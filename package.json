@@ -1,0 +1,27 @@
+{
+  "name": "c1218_rescue",
+  "version": "1.0.0",
+  "description": "Pet rescue app built with NodeJS and React",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stellaxxy/c1218_rescue.git"
+  },
+  "author": "Stella (Xiaoyun Hsin)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stellaxxy/c1218_rescue/issues"
+  },
+  "homepage": "https://github.com/stellaxxy/c1218_rescue#readme",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.10"
+  }
+}
