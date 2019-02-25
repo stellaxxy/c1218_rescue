@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
+    "dev": "npm run dev --prefix ..",
     "bundle": "webpack --config webpack.prod.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/stellaxxy/c1218_rescue.git"
   },
-  "author": "Stella (Xiaoyun)",
+  "author": "Stella Hsin",
+  "contributors": [
+    "Charu Benjwal",
+    "Karen King <kk99807@gmail.com> (kk99807@gmail.com)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stellaxxy/c1218_rescue/issues"
