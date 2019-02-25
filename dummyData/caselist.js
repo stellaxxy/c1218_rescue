@@ -24,4 +24,4 @@ var list = {
             coverImg: '../dummyData/images/guide-dogs-mobility.jpg'
         }
     ]
-}
+};
