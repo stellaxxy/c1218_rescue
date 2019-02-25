@@ -5,13 +5,21 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:client": "npm start --prefix client",
+    "dev:server": "nodemon index.js",
+    "bundle": "npm run bundle --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stellaxxy/c1218_rescue.git"
   },
-  "author": "Stella (Xiaoyun) Hsin",
+  "author": "Stella Hsin",
+  "contributors": [
+    "Charu Benjwal",
+    "Karen King <kk99807@gmail.com> (kk99807@gmail.com)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stellaxxy/c1218_rescue/issues"
@@ -19,7 +27,8 @@
   "homepage": "https://github.com/stellaxxy/c1218_rescue#readme",
   "dependencies": {
     "cors": "2.8.5",
-    "express": "4.16.4"
+    "express": "4.16.4",
+    "npm-run-all": "4.1.5"
   },
   "devDependencies": {
     "nodemon": "1.18.10"
