@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 
 // API
-app.get('/api/mapList', (req, res) => {
+app.get('/api/maplist', (req, res) => {
     res.send('Hello MapList');
 });
 
