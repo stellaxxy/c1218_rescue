@@ -18,9 +18,9 @@
       "breed": "golden retriever",
       "color": "golden",
       "gender": "female",
-      "size": "large",
-      "description": "description"
+      "size": "large"
     },
+    "description": "description",
     "coverImg": "../dummyData/images/guide-dogs-mobility.jpg",
     "images": ["../dummyData/images/guide-dogs-mobility.jpg", "../dummyData/images/guide-dogs-mobility.jpg", "../dummyData/images/guide-dogs-mobility.jpg"]
   }
