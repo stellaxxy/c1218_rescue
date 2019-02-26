@@ -13,13 +13,16 @@ const app = express();
 app.use(cors());
 
 // API
-app.get('/api/maplist', (req, res) => {
-    res.send('Hello MapList');
+app.get('/api/maplist', (request, response) => {
+    const data = require('./dummyData/caselist.json');
+    response.send(data);
 });
+
 
 app.get('/api/casedetails', async (req, res) => {
     const query = "SELECT * FROM `cases` AS c WHERE `id`=1"
 });
+
 
 // Listen
 app.listen(PORT, HOST, () => {
@@ -27,3 +30,8 @@ app.listen(PORT, HOST, () => {
 }).on('error', (err) => {
     console.log('Server listen error.  You probably already have a server on port: ', PORT);
 });
+
+function handleError( response, errorMessage ) {
+    let success = false;
+    response.send({success, errorMessage});
+}
