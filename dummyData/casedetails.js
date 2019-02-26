@@ -8,8 +8,8 @@ var caseDetail = {
             city: 'irvine',
             street: 'irvine dr',
             zipCode: '92618',
-            longitude: "33.68 N",
-            latitude: "117.83 W"
+            longitude: "33.68",
+            latitude: "-117.83"
         },
         dateFound: '02/03/2019',
         animalDetail: {
