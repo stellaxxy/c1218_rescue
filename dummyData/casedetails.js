@@ -12,15 +12,15 @@ var caseDetail = {
         },
         dateFound: '02/03/2019',
         animalDetail: {
-            id: 1,
+            animalID: 1,
             typeOfAnimal: 'dog',
             name: 'unknown',
             breed: 'golden retriever',
             color: "golden",
             gender: 'female',
             size: 'large',
+            description: 'description',
         },
-        description: 'description',
         coverImg: '../dummyData/images/guide-dogs-mobility.jpg',
         images: [
             '../dummyData/images/guide-dogs-mobility.jpg',

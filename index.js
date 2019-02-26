@@ -20,7 +20,13 @@ app.get('/api/maplist', (request, response) => {
 
 
 app.get('/api/casedetails', async (req, res) => {
-    const query = "SELECT * FROM `cases` AS c WHERE `id`=1"
+    const query = "SELECT c.`id`, c.`caseType` AS typeOfCase, c.`city`, c.`street`, c.`zipcode`, \n" +
+        "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date` AS dateFound, a.`id` AS animalID, a.`animalType` AS typeOfAnimal, a.`name`, a.`breed`,\n" +
+        "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`)\n" +
+        "FROM `cases` AS c \n" +
+        "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+        "JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
+        "GROUP BY c.`id`"
 });
 
 
