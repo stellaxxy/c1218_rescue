@@ -8,7 +8,9 @@ var list = {
             location: {
                 city: 'Irvine',
                 street: 'Irvine Center Drive',
-                zipCode: '92618'
+                zipCode: '92618',
+                longitude: "33.68 N",
+                latitude: "117.83 W"
             },
             coverImg: '../dummyData/images/guide-dogs-mobility.jpg'
         },
@@ -19,7 +21,9 @@ var list = {
             location: {
                 city: 'Irvine',
                 street: 'Jefferey Rd',
-                zipCode: '92618'
+                zipCode: '92618',
+                longitude: "33.68 N",
+                latitude: "117.83 W"
             },
             coverImg: '../dummyData/images/guide-dogs-mobility.jpg'
         }

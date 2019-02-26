@@ -7,7 +7,9 @@
       "id": 3,
       "city": "irvine",
       "street": "irvine dr",
-      "zipCode": "92618"
+      "zipCode": "92618",
+      "longitude": "33.68 N",
+      "latitude": "117.83 W"
     },
     "dateFound": "02/03/2019",
     "animalDetail": {
@@ -17,6 +19,7 @@
       "breed": "golden retriever",
       "color": "golden",
       "gender": "female",
+      "size": "large",
       "description": "description"
     },
     "coverImg": "url",
