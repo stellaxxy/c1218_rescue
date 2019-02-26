@@ -17,7 +17,9 @@ app.get('/api/maplist', (req, res) => {
     res.send('Hello MapList');
 });
 
-
+app.get('/api/casedetails', async (req, res) => {
+    const query = "SELECT * FROM `cases` AS c WHERE `id`=1"
+});
 
 // Listen
 app.listen(PORT, HOST, () => {
