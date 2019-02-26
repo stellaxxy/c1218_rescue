@@ -3,12 +3,12 @@ var list = {
     data: [
         {
             id: 1,
-            typeOfAnimal: 'dog',
-            typeOfCase: 'found',
+            animalType: 'dog',
+            caseType: 'found',
             location: {
                 city: 'Irvine',
                 street: 'Irvine Center Drive',
-                zipCode: '92618',
+                zipcode: '92618',
                 longitude: "33.68",
                 latitude: "-117.83"
             },
@@ -16,12 +16,12 @@ var list = {
         },
         {
             id: 2,
-            typeOfAnimal: 'dog',
-            typeOfCase: 'found',
+            animalType: 'dog',
+            caseType: 'found',
             location: {
                 city: 'Irvine',
                 street: 'Jefferey Rd',
-                zipCode: '92618',
+                zipcode: '92618',
                 longitude: "36.05",
                 latitude: "-117.83"
             },

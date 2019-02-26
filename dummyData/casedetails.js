@@ -6,23 +6,23 @@ var caseDetail = {
         location: {
             city: 'Irvine',
             street: 'Irvine Center Drive',
-            zipCode: '92618',
+            zipcode: '92618',
             longitude: "33.68",
             latitude: "-117.83"
         },
-        dateFound: '02/03/2019',
+        date: '02/03/2019',
         animalDetail: {
-            id: 1,
-            typeOfAnimal: 'dog',
+            animalID: 1,
+            animalType: 'dog',
             name: 'unknown',
             breed: 'golden retriever',
             color: "golden",
             gender: 'female',
             size: 'large',
+            description: 'description',
         },
-        description: 'description',
         coverImg: '../dummyData/images/guide-dogs-mobility.jpg',
-        images: [
+        imgURL: [
             '../dummyData/images/guide-dogs-mobility.jpg',
             '../dummyData/images/guide-dogs-mobility.jpg',
             '../dummyData/images/guide-dogs-mobility.jpg'
