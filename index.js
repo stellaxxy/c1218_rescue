@@ -19,14 +19,31 @@ app.get('/api/maplist', (request, response) => {
 });
 
 
-app.get('/api/casedetails', async (req, res) => {
-    const query = "SELECT c.`id`, c.`caseType` AS typeOfCase, c.`city`, c.`street`, c.`zipcode`, \n" +
-        "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date` AS dateFound, a.`id` AS animalID, a.`animalType` AS typeOfAnimal, a.`name`, a.`breed`,\n" +
-        "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`)\n" +
-        "FROM `cases` AS c \n" +
-        "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
-        "JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
-        "GROUP BY c.`id`"
+app.get('/api/casedetails', async (request, response) => {
+    try {
+        const id = request.query.id;
+
+        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`street`, c.`zipcode`, \n" +
+            "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
+            "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "FROM `cases` AS c \n" +
+            "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+            "LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
+            "WHERE c.`id` = ?\n" +
+            "GROUP BY c.`id`";
+        const output = {
+            success: false
+        };
+        let data = await db.query(query, [id]);
+
+        response.send({
+            success: true,
+            data: data
+        })
+    } catch(error) {
+        
+    }
+
 });
 
 
