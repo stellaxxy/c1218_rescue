@@ -19,8 +19,8 @@ var caseDetail = {
             color: "golden",
             gender: 'female',
             size: 'large',
-            description: 'description'
         },
+        description: 'description',
         coverImg: '../dummyData/images/guide-dogs-mobility.jpg',
         images: [
             '../dummyData/images/guide-dogs-mobility.jpg',
