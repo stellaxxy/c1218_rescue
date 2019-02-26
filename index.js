@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const mysql = require('mysql');
+const db = require('./db');
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
@@ -14,6 +16,8 @@ app.use(cors());
 app.get('/api/maplist', (req, res) => {
     res.send('Hello MapList');
 });
+
+
 
 // Listen
 app.listen(PORT, HOST, () => {
