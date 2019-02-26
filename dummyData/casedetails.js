@@ -2,7 +2,7 @@ var caseDetail = {
     success: true,
     data: {
         id: 1,
-        typeOfCase: 'found',
+        caseType: 'found',
         location: {
             id: 3,
             city: 'irvine',
