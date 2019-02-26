@@ -4,9 +4,8 @@ var caseDetail = {
         id: 1,
         typeOfCase: 'found',
         location: {
-            id: 3,
-            city: 'irvine',
-            street: 'irvine dr',
+            city: 'Irvine',
+            street: 'Irvine Center Drive',
             zipCode: '92618',
             longitude: "33.68",
             latitude: "-117.83"
@@ -22,7 +21,11 @@ var caseDetail = {
             size: 'large',
             description: 'description'
         },
-        coverImg: 'url',
-        images: ['url', 'url', 'url'],
+        coverImg: '../dummyData/images/guide-dogs-mobility.jpg',
+        images: [
+            '../dummyData/images/guide-dogs-mobility.jpg',
+            '../dummyData/images/guide-dogs-mobility.jpg',
+            '../dummyData/images/guide-dogs-mobility.jpg'
+        ]
     }
 };

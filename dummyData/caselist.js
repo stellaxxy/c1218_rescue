@@ -22,8 +22,8 @@ var list = {
                 city: 'Irvine',
                 street: 'Jefferey Rd',
                 zipCode: '92618',
-                longitude: "33.68",
-                latitude: "117.83"
+                longitude: "36.05",
+                latitude: "-117.83"
             },
             coverImg: '../dummyData/images/guide-dogs-mobility.jpg'
         }
