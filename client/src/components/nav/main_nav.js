@@ -8,16 +8,16 @@ export default () => {
 
         <nav>
             <div className="nav-wrapper">
-                <Link className="brand-logo" to='/map'>PAWS</Link>
+                <Link className="brand-logo" to='/casemap'>PAWS</Link>
                 <ul className="right hide-on-med-and-down">
                     <li>
-                        <Link to="/list">FOUND</Link>
+                        <Link to="/caselist">FOUND</Link>
                     </li>
                     <li>
-                        <Link to="/list">LOST</Link>
+                        <Link to="/caselist">LOST</Link>
                     </li>
                     <li>
-                        <Link to="/map">MAP</Link>
+                        <Link to="/casemap">MAP</Link>
                     </li>
                     <li>
                         <Link to="/upload">UPLOAD CASE</Link>

@@ -1,8 +1,8 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import React from 'react';
-import List from './list';
-import Map from './map';
+import CaseList from './caselist';
+import CaseMap from './casemap';
 import Upload from './upload';
 import Resource from './resource';
 import Landing from './landing';
@@ -14,8 +14,8 @@ const App = () => (
         <Nav/>
         <div className="container">
             <Route exact path="/" component={Landing}/>
-            <Route path="/list" component={List}/>
-            <Route path="/map" component={Map}/>
+            <Route path="/caselist" component={CaseList}/>
+            <Route path="/casemap" component={CaseMap}/>
             <Route path="/upload" component={Upload}/>
             <Route path="/resource" component={Resource}/>
         </div>
