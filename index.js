@@ -29,7 +29,7 @@ app.get('/api/caselist', async (request, response) => {
                         c.`caseType` AS `typeOfCase`, \
                         c.`city`, \
                         c.`street`, \
-                        c.`zipcode`, \
+                        c.`zipcode` AS `zipCode`, \
                         c.`latitude`, \
                         c.`longitude`, \
                         c.`coverImg` \
@@ -58,14 +58,14 @@ app.get('/api/caselist', async (request, response) => {
             row.location = {
                 city: row.city,
                 street: row.street,
-                zipcode: row.zipcode,
+                zipCode: row.zipCode,
                 latitude: row.latitude,
                 longitude: row.longitude
             };
 
             delete row.city;
             delete row.street;
-            delete row.zipcode;
+            delete row.zipCode;
             delete row.latitude;
             delete row.longitude;
         });
