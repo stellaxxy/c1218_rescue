@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class CaseList extends Component {
+class CaseDetails extends Component {
 
     state = {
         success: false,
@@ -34,4 +34,4 @@ class CaseList extends Component {
 
 }
 
-export default CaseList;
+export default CaseDetails;
