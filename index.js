@@ -80,6 +80,11 @@ app.get('/api/caselist', async (request, response) => {
 app.get('/api/casedetails', async (request, response) => {
     try {
         const id = request.query.id;
+        if(id === undefined){
+            throw new Error(`Please provide a valid ID`);
+        } else if(isNaN(id)){
+            throw new Error(`ID must be a number`);
+        }
 
         const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`street`, c.`zipcode`, \n" +
             "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
@@ -94,12 +99,56 @@ app.get('/api/casedetails', async (request, response) => {
         };
         let data = await db.query(query, [id]);
 
+        if(data.length === 1){
+            data = data[0];
+            data.location = {
+                city: data.city,
+                street: data.street,
+                zipcode: data.zipcode,
+                latitude: data.latitude,
+                longitude: data.longitude
+            };
+
+            delete data.city;
+            delete data.street;
+            delete data.zipcode;
+            delete data.latitude;
+            delete data.longitude;
+
+            data.animalDetail = {
+                animalId: data.animalID,
+                animalType: data.animalType,
+                name: data.name,
+                breed: data.breed,
+                color: data.color,
+                gender: data.gender,
+                size: data.size,
+                description: data.description
+            };
+
+            delete data.animalID;
+            delete data.animalType;
+            delete data.name;
+            delete data.breed;
+            delete data.color;
+            delete data.gender;
+            delete data.size;
+            delete data.description;
+
+            data.imgURL = data.imgURL.split(',');
+            data.date = new Date(data.date);
+            data.date = data.date.toDateString();
+            //data.date = data.date.toString.split('T');
+        } else {
+            throw new Error(`There is no case matched by id ${id}`);
+        }
+
         response.send({
             success: true,
             data: data
         })
     } catch(error) {
-        
+        handleError(response, error.message);
     }
 
 });
