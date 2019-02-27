@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import exampleImage from '../assets/images/cover1.jpg';
 
+
 class CaseList extends Component {
     state = {
         cases: []
@@ -32,5 +33,5 @@ class CaseList extends Component {
         );
     }
 }
-
 export default CaseList;
+
