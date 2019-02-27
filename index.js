@@ -135,18 +135,18 @@ app.get('/api/casedetails', async (request, response) => {
             delete data.size;
             delete data.description;
 
-            data.imgURL = data.imgURL.split(',');
-            data.date = new Date(data.date);
-            data.date = data.date.toDateString();
-            //data.date = data.date.toString.split('T');
+            if(data.imgURL !== null){
+                data.imgURL = data.imgURL.split(',');
+            }
+            data.date = data.date.toLocaleDateString();
+
+            output.success = true;
+            output.data = data;
         } else {
             throw new Error(`There is no case matched by id ${id}`);
         }
 
-        response.send({
-            success: true,
-            data: data
-        })
+        response.send(output);
     } catch(error) {
         handleError(response, error.message);
     }
