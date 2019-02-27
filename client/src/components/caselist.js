@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import exampleImage from '../assets/images/cover1.jpg';
 
 class CaseList extends Component {
     state = {
@@ -25,7 +26,7 @@ class CaseList extends Component {
         return(
             <div className="container">
                 <div>
-                    <img src={'../assets/images/cover1.jpg'}/>
+                    <img src={exampleImage}/>
                 </div>
             </div>
         );
