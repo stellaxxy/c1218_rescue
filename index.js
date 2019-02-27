@@ -14,6 +14,47 @@ const CASELIST_FILTERS = [
         param: 'case_type',
         validValues: ['lost','found'],
         sqlCriteria: 'c.`caseType` = ?'
+    },
+    {
+        param: 'zipcode',
+        sqlCriteria: 'c.`zipcode` = ?'
+    },
+    {
+        param: 'city',
+        sqlCriteria: 'c.`city` = ?'
+    },
+    {
+        param: 'size',
+        validValues: ['small','medium','large'],
+        sqlCriteria: 'a.`size` = ?'
+    },
+    {
+        param: 'animal_type',
+        validValues: ['cat','dog'],
+        sqlCriteria: 'a.`animalType` = ?'
+    },
+    {
+        param: 'gender',
+        validValues: ['female','male'],
+        sqlCriteria: 'a.`gender` = ?'
+    },
+    {
+        param: 'color',
+        validValues: [  'black',
+                        'blue',
+                        'brown',
+                        'chocolate',
+                        'cinnamon',
+                        'cream',
+                        'fawn',
+                        'gold',
+                        'gray',
+                        'lilac',
+                        'red',
+                        'smoke',
+                        'white',
+                        'yellow'],
+        sqlCriteria: 'LOWER(a.`color`) = ?'
     }
 ];
 
@@ -25,11 +66,11 @@ app.get('/api/caselist', async (request, response) => {
     try {
         let sql = "SELECT \
                         c.`id`, \
-                        a.`animalType` AS `typeOfAnimal`, \
-                        c.`caseType` AS `typeOfCase`, \
+                        a.`animalType`, \
+                        c.`caseType`, \
                         c.`city`, \
                         c.`street`, \
-                        c.`zipcode` AS `zipCode`, \
+                        c.`zipcode`, \
                         c.`latitude`, \
                         c.`longitude`, \
                         c.`coverImg` \
@@ -41,7 +82,7 @@ app.get('/api/caselist', async (request, response) => {
         CASELIST_FILTERS.forEach(filter => {
             if (request.query.hasOwnProperty(filter.param)) {
                 const value = request.query[filter.param];
-                if (filter.validValues !== null && filter.validValues.indexOf(value) === -1) {
+                if (filter.hasOwnProperty('validValues') && filter.validValues.indexOf(value) === -1) {
                     throw new Error(`Invalid value [${value}] for parameter [${filter.param}].  Valid values are: [${filter.validValues}]`);
                 }
                 filter_criteria.push(filter.sqlCriteria);
@@ -58,14 +99,14 @@ app.get('/api/caselist', async (request, response) => {
             row.location = {
                 city: row.city,
                 street: row.street,
-                zipCode: row.zipCode,
+                zipcode: row.zipcode,
                 latitude: row.latitude,
                 longitude: row.longitude
             };
 
             delete row.city;
             delete row.street;
-            delete row.zipCode;
+            delete row.zipcode;
             delete row.latitude;
             delete row.longitude;
         });
