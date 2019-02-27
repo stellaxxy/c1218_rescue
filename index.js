@@ -10,13 +10,13 @@ const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'development';
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const CASELIST_FILTERS = [
     {
         param: 'case_type',
-        validValues: ['lost','found'],
+        validValues: ['lost', 'found'],
         sqlCriteria: 'c.`caseType` = ?'
     },
     {
@@ -29,35 +29,35 @@ const CASELIST_FILTERS = [
     },
     {
         param: 'size',
-        validValues: ['small','medium','large'],
+        validValues: ['small', 'medium', 'large'],
         sqlCriteria: 'a.`size` = ?'
     },
     {
         param: 'animal_type',
-        validValues: ['cat','dog'],
+        validValues: ['cat', 'dog'],
         sqlCriteria: 'a.`animalType` = ?'
     },
     {
         param: 'gender',
-        validValues: ['female','male'],
+        validValues: ['female', 'male'],
         sqlCriteria: 'a.`gender` = ?'
     },
     {
         param: 'color',
-        validValues: [  'black',
-                        'blue',
-                        'brown',
-                        'chocolate',
-                        'cinnamon',
-                        'cream',
-                        'fawn',
-                        'gold',
-                        'gray',
-                        'lilac',
-                        'red',
-                        'smoke',
-                        'white',
-                        'yellow'],
+        validValues: ['black',
+            'blue',
+            'brown',
+            'chocolate',
+            'cinnamon',
+            'cream',
+            'fawn',
+            'gold',
+            'gray',
+            'lilac',
+            'red',
+            'smoke',
+            'white',
+            'yellow'],
         sqlCriteria: 'LOWER(a.`color`) = ?'
     }
 ];
@@ -100,7 +100,7 @@ app.get('/api/caselist', async (request, response) => {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
         }
 
-        const data = await db.query( sql, filter_values );
+        const data = await db.query(sql, filter_values);
         data.forEach(row => {
             row.location = {
                 city: row.city,
@@ -124,74 +124,48 @@ app.get('/api/caselist', async (request, response) => {
 });
 
 //API for for lost dog
-app.post('/api/createcase' , async(request,response)=>{
-
-    console.log(request.body);
-
+app.post('/api/createcase', async (request, response) => {
     try {
-
-
-
-            const {breed, color, name, animalType, gender, description, size, city, street, email, username, phone, caseType, zipcode, latitude, longitude, coverImg, date, animalID} = request.body;
-
-// insert into animal table
-            const animalsTable = " INSERT INTO `animals`(`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`,`animalID`) VALUES (?,?,?,?,?,?,?,?)";
-
-            const insert = [breed, color, name, animalType, gender, description, size,animalID]
-
-            const query = mysql.format(animalsTable, insert);
-
-            const insertResult = await db.query(query);
-            console.log('insert query for animal table', insertResult);
-
-
-// insert into cases table
-
-        const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`zipcode`,`latitude`,`longitude`,`coverImg`,`date`) VALUES (?,?,?,?,?,?,?,?)";
-
-        const insertlocation = [city,street,caseType,zipcode,latitude,longitude,coverImg,date];
-
-        const casequery = mysql.format (casesTable , insertlocation);
-
-        const insertcase = await db.query (casequery );
+        const {breed, color, name, animalType, gender, description, size, city, street, email, username, phone, caseType, zipcode, latitude, longitude, coverImg, date, imgURL} = request.body;
 
 // insert into users table
-
         const usersTable = "INSERT INTO `users` (`email`,`username`,`phone`) VALUES (?,?,?)";
-
-        const insertUserInfo = [email,username,phone];
-
-        const userquery = mysql.format(usersTable , insertUserInfo);
-
+        const insertUserInfo = [email, username, phone];
+        const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
+        var userID = insertuser.insertId;
 
+        //  insert into animal table
+        const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
+        const insert = [breed, color, name, animalType, gender, description, size,];
+        const query = mysql.format(animalsTable, insert);
+        const insertResult = await db.query(query);
+        var animalID = insertResult.insertId;
+
+        //  insert into cases table
+        const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`zipcode`,`latitude`,`longitude`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [city, street, caseType, zipcode, latitude, longitude, coverImg, date, animalID, userID];
+        const casequery = mysql.format(casesTable, insertlocation);
+        const insertcase = await db.query(casequery);
+
+
+        //  insert into image table
+        const imageTable = "INSERT INTO `images` (`animalID`,`imgURL`) VALUES (?,?)"
+        const imageInfo = [animalID, imgURL];
+        const imagequery = mysql.format(imageTable, imageInfo);
+        const insertimage = await db.query(imagequery);
 
         response.send({
             success: true,
             insertID: insertResult.insertID,
 
         })
-    } catch(error){
-
+    } catch (error) {
         console.log(error);
-
         handleError(response, 'Server Error');
     }
 
 })
-
-function handleError(response,error){
-    response.status(500).send({success:false,error:[error]})
-
-}
-
-
-//location table =city , street
-
-// user table = email,phone
-
-
-
 
 // Listen
 app.listen(PORT, HOST, () => {
@@ -200,7 +174,7 @@ app.listen(PORT, HOST, () => {
     console.log('Server listen error.  You probably already have a server on port: ', PORT);
 });
 
-function handleError( response, errorMessage ) {
+function handleError(response, errorMessage) {
     let success = false;
     response.send({success, errorMessage});
 }
