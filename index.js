@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
@@ -122,6 +123,83 @@ app.get('/api/caselist', async (request, response) => {
         handleError(response, error.message);
     }
 });
+
+app.get('/api/casedetails', async (request, response) => {
+    try {
+        const id = request.query.id;
+        if(id === undefined){
+            throw new Error(`Please provide a valid ID`);
+        } else if(isNaN(id)){
+            throw new Error(`ID must be a number`);
+        }
+
+        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`street`, c.`zipcode`, \n" +
+            "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
+            "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "FROM `cases` AS c \n" +
+            "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+            "LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
+            "WHERE c.`id` = ?\n" +
+            "GROUP BY c.`id`";
+        const output = {
+            success: false
+        };
+        let data = await db.query(query, [id]);
+
+        if(data.length === 1){
+            data = data[0];
+            data.location = {
+                city: data.city,
+                street: data.street,
+                zipcode: data.zipcode,
+                latitude: data.latitude,
+                longitude: data.longitude
+            };
+
+            delete data.city;
+            delete data.street;
+            delete data.zipcode;
+            delete data.latitude;
+            delete data.longitude;
+
+            data.animalDetail = {
+                animalId: data.animalID,
+                animalType: data.animalType,
+                name: data.name,
+                breed: data.breed,
+                color: data.color,
+                gender: data.gender,
+                size: data.size,
+                description: data.description
+            };
+
+            delete data.animalID;
+            delete data.animalType;
+            delete data.name;
+            delete data.breed;
+            delete data.color;
+            delete data.gender;
+            delete data.size;
+            delete data.description;
+
+            if(data.imgURL !== null){
+                data.imgURL = data.imgURL.split(',');
+}
+data.date = data.date.toLocaleDateString();
+
+output.success = true;
+output.data = data;
+} else {
+    throw new Error(`There is no case matched by id ${id}`);
+}
+
+response.send(output);
+} catch(error) {
+    handleError(response, error.message);
+}
+
+});
+
 
 //API for for lost dog
 app.post('/api/createcase', async (request, response) => {
