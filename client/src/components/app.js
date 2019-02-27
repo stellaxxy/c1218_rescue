@@ -6,8 +6,10 @@ import CaseMap from './casemap';
 import Upload from './upload';
 import Resource from './resource';
 import Landing from './landing';
+import DisplayList from './displaylist';
 import Nav from './nav';
 import {Route} from 'react-router-dom';
+
 
 const App = () => (
     <div>
@@ -18,6 +20,8 @@ const App = () => (
             <Route path="/casemap" component={CaseMap}/>
             <Route path="/upload" component={Upload}/>
             <Route path="/resource" component={Resource}/>
+
+
         </div>
     </div>
 );
