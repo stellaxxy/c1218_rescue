@@ -144,8 +144,8 @@ ALTER TABLE `cases`
 ALTER TABLE `images`
   ADD CONSTRAINT `images_fk0` FOREIGN KEY (`animalID`) REFERENCES `animals` (`id`);
 COMMIT;
-Collapse
 
 
 
-Message Input
+
+
