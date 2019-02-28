@@ -2,6 +2,7 @@
 import '../assets/css/casedetails.scss';
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import CaseDetailImage from '../assets/images/image11.jpg';
 
 
@@ -77,8 +78,9 @@ class CaseDetails extends Component {
                         </div>
                     </div>
                 <div className="center" >
-                    <a className="waves-effect waves-light btn orange text-white">Back</a>
-                    <a className="waves-effect waves-light btn orange text-white" float="right">Next</a>
+                    <Link to className="waves-effect waves-light btn orange text-white">Go Back</Link>
+                    <Link to className="waves-effect waves-light btn orange text-white" float="right">CONTACT</Link>
+                    <Link to className="waves-effect waves-light btn orange text-white" float="right">CLOSE</Link>
                 </div>
 
             </div>

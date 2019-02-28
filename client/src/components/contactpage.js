@@ -1,7 +1,8 @@
 import React , {Component} from 'react';
 import '../assets/css/casedetails.scss';
 import axios from 'axios';
-import '../assets/css/contactpage.scss'
+import '../assets/css/contactpage.scss';
+import {Link} from 'react-router-dom'
 
 
 class Contact extends Component{
@@ -38,12 +39,12 @@ class Contact extends Component{
                 </div>
                 <div className= "waves-button-input">
                 <div className="center textEmail" >
-                    <a className="waves-effect waves-light btn orange text-white">Text</a>
-                    <a className="waves-effect waves-light btn orange text-white" float="right">Email</a>
+                    <Link to className="waves-effect waves-light btn orange text-white">Text</Link>
+                    <Link to className="waves-effect waves-light btn orange text-white" float="right">Email</Link>
                 </div>
                 <div className="center callBack" >
-                    <a className="waves-effect waves-light btn orange text-white">Call</a>
-                    <a className="waves-effect waves-light btn orange text-white" float="right">Back</a>
+                    <Link to className="waves-effect waves-light btn orange text-white">Call</Link>
+                    <Link to className="waves-effect waves-light btn orange text-white" float="right">Back</Link>
                 </div>
                 </div>
             </div>
