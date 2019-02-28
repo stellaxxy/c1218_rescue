@@ -1,8 +1,15 @@
+
+
 {
   "name": "c1218_rescue_client",
   "version": "1.0.0",
   "description": "Client for pet rescue app built with NodeJS and React",
   "main": "index.js",
+  "proxy": {
+    "/api/*": {
+      "target": "http://localhost:9000"
+    }
+  },
   "scripts": {
     "start": "node dev_server.js",
     "dev": "npm run dev --prefix ..",
@@ -24,12 +31,12 @@
   },
   "homepage": "https://github.com/stellaxxy/c1218_rescue#readme",
   "dependencies": {
-    "materialize": "^1.0.0",
+    "axios": "^0.18.0",
     "materialize-css": "1.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "4.3.1",
     "redux": "^4.0.1"
   },
   "devDependencies": {
