@@ -13,6 +13,7 @@ import FoundLanding from './foundlanding';
 import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
 import Contact from './contactpage';
+import SearchVet from './searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import VetList from './resource/vetlist';
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/catcare" component={CatCare}/>
             <Route path="/vetlist" component={VetList}/>
             <Route path="/contactPage" component={Contact}/>
+            <Route path= "/searchVet" component={SearchVet}/>
         </div>
     </div>
 );
