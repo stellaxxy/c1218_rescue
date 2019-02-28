@@ -78,8 +78,8 @@ class CaseDetails extends Component {
                         </div>
                     </div>
                 <div className="center" >
-                    <a className="waves-effect waves-light btn">Back</a>
-                    <a className="waves-effect waves-light btn" float="right">Next</a>
+                    <a className="waves-effect waves-light btn orange text-white">Back</a>
+                    <a className="waves-effect waves-light btn orange text-white" float="right">Next</a>
                 </div>
 
             </div>
