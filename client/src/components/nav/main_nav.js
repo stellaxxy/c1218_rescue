@@ -1,3 +1,4 @@
+import './nav.scss';
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import SideNav from './side_nav';
