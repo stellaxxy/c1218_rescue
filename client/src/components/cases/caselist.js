@@ -24,9 +24,9 @@ class CaseList extends Component {
                 <div>Loading</div>
             );
         }
-        const { caseType, location, id } = this.state.cases;
 
         const caseItemArray = this.state.cases.map(item => {
+            const { caseType, location, id } = item;
             return <CaseItem key={id} coverImg={exampleImage} location={location} caseType={caseType}/>
         });
 
