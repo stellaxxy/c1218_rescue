@@ -22,21 +22,20 @@ import {Route} from 'react-router-dom';
 const App = () => (
     <div>
         <Nav/>
-        <div className="container">
-            <Route exact path="/" component={Landing}/>
-            <Route path="/caselist" component={CaseList}/>
-            <Route path="/casemap" component={CaseMap}/>
-            <Route path="/upload" component={Upload}/>
-            <Route path="/resource" component={Resource}/>
-            <Route path="/lostlanding" component={LostLanding}/>
-            <Route path="/foundlanding" component={FoundLanding}/>
-            <Route path="/typeselection" component={TypeSelection}/>
-            <Route path="/sizeselection" component={SizeSelection}/>
-            <Route path="/casedetails" component={CaseDetails}/>
-            <Route path="/dogcare" component={DogCare}/>
-            <Route path="/catcare" component={CatCare}/>
-            <Route path="/vetlist" component={VetList}/>
-        </div>
+        <Route exact path="/" component={Landing}/>
+        <Route path="/caselist" component={CaseList}/>
+        <Route path="/casemap" component={CaseMap}/>
+        <Route path="/upload" component={Upload}/>
+        <Route path="/resource" component={Resource}/>
+        <Route path="/lostlanding" component={LostLanding}/>
+        <Route path="/foundlanding" component={FoundLanding}/>
+        <Route path="/typeselection" component={TypeSelection}/>
+        <Route path="/sizeselection" component={SizeSelection}/>
+        <Route path="/casedetails" component={CaseDetails}/>
+        <Route path="/dogcare" component={DogCare}/>
+        <Route path="/catcare" component={CatCare}/>
+        <Route path="/vetlist" component={VetList}/>
+
     </div>
 );
 

@@ -19,6 +19,7 @@ class CaseList extends Component {
 
     render(){
         //console.log('caselist state', this.state.cases);
+        //console.log('case list props:', this.props);
         if(this.state.cases.length === 0){
             return(
                 <div>Loading</div>

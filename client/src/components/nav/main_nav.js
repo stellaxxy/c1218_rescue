@@ -8,7 +8,7 @@ export default () => {
         <Fragment>
             <nav>
                 <div className="nav-wrapper">
-                    <Link className="brand-logo" to='/casemap'>PAWS</Link>
+                    <Link className="brand-logo" to='/'>PAWS</Link>
                     <Link to="#" className="sidenav-trigger" data-target="sidenav">
                         <i className="material-icons">menu</i>
                     </Link>
