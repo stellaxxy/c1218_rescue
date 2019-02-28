@@ -78,9 +78,8 @@ class CaseDetails extends Component {
                         </div>
                     </div>
                 <div className="center" >
-                    <Link to className="waves-effect waves-light btn orange text-white">Go Back</Link>
-                    <Link to className="waves-effect waves-light btn orange text-white" float="right">CONTACT</Link>
-                    <Link to className="waves-effect waves-light btn orange text-white" float="right">CLOSE</Link>
+                    <Link to ="/caselist" className="waves-effect waves-light btn orange text-white">Go Back</Link>
+                    <Link to ="/contactPage" className="waves-effect waves-light btn orange text-white" float="right">CONTACT</Link>
                 </div>
 
             </div>

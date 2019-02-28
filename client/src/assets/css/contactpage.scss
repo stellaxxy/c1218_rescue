@@ -1,22 +1,32 @@
-.form{
+.form {
   height: 100%;
   width: 100%;
   margin: 0 auto;
 
-
-  .text-area{
-    height :200px;
+  .text-area {
+    margin: 20px 20px;
+    background-color: white;
+    height: 200px;
     width: 50%;
 
 
   }
+  .textEmail {
+    margin: 20px 20px;
 
-  .textEmail{
-    margin: 0 auto;
+    .text {
+      margin-right: 50px;
+    }
   }
 
-  .waves-button-input{
-    margin: 30px;
+  .callBack {
+    margin: 20px 20px;
+
+    .call {
+      margin-right: 50px;
+    }
   }
+
+
 
 }

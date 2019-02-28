@@ -2,7 +2,8 @@ import React , {Component} from 'react';
 import '../assets/css/casedetails.scss';
 import axios from 'axios';
 import '../assets/css/contactpage.scss';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 
 
 class Contact extends Component{
@@ -31,23 +32,21 @@ class Contact extends Component{
                 <div>
             <form onSubmit={this.handelSubmit}>
                 <label>
-                    Message
                     <textarea  className="text-area"  value = {this.state.value} onChange={this.handelChange}/>
 
                 </label>
             </form>
                 </div>
-                <div className= "waves-button-input">
                 <div className="center textEmail" >
-                    <Link to className="waves-effect waves-light btn orange text-white">Text</Link>
-                    <Link to className="waves-effect waves-light btn orange text-white" float="right">Email</Link>
+                    <button className="waves-effect waves-light btn orange text-white text">Text</button>
+                    <button className="waves-effect waves-light btn orange text-white" float="right">Email</button>
                 </div>
                 <div className="center callBack" >
-                    <Link to className="waves-effect waves-light btn orange text-white">Call</Link>
-                    <Link to className="waves-effect waves-light btn orange text-white" float="right">Back</Link>
+                    <button className="waves-effect waves-light btn orange text-white call">Call</button>
+                    <Link to ="/casedetails" className="waves-effect waves-light btn orange text-white">Back</Link>
                 </div>
                 </div>
-            </div>
+
         )
     }
 
