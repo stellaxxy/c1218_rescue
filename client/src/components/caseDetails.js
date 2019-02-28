@@ -10,9 +10,14 @@ class CaseDetails extends Component {
     }
 
     async componentDidMount() {
+
         const response = await axios.get('http://localhost:9000/api/casedetails?id=23');
         console.log('response:', response.data.data);
-        this.setState({
+
+       
+
+
+       this.setState({
             data: response.data.data
         })
 

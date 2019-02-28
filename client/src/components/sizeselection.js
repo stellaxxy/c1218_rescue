@@ -3,7 +3,7 @@ import smallDogImage from '../assets/images/image10.png';
 import mediumDogImage from '../assets/images/image9.png';
 import largeDogImage from '../assets/images/image8.jpg';
 import '../assets/css/sizeselection.scss';
-import {Link} from "react-router-dom";
+import NavButton from './general/navbutton';
 
 export default () => {
     return (
@@ -22,8 +22,8 @@ export default () => {
                 <button>Large</button>
             </div>
 
-            <Link className="btn" to="/typeselection">Go Back</Link>
-            <Link className="btn" to="/caselist">Next</Link>
+            <NavButton firstButton={{'Go Back': "/typeselection"}} secondButton={{'Next': "/caselist"}} className="btn"/>
         </div>
     );
 }
+

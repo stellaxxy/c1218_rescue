@@ -1,10 +1,10 @@
 import React from 'react';
-import googleMap from '../assets/images/GoogleMap.jpg';
+import '../assets/css/foundlanding.scss';
 
 export default () => {
     return(
         <div>
-            <img src={googleMap}/>
+            <h1>Found Landing</h1>
         </div>
     );
 }

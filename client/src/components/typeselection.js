@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import dogImage from '../assets/images/image8.jpg';
 import catImage from "../assets/images/image6.jpg";
 import otherAnimalImage from "../assets/images/image7.png";
 import '../assets/css/typeselection.scss';
+import NavButton from "./general/navbutton";
 
 export default () => {
     return (
@@ -22,8 +22,7 @@ export default () => {
                 <button>Others</button>
             </div>
 
-            <Link className="btn" to="/lostlanding">Go Back</Link>
-            <Link className="btn" to="/sizeselection">Next</Link>
+            <NavButton firstButton={{'Go Back': "/lostlanding"}} secondButton={{'Next': "/sizeselection"}} className="btn"/>
         </div>
     );
 }
