@@ -19,6 +19,7 @@ import CatCare from './resource/catcare';
 import VetList from './resource/vetlist';
 import Nav from './nav';
 import {Route} from 'react-router-dom';
+import OfficeInfo from "./vetofficeinfo";
 
 
 const App = () => (
@@ -40,7 +41,8 @@ const App = () => (
         <Route path="/catcare" component={CatCare}/>
         <Route path="/vetlist" component={VetList}/>
         <Route path="/contactPage" component={Contact}/>
-        <Route path= "/searchvet" component={SearchVet}/>
+        <Route path="/searchvet" component={SearchVet}/>
+        <Route path="/vetoffice" component={OfficeInfo}/>
     </div>
 );
 
