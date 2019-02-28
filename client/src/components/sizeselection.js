@@ -22,7 +22,7 @@ export default () => {
                 <button>Large</button>
             </div>
 
-            <NavButton firstButton={{'Go Back': "/typeselection"}} secondButton={{'Next': "/caselist"}}/>
+            <NavButton firstButton={{'Go Back': "/typeselection"}} secondButton={{'Next': "/caselist"}} className="btn"/>
         </div>
     );
 }
