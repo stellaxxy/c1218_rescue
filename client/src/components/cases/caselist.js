@@ -10,8 +10,11 @@ class CaseList extends Component {
     };
 
     async componentDidMount(){
-        const result = await axios.get('/api/caselist');
+        console.log('case list props:', this.props.match.params);
+
+        const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
         //console.log('data from caselist:', result.data);
+
         this.setState({
             cases: result.data.data
         })
@@ -19,7 +22,7 @@ class CaseList extends Component {
 
     render(){
         //console.log('caselist state', this.state.cases);
-        //console.log('case list props:', this.props);
+
         if(this.state.cases.length === 0){
             return(
                 <div>Loading</div>

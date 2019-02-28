@@ -23,7 +23,7 @@ const App = () => (
     <div>
         <Nav/>
         <Route exact path="/" component={Landing}/>
-        <Route path="/caselist" component={CaseList}/>
+        <Route path="/caselist/:casetype" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
