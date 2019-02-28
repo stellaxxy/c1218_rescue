@@ -10,6 +10,9 @@ import Landing from './landing';
 import LostLanding from './lostlanding';
 import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
+import DogCare from './resource/dogcare';
+import CatCare from './resource/catcare';
+import VetList from './resource/vetlist';
 import Nav from './nav';
 import {Route} from 'react-router-dom';
 
@@ -23,11 +26,13 @@ const App = () => (
             <Route path="/casemap" component={CaseMap}/>
             <Route path="/upload" component={Upload}/>
             <Route path="/resource" component={Resource}/>
-
             <Route path="/lostlanding" component={LostLanding}/>
             <Route path="/typeselection" component={TypeSelection}/>
             <Route path="/sizeselection" component={SizeSelection}/>
             <Route path="/casedetails" component={CaseDetails}/>
+            <Route path="/dogcare" component={DogCare}/>
+            <Route path="/catcare" component={CatCare}/>
+            <Route path="/vetlist" component={VetList}/>
         </div>
     </div>
 );
