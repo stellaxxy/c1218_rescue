@@ -1,7 +1,9 @@
+
+import '../assets/css/casedetails.scss';
 import React, {Component} from 'react';
 import axios from 'axios';
 import CaseDetailImage from '../assets/images/image11.jpg';
-import './caseDetails.scss';
+
 
 class CaseDetails extends Component {
 
@@ -11,13 +13,10 @@ class CaseDetails extends Component {
 
     async componentDidMount() {
 
-        const response = await axios.get('http://localhost:9000/api/casedetails?id=23');
+        const response = await axios.get('/api/casedetails?id=23');  // instead of 23 we will use this.props.id
         console.log('response:', response.data.data);
 
-       
-
-
-       this.setState({
+        this.setState({
             data: response.data.data
         })
 
@@ -32,37 +31,37 @@ class CaseDetails extends Component {
 
         if(this.props.googlemap){
             return (
-                <div className="row">
-                    <div className="col s12 m6">
-                        <div className="card">
-                            <div className="card-image">
+
+                <div className="w3-container">
+                    <div className="w3-container w3-half">
                                 <img src={CaseDetailImage}/>
                             </div>
-                            <div className="card-content">
+                            <div className="w3-container w3-half">
                                 <div className="orange text-white">City
                                     : {this.state.data.location.city}</div>
                                 <div>Case id: {this.state.data.id}</div>
                                 <div>PET TYPE : {this.state.data.animalDetail.animalType}</div>
                                 <div>PET COLOR: {this.state.data.animalDetail.color}</div>
-
                             </div>
-                        </div>
-                    </div>
                 </div>
+
+
+
 
               )
         }
 
         return (
             <div>
-                <h2 className="header">Please help me</h2>
-                <div className="card horizontal">
-                    <div className="card-image">
+            <div className="w3-container">
+                <h2 className="header ">Please help me</h2>
+
+                    <div className="w3-container w3-half">
                         <img src={CaseDetailImage}/>
                     </div>
-                    <div className="card-stacked">
-                        <div className="card-content">
-                            <div className="orange text-white">City
+
+                        <div className="w3-container w3-half">
+                            <div className="orange text-white bold s12">City
                                 : {this.state.data.location.city}</div>
                             <div>Case id: {this.state.data.id}</div>
                             <div>PET NAME:{this.state.data.animalDetail.name}</div>
@@ -78,8 +77,14 @@ class CaseDetails extends Component {
                             <div>Zip Code:{this.state.data.location.zipcode}</div>
                         </div>
                     </div>
+                <div className="center" >
+                    <a className="waves-effect waves-light btn">Back</a>
+                    <a className="waves-effect waves-light btn" float="right">Next</a>
                 </div>
+
             </div>
+
+
         );
 
     }
