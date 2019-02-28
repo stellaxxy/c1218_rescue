@@ -11,7 +11,6 @@ class CaseDetails extends Component {
 
     async componentDidMount() {
         const resp = await axios.get('http://localhost:9000/api/caselist');
-        console.log('response:', resp);
 
         this.setState({
             success: true,

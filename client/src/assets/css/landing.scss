@@ -1,0 +1,40 @@
+.landing {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #752a07;
+
+    .landing-title {
+        font-family: 'Staatliches', cursive;
+        font-size: 3.5em;
+        margin-bottom: 5px;
+    }
+
+    .landing-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5em;
+        z-index: 1;
+    }
+
+    img {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        width: 75%;
+        opacity: .8;
+        z-index: 0;
+    }
+
+    .btn-container {
+        position: absolute;
+        top: 60%;
+        left: 55%;
+
+        .btn {
+            background-color: #EB5E30;
+            margin: 20px 10px;
+            width: 60%;
+            font-size: 2em;
+        }
+    }
+}

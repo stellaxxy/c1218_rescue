@@ -10,7 +10,6 @@ class CaseList extends Component {
 
     async componentDidMount(){
         const result = await axios.get('/api/caselist');
-        console.log('data from caselist:', result);
         this.setState({
             cases: result.data.data
         })
