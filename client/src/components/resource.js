@@ -1,7 +1,11 @@
 import React from 'react';
+import '../assets/css/lostlanding.scss';
+import NavButton from './general/navbutton';
 
 export default () => {
     return(
-        <div>RESOURCE</div>
+        <div className="lostLandingContainer">
+            <NavButton firstButton={{'Care For Dog': "/dogcare"}} secondButton={{'Care For Cat': "/catcare"}} thirdButton={{'Vet': "/vetlist"}} className="btn"/>
+        </div>
     );
 }
