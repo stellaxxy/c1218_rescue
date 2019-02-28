@@ -1,7 +1,7 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import React from 'react';
-import CaseList from './caselist';
+import CaseList from './cases/caselist';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './upload';
