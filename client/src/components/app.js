@@ -13,6 +13,7 @@ import FoundLanding from './foundlanding';
 import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
 import Contact from './contactpage';
+import SearchVet from './searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import VetList from './resource/vetlist';
@@ -23,6 +24,8 @@ import {Route} from 'react-router-dom';
 const App = () => (
     <div>
         <Nav/>
+
+
         <Route exact path="/" component={Landing}/>
         <Route path="/caselist/:casetype" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
@@ -37,6 +40,7 @@ const App = () => (
         <Route path="/catcare" component={CatCare}/>
         <Route path="/vetlist" component={VetList}/>
         <Route path="/contactPage" component={Contact}/>
+        <Route path= "/searchvet" component={SearchVet}/>
     </div>
 );
 
