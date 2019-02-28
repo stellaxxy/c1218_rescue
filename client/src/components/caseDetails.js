@@ -28,7 +28,6 @@ class CaseDetails extends Component {
                 <h1>Loading</h1>
             )
         }
-
         if(this.props.googlemap){
             return (
 
