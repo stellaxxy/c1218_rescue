@@ -14,13 +14,14 @@ import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
 import Contact from './contactpage';
 import SearchVet from './searchVet';
-import SearchModal from './search';
+import SearchModal from './searchmodal';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import VetList from './resource/vetlist';
 import Nav from './nav';
 import {Route} from 'react-router-dom';
 import OfficeInfo from "./vetofficeinfo";
+import SearchPet from "./serachpet";
 
 
 const App = () => (
@@ -33,6 +34,7 @@ const App = () => (
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
+        <Route path="/searchpet" component={SearchPet}/>
         <Route path="/lostlanding" component={LostLanding}/>
         <Route path="/foundlanding" component={FoundLanding}/>
         <Route path="/typeselection" component={TypeSelection}/>
