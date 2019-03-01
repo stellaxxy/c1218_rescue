@@ -1,5 +1,23 @@
 .caseListContainer {
+  position:relative;
+  top: 2vh;
+
+}
+
+.caseItem {
+  width: 90%;
+  background-color: white;
+
+  .addressContainer {
+    display: inline-block;
+    width: 75%;
+  }
+
   img{
     height: 100px;
+  }
+
+  p {
+    display: inline-block;
   }
 }

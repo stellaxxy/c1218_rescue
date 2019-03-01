@@ -10,7 +10,7 @@ export default () => {
                 <p>Food dogs cannot eat: chocolate, avocado,  grapes, onion, garlic</p>
                 <p>Keep fresh water and food available at all time</p>
             </div>
-            <NavButton firstButton={{'Vet': "/vetlist"}} className="btn"/>
+            <NavButton firstButton={{'Vet': "/searchvet"}} className="btn"/>
         </div>
     );
 }

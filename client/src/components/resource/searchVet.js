@@ -1,7 +1,7 @@
-import '../assets/css/searchVet.scss';
+import '../../assets/css/searchVet.scss';
 import React, {Component} from 'react';
-import GoogleMapImage from '../assets/images/GoogleMap.jpg';
-import PetImage from '../assets/images/image8.jpg';
+import GoogleMapImage from '../../assets/images/GoogleMap.jpg';
+import PetImage from '../../assets/images/image8.jpg';
 import {Link} from 'react-router-dom';
 
 
