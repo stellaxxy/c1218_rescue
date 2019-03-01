@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+/*
+mport React, {Component} from 'react';
 import Modal from 'react-responsive-modal';
 
 
@@ -45,3 +46,4 @@ closeModal=()=>{
 }
 
 export default SearchModal;
+*/
