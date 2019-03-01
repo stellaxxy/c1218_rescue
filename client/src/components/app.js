@@ -44,7 +44,7 @@ const App = () => (
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
-            <Route path="/searchmodal" component={SearchModal}/>
+        <Route path="/searchmodal" component={SearchModal}/>
     </div>
 );
 
