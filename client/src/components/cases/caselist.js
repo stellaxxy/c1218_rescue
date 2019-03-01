@@ -6,23 +6,57 @@ import './caselist.scss';
 
 class CaseList extends Component {
     state = {
+        error: false,
         cases: []
     };
 
     async componentDidMount(){
-        console.log('case list props:', this.props.match.params);
+        try {
+            const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
 
-        const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
-        //console.log('data from caselist:', result.data);
+            if(result.data.success === false) {
+                throw new Error('Failed to retrieve data');
+            }
 
-        this.setState({
-            cases: result.data.data
-        })
+            this.setState({
+                cases: result.data.data
+            })
+        } catch(error) {
+            this.setState({
+                error: true,
+                cases: []
+            });
+        }
+
+    }
+
+    async componentDidUpdate(prevProps){
+        if(prevProps.location.pathname !== this.props.location.pathname){
+            try {
+                const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
+
+                if(result.data.success === false) {
+                    throw new Error('Failed to retrieve data');
+                }
+
+                this.setState({
+                    cases: result.data.data
+                })
+            } catch(error) {
+                this.setState({
+                    cases: []
+                });
+            }
+        }
     }
 
     render(){
-        //console.log('caselist state', this.state.cases);
 
+        if(this.state.error === true){
+            return(
+                <div>No list</div>
+            );
+        }
         if(this.state.cases.length === 0){
             return(
                 <div>Loading</div>

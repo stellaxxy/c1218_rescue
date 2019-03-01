@@ -1,5 +1,6 @@
 import React from 'react';
 import exampleImage from "../../assets/images/cover1.jpg";
+import { Link } from 'react-router-dom';
 
 export default (props) => {
     const { caseType, location } = props;
@@ -11,9 +12,15 @@ export default (props) => {
     }
 
     return(
-        <div className='row'>
-            <p>{`${prefixForAddress} ${location.street}, ${location.city} ${location.zipcode}`}</p>
-            <img src={exampleImage}/>
-        </div>
+        <Link to="/casedetails">
+            <div className='row caseItem'>
+                <div className="addressContainer">
+                    <p>{`${prefixForAddress} ${location.street}, ${location.city} ${location.zipcode}`}</p>
+                </div>
+
+                <img src={exampleImage}/>
+            </div>
+        </Link>
+
     );
 }
