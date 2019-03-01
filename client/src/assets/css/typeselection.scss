@@ -1,7 +1,21 @@
 .typeSelectionContainer {
-  img {
-    height: 100px;
+  [type=radio] + img {
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 25px;
+    box-shadow: 7px 12px;
+    margin: 2px 15px;
+    height: 110px;
   }
+
+  [type=radio]:hover + img {
+    transform: translateY(10px);
+  }
+
+  [type=radio]:checked + img {
+    box-shadow: 7px 12px #CD853F;
+  }
+
   .btn {
     margin: 10px;
   }
