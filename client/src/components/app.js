@@ -37,7 +37,7 @@ const App = () => (
         <Route path="/foundlanding" component={FoundLanding}/>
         <Route path="/typeselection" component={TypeSelection}/>
         <Route path="/sizeselection" component={SizeSelection}/>
-        <Route path="/casedetails" component={CaseDetails}/>
+        <Route path="/casedetails/:caseid" component={CaseDetails}/>
         <Route path="/dogcare" component={DogCare}/>
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage" component={Contact}/>

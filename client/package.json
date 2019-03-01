@@ -6,6 +6,10 @@
   "proxy": {
     "/api/*": {
       "target": "http://localhost:9000"
+    },
+    "/images/*":{
+      "target": "http://localhost:9000"
+
     }
   },
   "scripts": {
@@ -30,7 +34,6 @@
   "homepage": "https://github.com/stellaxxy/c1218_rescue#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0-alpha.6",
     "materialize-css": "1.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
