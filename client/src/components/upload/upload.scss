@@ -6,6 +6,10 @@ $color-action-buttons: #EB5E30;
     min-height: calc(100vh - 56px);
     flex-direction: column;
 
+    @media (min-width: 600px) {
+        min-height: calc(100vh - 64px);
+    }
+    
     main {
         flex: 1 0 auto;
         overflow: hidden;
@@ -31,4 +35,8 @@ $color-action-buttons: #EB5E30;
             }
         }
     }
+}
+
+.upload-confirmation {
+    text-align: center;
 }

@@ -1,4 +1,6 @@
 .landing {
+    transition: ease all .75s;
+
     height: 100%;
     width: 100%;
     text-align: center;
@@ -8,12 +10,33 @@
         font-family: 'Staatliches', cursive;
         font-size: 20px;
         margin-bottom: 5px;
+
+        @media (min-width: 635px) {
+            position: absolute;
+            top: 25%;
+            left: 55%;
+        }
     }
 
     .landing-text {
+        position: relative;
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
         z-index: 1;
+
+        @media (min-width: 635px) {
+            position: absolute;
+            top: 30%;
+            left: 55%;
+            max-width: 30vw;
+            text-align: left;
+        }
+    }
+
+    @media (min-width: 1236px) {
+        p.landing-text::after {
+            content: ' We help reunite pet owners with their loved ones.'
+        }
     }
 
     img {
@@ -23,6 +46,13 @@
         width: 75%;
         opacity: .8;
         z-index: 0;
+
+        @media (min-width: 500px) {
+            max-width: 520px;
+            top: 50%;
+            left: 45%;
+            transform: translate(-80%, -45%);           
+        }
     }
 
     .btn-container {
@@ -35,5 +65,51 @@
             margin: 10px 5px;
             width: 87%;
         }
+
+        @media (min-width: 635px) {
+            top: 55%;
+            left: 65%;
+        }
+
+        @media (min-width: 1236px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 10px;
+
+            top: 40%;
+            left: 55%;
+            min-width: 25vw;
+            max-width: 30vw;
+        }
     }
 }
+
+/*
+@media (min-width: 500px) {
+    
+    .landing {
+
+        
+
+
+        div.btn-container {
+
+            .btn {
+                margin-top: 30px;
+            }
+        }
+    }
+}
+*/
+
+/*
+media 850
+.btn-container {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    width: 40%;
+    align-text: center;
+}
+*/
