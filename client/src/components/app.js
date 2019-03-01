@@ -13,7 +13,7 @@ import FoundLanding from './foundlanding';
 import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
 import Contact from './contactpage';
-import SearchModal from './searchmodal';
+//import SearchModal from './searchmodal';
 import SearchVet from './resource/searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
@@ -43,8 +43,9 @@ const App = () => (
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
-        <Route path="/searchmodal" component={SearchModal}/>
+
     </div>
 );
 
 export default App;
+//<Route path="/searchmodal" component={SearchModal}/>
