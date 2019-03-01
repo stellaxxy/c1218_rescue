@@ -5,7 +5,6 @@ const mysql = require('mysql');
 const db = require('./db');
 var bodyParser = require('body-parser');
 
-
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'development';
@@ -13,6 +12,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 const CASELIST_FILTERS = [
     {
