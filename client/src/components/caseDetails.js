@@ -14,8 +14,7 @@ class CaseDetails extends Component {
 
     async componentDidMount() {
 
-        const response = await axios.get('/api/casedetails?id=23');  // instead of 23 we will use this.props.id
-        console.log('response:', response.data.data);
+        const response = await axios.get('/api/casedetails?id=1');  // instead of 23 we will use this.props.id
 
         this.setState({
             data: response.data.data

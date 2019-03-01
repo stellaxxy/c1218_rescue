@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import PetImage from "../assets/images/image11.jpg";
+import PetImage from "../../assets/images/image11.jpg";
 
 
 class OfficeInfo extends Component {
