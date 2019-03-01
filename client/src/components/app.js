@@ -25,8 +25,6 @@ import OfficeInfo from "./vetofficeinfo";
 const App = () => (
     <div>
         <Nav/>
-
-
         <Route exact path="/" component={Landing}/>
         <Route path="/caselist/:casetype" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
