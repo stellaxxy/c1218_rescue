@@ -52,6 +52,9 @@ class CaseList extends Component {
 
     render(){
 
+
+
+
         if(this.state.error === true){
             return(
                 <div>No list</div>
@@ -64,8 +67,7 @@ class CaseList extends Component {
         }
 
         const caseItemArray = this.state.cases.map(item => {
-            const { caseType, location, id } = item;
-            return <CaseItem key={id} coverImg={exampleImage} location={location} caseType={caseType}/>
+            return <CaseItem key={item.id} coverImg={exampleImage} {...item} />
         });
 
         return(
