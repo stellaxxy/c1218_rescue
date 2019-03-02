@@ -5,6 +5,8 @@ import otherAnimalImage from "../assets/images/image7.png";
 import '../assets/css/typeselection.scss';
 import NavButton from "./general/navbutton";
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setActiveAnimalType } from "../actions";
 
 class TypeSelection extends Component {
     state = {
@@ -26,15 +28,15 @@ class TypeSelection extends Component {
 
             <div className="typeSelectionContainer">
                 <h1>What Type of Pet?</h1>
-                <label>
+                <label onClick={() => {this.props.setActiveAnimalType('dog')}}>
                     <input type="radio" name="typeselection" value="dog"/>
                     <img src={dogImage}/>
                 </label>
-                <label>
+                <label onClick={() => {this.props.setActiveAnimalType('cat')}}>
                     <input type="radio" name="typeselection" value="cat"/>
                     <img src={catImage}/>
                 </label>
-                <label>
+                <label onClick={() => {this.props.setActiveAnimalType('other')}}>
                     <input type="radio" name="typeselection" value="other"/>
                     <img src={otherAnimalImage}/>
                 </label>
@@ -45,6 +47,13 @@ class TypeSelection extends Component {
         );
     }
 }
-export default TypeSelection;
+
+function mapStateToProps(state){
+    return {
+        animalType: state.activeCase.animalType
+    };
+}
+
+export default connect(mapStateToProps, { setActiveAnimalType })(TypeSelection);
 // <NavButton firstButton={{'Go Back': "/lostlanding"}} secondButton={{'Next': "/sizeselection"}} className="btn"/>
 //
