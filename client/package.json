@@ -7,9 +7,8 @@
     "/api/*": {
       "target": "http://localhost:9000"
     },
-    "/images/*":{
+    "/images/*": {
       "target": "http://localhost:9000"
-
     }
   },
   "scripts": {
