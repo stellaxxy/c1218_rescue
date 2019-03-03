@@ -7,7 +7,6 @@ const DEFAULT_STATE = {
 };
 
 function activeCaseReducer(state = DEFAULT_STATE, action) {
-    console.log('In activeCaseReducer. action.type: ', action.type);
     switch(action.type) {
         case types.SET_ACTIVE_CASE_TYPE:
             return { ...state, caseType: action.payload };

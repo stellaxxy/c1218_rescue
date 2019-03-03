@@ -18,23 +18,6 @@ $color-action-buttons: #EB5E30;
             margin: 1.4em 0;
         }
     }
-
-    .page-footer {
-        background-color: $color-bars;
-        padding: 10px;
-
-        .btn-panel {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            align-content: center;
-
-            .btn-action {
-                margin-left: 10px;
-                background-color: $color-action-buttons;
-            }
-        }
-    }
 }
 
 .upload-confirmation {

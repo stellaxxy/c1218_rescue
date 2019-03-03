@@ -12,14 +12,9 @@ class CaseDetails extends Component {
     }
 
     async componentDidMount() {
-
-
-        console.log('properties:',this.props);
         const {caseid} = this.props.match.params;
-        console.log('case id', caseid);
-        const response = await axios.get('/api/casedetails?id=' + caseid);  // instead of 23 we will use this.props.id
+        const response = await axios.get('/api/casedetails?id=' + caseid);
 
-        console.log('case details response', response);
         this.setState({
             data: response.data.data
         })
