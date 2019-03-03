@@ -2,12 +2,14 @@ import './upload.scss';
 import React, {Component} from 'react';
 import UploadForm from './upload_form';
 import UploadConfirmation from './upload_confirmation';
+import { connect } from 'react-redux';
+
 
 class CaseUpload extends Component {
     state = {
         submitted: false,
         currentPage: 1,
-        caseType: 'lost',
+        caseType: 'found',
         animalType: 'dog',
         animalSize: 'medium'
     };
@@ -29,8 +31,15 @@ class CaseUpload extends Component {
             submitted: true
         });
     }
+/*
+    componentDidMount(){
 
+        const { caseType, animalType, animalSize } = this.props;
+        this.setState({caseType, animalType, animalSize});
+    }
+*/
     render() {
+        console.log('upload state', this.props);
         const {submitted, currentPage, caseType, animalType} = this.state;
 
         if (!submitted) {
@@ -50,4 +59,12 @@ class CaseUpload extends Component {
 }
 
 
-export default CaseUpload;
+function mapStateToProps(state) {
+    return {
+        caseType: state.activeCase.caseType,
+        animalType: state.activeCase.animalType,
+        animalSize: state.activeCase.animalSize
+    };
+}
+
+export default connect(mapStateToProps)(CaseUpload);

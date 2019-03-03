@@ -1,3 +1,4 @@
 module.exports={
-    dbConfig : require('./db')
-}
+    dbConfig : require('./db'),
+    googleMapApi: require('./api')
+};
