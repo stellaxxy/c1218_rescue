@@ -1,8 +1,4 @@
-import React, { Component } from 'react';
-import smallDogImage from '../assets/images/image10.png';
-import mediumDogImage from '../assets/images/image9.png';
-import largeDogImage from '../assets/images/image8.jpg';
-import '../assets/css/sizeselection.scss';
+import React, { Component, Fragment } from 'react';
 import NavButton from './general/navbutton';
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
@@ -13,34 +9,40 @@ class AnimalSizeSelector extends Component{
     render(){
         const { animalSize, animalType, caseType } = this.props;
 
-        //console.log('sizeselection animalType:', animalType);
-        //console.log('sizeselection caseType:', caseType);
-        //console.log('sizeselection animalSize:', animalSize);
-
         return (
-            <div className="sizeSelectionContainer">
-                <h1>Size of Your Lost Pet</h1>
-                <label onClick={()=>{this.props.setActiveAnimalSize('small')}}>
-                    <input type="radio" name="sizeselection" value="small"/>
-                    <img src={smallDogImage} className="small"/>
-                </label>
-                <label onClick={()=>{this.props.setActiveAnimalSize('medium')}}>
-                    <input type="radio" name="sizeselection" value="medium"/>
-                    <img src={mediumDogImage} className="medium"/>
-                </label>
-                <label onClick={()=>{this.props.setActiveAnimalSize('large')}}>
-                    <input type="radio" name="sizeselection" value="large"/>
-                    <img src={largeDogImage} className="large"/>
-                </label>
+            <div className="page-body">
+                <main>
+                    <div className="container">
 
-                <Link to="/typeselection" className="btn">GO BACK</Link>
-                <Link to={"/caselist"}  className="btn">Next</Link>
+                        <div className="type-selector">
+                            <p>How big is the pet?</p>
 
+                            <div className="images">
+                                <input id="small" type="radio" name="animalSize" value="small" onClick={()=>{this.props.setActiveAnimalSize('small')}}/>
+                                <label className="typecard small" htmlFor="small"><span>SMALL</span></label>  
+                                <input id="medium" type="radio" name="animalSize" value="medium" onClick={()=>{this.props.setActiveAnimalSize('medium')}}/>
+                                <label className="typecard medium" htmlFor="medium"><span>MEDIUM</span></label>  
+                                <input id="large" type="radio" name="animalSize" value="large" onClick={()=>{this.props.setActiveAnimalSize('large')}}/>
+                                <label className="typecard large" htmlFor="large"><span>LARGE</span></label> 
+                            </div>      
+                        </div>
+
+
+                    </div>
+                </main>
+
+                <footer className="page-footer">
+                    <div className="btn-panel">
+                        <Link to="/typeselection" className="btn">Prev</Link>
+                        <Link to={"/caselist"} className={"btn " + (animalSize ? '' : 'disabled')}>Next</Link>
+                    </div>                
+                </footer>
             </div>
         );
     }
 
 }
+
 //<NavButton firstButton={{'Go Back': "/typeselection"}} secondButton={{'Next': "/caselist"}} className="btn"/>
 function mapStateToProps(state){
     return{

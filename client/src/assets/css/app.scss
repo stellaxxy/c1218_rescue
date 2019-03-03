@@ -1,3 +1,117 @@
+/*
+ * COLORS
+ */
+$color-bars: #e79307;
+$color-action-buttons: #EB5E30;
+$color-text: #752a07;
+
+/*
+ * FONTS
+ */
+$font-size-normal: 1.4em;
+
 body {
     background-image: url(../images/landing-page-background.png);
+}
+
+/*
+ * SELECTORS
+ */
+
+.type-selector {
+    text-align: center;
+    color: $color-text;
+    font-size: $font-size-normal;
+
+    .typecard {
+        border-radius: 2px;
+        /*background-color: white;*/
+        padding: 5px;
+        color: $color-text;
+        font-family: 'Staatliches', cursive;
+        font-size: 1.2em;
+
+        width: 70vw;
+        height: 20vh;
+        margin-bottom: 10px;
+        border:  1px solid gainsboro;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+
+        cursor:pointer;
+        background-size:contain;
+        background-repeat:no-repeat;
+        display:inline-block;
+
+        -webkit-transition: all 100ms ease-in;
+        -moz-transition: all 100ms ease-in;
+             transition: all 100ms ease-in;
+        -webkit-filter: brightness(1.25) grayscale(1) opacity(.8);
+        -moz-filter: brightness(1.25) grayscale(1) opacity(.8);
+             filter: brightness(1.25) grayscale(1) opacity(.8);
+
+        span {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    }
+    
+    .typecard:hover{
+        -webkit-filter: brightness(1.1) grayscale(.5) opacity(.9);
+           -moz-filter: brightness(1.1) grayscale(.5) opacity(.9);
+                filter: brightness(1.1) grayscale(.5) opacity(.9);
+    }
+
+    input{
+        margin:0;
+        padding:0;
+        -webkit-appearance:none;
+        -moz-appearance:none;
+        appearance:none;
+    }
+
+    input:active +.typecard{
+        opacity: .9;
+        box-shadow: 0 5px 0 0 rgba(0,0,0,0.2);
+        transform: translateY(4px);
+    }
+
+    input:checked +.typecard{
+        box-shadow: 0 5px 0 0 rgba(0,0,0,0.2);
+        transform: translateY(4px);
+
+        -webkit-filter: none;
+           -moz-filter: none;
+                filter: none;
+    }
+
+    .large{background-image:url(../images/size_large.png);}
+    .medium{background-image:url(../images/size_medium.png);}
+    .small{background-image:url(../images/size_small.png);}
+
+    .dog{background-image:url(../images/type_dog.png);}
+    .cat{background-image:url(../images/type_cat.png);}
+    .other{background-image:url(../images/type_other.png);}
+}
+
+/*
+ * BUTTON PANELS
+ */
+.btn-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .btn {
+        margin: 8px 20px;
+        width: 115px;
+    }
+}
+
+/*
+ * FOOTERS
+ */
+ .page-footer {
+    background-color: $color-bars;
+    padding: 10px;
 }
