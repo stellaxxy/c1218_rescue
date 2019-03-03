@@ -3,6 +3,8 @@ import axios from 'axios';
 import exampleImage from '../../assets/images/cover1.jpg';
 import CaseItem from './caseitem';
 import './caselist.scss';
+import { connect } from 'react-redux';
+
 
 class CaseList extends Component {
     state = {
@@ -10,12 +12,34 @@ class CaseList extends Component {
         cases: []
     };
 
-    async componentDidMount(){
+    async renderPage(){
         try {
-            const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
+            const { caseType, animalType, animalSize } = this.props;
+            const queryStringArray = [{caseType}, {animalType}, {animalSize}];
+
+            let endpointString = '/api/caselist?';
+
+            queryStringArray.map(item => {
+                if(Object.values(item)[0] !== null){
+                    if(endpointString[endpointString.length-1] !== '?'){
+                        endpointString = endpointString + '&';
+                    }
+                    endpointString = endpointString + Object.keys(item)[0] + '=' + Object.values(item)[0];
+                }
+            });
+
+            //console.log('endpoint string:', endpointString);
+
+            const result = await axios.get(endpointString);
+
+            //console.log('caselist result:', result);
 
             if(result.data.success === false) {
                 throw new Error('Failed to retrieve data');
+            }
+
+            if(result.data.data.length === 0){
+                throw new Error('No data available');
             }
 
             this.setState({
@@ -27,37 +51,27 @@ class CaseList extends Component {
                 cases: []
             });
         }
-
     }
 
-    async componentDidUpdate(prevProps){
-        if(prevProps.location.pathname !== this.props.location.pathname){
-            try {
-                const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
+    componentDidMount(){
+        this.renderPage();
+    }
 
-                if(result.data.success === false) {
-                    throw new Error('Failed to retrieve data');
-                }
-
-                this.setState({
-                    cases: result.data.data
-                })
-            } catch(error) {
-                this.setState({
-                    cases: []
-                });
-            }
+    componentDidUpdate(prevState){
+        if(prevState.caseType !== this.props.caseType || prevState.animalSize !== this.props.animalSize || prevState.animalType !== this.props.animalType){
+            this.setState({
+                error: false
+            });
+            this.renderPage();
         }
+
     }
 
     render(){
 
-
-
-
         if(this.state.error === true){
             return(
-                <div>No list</div>
+                <div>No Matching Data</div>
             );
         }
         if(this.state.cases.length === 0){
@@ -77,5 +91,14 @@ class CaseList extends Component {
         );
     }
 }
-export default CaseList;
+
+function mapStateToProps(state){
+    return{
+        caseType: state.activeCase.caseType,
+        animalType: state.activeCase.animalType,
+        animalSize: state.activeCase.animalSize
+    };
+}
+
+export default connect(mapStateToProps)(CaseList);
 

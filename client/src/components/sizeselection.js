@@ -13,8 +13,9 @@ class AnimalSizeSelector extends Component{
     render(){
         const { animalSize, animalType, caseType } = this.props;
 
-        console.log('sizeselection animalType:', animalType);
-        console.log('sizeselection caseType:', caseType);
+        //console.log('sizeselection animalType:', animalType);
+        //console.log('sizeselection caseType:', caseType);
+        //console.log('sizeselection animalSize:', animalSize);
 
         return (
             <div className="sizeSelectionContainer">
@@ -33,7 +34,7 @@ class AnimalSizeSelector extends Component{
                 </label>
 
                 <Link to="/typeselection" className="btn">GO BACK</Link>
-                <Link to="/caselist"  className="btn">Next</Link>
+                <Link to={"/caselist"}  className="btn">Next</Link>
 
             </div>
         );

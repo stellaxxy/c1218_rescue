@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default (props) => {
 
-    console.log('caseitems props:',props);
+    //console.log('caseitems props:',props);
     const { caseType, location, id } = props;
     let prefixForAddress = null;
     if(caseType === 'lost'){
