@@ -1,1 +1,3 @@
-const Google_Map_Api_Key = '';
+module.exports ={
+    googleMapApi: 'key'
+};

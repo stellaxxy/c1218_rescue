@@ -3,11 +3,17 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const db = require('./db');
+const {googleMapApi} = require('./config/api');
 var bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'development';
+
+const googleMap = require('@google/maps').createClient({
+    key: googleMapApi,
+    Promise: Promise
+});
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -204,10 +210,15 @@ response.send(output);
 //API for for lost dog
 app.post('/api/createcase', async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, size, city, street, email, username, phone, caseType, zipcode, latitude, longitude, coverImg, date, imgURL} = request.body;
+        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, coverImg, date, imgURL} = request.body;
+
+        const result = await googleMap.geocode({address: location}).asPromise();
+
+        const longitude = result.json.results[0].geometry.location.lng;
+        const latitude = result.json.results[0].geometry.location.lat;
 
 // insert into users table
-        const usersTable = "INSERT INTO `users` (`email`,`username`,`phone`) VALUES (?,?,?)";
+        const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
         const insertUserInfo = [email, username, phone];
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
@@ -221,8 +232,9 @@ app.post('/api/createcase', async (request, response) => {
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`zipcode`,`latitude`,`longitude`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [city, street, caseType, zipcode, latitude, longitude, coverImg, date, animalID, userID];
+        //`latitude`,`longitude`
+        const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [city, street, caseType, longitude, latitude, zipcode, coverImg, date, animalID, userID];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
@@ -243,7 +255,7 @@ app.post('/api/createcase', async (request, response) => {
         handleError(response, 'Server Error');
     }
 
-})
+});
 
 // Listen
 app.listen(PORT, HOST, () => {
