@@ -3,8 +3,6 @@ import exampleImage from "../../assets/images/cover1.jpg";
 import { Link } from 'react-router-dom';
 
 export default (props) => {
-
-    //console.log('caseitems props:',props);
     const { caseType, location, id } = props;
     let prefixForAddress = null;
     if(caseType === 'lost'){

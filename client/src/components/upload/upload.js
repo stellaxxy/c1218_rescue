@@ -27,7 +27,6 @@ class CaseUpload extends Component {
     }
 
     handleSubmit() {
-        console.log('Submitted');
         this.setState({
             submitted: true
         });
@@ -52,7 +51,6 @@ class CaseUpload extends Component {
                     {...this.state}/>
             );
         } else {
-            console.log('Was submitted');
             return (
                 <UploadConfirmation/>
             );

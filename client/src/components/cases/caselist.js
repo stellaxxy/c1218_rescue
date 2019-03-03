@@ -28,11 +28,8 @@ class CaseList extends Component {
                 }
             });
 
-            //console.log('endpoint string:', endpointString);
 
             const result = await axios.get(endpointString);
-
-            //console.log('caselist result:', result);
 
             if(result.data.success === false) {
                 throw new Error('Failed to retrieve data');
