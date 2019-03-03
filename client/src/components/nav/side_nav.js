@@ -12,19 +12,19 @@ class SideNav extends Component{
         return(
             <ul ref={element => {this.sideNav = element}} className="sidenav" id="sidenav">
                 <li>
-                    <Link onClick={() => {this.props.setActiveCaseType('found')}} to="/caselist">FOUND</Link>
+                    <Link className="sidenav-close" onClick={() => {this.props.setActiveCaseType('found')}} to="/caselist">FOUND</Link>
                 </li>
                 <li>
-                    <Link onClick={() => {this.props.setActiveCaseType('lost')}} to="/caselist">LOST</Link>
+                    <Link className="sidenav-close" onClick={() => {this.props.setActiveCaseType('lost')}} to="/caselist">LOST</Link>
                 </li>
                 <li>
-                    <Link to="/casemap">MAP</Link>
+                    <Link className="sidenav-close" to="/casemap">MAP</Link>
                 </li>
                 <li>
-                    <Link to="/upload">UPLOAD CASE</Link>
+                    <Link className="sidenav-close" to="/upload">UPLOAD CASE</Link>
                 </li>
                 <li>
-                    <Link to="/resource">RESOURCE</Link>
+                    <Link className="sidenav-close" to="/resource">RESOURCE</Link>
                 </li>
             </ul>
         );
