@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import { setActiveCaseType } from '../../actions';
 
 class SideNav extends Component{
     componentDidMount(){
@@ -10,10 +12,10 @@ class SideNav extends Component{
         return(
             <ul ref={element => {this.sideNav = element}} className="sidenav" id="sidenav">
                 <li>
-                    <Link to="/caselist/found">FOUND</Link>
+                    <Link onClick={() => {this.props.setActiveCaseType('found')}} to="/caselist">FOUND</Link>
                 </li>
                 <li>
-                    <Link to="/caselist/lost">LOST</Link>
+                    <Link onClick={() => {this.props.setActiveCaseType('lost')}} to="/caselist">LOST</Link>
                 </li>
                 <li>
                     <Link to="/casemap">MAP</Link>
@@ -29,4 +31,8 @@ class SideNav extends Component{
     }
 }
 
-export default SideNav;
+function mapStateToProps(){
+    return {};
+}
+
+export default connect(mapStateToProps, {setActiveCaseType})(SideNav);

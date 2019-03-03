@@ -16,7 +16,7 @@ app.use(express.static('public'));
 
 const CASELIST_FILTERS = [
     {
-        param: 'case_type',
+        param: 'caseType',
         validValues: ['lost', 'found'],
         sqlCriteria: 'c.`caseType` = ?'
     },
@@ -29,12 +29,12 @@ const CASELIST_FILTERS = [
         sqlCriteria: 'c.`city` = ?'
     },
     {
-        param: 'size',
+        param: 'animalSize',
         validValues: ['small', 'medium', 'large'],
         sqlCriteria: 'a.`size` = ?'
     },
     {
-        param: 'animal_type',
+        param: 'animalType',
         validValues: ['cat', 'dog'],
         sqlCriteria: 'a.`animalType` = ?'
     },

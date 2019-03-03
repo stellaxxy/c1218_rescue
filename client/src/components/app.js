@@ -17,7 +17,7 @@ import Contact from './contactpage';
 import SearchVet from './resource/searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
-import Nav from './nav';
+import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
@@ -26,9 +26,9 @@ import OfficeInfo from "./resource/vetofficeinfo";
 
 const App = () => (
     <div>
-        <Nav/>
+        <MainNav/>
         <Route exact path="/" component={Landing}/>
-        <Route path="/caselist/:casetype" component={CaseList}/>
+        <Route path="/caselist" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>

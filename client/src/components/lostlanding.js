@@ -7,7 +7,7 @@ export default () => {
     return(
         <div className="lostLandingContainer">
             <Link to="/typeselection" className="btn">Describe Your Pet</Link>
-            <Link to="/caselist/lost" className="btn">See All List</Link>
+            <Link to="/caselist" className="btn">See All List</Link>
         </div>
     );
 }
