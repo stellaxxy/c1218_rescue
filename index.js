@@ -239,7 +239,6 @@ app.post('/api/createcase', async (request, response) => {
 
         })
     } catch (error) {
-        console.log(error);
         handleError(response, 'Server Error');
     }
 

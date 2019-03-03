@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import dogImage from '../assets/images/image9.png';
-import catImage from "../assets/images/image13.png";
-import otherAnimalImage from "../assets/images/image7.png";
-import '../assets/css/typeselection.scss';
 import NavButton from "./general/navbutton";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -23,26 +19,36 @@ class TypeSelection extends Component {
     };
 
     render(){
-        console.log('selection:', this.state.selection);
+        const {animalType} = this.props;
+
         return (
+            <div className="page-body">
+                <main>
+                    <div className="container">
 
-            <div className="typeSelectionContainer">
-                <h1>What Type of Pet?</h1>
-                <label onClick={() => {this.props.setActiveAnimalType('dog')}}>
-                    <input type="radio" name="typeselection" value="dog"/>
-                    <img src={dogImage}/>
-                </label>
-                <label onClick={() => {this.props.setActiveAnimalType('cat')}}>
-                    <input type="radio" name="typeselection" value="cat"/>
-                    <img src={catImage}/>
-                </label>
-                <label onClick={() => {this.props.setActiveAnimalType('other')}}>
-                    <input type="radio" name="typeselection" value="other"/>
-                    <img src={otherAnimalImage}/>
-                </label>
+                        <div className="type-selector">
+                            <p>What kind of pet is it?</p>
 
-                <Link to="/lostlanding" className="btn">GO BACK</Link>
-                <Link to="/sizeselection" onClick={this.saveSelection} className="btn">Next</Link>
+                            <div className="images">
+                                <input id="dog" type="radio" name="animalType" value="dog" onClick={()=>{this.props.setActiveAnimalType('dog')}}/>
+                                <label className="typecard dog" htmlFor="dog"><span>DOG</span></label>  
+                                <input id="cat" type="radio" name="animalType" value="cat" onClick={()=>{this.props.setActiveAnimalType('cat')}}/>
+                                <label className="typecard cat" htmlFor="cat"><span>CAT</span></label>  
+                                <input id="other" type="radio" name="animalType" value="other" onClick={()=>{this.props.setActiveAnimalType('other')}}/>
+                                <label className="typecard other" htmlFor="other"><span>OTHER</span></label> 
+                            </div>      
+                        </div>
+
+
+                    </div>
+                </main>
+
+                <footer className="page-footer">
+                    <div className="btn-panel">
+                        <Link to="/" className="btn">Prev</Link>
+                        <Link to={"/sizeselection"}  className={"btn " + (animalType ? '' : 'disabled')}>Next</Link>
+                    </div>                
+                </footer>
             </div>
         );
     }
