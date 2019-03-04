@@ -19,6 +19,7 @@ import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
+import Filter from "./filter";
 
 const App = () => (
     <div>
@@ -29,6 +30,7 @@ const App = () => (
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
+        <Route path="/searchfilter" component={Filter}/>
         <Route path="/typeselection" component={TypeSelection}/>
         <Route path="/sizeselection" component={SizeSelection}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
