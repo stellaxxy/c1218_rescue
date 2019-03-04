@@ -1,75 +1,58 @@
 import React, {Component} from 'react';
 import '../assets/css/casemap.scss';
-import dog from '@fortawesome/fontawesome-free/svgs/solid/dog.svg';
-import cat from '@fortawesome/fontawesome-free/svgs/solid/cat.svg';
-import other from '@fortawesome/fontawesome-free/svgs/solid/horse.svg'
 import axios from 'axios';
 import config from '../../../config/api';
-
+import foundDog from '../assets/images/icons8-dog-24.png';
+import lostDog from '../assets/images/icons8-dog-24-red.png';
+import foundCat from '../assets/images/icons8-cat-24.png';
+import lostCat from '../assets/images/icons8-cat-24-red.png';
+import foundOther from '../assets/images/icons8-bull-24.png';
+import lostOther from '../assets/images/icons8-bull-24-red.png'
 
 class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
         loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
+        //loadJS('../googleMapClustering/markerclusterer.js');
     }
-
 
     async renderMarkers(map){
         const icons = {
             dog: {
-                url: dog,
-                scaledSize: new google.maps.Size(30, 30),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(0, 0),
-                style: {color: 'red'}
+                found: foundDog,
+                lost: lostDog
             },
             cat: {
-                url: cat,
-                scaledSize: new google.maps.Size(30, 30),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(0, 0)
+                found: foundCat,
+                lost: lostCat
             },
             other: {
-                url: other,
-                scaledSize: new google.maps.Size(30, 30),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(0, 0)
+                found: foundOther,
+                lost: lostOther
             }
-        };
-
+        }
+        ;
         const result = await axios.get('/api/caselist');
-        /*
+
         const markers = result.data.data.map(item => {
-            //console.log(item.location.longitude);
             const longitude = item.location.longitude;
             const latitude = item.location.latitude;
-            //console.log('item:', item.animalType);
+
             return new google.maps.Marker({
                 position: new google.maps.LatLng(latitude, longitude),
-                icon: icons[item.animalType],
+                icon: icons[item.animalType][item.caseType],
                 map: map
             });
         });
-        console.log(markers);
 
         const markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-        */
-
-        result.data.data.forEach(item => {
-            const longitude = item.location.longitude;
-            const latitude = item.location.latitude;
-            const marker = new google.maps.Marker({
-                position: new google.maps.LatLng(latitude, longitude),
-                icon: icons[item.animalType],
-                map: map
-            });
-        });
+//'../googleMapClustering/m'
     }
 
 
-    showCluster(renderedMap) {
+    showCluster(renderedMap){
         var locations = [
             {lat: 33.1846, lng: -117.1265},
             {lat: 33.1847, lng: -117.1266},
@@ -95,11 +78,12 @@ class CaseMap extends Component {
                 lat: 33.6846,
                 lng: -117.8265
             },
-            zoom: 10
-
+            zoom: 10,
+            gestureHandling: 'greedy'
         });
+
         this.renderMarkers(renderedMap);
-        //this.showCluster(renderedMap)
+        this.showCluster(renderedMap)
     }
 
     render() {
