@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/lostlanding.scss';
+import '../assets/css/resource.scss';
 import NavButton from './general/navbutton';
 
 export default () => {
