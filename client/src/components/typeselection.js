@@ -61,5 +61,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, { setActiveAnimalType })(TypeSelection);
-// <NavButton firstButton={{'Go Back': "/lostlanding"}} secondButton={{'Next': "/sizeselection"}} className="btn"/>
-//
