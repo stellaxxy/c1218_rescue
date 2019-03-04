@@ -35,9 +35,9 @@ class CaseMap extends Component {
         ;
         const result = await axios.get('/api/caselist');
 
-        console.log(result);
+        //console.log(result);
 
-        if(result.data.data){
+        if(result.data.success === true){
             const markers = result.data.data.map(item => {
                 const longitude = item.location.longitude;
                 const latitude = item.location.latitude;
@@ -56,26 +56,6 @@ class CaseMap extends Component {
 
     }
 
-
-    showCluster(renderedMap){
-        var locations = [
-            {lat: 33.1846, lng: -117.1265},
-            {lat: 33.1847, lng: -117.1266},
-            {lat: 33.1848, lng: -117.1267},
-        ];
-
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        var markers = locations.map(function (location, i) {
-            return new google.maps.Marker({
-                position: location,
-                label: labels[i % labels.length]
-            });
-        });
-        var markerCluster = new MarkerClusterer(renderedMap, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-    }
-
     initMap() {
         var renderedMap = new google.maps.Map(document.getElementById("map"), {
 
@@ -88,7 +68,6 @@ class CaseMap extends Component {
         });
 
         this.renderMarkers(renderedMap);
-        this.showCluster(renderedMap)
     }
 
     render() {
