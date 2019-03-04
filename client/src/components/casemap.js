@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import '../assets/css/casemap.scss';
+import config from '../../../config/api';
 
 class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
-        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAb8_xYpdmVAx63QPRfw-M8VaKUsJuHzO0&callback=initMap');
+        loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
     }
 
-    showCluster(map) {
+    showCluster(renderedMap) {
         var locations = [
             {lat: 33.1846, lng: -117.1265},
             {lat: 33.1847, lng: -117.1266},
@@ -21,13 +22,13 @@ class CaseMap extends Component {
                 label: labels[i % labels.length]
             });
         });
-        var markerCluster = new MarkerClusterer(map, markers,
+        var markerCluster = new MarkerClusterer(renderedMap, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     }
 
     initMap() {
-        var map = new google.maps.Map(document.getElementById("map"), {
+        var renderedMap = new google.maps.Map(document.getElementById("map"), {
 
             center: {
                 lat: 33.6846,
@@ -37,7 +38,7 @@ class CaseMap extends Component {
 
         })
 
-        this.showCluster(map)
+        this.showCluster(renderedMap)
     }
 
     render() {
