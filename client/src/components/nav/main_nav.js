@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import SideNav from './side_nav';
 import {connect} from 'react-redux';
 import {setActiveCaseType} from '../../actions';
+import Filter from '../filter';
 
 class MainNav extends Component {
 
@@ -30,7 +31,7 @@ class MainNav extends Component {
                         <Link className="brand-logo" to='/'>PAWS</Link>
                         {
                             this.state.showfilter ?
-                                (<Link to="/searchfilter" className="right">Filter</Link>)
+                                (<Filter/>)
                                 :
                                 ''
                         }
