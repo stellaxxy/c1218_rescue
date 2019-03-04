@@ -39,7 +39,6 @@ class CaseUpload extends Component {
     }
 */
     render() {
-        console.log('upload state', this.props);
         const {submitted, currentPage, caseType, animalType} = this.state;
 
         if (!submitted) {

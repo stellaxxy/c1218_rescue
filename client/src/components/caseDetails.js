@@ -53,7 +53,7 @@ class CaseDetails extends Component {
                     <h2 className="header ">Please help me</h2>
 
                     <div className="w3-container w3-half">
-                        <img src={"http://localhost:9000"+this.state.data.coverImg}/>
+                        <img src={this.state.data.coverImg}/>
                     </div>
 
                     <div className="w3-container w3-half">

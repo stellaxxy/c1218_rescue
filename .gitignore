@@ -3,7 +3,9 @@ node_modules
 .vscode
 .DS_Store
 
-
+public
+!public/images/image*.jpg
+!public/images/cover5.jpg
 
 config/*.js
 !config /index.js
