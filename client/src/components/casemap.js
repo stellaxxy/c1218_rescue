@@ -13,7 +13,11 @@ class CaseMap extends Component {
             {lat: 33.1846, lng: -117.1265},
             {lat: 33.1847, lng: -117.1266},
             {lat: 33.1848, lng: -117.1267},
-        ]
+        ];
+
+        const icons = {
+        };
+
         var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         var markers = locations.map(function (location, i) {
             return new google.maps.Marker({
