@@ -28,6 +28,7 @@ class CaseList extends Component {
                 }
             });
 
+
             const result = await axios.get(endpointString);
 
             if(result.data.success === false) {

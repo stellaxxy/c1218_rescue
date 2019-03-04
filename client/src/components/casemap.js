@@ -4,13 +4,16 @@ import dog from '@fortawesome/fontawesome-free/svgs/solid/dog.svg';
 import cat from '@fortawesome/fontawesome-free/svgs/solid/cat.svg';
 import other from '@fortawesome/fontawesome-free/svgs/solid/horse.svg'
 import axios from 'axios';
+import config from '../../../config/api';
+
 
 class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
-        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAb8_xYpdmVAx63QPRfw-M8VaKUsJuHzO0&callback=initMap');
+        loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
     }
+
 
     async renderMarkers(map){
         const icons = {
@@ -19,7 +22,7 @@ class CaseMap extends Component {
                 scaledSize: new google.maps.Size(30, 30),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(0, 0),
-                color: 'red'
+                style: {color: 'red'}
             },
             cat: {
                 url: cat,
@@ -65,7 +68,8 @@ class CaseMap extends Component {
         });
     }
 
-    showCluster(map) {
+
+    showCluster(renderedMap) {
         var locations = [
             {lat: 33.1846, lng: -117.1265},
             {lat: 33.1847, lng: -117.1266},
@@ -79,13 +83,13 @@ class CaseMap extends Component {
                 label: labels[i % labels.length]
             });
         });
-        var markerCluster = new MarkerClusterer(map, markers,
+        var markerCluster = new MarkerClusterer(renderedMap, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     }
 
     initMap() {
-        var map = new google.maps.Map(document.getElementById("map"), {
+        var renderedMap = new google.maps.Map(document.getElementById("map"), {
 
             center: {
                 lat: 33.6846,
@@ -94,8 +98,8 @@ class CaseMap extends Component {
             zoom: 10
 
         });
-        this.renderMarkers(map);
-        //this.showCluster(map)
+        this.renderMarkers(renderedMap);
+        //this.showCluster(renderedMap)
     }
 
     render() {
