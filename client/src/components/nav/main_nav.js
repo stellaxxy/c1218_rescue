@@ -41,14 +41,7 @@ class MainNav extends Component {
                         </Link>
                         <ul className="right hide-on-med-and-down">
                             <li>
-                                <Link onClick={() => {
-                                    this.props.setActiveCaseType('found')
-                                }} to="/caselist">FOUND</Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => {
-                                    this.props.setActiveCaseType('lost')
-                                }} to="/caselist">LOST</Link>
+                                <Link to="/caselist">SEARCH</Link>
                             </li>
                             <li>
                                 <Link to="/casemap">MAP</Link>
