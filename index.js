@@ -5,6 +5,7 @@ const mysql = require('mysql');
 const db = require('./db');
 const {googleMapApi} = require('./config/api');
 var bodyParser = require('body-parser');
+const upload = require('./services/upload');
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
@@ -154,6 +155,7 @@ app.get('/api/casedetails', async (request, response) => {
 
         if(data.length === 1){
             data = data[0];
+
             data.location = {
                 city: data.city,
                 street: data.street,
@@ -195,10 +197,10 @@ data.date = data.date.toLocaleDateString();
 
 output.success = true;
 output.data = data;
+
 } else {
     throw new Error(`There is no case matched by id ${id}`);
 }
-
 response.send(output);
 } catch(error) {
     handleError(response, error.message);
@@ -208,9 +210,10 @@ response.send(output);
 
 
 //API for for lost dog
-app.post('/api/createcase', async (request, response) => {
+app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, coverImg, date, imgURL} = request.body;
+        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, date, imgURL} = request.body;
+        const coverImg = upload.getFilepath(request);
 
         const result = await googleMap.geocode({address: location}).asPromise();
 
@@ -240,18 +243,20 @@ app.post('/api/createcase', async (request, response) => {
 
 
         //  insert into image table
-        const imageTable = "INSERT INTO `images` (`animalID`,`imgURL`) VALUES (?,?)"
-        const imageInfo = [animalID, imgURL];
-        const imagequery = mysql.format(imageTable, imageInfo);
-        const insertimage = await db.query(imagequery);
+        if (imgURL) {
+            const imageTable = "INSERT INTO `images` (`animalID`,`imgURL`) VALUES (?,?)"
+            const imageInfo = [animalID, imgURL];
+            const imagequery = mysql.format(imageTable, imageInfo);
+            const insertimage = await db.query(imagequery);
+        }
 
         response.send({
             success: true,
-            insertID: insertResult.insertID,
+            insertID: insertcase.insertId,
 
         })
     } catch (error) {
-        handleError(response, 'Server Error');
+        handleError(response, error);
     }
 
 });
@@ -263,7 +268,16 @@ app.listen(PORT, HOST, () => {
     console.log('Server listen error.  You probably already have a server on port: ', PORT);
 });
 
-function handleError(response, errorMessage) {
-    let success = false;
-    response.send({success, errorMessage});
+function handleError(response, error) {
+    let result = {success: false};
+
+    if (typeof error === 'string') {
+        result.errorMessage = error;
+        result.trace = '';
+    } else {
+        result.errorMessage = error.message;
+        result.trace = error.stack;
+    }
+
+    response.send(result);
 }
