@@ -1,6 +1,6 @@
 import './upload.scss';
 import React, {Component} from 'react';
-import UploadForm from './upload_form';
+import UploadForm from './upload_form_v1';
 import UploadConfirmation from './upload_confirmation';
 import { connect } from 'react-redux';
 
