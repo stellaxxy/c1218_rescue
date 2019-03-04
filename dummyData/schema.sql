@@ -43,7 +43,7 @@ CREATE TABLE `cases` (
   `zipcode` mediumint(9) NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
-  `coverImg` varchar(30) NOT NULL,
+  `coverImg` varchar(100) NOT NULL,
   `animalID` bigint(20) NOT NULL,
   `userID` bigint(20) NOT NULL,
   `date` date NOT NULL
