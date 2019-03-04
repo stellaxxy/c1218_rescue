@@ -8,8 +8,6 @@ import CaseMap from './casemap';
 import Upload from './upload';
 import Resource from './resource';
 import Landing from './landing';
-import LostLanding from './lostlanding';
-import FoundLanding from './foundlanding';
 import TypeSelection from './typeselection';
 import SizeSelection from './sizeselection';
 import Contact from './contactpage';
@@ -22,8 +20,6 @@ import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 
-
-
 const App = () => (
     <div>
         <MainNav/>
@@ -33,8 +29,6 @@ const App = () => (
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
-        <Route path="/lostlanding" component={LostLanding}/>
-        <Route path="/foundlanding" component={FoundLanding}/>
         <Route path="/typeselection" component={TypeSelection}/>
         <Route path="/sizeselection" component={SizeSelection}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
