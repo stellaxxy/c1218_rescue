@@ -21,6 +21,7 @@ import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
+import Filter from "./filter";
 
 
 
@@ -33,6 +34,7 @@ const App = () => (
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
+        <Route path="/searchfilter" component={Filter}/>
         <Route path="/lostlanding" component={LostLanding}/>
         <Route path="/foundlanding" component={FoundLanding}/>
         <Route path="/typeselection" component={TypeSelection}/>

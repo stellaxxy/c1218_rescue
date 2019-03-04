@@ -1,26 +1,53 @@
 import './nav.scss';
 import React, {Fragment, Component} from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import SideNav from './side_nav';
-import { connect } from 'react-redux';
-import { setActiveCaseType } from '../../actions';
+import {connect} from 'react-redux';
+import {setActiveCaseType} from '../../actions';
 
-class MainNav extends Component{
-    render(){
-        return(
+class MainNav extends Component {
+
+    state = {
+        showfilter: false
+
+    }
+
+    componentDidMount() {
+        if (window.location.pathname == "/caselist" || window.location.pathname == "/casemap") {
+            this.setState({
+                showfilter: true
+            })
+
+        }
+    }
+
+
+    render() {
+        return (
             <Fragment>
                 <nav>
                     <div className="nav-wrapper">
                         <Link className="brand-logo" to='/'>PAWS</Link>
+                        {
+                            this.state.showfilter ?
+                                (<Link to="/searchfilter" className="right">Filter</Link>)
+                                :
+                                ''
+                        }
+
                         <Link to="#" className="sidenav-trigger" data-target="sidenav">
                             <i className="material-icons">menu</i>
                         </Link>
                         <ul className="right hide-on-med-and-down">
                             <li>
-                                <Link onClick={() => {this.props.setActiveCaseType('found')}} to="/caselist">FOUND</Link>
+                                <Link onClick={() => {
+                                    this.props.setActiveCaseType('found')
+                                }} to="/caselist">FOUND</Link>
                             </li>
                             <li>
-                                <Link onClick={() => {this.props.setActiveCaseType('lost')}} to="/caselist">LOST</Link>
+                                <Link onClick={() => {
+                                    this.props.setActiveCaseType('lost')
+                                }} to="/caselist">LOST</Link>
                             </li>
                             <li>
                                 <Link to="/casemap">MAP</Link>
@@ -40,7 +67,7 @@ class MainNav extends Component{
     }
 }
 
-function mapStateToProps(){
+function mapStateToProps() {
     return {};
 }
 
