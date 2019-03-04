@@ -83,33 +83,13 @@
             max-width: 30vw;
         }
     }
-}
 
-/*
-@media (min-width: 500px) {
-    
-    .landing {
-
-        
-
-
-        div.btn-container {
-
-            .btn {
-                margin-top: 30px;
-            }
+    #modalBegin {
+        height: 40vh;
+        .modal-footer {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
         }
     }
 }
-*/
-
-/*
-media 850
-.btn-container {
-    position: absolute;
-    top: 40%;
-    left: 60%;
-    width: 40%;
-    align-text: center;
-}
-*/
