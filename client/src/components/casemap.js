@@ -35,20 +35,25 @@ class CaseMap extends Component {
         ;
         const result = await axios.get('/api/caselist');
 
-        const markers = result.data.data.map(item => {
-            const longitude = item.location.longitude;
-            const latitude = item.location.latitude;
+        console.log(result);
 
-            return new google.maps.Marker({
-                position: new google.maps.LatLng(latitude, longitude),
-                icon: icons[item.animalType][item.caseType],
-                map: map
+        if(result.data.data){
+            const markers = result.data.data.map(item => {
+                const longitude = item.location.longitude;
+                const latitude = item.location.latitude;
+
+                return new google.maps.Marker({
+                    position: new google.maps.LatLng(latitude, longitude),
+                    icon: icons[item.animalType][item.caseType],
+                    map: map
+                });
             });
-        });
 
-        const markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            const markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 //'../googleMapClustering/m'
+        }
+
     }
 
 
