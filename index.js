@@ -217,8 +217,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         const result = await googleMap.geocode({address: location}).asPromise();
 
-        const longitude = result.json.results[0].geometry.location.lng;
-        const latitude = result.json.results[0].geometry.location.lat;
+        const longitude = result.json.results[0].geometry.location.lat;
+        const latitude = result.json.results[0].geometry.location.lng;
 
 // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
