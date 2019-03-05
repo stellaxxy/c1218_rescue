@@ -208,11 +208,10 @@ response.send(output);
 
 });
 
-
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, date, imgURL} = request.body;
+        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, caseDate, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
 
         const result = await googleMap.geocode({address: location}).asPromise();
@@ -237,7 +236,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         //  insert into cases table
         //`latitude`,`longitude`
         const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [city, street, caseType, longitude, latitude, zipcode, coverImg, date, animalID, userID];
+        const insertlocation = [city, street, caseType, longitude, latitude, zipcode, coverImg, caseDate, animalID, userID];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
