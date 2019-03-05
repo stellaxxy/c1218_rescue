@@ -50,6 +50,9 @@ class MainNav extends Component {
                                 <Link to="/upload">UPLOAD CASE</Link>
                             </li>
                             <li>
+                                <Link to="/mycase">MY CASE</Link>
+                            </li>
+                            <li>
                                 <Link to="/resource">RESOURCE</Link>
                             </li>
                         </ul>

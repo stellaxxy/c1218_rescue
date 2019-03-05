@@ -20,6 +20,7 @@ import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import Filter from "./filter";
+import MyCase from "./mycase";
 
 const App = () => (
     <div>
@@ -39,6 +40,7 @@ const App = () => (
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
+        <Route path="/mycase" component={MyCase}/>
 
     </div>
 );

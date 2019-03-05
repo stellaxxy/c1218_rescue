@@ -32,14 +32,14 @@ class CaseMap extends Component {
                     icon: icons[item.caseType],
                     map: map
                 });
-
+                console.log(item);
                 const img = item.coverImg;
                 let contentString = '';
 
                 if (item.caseType === 'found'){
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.street}, ${item.location.zipcode}</p></div>`;
                 } else if(item.caseType === 'lost') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.street}, ${item.location.zipcode}</p></div>`;
                 }
 
 
@@ -49,7 +49,7 @@ class CaseMap extends Component {
 
                 marker.addListener('click', () => {
                     infowindow.open(map, marker);
-                })
+                });
 
                 return marker;
             });

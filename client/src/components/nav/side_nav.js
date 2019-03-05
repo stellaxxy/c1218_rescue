@@ -21,6 +21,9 @@ class SideNav extends Component{
                     <Link className="sidenav-close" to="/upload">UPLOAD CASE</Link>
                 </li>
                 <li>
+                    <Link className="sidenav-close" to="/mycase">MY CASE</Link>
+                </li>
+                <li>
                     <Link className="sidenav-close" to="/resource">RESOURCE</Link>
                 </li>
             </ul>
