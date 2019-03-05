@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import NavButton from "./general/navbutton";
+import NavButton from "../general/navbutton/navbutton";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setActiveAnimalType } from "../actions";
+import { setActiveAnimalType } from "../../actions";
 
 class TypeSelection extends Component {
     state = {

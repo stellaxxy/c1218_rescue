@@ -3,7 +3,6 @@ const cors = require('cors');
 const mysql = require('mysql');
 const db = require('./db');
 const {googleMapApi} = require('./config/api');
-var bodyParser = require('body-parser');
 const upload = require('./services/upload');
 
 const PORT = process.env.PORT || 9000;
@@ -16,8 +15,8 @@ const googleMap = require('@google/maps').createClient({
 });
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use(express.static('public'));
 
 const CASELIST_FILTERS = [
@@ -72,7 +71,6 @@ const CASELIST_FILTERS = [
 // Middleware
 app.use(cors());
 
-app.use(express.json());
 
 // API
 app.get('/api/caselist', async (request, response) => {
