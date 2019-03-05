@@ -11,15 +11,36 @@ $color-action-buttons: #EB5E30;
     }
     
     main {
-        flex: 1 0 auto;
-        overflow: hidden;
+        // flex: 1 0 auto;
+        position: absolute;
+        top: 60px;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        overflow-y: scroll;
+        padding-bottom: 30px;
 
         h5 {
             margin: 1.4em 0;
         }
     }
+
+    footer {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
 }
 
 .upload-confirmation {
     text-align: center;
+}
+
+.placeholder-preview {
+    text-align: center;
+    border-radius: 5px;
+    border: 2px dashed black;
 }
