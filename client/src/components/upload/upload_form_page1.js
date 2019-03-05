@@ -6,7 +6,7 @@ import './upload.scss';
 const imageIsRequired = value => (!value ? "Required" : undefined);
 
 let UploadFormPage1 = props => {
-  const { handleSubmit } = props
+  const { handleSubmit } = props;
   return (
     <Fragment>
       <div className="page-body">
