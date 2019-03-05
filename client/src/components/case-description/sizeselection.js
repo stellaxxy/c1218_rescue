@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import NavButton from './general/navbutton';
+import NavButton from '../general/navbutton/navbutton';
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
-import { setActiveAnimalSize} from "../actions";
+import { setActiveAnimalSize} from "../../actions";
 
 class AnimalSizeSelector extends Component{
 

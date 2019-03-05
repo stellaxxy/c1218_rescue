@@ -2,8 +2,6 @@ import React, {Component, Fragment} from 'react';
 import FilterForm from './filterform';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
 import '../assets/css/filter.scss';
-import history from './history';
-
 
 class Filter extends Component {
     constructor(props){
@@ -13,7 +11,6 @@ class Filter extends Component {
 
     submit = values => {
         console.log('submit value:',this.props)
-        history.push("/caselist");
         console.log(values)
     }
 
