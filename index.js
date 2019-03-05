@@ -260,54 +260,6 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 });
 
-/*app.post('/api/savefilter', async (request, response) => {
-
-    try {
-        const {size, animalType, city, color, gender, zipcode} = request.body;
-        const query = "SELECT a.animalType,a.size, a.color,a.gender, c.city, c.zipcode from animals as a JOIN cases as c ON a.id=c.AnimalID"
-
-        const output = {
-            success: false
-        };
-
-        let data = await db.query(query);
-
-        if (data.length === 1) {
-            data = data[0];
-
-            data.location = {
-                city: data.city,
-                zipcode: data.zipcode,
-            }
-            delete data.city;
-            delete data.street;
-
-            data.animalDetail = {
-                animalType: data.animalType,
-                color: data.color,
-                gender: data.gender,
-                size: data.size,
-            };
-
-            delete data.animalType;
-            delete data.color;
-            delete data.gender;
-            delete data.size;
-            data.date = data.date.toLocaleDateString();
-
-            output.success = true;
-            output.data = data;
-
-        } else {
-            throw new Error(`There is no case matched `);
-        }
-        response.send(output);
-
-    }
-    catch (error) {
-        handleError(response, error.message);
-    }
-}); */
 
 // Listen
 app.listen(PORT, HOST, () => {
