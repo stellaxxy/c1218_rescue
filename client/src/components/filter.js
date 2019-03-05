@@ -1,29 +1,24 @@
 import React, {Component, Fragment} from 'react';
-import ReactDOM from 'react-dom'
+import FilterForm from './filterform';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import '../assets/css/filter.scss';
+import history from './history';
 
 
 class Filter extends Component {
+    constructor(props){
+        super(props);
+    }
 
-    // state={
-    //     //     show:false
-    //     // }
-    //     //
-    //     // showModal=()=>{
-    //     //     this.setState({
-    //     //         show:true
-    //     //     })
-    //     // }
-    //     //
-    //     // hideModal=()=>{
-    //     //     this.setState({
-    //     //         show:false
-    //     //     })
-    //     // }
 
+    submit = values => {
+        console.log('submit value:',this.props)
+        history.push("/caselist");
+        console.log(values)
+    }
 
     componentDidMount(){
-
+        console.log('componenet didmount :',this.props)
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {});
     }
@@ -32,21 +27,11 @@ class Filter extends Component {
             <Fragment>
 
                     <a className="waves-effect waves-light btn modal-trigger right" href="#modal1">Filter</a>
-                    <div id="modal1" className="modal">
-                        <div className="modal-content">
-                            <input placeholder="Zip code" id="zip_code" type="text" className="validate"/>
-                            <input placeholder="City to search" id="city" type="text" className="validate"/>
-                            <input placeholder="Animal type" id="animalType" type="text" className="validate"/>
-                            <input placeholder="Animal gender" id="gender" type="text" className="validate"/>
-                            <input placeholder="Animal size" id="size" type="text" className="validate"/>
-                            <input placeholder="Main color" id="color" type="text" className="validate"/>
-
-                        </div>
-                    <div className="modal-footer">
-                        <a href="#!" className="modal-close waves-effect waves-green btn-flat">Apply</a>
-                        <a href="#!" className="modal-close waves-effect waves-green btn-flat">Clear</a>
+                <div id="modal1" className="modal">
+                    <div className="modal-content">
+                        <FilterForm onSubmit={this.submit.bind(this)}/>
                     </div>
-                    </div>
+                </div>
 
             </Fragment>
 

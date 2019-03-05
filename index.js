@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
@@ -134,9 +133,9 @@ app.get('/api/caselist', async (request, response) => {
 app.get('/api/casedetails', async (request, response) => {
     try {
         const id = request.query.id;
-        if(id === undefined){
+        if (id === undefined) {
             throw new Error(`Please provide a valid ID`);
-        } else if(isNaN(id)){
+        } else if (isNaN(id)) {
             throw new Error(`ID must be a number`);
         }
 
@@ -153,7 +152,7 @@ app.get('/api/casedetails', async (request, response) => {
         };
         let data = await db.query(query, [id]);
 
-        if(data.length === 1){
+        if (data.length === 1) {
             data = data[0];
 
             data.location = {
@@ -190,21 +189,21 @@ app.get('/api/casedetails', async (request, response) => {
             delete data.size;
             delete data.description;
 
-            if(data.imgURL !== null){
+            if (data.imgURL !== null) {
                 data.imgURL = data.imgURL.split(',');
-}
-data.date = data.date.toLocaleDateString();
+            }
+            data.date = data.date.toLocaleDateString();
 
-output.success = true;
-output.data = data;
+            output.success = true;
+            output.data = data;
 
-} else {
-    throw new Error(`There is no case matched by id ${id}`);
-}
-response.send(output);
-} catch(error) {
-    handleError(response, error.message);
-}
+        } else {
+            throw new Error(`There is no case matched by id ${id}`);
+        }
+        response.send(output);
+    } catch (error) {
+        handleError(response, error.message);
+    }
 
 });
 
@@ -260,6 +259,55 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
     }
 
 });
+
+/*app.post('/api/savefilter', async (request, response) => {
+
+    try {
+        const {size, animalType, city, color, gender, zipcode} = request.body;
+        const query = "SELECT a.animalType,a.size, a.color,a.gender, c.city, c.zipcode from animals as a JOIN cases as c ON a.id=c.AnimalID"
+
+        const output = {
+            success: false
+        };
+
+        let data = await db.query(query);
+
+        if (data.length === 1) {
+            data = data[0];
+
+            data.location = {
+                city: data.city,
+                zipcode: data.zipcode,
+            }
+            delete data.city;
+            delete data.street;
+
+            data.animalDetail = {
+                animalType: data.animalType,
+                color: data.color,
+                gender: data.gender,
+                size: data.size,
+            };
+
+            delete data.animalType;
+            delete data.color;
+            delete data.gender;
+            delete data.size;
+            data.date = data.date.toLocaleDateString();
+
+            output.success = true;
+            output.data = data;
+
+        } else {
+            throw new Error(`There is no case matched `);
+        }
+        response.send(output);
+
+    }
+    catch (error) {
+        handleError(response, error.message);
+    }
+}); */
 
 // Listen
 app.listen(PORT, HOST, () => {
