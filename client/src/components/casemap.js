@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import '../assets/css/casemap.scss';
 import axios from 'axios';
 import config from '../../../config/api';
-import foundDog from '../assets/images/icons8-dog-24.png';
-import lostDog from '../assets/images/icons8-dog-24-red.png';
-import foundCat from '../assets/images/icons8-cat-24.png';
-import lostCat from '../assets/images/icons8-cat-24-red.png';
-import foundOther from '../assets/images/icons8-bull-24.png';
-import lostOther from '../assets/images/icons8-bull-24-red.png'
+import foundIcon from '../assets/images/icons8-region-filled-48.png';
+import lostIcon from '../assets/images/icons8-region-48.png';
+
 
 class CaseMap extends Component {
 
@@ -19,41 +16,48 @@ class CaseMap extends Component {
 
     async renderMarkers(map){
         const icons = {
-            dog: {
-                found: foundDog,
-                lost: lostDog
-            },
-            cat: {
-                found: foundCat,
-                lost: lostCat
-            },
-            other: {
-                found: foundOther,
-                lost: lostOther
-            }
-        }
-        ;
-        const result = await axios.get('/api/caselist');
+            found: foundIcon,
+            lost: lostIcon
+        };
 
-        //console.log(result);
+        const result = await axios.get('/api/caselist');
 
         if(result.data.success === true){
             const markers = result.data.data.map(item => {
                 const longitude = item.location.longitude;
                 const latitude = item.location.latitude;
 
-                return new google.maps.Marker({
+                let marker = new google.maps.Marker({
                     position: new google.maps.LatLng(latitude, longitude),
-                    icon: icons[item.animalType][item.caseType],
+                    icon: icons[item.caseType],
                     map: map
                 });
+
+                const img = item.coverImg;
+                let contentString = '';
+
+                if (item.caseType === 'found'){
+                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                } else if(item.caseType === 'lost') {
+                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                }
+
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                marker.addListener('click', () => {
+                    infowindow.open(map, marker);
+                })
+
+                return marker;
             });
 
             const markerCluster = new MarkerClusterer(map, markers,
                 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-//'../googleMapClustering/m'
+            //'../googleMapClustering/m'
         }
-
     }
 
     initMap() {
