@@ -39,24 +39,25 @@ CREATE TABLE `cases` (
   `id` bigint(20) NOT NULL,
   `caseType` varchar(5) NOT NULL,
   `city` varchar(15) NOT NULL,
-  `street` varchar(30) NOT NULL,
+  `location` varchar(100) NOT NULL,
   `zipcode` mediumint(9) NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
   `coverImg` varchar(100) NOT NULL,
   `animalID` bigint(20) NOT NULL,
   `userID` bigint(20) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `caseKey` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cases`
 --
 
-INSERT INTO `cases` (`id`, `caseType`, `city`, `street`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`) VALUES
-(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, -117.83, 33.68, '/images/cover1.jpg', 1, 1, '2019-02-03'),
-(2, 'lost', 'Irvine', 'Jefferey Rd', 92618, -117.83, 36.05, '/images/image4.jpg', 2, 2, '2019-02-07'),
-(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/images5.jpg', 3, 3, '2019-02-14');
+INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`) VALUES
+(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, -117.83, 33.68, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF'),
+(2, 'lost', 'Irvine', 'Jefferey Rd', 92618, -117.83, 36.05, '/images/image4.jpg', 2, 2, '2019-02-07', '123ABC'),
+(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/images5.jpg', 3, 3, '2019-02-14', 'BOBCAT');
 
 -- --------------------------------------------------------
 
