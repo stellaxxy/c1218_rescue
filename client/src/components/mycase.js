@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Modal from './general/modal/modal';
 
 class MyCase extends Component {
     state = {
-        modal: null
-    }
+        modal: true
+    };
 
-    componentDidMount(){
-        const instances = M.Modal.init(this.refs.myCaseModal);
+    // componentDidMount(){
+    //     const instances = M.Modal.init(this.refs.myCaseModal);
+    //     this.setState({
+    //         modal: instances
+    //     });
+    // }
+
+    closeModal = () =>{
         this.setState({
-            modal: instances
-        });
-    }
-
-    closeModal(){
-        if(this.state.modal !== null){
-            this.state.modal.close();
-        }
-    }
+            modal: false
+        })
+    };
 
     render(){
-
         return (
-            <div className="myCaseContainer">
-                <div>my case</div>
+            <Modal showModal={this.state.modal} closeModal={this.closeModal}/>
 
-                <div ref="myCaseModal" className='modal' id='myCaseModal'>
+        );
+    }
+}
+
+export default MyCase;
+
+/*
+<div ref="myCaseModal" className='modal' id='myCaseModal'>
                     <div className="modal-content">
                         <h5>Please provide your email and unique key</h5>
                         <div className="row">
@@ -45,10 +51,4 @@ class MyCase extends Component {
                         <Link onClick={this.closeModal} to="#" className="modal-close btn">Submit</Link>
                     </div>
                 </div>
-            </div>
-
-        );
-    }
-}
-
-export default MyCase;
+ */
