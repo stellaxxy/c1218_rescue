@@ -12,6 +12,7 @@ class Filter extends Component {
     submit = values => {
         console.log('submit value:', this.props)
         console.log(values)
+        this.props.applyFilter(values);
     }
 
     componentDidMount() {

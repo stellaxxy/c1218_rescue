@@ -9,9 +9,14 @@ import {change} from 'redux-form';
 class FilterPanel extends Component {
 
     handleChipClose(key,value){
+        var removefilter={}
+        removefilter[key]=value;
+        this.props.applyFilter({
+            remove: removefilter
+        })
 
 
-        console.log('this.props.change:',this.props.change)
+        console.log('this.props.change:',key,value)
 
 
     }
@@ -27,8 +32,18 @@ class FilterPanel extends Component {
         if (!values) {
             return chips;
         }
+
+        console.log('chip panel values',values);
+
+        if(!values){
+            return null;
+        }
+
         chips = Object.keys(values).map((key, i) => {
             let value = values[key]
+            if(!value){
+                return null;
+            }
             return (
                 <div key={i} className="chip">
                     {value}
@@ -48,7 +63,7 @@ class FilterPanel extends Component {
                 <div className="chip-panel">
                     {this.renderChips()}
                 </div>
-                <Filter/>
+                <Filter  applyFilter={this.props.applyFilter}/>
             </div>
 
         )
