@@ -10,10 +10,9 @@ let FilterForm = props => {
             <Field component="input" name="city" placeholder="City to search" id="city" type="text" className="validate" value=" "/>
             <Field component="input" name="animalType" placeholder="Animal type" id="animalType" type="text" className="validate" value=" "/>
             <Field component="input" name="size" placeholder="Animal size" id="size" type="text" className="validate" value= " "/>
-            <Field component="input" name="color" placeholder="Main color" id="color" type="text" className="validate" value= " "/>
             <div className="modal-footer">
-                <button type="submit" className="modal-close waves-effect waves-green btn-flat">Apply</button>
-                <button className="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                <button type="submit" className="modal-close waves-effect waves-green btn left">Apply</button>
+                 <button type= "reset" className="modal-close waves-effect waves-green btn">Cancel</button>
             </div>
 
         </form>

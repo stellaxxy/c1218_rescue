@@ -15,6 +15,11 @@ class Filter extends Component {
         this.props.applyFilter(values);
     }
 
+
+    reset = values=>{
+        this.props.applyFilter.reset()
+    }
+
     componentDidMount() {
         console.log('componenet didmount :', this.props)
         var elems = document.querySelectorAll('.modal');
