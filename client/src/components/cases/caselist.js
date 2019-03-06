@@ -24,9 +24,8 @@ class CaseList extends Component {
                 })
             }
 
-
-            const { caseType, animalType, size,zipcode,city } = params || this.props;
-           const queryStringArray = [{caseType}, {animalType}, {size},{zipcode},{city}];
+            const { caseType, animalType, size, zipcode, city } = params || this.props;
+            const queryStringArray = [{caseType}, {animalType}, {size},{zipcode},{city}];
 
             let endpointString = '/api/caselist?';
 
@@ -39,7 +38,6 @@ class CaseList extends Component {
                     filters.push(Object.keys(item)[0])
                 }
             });
-
 
             const result = await axios.get(endpointString);
 
