@@ -5,23 +5,41 @@ import SideNav from './side_nav';
 import {connect} from 'react-redux';
 import {setActiveCaseType} from '../../actions';
 import Filter from '../filter';
+import Modal from '../general/modal';
 
 class MainNav extends Component {
 
     state = {
-        showfilter: false
-
-    }
+        showfilter: false,
+        showModal: false
+    };
 
     componentDidMount() {
         if (window.location.pathname == "/caselist" || window.location.pathname == "/casemap") {
             this.setState({
                 showfilter: true
             })
-
         }
+        /*
+        debugger;
+        const instances = M.Modal.init(this.refs.myCaseModal);
+        this.setState({
+            modal: instances
+        });
+        */
     }
 
+    openModal = ()=>{
+        this.setState({
+            showModal: true
+        })
+    };
+
+    closeModal = ()=>{
+        this.setState({
+            showModal: false
+        })
+    };
 
     render() {
         return (
@@ -50,7 +68,7 @@ class MainNav extends Component {
                                 <Link to="/upload">UPLOAD CASE</Link>
                             </li>
                             <li>
-                                <Link to="/mycase">MY CASE</Link>
+                                <Link onClick={this.openModal} data-target="myCaseModal" to="/mycase">MY CASE</Link>
                             </li>
                             <li>
                                 <Link to="/resource">RESOURCE</Link>
@@ -59,6 +77,7 @@ class MainNav extends Component {
                     </div>
                 </nav>
                 <SideNav/>
+                <Modal closeModal={this.closeModal} className='modal' id='myCaseModal'/>
             </Fragment>
         );
     }

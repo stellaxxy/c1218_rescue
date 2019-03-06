@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-class MyCase extends Component {
+class Modal extends Component {
+
     state = {
         modal: null
     }
 
     componentDidMount(){
+        debugger;
         const instances = M.Modal.init(this.refs.myCaseModal);
         this.setState({
             modal: instances
@@ -20,12 +22,10 @@ class MyCase extends Component {
     }
 
     render(){
-
+        console.log(this.props);
         return (
-            <div className="myCaseContainer">
-                <div>my case</div>
 
-                <div ref="myCaseModal" className='modal' id='myCaseModal'>
+                <div ref="myCaseModal" className={this.props.className} id={this.props.id}>
                     <div className="modal-content">
                         <h5>Please provide your email and unique key</h5>
                         <div className="row">
@@ -42,13 +42,12 @@ class MyCase extends Component {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <Link onClick={this.closeModal} to="#" className="modal-close btn">Submit</Link>
+                        <Link to="#" className="modal-close btn">Submit</Link>
                     </div>
                 </div>
-            </div>
 
         );
     }
 }
 
-export default MyCase;
+export default Modal;

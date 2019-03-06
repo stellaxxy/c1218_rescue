@@ -4,14 +4,19 @@ import axios from 'axios';
 import config from '../../../config/api';
 import foundIcon from '../assets/images/icons8-region-filled-48.png';
 import lostIcon from '../assets/images/icons8-region-48.png';
-
+import m1 from '../googleMapClustering/m1.png';
+import m2 from '../googleMapClustering/m2.png';
+import m3 from '../googleMapClustering/m3.png';
+import m4 from '../googleMapClustering/m4.png';
+import m5 from '../googleMapClustering/m5.png';
+import '../googleMapClustering/markerclusterer.js'
 
 class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
         loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
-        //loadJS('../googleMapClustering/markerclusterer.js');
+        loadJS('../googleMapClustering/markerclusterer.js');
     }
 
     async renderMarkers(map){
@@ -55,8 +60,8 @@ class CaseMap extends Component {
             });
 
             const markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            //'../googleMapClustering/m'
+                {imagePath: '../googleMapClustering/m'});
+            //'../googleMapClustering/m' 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
         }
     }
 
