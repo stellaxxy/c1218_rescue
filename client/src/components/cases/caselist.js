@@ -4,6 +4,7 @@ import exampleImage from '../../assets/images/cover1.jpg';
 import CaseItem from './caseitem';
 import './caselist.scss';
 import { connect } from 'react-redux';
+import FilterPanel from '../case-filter';
 
 
 class CaseList extends Component {
@@ -82,9 +83,13 @@ class CaseList extends Component {
         });
 
         return(
-            <div className="caseListContainer">
-                {caseItemArray}
+            <div>
+                <FilterPanel/>
+                <div className="caseListContainer">
+                    {caseItemArray}
+                </div>
             </div>
+
         );
     }
 }
