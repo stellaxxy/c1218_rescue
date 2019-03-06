@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import SideNav from './side_nav';
 import {connect} from 'react-redux';
 import {setActiveCaseType} from '../../actions';
+<<<<<<< HEAD
 import Filter from '../filter';
 import Modal from '../general/modal';
 
@@ -20,7 +21,11 @@ class MainNav extends Component {
             })
         }
     }
+=======
 
+>>>>>>> e7132f25573ff6fb6510456dcf0d237d61dd638e
+
+class MainNav extends Component {
 
     render() {
         return (
@@ -28,12 +33,7 @@ class MainNav extends Component {
                 <nav>
                     <div className="nav-wrapper">
                         <Link className="brand-logo" to='/'>PAWS</Link>
-                        {
-                            this.state.showfilter ?
-                                (<Filter/>)
-                                :
-                                ''
-                        }
+
 
                         <Link to="#" className="sidenav-trigger" data-target="sidenav">
                             <i className="material-icons">menu</i>

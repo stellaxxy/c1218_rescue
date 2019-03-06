@@ -1,10 +1,8 @@
-
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const db = require('./db');
 const {googleMapApi} = require('./config/api');
-var bodyParser = require('body-parser');
 const upload = require('./services/upload');
 
 const PORT = process.env.PORT || 9000;
@@ -17,8 +15,8 @@ const googleMap = require('@google/maps').createClient({
 });
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use(express.static('public'));
 
 const CASELIST_FILTERS = [
@@ -73,11 +71,11 @@ const CASELIST_FILTERS = [
 // Middleware
 app.use(cors());
 
-app.use(express.json());
 
 // API
 app.get('/api/caselist', async (request, response) => {
     try {
+
         let sql = "SELECT c.`id`, a.`animalType`, c.`caseType`,\n" +
             "            c.`city`,c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
             "            FROM `cases` c\n" +
@@ -111,14 +109,13 @@ app.get('/api/caselist', async (request, response) => {
         data.forEach(row => {
             row.location = {
                 city: row.city,
-                street: row.street,
+                location: row.location,
                 zipcode: row.zipcode,
                 latitude: row.latitude,
                 longitude: row.longitude
             };
 
             delete row.city;
-            delete row.street;
             delete row.zipcode;
             delete row.latitude;
             delete row.longitude;
@@ -133,13 +130,13 @@ app.get('/api/caselist', async (request, response) => {
 app.get('/api/casedetails', async (request, response) => {
     try {
         const id = request.query.id;
-        if(id === undefined){
+        if (id === undefined) {
             throw new Error(`Please provide a valid ID`);
-        } else if(isNaN(id)){
+        } else if (isNaN(id)) {
             throw new Error(`ID must be a number`);
         }
 
-        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`street`, c.`zipcode`, \n" +
+        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
             "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
             "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
             "FROM `cases` AS c \n" +
@@ -152,19 +149,18 @@ app.get('/api/casedetails', async (request, response) => {
         };
         let data = await db.query(query, [id]);
 
-        if(data.length === 1){
+        if (data.length === 1) {
             data = data[0];
 
             data.location = {
                 city: data.city,
-                street: data.street,
+                location: data.location,
                 zipcode: data.zipcode,
                 latitude: data.latitude,
                 longitude: data.longitude
             };
 
             delete data.city;
-            delete data.street;
             delete data.zipcode;
             delete data.latitude;
             delete data.longitude;
@@ -189,29 +185,28 @@ app.get('/api/casedetails', async (request, response) => {
             delete data.size;
             delete data.description;
 
-            if(data.imgURL !== null){
+            if (data.imgURL !== null) {
                 data.imgURL = data.imgURL.split(',');
-}
-data.date = data.date.toLocaleDateString();
+            }
+            data.date = data.date.toLocaleDateString();
 
-output.success = true;
-output.data = data;
+            output.success = true;
+            output.data = data;
 
-} else {
-    throw new Error(`There is no case matched by id ${id}`);
-}
-response.send(output);
-} catch(error) {
-    handleError(response, error.message);
-}
+        } else {
+            throw new Error(`There is no case matched by id ${id}`);
+        }
+        response.send(output);
+    } catch (error) {
+        handleError(response, error.message);
+    }
 
 });
-
 
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, location, size, city, street, email, username, phone, caseType, zipcode, date, imgURL} = request.body;
+        const {breed, color, name, animalType, gender, description, location, size, city, email, username, phone, caseType, zipcode, caseDate, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
 
         const result = await googleMap.geocode({address: location}).asPromise();
@@ -235,8 +230,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         //  insert into cases table
         //`latitude`,`longitude`
-        const casesTable = "INSERT INTO `cases` (`city`,`street`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [city, street, caseType, longitude, latitude, zipcode, coverImg, date, animalID, userID];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [city, location, caseType, longitude, latitude, zipcode, coverImg, caseDate, animalID, userID];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 

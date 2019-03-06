@@ -5,11 +5,11 @@ import React from 'react';
 import CaseList from './cases/caselist';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
-import Upload from './upload';
+import Upload from './case-upload';
 import Resource from './resource';
 import Landing from './landing';
-import TypeSelection from './typeselection';
-import SizeSelection from './sizeselection';
+import TypeSelection from './case-description/typeselection';
+import SizeSelection from './case-description/sizeselection';
 import Contact from './contactpage';
 //import SearchModal from './searchmodal';
 import SearchVet from './resource/searchVet';
@@ -19,8 +19,9 @@ import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
-import Filter from "./filter";
 import MyCase from "./mycase";
+import Filter from "./case-filter/filtermodal";
+
 
 const App = () => (
     <div>

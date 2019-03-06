@@ -5,7 +5,7 @@ var caseDetail = {
         caseType: 'found',
         location: {
             city: 'Irvine',
-            street: 'Irvine Center Drive',
+            location: 'Irvine Center Drive',
             zipcode: '92618',
             longitude: "33.68",
             latitude: "-117.83"
