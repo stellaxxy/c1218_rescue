@@ -11,14 +11,14 @@ class Filter extends Component {
 
     submit = values => {
         console.log('submit value:', this.props)
-        console.log(values)
+        console.log('values',values)
         this.props.applyFilter(values);
     }
 
 
-    reset = values=>{
-        this.props.applyFilter.reset()
-    }
+    // reset = values=>{
+    //     this.props.applyFilter.reset()
+    // }
 
     componentDidMount() {
         console.log('componenet didmount :', this.props)

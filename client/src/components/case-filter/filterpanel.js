@@ -16,7 +16,8 @@ class FilterPanel extends Component {
         })
 
 
-        console.log('this.props.change:',key,value)
+       //this.props.change('casefilter',key,'')
+
 
 
     }
@@ -63,7 +64,7 @@ class FilterPanel extends Component {
                 <div className="chip-panel">
                     {this.renderChips()}
                 </div>
-                <Filter  applyFilter={this.props.applyFilter}/>
+                <Filter applyFilter={this.props.applyFilter}/>
             </div>
 
         )
