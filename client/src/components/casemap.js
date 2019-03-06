@@ -37,9 +37,9 @@ class CaseMap extends Component {
                 let contentString = '';
 
                 if (item.caseType === 'found'){
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 } else if(item.caseType === 'lost') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.street}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 }
 
 

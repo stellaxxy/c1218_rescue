@@ -10,7 +10,6 @@ const HARD_CODED = {
   gender: 'DUMMY GENDER',
   description: 'DUMMY DESCRIPTION',
   city: 'Irvine',
-  street: 'Spectrum Center Drive',
   zipcode: '92618'
 };
 

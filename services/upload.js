@@ -8,6 +8,9 @@ const multerS3 = require('multer-s3');
 const s3 = require('./s3');
 const { s3Config } = require('../config');
 
+// Location for files uploaded with local configuration
+const LOCAL_DIR = 'public/images/';
+
 // Get environment variable to determine type of storage
 const STORAGE_S3 = 's3';
 const STORAGE_LOCAL = 'local';
@@ -19,7 +22,6 @@ let storageOptions = {};
 
 if (storageType === STORAGE_LOCAL) {
     // Set local storage options
-    const LOCAL_DIR = 'public/images/';
     storageOptions = { dest: LOCAL_DIR };
 
 } else if (storageType === STORAGE_S3) {

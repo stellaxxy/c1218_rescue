@@ -12,7 +12,7 @@ function checkInvalidRequest(response, errorText) {
 
 function checkValidCaselist(response, expectedAnimalTypes) {
   const caseProps = ['id','animalType','caseType','location','coverImg'];
-  const locationProps = ['city','street','zipcode','longitude','latitude'];
+  const locationProps = ['city','location','zipcode','longitude','latitude'];
 
   expect(response).toBeDefined();
   expect(response.data.success).toEqual(true);

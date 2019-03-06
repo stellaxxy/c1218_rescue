@@ -69,7 +69,7 @@ class CaseDetails extends Component {
                         <div>DATE LOST: {this.state.data.date}</div>
                         <div>PHONE: mobile</div>
                         <div>PET DESCRIPTION:{this.state.data.animalDetail.description} </div>
-                        <div>AREA LAST SEEN : {this.state.data.location.street}</div>
+                        <div>AREA LAST SEEN : {this.state.data.location.location}</div>
                         <div>Zip Code:{this.state.data.location.zipcode}</div>
                     </div>
                 </div>

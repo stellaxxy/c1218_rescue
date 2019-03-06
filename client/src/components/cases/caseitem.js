@@ -15,7 +15,7 @@ export default (props) => {
         <Link to={"/casedetails/"+id}>
             <div className='row caseItem'>
                 <div className="addressContainer">
-                    <p>{`${prefixForAddress} ${location.street}, ${location.city} ${location.zipcode}`}</p>
+                    <p>{`${prefixForAddress} ${location.location}, ${location.city} ${location.zipcode}`}</p>
                 </div>
 
                 <img src={coverImg}/>
