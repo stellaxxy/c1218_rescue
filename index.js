@@ -78,18 +78,11 @@ app.use(express.json());
 // API
 app.get('/api/caselist', async (request, response) => {
     try {
-        let sql = "SELECT \
-                        c.`id`, \
-                        a.`animalType`, \
-                        c.`caseType`, \
-                        c.`city`, \
-                        c.`street`, \
-                        c.`zipcode`, \
-                        c.`latitude`, \
-                        c.`longitude`, \
-                        c.`coverImg` \
-                    FROM `cases` c \
-                    INNER JOIN `animals` a ON c.`animalID` = a.`id`";
+        let sql = "SELECT c.`id`, a.`animalType`, c.`caseType`,\n" +
+            "            c.`city`,c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
+            "            FROM `cases` c\n" +
+            "            INNER JOIN `animals` a ON c.`animalID` = a.`id`\n" +
+            "            INNER JOIN `users` u ON c.`userID` = u.`id`";
 
         const filter_criteria = [];
         const filter_values = [];
@@ -104,8 +97,14 @@ app.get('/api/caselist', async (request, response) => {
             }
         });
 
+        //console.log(request.query);
+
         if (filter_criteria.length) {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
+        }
+
+        if (request.query.email && request.query.caseKey){
+            sql = sql + ' WHERE u.`email` = ' + request.query.email + ' AND c.`caseKey` = ' + request.query.caseKey;
         }
 
         const data = await db.query(sql, filter_values);
