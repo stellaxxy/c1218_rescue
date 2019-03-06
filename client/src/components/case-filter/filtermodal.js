@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import FilterForm from './filterform';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import { setCaseFilterValues } from '../../actions';
 import '../../assets/css/filter.scss';
 
 class Filter extends Component {
@@ -9,9 +10,15 @@ class Filter extends Component {
     }
 
 
-    submit = values => {
-        console.log('submit value:', this.props)
-        console.log('values',values)
+    submit = event => {
+        event.preventDefault();
+
+        const values = {};
+        const params = ['caseType', 'animalType', 'size', 'city', 'zipcode'];
+
+        params.forEach(param => values[param] = event.target[param].value);
+        this.props.setCaseFilterValues(values);
+
         this.props.applyFilter(values);
     }
 
@@ -21,7 +28,6 @@ class Filter extends Component {
     // }
 
     componentDidMount() {
-        console.log('componenet didmount :', this.props)
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, {});
     }
@@ -45,5 +51,5 @@ class Filter extends Component {
     }
 }
 
-export default Filter
+export default connect(null, {setCaseFilterValues})(Filter)
 

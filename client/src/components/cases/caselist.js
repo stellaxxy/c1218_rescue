@@ -3,7 +3,6 @@ import axios from 'axios';
 import exampleImage from '../../assets/images/cover1.jpg';
 import CaseItem from './caseitem';
 import './caselist.scss';
-import {connect} from 'react-redux';
 import FilterPanel from '../case-filter';
 
 
@@ -16,7 +15,7 @@ class CaseList extends Component {
 
     async renderPage(params) {
         try {
-        let filters = this.state.filters
+            let filters = this.state.filters
             if (params && params.remove) {
                 var keys = Object.keys(params.remove)
                keys.forEach((key) => {
@@ -113,11 +112,5 @@ class CaseList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        casefilter: state.form.casefilter
-    };
-}
-
-export default connect(mapStateToProps)(CaseList);
+export default CaseList;
 
