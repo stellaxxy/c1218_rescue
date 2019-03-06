@@ -4,26 +4,7 @@ import {Link} from 'react-router-dom';
 import SideNav from './side_nav';
 import {connect} from 'react-redux';
 import {setActiveCaseType} from '../../actions';
-<<<<<<< HEAD
-import Filter from '../filter';
-import Modal from '../general/modal';
 
-class MainNav extends Component {
-
-    state = {
-        showfilter: false,
-    };
-
-    componentDidMount() {
-        if (window.location.pathname == "/caselist" || window.location.pathname == "/casemap") {
-            this.setState({
-                showfilter: true
-            })
-        }
-    }
-=======
-
->>>>>>> e7132f25573ff6fb6510456dcf0d237d61dd638e
 
 class MainNav extends Component {
 
