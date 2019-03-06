@@ -5,7 +5,7 @@ import './upload.scss';
 
 const imageIsRequired = value => (!value ? "Required" : undefined);
 
-let UploadFormPage1 = props => {
+let UploadForm = props => {
   const { handleSubmit } = props;
   return (
     <Fragment>
@@ -83,6 +83,10 @@ let UploadFormPage1 = props => {
                 </div>
               </div>
 
+              <input type="hidden" name="color" value=""/>
+              <input type="hidden" name="gender" value=""/>
+              <input type="hidden" name="breed" value=""/>
+
             </form>
 
           </div>
@@ -98,9 +102,9 @@ let UploadFormPage1 = props => {
   )
 }
 
-UploadFormPage1 = reduxForm({
+UploadForm = reduxForm({
   form: 'caseupload',
   initialValues: {caseDate: new Date().toLocaleDateString()}
-})(UploadFormPage1);
+})(UploadForm);
 
-export default UploadFormPage1;
+export default UploadForm;

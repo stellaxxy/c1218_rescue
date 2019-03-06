@@ -1,14 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import UploadFormPage1 from './upload_form_page1';
+import UploadForm from './upload_form';
 import axios from 'axios';
 
 const HARD_CODED = {
-  breed: 'DUMMY BREED',
-  color: 'DUMMY COLOR',
   username: 'DUMMY USERNAME',
-  gender: 'DUMMY GENDER',
-  description: 'DUMMY DESCRIPTION',
   city: 'Irvine',
   zipcode: '92618'
 };
@@ -54,7 +50,7 @@ class UploadPage extends React.Component {
   }
 
   render() {
-    return <UploadFormPage1 onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
+    return <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
   }
 }
 
