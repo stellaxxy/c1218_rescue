@@ -19,7 +19,7 @@ import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
-import Filter from "./filter";
+import Filter from "./case-filter/filtermodal";
 
 const App = () => (
     <div>
