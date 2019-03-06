@@ -4,24 +4,9 @@ import {Link} from 'react-router-dom';
 import SideNav from './side_nav';
 import {connect} from 'react-redux';
 import {setActiveCaseType} from '../../actions';
-import Filter from '../filter';
+
 
 class MainNav extends Component {
-
-    state = {
-        showfilter: false
-
-    }
-
-    componentDidMount() {
-        if (window.location.pathname == "/caselist" || window.location.pathname == "/casemap") {
-            this.setState({
-                showfilter: true
-            })
-
-        }
-    }
-
 
     render() {
         return (
@@ -29,12 +14,7 @@ class MainNav extends Component {
                 <nav>
                     <div className="nav-wrapper">
                         <Link className="brand-logo" to='/'>PAWS</Link>
-                        {
-                            this.state.showfilter ?
-                                (<Filter/>)
-                                :
-                                ''
-                        }
+
 
                         <Link to="#" className="sidenav-trigger" data-target="sidenav">
                             <i className="material-icons">menu</i>
