@@ -19,7 +19,7 @@ class Map extends Component {
     }
 
     initMap() {
-        var renderedMap = new google.maps.Map(document.getElementById("map"), {
+        var renderedMap = new google.maps.Map(document.getElementById("vetMap"), {
 
             center: {
                 lat: 33.6846,
@@ -34,7 +34,7 @@ class Map extends Component {
 
     render() {
         return (
-            <div id="map">
+            <div id="vetMap">
 
             </div>
         );

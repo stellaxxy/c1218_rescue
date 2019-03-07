@@ -23,7 +23,7 @@ import Filter from "./case-filter/filtermodal";
 
 
 const App = () => (
-    <div>
+    <div className="mainContainer">
         <MainNav/>
         <Route exact path="/" component={Landing}/>
         <Route path="/caselist" component={CaseList}/>

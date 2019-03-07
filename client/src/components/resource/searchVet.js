@@ -5,7 +5,7 @@ import PetImage from '../../assets/images/image8.jpg';
 import {Link} from 'react-router-dom';
 import Map from '../map';
 import axios from 'axios';
-import {yelpApi} from '../../../../config';
+import {googleMapApi} from '../../../../config';
 
 class SearchVet extends Component {
     state = {
@@ -13,25 +13,24 @@ class SearchVet extends Component {
     };
 
     async componentDidMount(){
-        const apiKey = yelpApi.yelpApi;
-        //axios.defaults.headers.common['Authorization'] = 'Bearer' + apiKey;
+        //const apiKey = yelpApi.yelpApi;
 
-        const response = await axios.get('https://api.yelp.com/v3/businesses/search?term=vet&location=irvine', {
-            headers: {
-                "Authorization": 'Bearer ' + apiKey,
-                "Access-Control-Allow-Origin": "*"
-            }
-        });
-
-        //console.log('search vet response:', response);
     }
 
-    handleClick(){
-        const searchZip = document.getElementsByClassName('vetSearchInput')[0].value;
+    async handleClick(){
+        const searchInput = document.getElementsByClassName('vetSearchInput')[0].value;
+        const mapApi = googleMapApi.googleMapApi;
 
+        let geocodingQuery = `https://maps.googleapis.com/maps/api/geocode/json?key=${mapApi}&address=`;
 
-        console.log('api key:', yelpApi.yelpApi);
-        console.log(searchZip);
+        let searchInputArray =searchInput.split(' ');
+        geocodingQuery = geocodingQuery;
+
+        //const lnglat = await axios.get('');
+
+       // const result = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/output?key=${mapApi}&input=vet&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2500@`);
+        console.log('api key:', googleMapApi.googleMapApi);
+        console.log(city, state, zipCode);
     }
 
     render() {
@@ -43,8 +42,8 @@ class SearchVet extends Component {
                 </div>
 
                 <div className="searchContainer row">
-                    <input className="vetSearchInput col s7 offset-s1" type="text" placeholder="City, State, Zip Code"/>
-                    <button className="col s3" onClick={this.handleClick}>Search</button>
+                    <input className="vetSearchInput col s6 offset-s1" type="text" placeholder="City, State"/>
+                    <button className="col s4" onClick={this.handleClick}>Search</button>
                 </div>
 
                 <div className="listContainer">
