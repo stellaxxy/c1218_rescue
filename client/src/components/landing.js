@@ -18,6 +18,7 @@ class Landing extends Component {
     } 
 
     handleButtonClick(selectedCaseType) {
+        console.log('selectedCaseType: ', selectedCaseType);
         this.props.setActiveCaseType(selectedCaseType);
 
         this.props.setCaseFilterValues({
@@ -37,8 +38,8 @@ class Landing extends Component {
                 <p className="landing-title">Getting Pets Home</p>
                 <p className="landing-text">Search for a lost pet or list one found.</p>
                 <div className="btn-container">
-                    <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Lost a Pet</button>
-                    <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Found a Pet</button>
+                    <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
+                    <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
                 </div>
 
                 <div id="modalBegin" ref="modalBegin" className="modal">
@@ -48,7 +49,7 @@ class Landing extends Component {
                     </div>
                     <div className="modal-footer">
                         <Link to="/typeselection" className="waves-effect waves-light btn">Describe {activeCaseType === 'lost' ? 'Your':'The'} Pet</Link>
-                        <Link to="/caselist" className="waves-effect waves-light btn">See List of All Lost Pets</Link>
+                        <Link to="/caselist" className="waves-effect waves-light btn">See List of All {activeCaseType === 'lost' ? 'Found' : 'Lost'} Pets</Link>
                     </div>
                 </div>
             </div>
