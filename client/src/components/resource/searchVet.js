@@ -9,11 +9,12 @@ import {googleMapApi} from '../../../../config';
 
 class SearchVet extends Component {
     state = {
-        data: []
+        data: [],
+        error: false,
+        message: ''
     };
 
     async componentDidMount(){
-        //const apiKey = yelpApi.yelpApi;
 
     }
 
@@ -21,20 +22,36 @@ class SearchVet extends Component {
         const searchInput = document.getElementsByClassName('vetSearchInput')[0].value;
         const mapApi = googleMapApi.googleMapApi;
 
+        if(isNaN(searchInput)){
+            let searchInputArray = searchInput.split(' ');
+            console.log(searchInputArray);
+            if(searchInputArray.length !== 2){
+
+            }
+        }
+
         let geocodingQuery = `https://maps.googleapis.com/maps/api/geocode/json?key=${mapApi}&address=`;
 
-        let searchInputArray =searchInput.split(' ');
+
         geocodingQuery = geocodingQuery;
 
         //const lnglat = await axios.get('');
 
        // const result = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/output?key=${mapApi}&input=vet&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2500@`);
-        console.log('api key:', googleMapApi.googleMapApi);
-        console.log(city, state, zipCode);
+    }
+
+    renderError(){
+        return(
+            <div>Please provide both city and state.</div>
+        );
     }
 
     render() {
+        let extraInformation =
 
+        if(this.state.error){
+
+        }
         return (
             <div className="w3-container">
                 <div className="mapContainer">
@@ -42,11 +59,25 @@ class SearchVet extends Component {
                 </div>
 
                 <div className="searchContainer row">
-                    <input className="vetSearchInput col s6 offset-s1" type="text" placeholder="City, State"/>
+                    <input className="vetSearchInput col s6 offset-s1" type="text" placeholder="City, State or Zip Code"/>
                     <button className="col s4" onClick={this.handleClick}>Search</button>
                 </div>
 
-                <div className="listContainer">
+
+            </div>
+
+
+        )
+    }
+
+
+}
+
+export default SearchVet;
+
+
+/*
+<div className="listContainer">
                     <div className="card horizontal">
                         <div className="card-image">
                             <Link to="/vetinfo">
@@ -76,13 +107,4 @@ class SearchVet extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-        )
-    }
-
-
-}
-
-export default SearchVet;
+ */
