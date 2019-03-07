@@ -26,6 +26,7 @@ export function setActiveAnimalSize(animalSize) {
 /********************* CASE FILTERS *************************/
 
 export function setCaseFilterValues(values) {
+    console.log('in setfilters action. values:', values);
     return {
         type: types.SET_CASE_FILTER_VALUES,
         payload: values
