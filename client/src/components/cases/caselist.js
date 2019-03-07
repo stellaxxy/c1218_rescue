@@ -27,8 +27,6 @@ class CaseList extends Component {
     async renderPage(params) {
 
         try {
-
-            console.log('render page this.props.values:',this.props.filterValues)
             let filterValues = Object.assign({}, this.props.filterValues);
 
             filterValues = this.clean(filterValues)
