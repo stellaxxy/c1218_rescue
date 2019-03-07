@@ -4,6 +4,7 @@ import axios from 'axios';
 import config from '../../../config/api';
 import foundIcon from '../assets/images/icons8-region-filled-48.png';
 import lostIcon from '../assets/images/icons8-region-48.png';
+import { connect } from 'react-redux';
 
 
 class CaseMap extends Component {
@@ -11,10 +12,9 @@ class CaseMap extends Component {
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
         loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
-        //loadJS('../googleMapClustering/markerclusterer.js');
     }
 
-    async renderMarkers(map){
+    async renderMarkers(map) {
         const icons = {
             found: foundIcon,
             lost: lostIcon
@@ -22,7 +22,7 @@ class CaseMap extends Component {
 
         const result = await axios.get('/api/caselist');
 
-        if(result.data.success === true){
+        if (result.data.success === true) {
             const markers = result.data.data.map(item => {
                 const longitude = item.location.longitude;
                 const latitude = item.location.latitude;
@@ -32,14 +32,14 @@ class CaseMap extends Component {
                     icon: icons[item.caseType],
                     map: map
                 });
-
+                console.log(item);
                 const img = item.coverImg;
                 let contentString = '';
 
                 if (item.caseType === 'found'){
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 } else if(item.caseType === 'lost') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 }
 
 
@@ -49,14 +49,13 @@ class CaseMap extends Component {
 
                 marker.addListener('click', () => {
                     infowindow.open(map, marker);
-                })
+                });
 
                 return marker;
             });
 
             const markerCluster = new MarkerClusterer(map, markers,
                 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            //'../googleMapClustering/m'
         }
     }
 
@@ -76,7 +75,9 @@ class CaseMap extends Component {
 
     render() {
         return (
-            <div id="map">
+            <div>
+                <div id="map">
+                </div>
 
             </div>
         );
