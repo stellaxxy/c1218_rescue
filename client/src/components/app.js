@@ -6,7 +6,7 @@ import CaseList from './cases/caselist';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
-import Resource from './resource';
+import Resource from './resource/resource';
 import Landing from './landing';
 import TypeSelection from './case-description/typeselection';
 import SizeSelection from './case-description/sizeselection';
@@ -17,8 +17,7 @@ import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import MainNav from './nav';
 import {Route} from 'react-router-dom';
-import SearchPet from "./serachpet";
-import OfficeInfo from "./resource/vetofficeinfo";
+import OfficeInfo from "./resource/vetinfo";
 import MyCase from "./mycase";
 import Filter from "./case-filter/filtermodal";
 
@@ -31,7 +30,6 @@ const App = () => (
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/resource" component={Resource}/>
-        <Route path="/searchpet" component={SearchPet}/>
         <Route path="/searchfilter" component={Filter}/>
         <Route path="/typeselection" component={TypeSelection}/>
         <Route path="/sizeselection" component={SizeSelection}/>
@@ -40,7 +38,7 @@ const App = () => (
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
-        <Route path="/vetoffice" component={OfficeInfo}/>
+        <Route path="/vetinfo" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
 
     </div>

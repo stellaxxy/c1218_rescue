@@ -227,6 +227,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         const result = await googleMap.geocode({address: location}).asPromise();
 
+        console.log('create case result', result.json.results);
+
         const longitude = result.json.results[0].geometry.location.lat;
         const latitude = result.json.results[0].geometry.location.lng;
 

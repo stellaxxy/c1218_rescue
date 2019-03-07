@@ -1,3 +1,4 @@
 module.exports= {
-    googleMapApi: 'key'
+    googleMapApi: 'key',
+    yelpApi: 'key'
 };

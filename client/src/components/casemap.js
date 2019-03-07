@@ -32,7 +32,7 @@ class CaseMap extends Component {
                     icon: icons[item.caseType],
                     map: map
                 });
-                console.log(item);
+
                 const img = item.coverImg;
                 let contentString = '';
 
