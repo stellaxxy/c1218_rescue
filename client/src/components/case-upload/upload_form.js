@@ -52,8 +52,13 @@ let UploadForm = props => {
               </div>
 
               <div>
-                <label htmlFor="location">Location Pet Last Seen*</label>
-                <Field name="location" component="input" type="text" placeholder="Zipcode or City, State" />
+                <label htmlFor="street">Location Pet Last Seen*</label>
+                <Field name="street" component="input" type="text" placeholder="Street address or cross streets" />
+              </div>
+
+              <div>
+                <label htmlFor="city">City Pet Last Seen*</label>
+                <Field name="city" component="input" type="text" placeholder="Zipcode or City, State" />
               </div>
 
               <div>
@@ -82,10 +87,6 @@ let UploadForm = props => {
                   <Field name="description" component="textarea" placeholder="Animal color, breed, gender..."/>
                 </div>
               </div>
-
-              <input type="hidden" name="color" value=""/>
-              <input type="hidden" name="gender" value=""/>
-              <input type="hidden" name="breed" value=""/>
 
             </form>
 

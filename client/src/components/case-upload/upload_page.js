@@ -2,12 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UploadForm from './upload_form';
 import axios from 'axios';
-
-const HARD_CODED = {
-  username: 'DUMMY USERNAME',
-  city: 'Irvine',
-  zipcode: '92618'
-};
+import {createCaseKey} from '../../helpers';
 
 class UploadPage extends React.Component {
   state = { imageFile: [] };
@@ -17,22 +12,18 @@ class UploadPage extends React.Component {
   submit = values => {
     let data = new FormData();
 
-    // Hard-Coded Values
-    for (let [key, value] of Object.entries(HARD_CODED)) {
-      data.append(key, value);
-    }
-
-    // Real Values
     for (let [key, value] of Object.entries(values)) {
-      // For now, only send 1st image
+      
       if (key === 'coverImg') {
+        // For now, only send 1st image
         value = value[0];       
-      } else if (key === 'caseDate') {
-        value = new Date(value).toISOString().split('T')[0];
       }
+
       data.append(key, value);
     }
 
+    data.append('caseKey', createCaseKey());
+    
     axios({
       method: 'post',
       url: '/api/createcase',
