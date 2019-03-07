@@ -11,8 +11,7 @@ class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
-        loadJS('https://maps.googleapis.com/maps/api/js?key=' + config.googleMapApi + '&callback=initMap');
-        //loadJS('../googleMapClustering/markerclusterer.js');
+        loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
     }
 
     async renderMarkers(map) {
@@ -33,14 +32,14 @@ class CaseMap extends Component {
                     icon: icons[item.caseType],
                     map: map
                 });
-
+                console.log(item);
                 const img = item.coverImg;
                 let contentString = '';
 
-                if (item.caseType === 'found') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
-                } else if (item.caseType === 'lost') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                if (item.caseType === 'found'){
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                } else if(item.caseType === 'lost') {
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 }
 
 
@@ -50,14 +49,13 @@ class CaseMap extends Component {
 
                 marker.addListener('click', () => {
                     infowindow.open(map, marker);
-                })
+                });
 
                 return marker;
             });
 
             const markerCluster = new MarkerClusterer(map, markers,
                 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            //'../googleMapClustering/m'
         }
     }
 

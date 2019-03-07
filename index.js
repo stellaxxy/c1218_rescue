@@ -75,18 +75,11 @@ app.use(cors());
 // API
 app.get('/api/caselist', async (request, response) => {
     try {
-        let sql = "SELECT \
-                        c.`id`, \
-                        a.`animalType`, \
-                        c.`caseType`, \
-                        c.`city`, \
-                        c.`location`, \
-                        c.`zipcode`, \
-                        c.`latitude`, \
-                        c.`longitude`, \
-                        c.`coverImg` \
-                    FROM `cases` c \
-                    INNER JOIN `animals` a ON c.`animalID` = a.`id`";
+
+        let sql = "SELECT c.`id`, a.`animalType`, c.`caseType`,\n" +
+            "            c.`city`,c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
+            "            FROM `cases` c\n" +
+            "            INNER JOIN `animals` a ON c.`animalID` = a.`id`";
 
         const filter_criteria = [];
         const filter_values = [];
@@ -100,6 +93,8 @@ app.get('/api/caselist', async (request, response) => {
                 filter_values.push(value);
             }
         });
+
+        //console.log(request.query);
 
         if (filter_criteria.length) {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
@@ -129,25 +124,46 @@ app.get('/api/caselist', async (request, response) => {
 
 app.get('/api/casedetails', async (request, response) => {
     try {
-        const id = request.query.id;
-        if (id === undefined) {
-            throw new Error(`Please provide a valid ID`);
-        } else if (isNaN(id)) {
-            throw new Error(`ID must be a number`);
+        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
+            "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
+            "            a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "            FROM `cases` AS c \n" +
+            "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+            "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
+        let data = {};
+        console.log(request.query);
+        if(request.query.caseKey || request.query.email){
+            if(request.query.caseKey === undefined){
+                throw new Error(`Please provide valid case key`);
+            } else if (request.query.email === undefined){
+                throw new Error(`Please provide valid email`);
+            }
+
+            const caseKey = request.query.caseKey;
+            const email = request.query.email;
+
+            query = query +  "INNER JOIN `users` u ON c.`userID` = u.`id`" + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
+
+            data = await db.query(query, [email, caseKey]);
+
+        } else {
+            const id = request.query.id;
+            if (id === undefined) {
+                throw new Error(`Please provide a valid ID`);
+            } else if (isNaN(id)) {
+                throw new Error(`ID must be a number`);
+            }
+
+            query = query + "WHERE c.`id` = ?" + "GROUP BY c.`id`";
+
+            data = await db.query(query, [id]);
         }
 
-        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
-            "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
-            "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
-            "FROM `cases` AS c \n" +
-            "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
-            "LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
-            "WHERE c.`id` = ?\n" +
-            "GROUP BY c.`id`";
+
         const output = {
             success: false
         };
-        let data = await db.query(query, [id]);
+
 
         if (data.length === 1) {
             data = data[0];
@@ -194,7 +210,7 @@ app.get('/api/casedetails', async (request, response) => {
             output.data = data;
 
         } else {
-            throw new Error(`There is no case matched by id ${id}`);
+            throw new Error(`There is no matching case.`);
         }
         response.send(output);
     } catch (error) {
@@ -254,6 +270,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
     }
 
 });
+
 
 
 // Listen
