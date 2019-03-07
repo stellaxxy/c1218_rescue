@@ -254,7 +254,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         response.send({
             success: true,
-            insertID: insertcase.insertId
+            insertID: insertcase.insertId,
+            caseKey: caseKey
         })
     } catch (error) {
         handleError(response, error);
