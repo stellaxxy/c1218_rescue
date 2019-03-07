@@ -2,17 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const db = require('./db');
-const {googleMapApi} = require('./config/api');
+const googleMap = require('./services/maps');
 const upload = require('./services/upload');
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'development';
-
-const googleMap = require('@google/maps').createClient({
-    key: googleMapApi,
-    Promise: Promise
-});
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -222,32 +217,29 @@ app.get('/api/casedetails', async (request, response) => {
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, location, size, city, email, username, phone, caseType, zipcode, caseDate, imgURL} = request.body;
+        const {color, breed, name, animalType, gender, description, street, size, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
+        const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
-        const result = await googleMap.geocode({address: location}).asPromise();
-
-        const longitude = result.json.results[0].geometry.location.lat;
-        const latitude = result.json.results[0].geometry.location.lng;
+        const address = await googleMap.getAddress(`${street}, ${city}`);
 
 // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
-        const insertUserInfo = [email, username, phone];
+        const insertUserInfo = [email, name, phone];
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
         var userID = insertuser.insertId;
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
-        const insert = [breed, color, name, animalType, gender, description, size,];
+        const insert = [breed, color, petName, animalType, gender, description, size,];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        //`latitude`,`longitude`
-        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [city, location, caseType, longitude, latitude, zipcode, coverImg, caseDate, animalID, userID];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
@@ -263,7 +255,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         response.send({
             success: true,
             insertID: insertcase.insertId,
-
+            caseKey: caseKey
         })
     } catch (error) {
         handleError(response, error);
