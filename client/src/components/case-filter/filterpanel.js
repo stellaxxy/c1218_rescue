@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import './filterform.scss';
 import {connect} from 'react-redux';
 import Filter from './filtermodal';
-import {change} from 'redux-form';
-
-
 
 class FilterPanel extends Component {
 
@@ -16,8 +13,7 @@ class FilterPanel extends Component {
         })
 
 
-        console.log('this.props.change:',key,value)
-
+       //this.props.change('casefilter',key,'')
 
     }
 
@@ -25,19 +21,10 @@ class FilterPanel extends Component {
 
 
         let chips = null;
-        if (!this.props.casefilter) {
-            return chips;
-        }
-        const {values} = this.props.casefilter;
-        if (!values) {
-            return chips;
-        }
 
-        console.log('chip panel values',values);
+        const values = this.props.filterValues;
 
-        if(!values){
-            return null;
-        }
+        if (!values) return chips;
 
         chips = Object.keys(values).map((key, i) => {
             let value = values[key]
@@ -56,14 +43,13 @@ class FilterPanel extends Component {
     }
 
     render() {
-        console.log('props value', this.props.casefilter)
 
         return (
             <div className="filter-panel">
                 <div className="chip-panel">
                     {this.renderChips()}
                 </div>
-                <Filter  applyFilter={this.props.applyFilter}/>
+                <Filter applyFilter={this.props.applyFilter}/>
             </div>
 
         )
@@ -72,11 +58,11 @@ class FilterPanel extends Component {
 
 function mapStateToProps(state) {
     return {
-        casefilter: state.form.casefilter
+        filterValues: state.caseFilters.values
     }
 }
 
 
 
-export default connect(mapStateToProps,{change})(FilterPanel);
+export default connect(mapStateToProps)(FilterPanel);
 
