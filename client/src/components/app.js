@@ -7,6 +7,7 @@ import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
 import Resource from './resource/resource';
+import UploadConfirmation from './case-upload/upload_confirmation';
 import Landing from './landing';
 import TypeSelection from './case-description/typeselection';
 import SizeSelection from './case-description/sizeselection';
@@ -29,6 +30,7 @@ const App = () => (
         <Route path="/caselist" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
+        <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchfilter" component={Filter}/>
         <Route path="/typeselection" component={TypeSelection}/>

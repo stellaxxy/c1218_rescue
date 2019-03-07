@@ -4,6 +4,7 @@ import exampleImage from '../../assets/images/cover1.jpg';
 import CaseItem from './caseitem';
 import './caselist.scss';
 import FilterPanel from '../case-filter';
+import connect from "react-redux/es/connect/connect";
 
 
 class CaseList extends Component {
@@ -13,17 +14,36 @@ class CaseList extends Component {
         filters: []
     };
 
+    clean(obj) {
+        for (var propName in obj) {
+            if (obj[propName] === null || obj[propName] === undefined) {
+                delete obj[propName];
+            }
+        }
+        return Object.keys(obj).length==0 ? null : obj
+    }
+
+
     async renderPage(params) {
+
         try {
+            let filterValues = Object.assign({}, this.props.filterValues);
+
+            filterValues = this.clean(filterValues)
+
             let filters = this.state.filters
             if (params && params.remove) {
                 var keys = Object.keys(params.remove)
                keys.forEach((key) => {
+                    delete filterValues[key]
                     delete filters[key]
                })
             }
+            console.log('clean:', filterValues);
+            console.log('params', params);
+            console.log('props' , this.props);
 
-            const {caseType, animalType, size, zipcode, city} = params || this.props;
+            const {caseType, animalType, size, zipcode, city} = filterValues || params || this.props;
             const queryStringArray = [{caseType}, {animalType}, {size}, {zipcode}, {city}];
 
             let endpointString = '/api/caselist?';
@@ -50,16 +70,21 @@ class CaseList extends Component {
 
             this.setState({
                 cases: result.data.data,
-                filters: filters
+                filters: filters,
+                error:false
             })
+
+            console.log('filter value',filters.filters);
+
         } catch (error) {
             this.setState({
                 error: true,
                 cases: [],
-                filters: filters
+
 
             });
         }
+
     }
 
     componentDidMount() {
@@ -85,7 +110,15 @@ class CaseList extends Component {
 
         if (this.state.error === true) {
             return (
-                <div>No Matching Data</div>
+                <div>
+                    <div>
+                        <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
+                        <div className="caseListContainer">
+                            <div>No Matching Data</div>
+                        </div>
+                    </div>
+                </div>
+
             );
         }
         if (this.state.cases.length === 0) {
@@ -110,5 +143,12 @@ class CaseList extends Component {
     }
 }
 
-export default CaseList;
+function mapStateToProps(state) {
+    return {
+        filterValues: state.caseFilters.values
+    }
+}
+
+export default connect(mapStateToProps)(CaseList);
+
 

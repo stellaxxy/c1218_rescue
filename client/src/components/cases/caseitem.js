@@ -6,21 +6,25 @@ export default (props) => {
     const { caseType, location, id, coverImg } = props;
     let prefixForAddress = null;
     if(caseType === 'lost'){
-        prefixForAddress = 'Last seen on';
+        prefixForAddress = 'Last seen';
     } else {
-        prefixForAddress = 'Found on';
+        prefixForAddress = 'Found';
     }
 
     return(
-        <Link to={"/casedetails/"+id}>
-            <div className='row caseItem'>
-                <div className="addressContainer">
-                    <p>{`${prefixForAddress} ${location.location}, ${location.city} ${location.zipcode}`}</p>
-                </div>
 
-                <img src={coverImg}/>
+        <div className="card small horizontal">
+        <div className="card-image">
+            <img className="responsive" src={coverImg}/>
+        </div>
+        <div className="card-stacked">
+            <div className="card-content">
+                <p>{prefixForAddress} in {location.city}</p>
             </div>
-        </Link>
-
+            <div className="card-action">
+                <a href={"/casedetails/"+id}>Details</a>
+            </div>
+        </div>
+        </div>
     );
 }
