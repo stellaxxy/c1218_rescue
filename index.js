@@ -12,7 +12,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/client/dist'));
 
 const CASELIST_FILTERS = [
     {
