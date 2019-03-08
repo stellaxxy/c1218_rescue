@@ -2,7 +2,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
 import React from 'react';
-import CaseList from './cases/caselist';
+import SearchPage from './case-search';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
@@ -28,7 +28,7 @@ const App = () => (
     <div>
         <MainNav/>
         <Route exact path="/" component={Landing}/>
-        <Route path="/caselist" component={CaseList}/>
+        <Route path="/search" component={SearchPage}/>
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
