@@ -56,7 +56,9 @@ class SearchPage extends Component {
 
     render(props) {
         const filterValues = queryString.parse(this.props.location.search);
-        const displayPanel = filterValues.mode === 'list' ? <CaseList cases={this.state.cases}/> : <CaseMap cases={this.state.cases}/>;
+        const displayPanel = filterValues.mode === 'map' ? 
+            <CaseMap cases={this.state.cases}/> :
+            <CaseList cases={this.state.cases}/>;
 
         return (
             <div>
