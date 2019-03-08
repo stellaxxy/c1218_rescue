@@ -263,7 +263,9 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 });
 
-
+app.get('*', (request, response) => {
+    response.sendFile(__dirname + '/client/dist/index.html');
+});
 
 // Listen
 app.listen(PORT, HOST, () => {
