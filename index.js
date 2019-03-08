@@ -256,6 +256,35 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 });
 
 
+// status update
+
+app.post('/api/updatestatus', async(request,response)=>{
+
+    try{
+        const { status ,caseKey } = request.body;
+        if (caseKey === undefined) {
+            throw new Error(`Please provide a valid caseKey`);
+        }
+        const updatecases = "update cases set status = ? where caseKey = ? "
+        console.log('casekey:', caseKey);
+        const updateStatus= [status, caseKey];
+        const updatequery= mysql.format(updatecases, updateStatus);
+        console.log('case query ', updatequery);
+        const caseupdate = await db.query(updatequery);
+        console.log(caseupdate)
+
+        response.send({
+            success: true,
+
+        })
+    }catch (error) {
+        handleError(response, error);
+    }
+
+})
+
+
+
 // Listen
 app.listen(PORT, HOST, () => {
     console.log('Server running on ' + HOST + ':' + PORT);
