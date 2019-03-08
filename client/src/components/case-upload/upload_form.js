@@ -5,7 +5,7 @@ import './upload.scss';
 
 const imageIsRequired = value => (!value ? "Required" : undefined);
 
-let UploadFormPage1 = props => {
+let UploadForm = props => {
   const { handleSubmit } = props;
   return (
     <Fragment>
@@ -52,8 +52,13 @@ let UploadFormPage1 = props => {
               </div>
 
               <div>
-                <label htmlFor="location">Location Pet Last Seen*</label>
-                <Field name="location" component="input" type="text" placeholder="Zipcode or City, State" />
+                <label htmlFor="street">Location Pet Last Seen*</label>
+                <Field name="street" component="input" type="text" placeholder="Street address or cross streets" />
+              </div>
+
+              <div>
+                <label htmlFor="city">City Pet Last Seen*</label>
+                <Field name="city" component="input" type="text" placeholder="Zipcode or City, State" />
               </div>
 
               <div>
@@ -98,9 +103,9 @@ let UploadFormPage1 = props => {
   )
 }
 
-UploadFormPage1 = reduxForm({
+UploadForm = reduxForm({
   form: 'caseupload',
   initialValues: {caseDate: new Date().toLocaleDateString()}
-})(UploadFormPage1);
+})(UploadForm);
 
-export default UploadFormPage1;
+export default UploadForm;

@@ -1,5 +1,5 @@
 /*
- * Purpose: Return multer uploader configured to either upload locally or to S3
+ * Provides multer uploader configured to either upload locally or to S3
  *
  * Uses STORAGE environment variable. Values: local | s3
  */

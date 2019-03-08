@@ -1,3 +1,6 @@
+/**
+ * Provides configured AWS S3 client
+ */
 const aws = require('aws-sdk');
 const { awsConfig } = require('../config');
 const {promisify} = require('util');

@@ -6,6 +6,7 @@ import CaseList from './cases/caselist';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
+import UploadConfirmation from './case-upload/upload_confirmation';
 import Resource from './resource';
 import Landing from './landing';
 import TypeSelection from './case-description/typeselection';
@@ -19,7 +20,9 @@ import MainNav from './nav';
 import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
+import MyCase from "./mycase";
 import Filter from "./case-filter/filtermodal";
+
 
 const App = () => (
     <div>
@@ -28,6 +31,7 @@ const App = () => (
         <Route path="/caselist" component={CaseList}/>
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
+        <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
         <Route path="/searchfilter" component={Filter}/>
@@ -39,6 +43,7 @@ const App = () => (
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
+        <Route path="/mycase" component={MyCase}/>
 
     </div>
 );

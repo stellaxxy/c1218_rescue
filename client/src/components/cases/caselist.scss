@@ -2,22 +2,19 @@
   position:relative;
   top: 2vh;
 
-}
+  .card {
+    max-height: 130px;
+    max-width: 90%;
+    position: relative;
+    left: 5%;
 
-.caseItem {
-  width: 90%;
-  background-color: white;
+    img {
+      max-width: 50px;
+    }
 
-  .addressContainer {
-    display: inline-block;
-    width: 75%;
-  }
-
-  img{
-    height: 100px;
-  }
-
-  p {
-    display: inline-block;
+    .card-action {
+      padding: 5px;
+      padding-left: 25px;
+    }
   }
 }

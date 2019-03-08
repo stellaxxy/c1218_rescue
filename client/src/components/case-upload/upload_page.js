@@ -1,60 +1,84 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import UploadFormPage1 from './upload_form_page1';
+import UploadForm from './upload_form';
 import axios from 'axios';
-
-const HARD_CODED = {
-  breed: 'DUMMY BREED',
-  color: 'DUMMY COLOR',
-  username: 'DUMMY USERNAME',
-  gender: 'DUMMY GENDER',
-  description: 'DUMMY DESCRIPTION',
-  city: 'Irvine',
-  zipcode: '92618'
-};
+import {createCaseKey} from '../../helpers';
 
 class UploadPage extends React.Component {
-  state = { imageFile: [] };
+  state = { 
+    imageFile: [],
+    uploading: false
+  };
 
   handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
 
-  submit = values => {
-    let data = new FormData();
+  submit = async values => {
+    let caseId = 0;
+    let caseKey = 0;
 
-    // Hard-Coded Values
-    for (let [key, value] of Object.entries(HARD_CODED)) {
-      data.append(key, value);
-    }
+    try {
+      this.setState({uploading: true});
 
-    // Real Values
-    for (let [key, value] of Object.entries(values)) {
-      // For now, only send 1st image
-      if (key === 'coverImg') {
-        value = value[0];       
-      } else if (key === 'caseDate') {
-        value = new Date(value).toISOString().split('T')[0];
+      let data = new FormData();
+
+      for (let [key, value] of Object.entries(values)) {
+        
+        if (key === 'coverImg') {
+          // For now, only send 1st image
+          value = value[0];       
+        }
+  
+        data.append(key, value);
       }
-      data.append(key, value);
-    }
+  
+      data.append('caseKey', createCaseKey());
+  
+      const response = await axios({
+        method: 'post',
+        url: '/api/createcase',
+        data: data,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
+      });
+      
+      caseId = response.data.insertID;
+      caseKey = response.data.caseKey;
 
-    axios({
-      method: 'post',
-      url: '/api/createcase',
-      data: data,
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
-    })
-    .then(function (response) {
-          //handle success
-          console.log('success: ', response);
-    })
-    .catch(function (response) {
-          //handle error
-          console.log('error: ', response);
-    });
+      console.log('response', response);
+    } catch (error) {
+      console.log('Had an error');
+    }
+ 
+    this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
+    console.log('caseId: ', caseId);
+  }
+
+  renderSpinner() {
+    const {uploading} = this.state;
+
+    return (
+      <div className={"preloader-wrapper big " + (uploading ? 'active' : '')}>
+        <div className="spinner-layer spinner-green-only">
+          <div className="circle-clipper left">
+            <div className="circle"></div>
+          </div>
+          <div className="gap-patch">
+            <div className="circle"></div>
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle"></div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   render() {
-    return <UploadFormPage1 onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
+    return (
+      <div>
+        {this.renderSpinner()}
+        <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
+      </div>     
+    );
   }
 }
 

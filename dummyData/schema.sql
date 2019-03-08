@@ -11,13 +11,13 @@ DROP TABLE IF EXISTS `animals`;
 
 CREATE TABLE `animals` (
   `id` bigint(20) NOT NULL,
-  `breed` varchar(25) NOT NULL,
-  `color` varchar(15) NOT NULL,
-  `name` varchar(15) NOT NULL DEFAULT 'Unknown',
+  `breed` varchar(25),
+  `color` varchar(15),
+  `name` varchar(15),
   `size` varchar(15) NOT NULL,
   `animalType` varchar(15) NOT NULL,
-  `gender` varchar(8) NOT NULL,
-  `description` text NOT NULL
+  `gender` varchar(8),
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `cases` (
 INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`) VALUES
 (1, 'found', 'Irvine', 'Irvine Center Drive', 92618, -117.83, 33.68, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF'),
 (2, 'lost', 'Irvine', 'Jefferey Rd', 92618, -117.83, 36.05, '/images/image4.jpg', 2, 2, '2019-02-07', '123ABC'),
-(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/images5.jpg', 3, 3, '2019-02-14', 'BOBCAT');
+(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT');
 
 -- --------------------------------------------------------
 
