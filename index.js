@@ -14,7 +14,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/client/dist'));
 
 const CASELIST_FILTERS = [
     {
@@ -268,6 +268,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 });
 
 
+
 // API Call for Yelp Data
 app.post('/api/yelp/businesses', async (request, response) =>{
     const { latitude, longitude, location } = request.body;
@@ -307,6 +308,11 @@ app.post('/api/yelp/businesses', async (request, response) =>{
     } catch(error) {
         handleError(response, error);
     }
+});
+
+
+app.get('*', (request, response) => {
+    response.sendFile(__dirname + '/client/dist/index.html');
 });
 
 

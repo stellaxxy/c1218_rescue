@@ -114,7 +114,7 @@ class CaseList extends Component {
                     <div>
                         <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
                         <div className="caseListContainer">
-                            <div>No Matching Data</div>
+                            <div className= "center green">No Matching Data</div>
                         </div>
                     </div>
                 </div>
