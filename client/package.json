@@ -34,7 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "materialize-css": "1.0.0",
-    "query-string": "6.3.0",
+    "query-string": "5.1.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-dropzone": "5.0.1",
