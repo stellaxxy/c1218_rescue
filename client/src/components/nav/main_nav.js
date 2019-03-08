@@ -21,7 +21,7 @@ class MainNav extends Component {
                         </Link>
                         <ul className="right hide-on-med-and-down">
                             <li>
-                                <Link to="/caselist">SEARCH</Link>
+                                <Link to="/search">SEARCH</Link>
                             </li>
                             <li>
                                 <Link to="/casemap">MAP</Link>

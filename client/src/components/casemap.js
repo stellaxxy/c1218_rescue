@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../../../config/api';
 import foundIcon from '../assets/images/icons8-region-filled-48.png';
 import lostIcon from '../assets/images/icons8-region-48.png';
-import FilterPanel from './case-filter';
+// import FilterPanel from './case-filter';
 import connect from "react-redux/es/connect/connect";
 
 
@@ -137,7 +137,7 @@ class CaseMap extends Component {
     render() {
         return (
             <div>
-                <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
+                {/* <FilterPanel applyFilter={this.applyFilter.bind(this)}/> */}
                 <div id="map">
                 </div>
 
