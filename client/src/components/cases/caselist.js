@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import exampleImage from '../../assets/images/cover1.jpg';
+import queryString from 'query-string';
 import CaseItem from './caseitem';
 import './caselist.scss';
 
 class CaseList extends Component {
     state = {
         cases: []
-    };
+    }
 
     async componentDidMount(){
-        const result = await axios.get('/api/caselist');
-
         this.setState({
-            cases: result.data.data
+            cases: this.props.cases || []
         })
     }
 
     async componentDidUpdate(prevProps){
-        if(prevProps.location.pathname !== this.props.location.pathname){
-            const result = await axios.get('/api/caselist?case_type=' + this.props.match.params.casetype);
-
+        if(prevProps != this.props && this.props.cases && this.props.cases.length > 0){
             this.setState({
-                cases: result.data.data
+                cases: this.props.cases
             })
         }
     }
 
     render(){
-
-        if(this.state.cases.length === 0){
+        if(!this.state.cases || this.state.cases.length === 0){
             return(
                 <div>Loading</div>
             );

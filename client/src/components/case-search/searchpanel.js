@@ -1,29 +1,62 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
+import queryString from 'query-string';
 import './filterform.scss';
 
 class FilterPanel extends Component {
 
+    handleFilterClick = () => {
+        this.props.onFilterClick(this.props.filterValues);
+    }
+
+    handleChipClose(key) {
+        const newFilters = {...this.props.filterValues};
+        newFilters[key] = '';
+        this.props.onFilterChange(newFilters);
+    }
+
     renderChips() {
-        let chips = null;
 
-        const values = this.props.filterValues;
+        const defaultValues = {
+            zipcode: '',
+            animalType: '',
+            city: '',
+            caseType: '',
+            animalSize: ''
+        }
+        const values = this.props.filterValues || defaultValues;
 
-        if (!values) return chips;
+        const hide = {
+            display: 'none'
+        }
 
-        chips = Object.keys(values).map((key, i) => {
-            let value = values[key]
-            if(!value){
-                return null;
-            }
-            return (
-                <div key={i} className="chip">
-                    {value}
-                    <i onClick = {()=>this.handleChipClose(key,value)} className="close material-icons">close</i>
+        const show = {
+            display: 'inline-block'
+        }
+
+        return (
+            <Fragment>
+                <div className="chip" style={values.caseType ? show : hide}>
+                    {values.caseType}
+                    <i onClick = {()=>this.handleChipClose('caseType')} className="close material-icons">close</i>
                 </div>
-            )
-
-        })
-        return chips;
+                <div className="chip" style={values.animalType ? show : hide}>
+                    {values.animalType}
+                    <i onClick = {()=>this.handleChipClose('animalType')} className="close material-icons">close</i>
+                </div>
+                <div className="chip" style={values.animalSize ? show : hide}>
+                    {values.animalSize}
+                    <i onClick = {()=>this.handleChipClose('animalSize')} className="close material-icons">close</i>
+                </div>
+                <div className="chip" style={values.city ? show : hide}>
+                    {values.city}
+                    <i onClick = {()=>this.handleChipClose('city')} className="close material-icons">close</i>
+                </div>
+                <div className="chip" style={values.zipcode ? show : hide}>
+                    {values.zipcode}
+                    <i onClick = {()=>this.handleChipClose('zipcode')} className="close material-icons">close</i>
+                </div>
+            </Fragment>
+        )
     }
 
     render() {
@@ -33,6 +66,7 @@ class FilterPanel extends Component {
                 <div className="chip-panel">
                     {this.renderChips()}
                 </div>
+                <button type="button" className="waves-effect waves-green btn" onClick={this.handleFilterClick}>Filter</button>
             </div>
 
         )
