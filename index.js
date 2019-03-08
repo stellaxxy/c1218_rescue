@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
 const mysql = require('mysql');
 const db = require('./db');
+const { yelpApi } = require('./config/api');
 const googleMap = require('./services/maps');
 const upload = require('./services/upload');
 
@@ -265,6 +267,47 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 });
 
+
+// API Call for Yelp Data
+app.post('/api/yelp/businesses', async (request, response) =>{
+    const { latitude, longitude, location } = request.body;
+
+    try {
+        let yelpURL = 'https://api.yelp.com/v3/businesses/search';
+
+        let config = {
+            params: {
+                term: 'vet'
+            },
+            headers: {
+                'Authorization': "Bearer " + yelpApi
+            }
+        };
+
+        //yelpURL += `?location=${location}`;
+         if (latitude && longitude) {
+             config.params.latitude = latitude;
+             config.params.longitude = longitude;
+         } else if(location) {
+             config.params.location = location;
+         } else {
+             throw new Error('Please enter in valid latitude / longitude OR location');
+         }
+/*
+         for (let parameter in request.body) {
+             yelpURL += `${parameter}=${request.body[parameter]}`;
+         }
+*/
+        const data = await axios.get(yelpURL, config);
+
+        response.send({
+            result: data.data
+        });
+
+    } catch(error) {
+        handleError(response, error);
+    }
+});
 
 
 // Listen

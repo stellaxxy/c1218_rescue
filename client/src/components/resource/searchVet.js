@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Map from '../map';
 import axios from 'axios';
 import {googleMapApi} from '../../../../config';
+import SearchVetItem from './searchvetitem';
 
 class SearchVet extends Component {
     state = {
@@ -18,26 +19,23 @@ class SearchVet extends Component {
 
     }
 
-    async handleClick(){
+    handleClick = async () => {
         const searchInput = document.getElementsByClassName('vetSearchInput')[0].value;
-        const mapApi = googleMapApi.googleMapApi;
 
-        if(isNaN(searchInput)){
-            let searchInputArray = searchInput.split(' ');
-            console.log(searchInputArray);
-            if(searchInputArray.length !== 2){
-
-            }
+        if(!searchInput){
+            this.setState({
+                error: true,
+                message: 'Please provide city, state or zip code'
+            });
+        } else {
+            const result = await axios.post('/api/yelp/businesses', {
+                location: searchInput
+            });
+            //console.log(result.data.result.businesses);
+            this.setState({
+                data: result.data.result.businesses
+            });
         }
-
-        let geocodingQuery = `https://maps.googleapis.com/maps/api/geocode/json?key=${mapApi}&address=`;
-
-
-        geocodingQuery = geocodingQuery;
-
-        //const lnglat = await axios.get('');
-
-       // const result = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/output?key=${mapApi}&input=vet&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2500@`);
     }
 
     renderError(){
@@ -47,23 +45,32 @@ class SearchVet extends Component {
     }
 
     render() {
-        let extraInformation =
-
+/*
         if(this.state.error){
 
         }
+        */
+        //console.log('search vet data:', this.state.data);
+
+
+        const businessList = this.state.data.map(item => {
+            //console.log(item);
+            return <SearchVetItem phone={item.display_phone} key={item.id} image={item.image_url} location={item.location} id={item.id} name={item.name}/>
+        });
+
         return (
             <div className="w3-container">
                 <div className="mapContainer">
-                    <Map/>
+                    <Map data={this.state.data}/>
                 </div>
 
                 <div className="searchContainer row">
                     <input className="vetSearchInput col s6 offset-s1" type="text" placeholder="City, State or Zip Code"/>
                     <button className="col s4" onClick={this.handleClick}>Search</button>
                 </div>
-
-
+                <div className="vetListContainer">
+                    {businessList}
+                </div>
             </div>
 
 
