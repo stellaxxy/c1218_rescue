@@ -18,8 +18,7 @@ class CaseMap extends Component {
 
     componentDidMount() {
         window.initMap = this.initMap.bind(this);
-        loadJS('https://maps.googleapis.com/maps/api/js?key=' + config.googleMapApi + '&callback=initMap');
-        //loadJS('../googleMapClustering/markerclusterer.js');
+        loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
     }
 
     clean(obj) {
@@ -83,18 +82,17 @@ class CaseMap extends Component {
                     icon: icons[item.caseType],
                     map: this.renderedMap
                 });
-
-
+              
                 // To add the marker to the map, call setMap();
                 marker.setMap(this.renderedMap);
 
                 const img = item.coverImg;
                 let contentString = '';
 
-                if (item.caseType === 'found') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
-                } else if (item.caseType === 'lost') {
-                    contentString = `<img src=${img} alt="pet picture"/><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                if (item.caseType === 'found'){
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                } else if(item.caseType === 'lost') {
+                    contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 }
 
 
@@ -106,12 +104,12 @@ class CaseMap extends Component {
                     infowindow.open(this.renderedMap, marker);
                 })
 
+
                 return marker;
             });
 
             const markerCluster = new MarkerClusterer(this.renderedMap, markers,
                 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            //'../googleMapClustering/m'
         }
     }
 

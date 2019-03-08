@@ -2,22 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const db = require('./db');
-const {googleMapApi} = require('./config/api');
+const googleMap = require('./services/maps');
 const upload = require('./services/upload');
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'development';
 
-const googleMap = require('@google/maps').createClient({
-    key: googleMapApi,
-    Promise: Promise
-});
-
 const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/client/dist'));
 
 const CASELIST_FILTERS = [
     {
@@ -75,18 +70,11 @@ app.use(cors());
 // API
 app.get('/api/caselist', async (request, response) => {
     try {
-        let sql = "SELECT \
-                        c.`id`, \
-                        a.`animalType`, \
-                        c.`caseType`, \
-                        c.`city`, \
-                        c.`location`, \
-                        c.`zipcode`, \
-                        c.`latitude`, \
-                        c.`longitude`, \
-                        c.`coverImg` \
-                    FROM `cases` c \
-                    INNER JOIN `animals` a ON c.`animalID` = a.`id`";
+
+        let sql = "SELECT c.`id`, a.`animalType`, c.`caseType`,\n" +
+            "            c.`city`,c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
+            "            FROM `cases` c\n" +
+            "            INNER JOIN `animals` a ON c.`animalID` = a.`id`";
 
         const filter_criteria = [];
         const filter_values = [];
@@ -100,6 +88,8 @@ app.get('/api/caselist', async (request, response) => {
                 filter_values.push(value);
             }
         });
+
+        //console.log(request.query);
 
         if (filter_criteria.length) {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
@@ -129,25 +119,46 @@ app.get('/api/caselist', async (request, response) => {
 
 app.get('/api/casedetails', async (request, response) => {
     try {
-        const id = request.query.id;
-        if (id === undefined) {
-            throw new Error(`Please provide a valid ID`);
-        } else if (isNaN(id)) {
-            throw new Error(`ID must be a number`);
+        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
+            "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
+            "            a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "            FROM `cases` AS c \n" +
+            "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+            "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
+        let data = {};
+        console.log(request.query);
+        if(request.query.caseKey || request.query.email){
+            if(request.query.caseKey === undefined){
+                throw new Error(`Please provide valid case key`);
+            } else if (request.query.email === undefined){
+                throw new Error(`Please provide valid email`);
+            }
+
+            const caseKey = request.query.caseKey;
+            const email = request.query.email;
+
+            query = query +  "INNER JOIN `users` u ON c.`userID` = u.`id`" + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
+
+            data = await db.query(query, [email, caseKey]);
+
+        } else {
+            const id = request.query.id;
+            if (id === undefined) {
+                throw new Error(`Please provide a valid ID`);
+            } else if (isNaN(id)) {
+                throw new Error(`ID must be a number`);
+            }
+
+            query = query + "WHERE c.`id` = ?" + "GROUP BY c.`id`";
+
+            data = await db.query(query, [id]);
         }
 
-        const query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
-            "c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
-            "a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
-            "FROM `cases` AS c \n" +
-            "JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
-            "LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
-            "WHERE c.`id` = ?\n" +
-            "GROUP BY c.`id`";
+
         const output = {
             success: false
         };
-        let data = await db.query(query, [id]);
+
 
         if (data.length === 1) {
             data = data[0];
@@ -194,7 +205,7 @@ app.get('/api/casedetails', async (request, response) => {
             output.data = data;
 
         } else {
-            throw new Error(`There is no case matched by id ${id}`);
+            throw new Error(`There is no matching case.`);
         }
         response.send(output);
     } catch (error) {
@@ -206,32 +217,29 @@ app.get('/api/casedetails', async (request, response) => {
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {breed, color, name, animalType, gender, description, location, size, city, email, username, phone, caseType, zipcode, caseDate, imgURL} = request.body;
+        const {color, breed, name, animalType, gender, description, street, size, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
+        const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
-        const result = await googleMap.geocode({address: location}).asPromise();
-
-        const longitude = result.json.results[0].geometry.location.lat;
-        const latitude = result.json.results[0].geometry.location.lng;
+        const address = await googleMap.getAddress(`${street}, ${city}`);
 
 // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
-        const insertUserInfo = [email, username, phone];
+        const insertUserInfo = [email, name, phone];
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
         var userID = insertuser.insertId;
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
-        const insert = [breed, color, name, animalType, gender, description, size,];
+        const insert = [breed, color, petName, animalType, gender, description, size,];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        //`latitude`,`longitude`
-        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [city, location, caseType, longitude, latitude, zipcode, coverImg, caseDate, animalID, userID];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
@@ -247,7 +255,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         response.send({
             success: true,
             insertID: insertcase.insertId,
-
+            caseKey: caseKey
         })
     } catch (error) {
         handleError(response, error);
@@ -255,6 +263,9 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 });
 
+app.get('*', (request, response) => {
+    response.sendFile(__dirname + '/client/dist/index.html');
+});
 
 // Listen
 app.listen(PORT, HOST, () => {
