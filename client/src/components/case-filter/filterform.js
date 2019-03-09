@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 
 let FilterForm = props => {
-    const {onSubmit} = props
+    const {onSubmit} = props;
     return (
         <form onSubmit={onSubmit}>
             <div className="row">

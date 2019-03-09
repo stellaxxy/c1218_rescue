@@ -59,7 +59,7 @@ class SearchVet extends Component {
         });
 
         return (
-            <div className="w3-container">
+            <div className="w3-container main">
                 <div className="mapContainer">
                     <Map data={this.state.data}/>
                 </div>

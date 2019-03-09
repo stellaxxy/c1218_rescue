@@ -35,7 +35,7 @@ class Filter extends Component {
         return (
             <Fragment>
                 <div className="center">
-                    <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Filter</a>
+                    <a className="waves-effect waves-light btn modal-trigger col s2 filterBtn" href="#modal1">Filter</a>
                     <div id="modal1" className="modal">
                         <div className="modal-content">
                             <FilterForm onSubmit={this.submit.bind(this)}/>

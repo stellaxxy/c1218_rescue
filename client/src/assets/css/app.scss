@@ -18,22 +18,29 @@ body {
         font-family: 'Concert One', cursive;
         font-size: 1.3rem;
 
+        .navbar-fixed {
+            height: 55px;
+        }
         nav {
             height: 10%;
-            position: fixed;
-            top: 0;
-            left: 0;
         }
 
         .bottomContainer {
             height: 90%;
             width: 100%;
-            position: absolute;
-            bottom: 0;
             overflow-y: scroll;
         }
     }
 }
+
+/*
+position: fixed;
+            top: 0;
+            left: 0;
+
+            position: absolute;
+            bottom: 0;
+ */
 
 /*
  * SELECTORS
