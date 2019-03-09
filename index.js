@@ -119,7 +119,7 @@ app.get('/api/caselist', async (request, response) => {
 
 app.get('/api/casedetails', async (request, response) => {
     try {
-        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
+        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`zipcode`, \n" +
             "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
             "            a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
             "            FROM `cases` AS c \n" +
@@ -262,10 +262,42 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
     }
 
 });
+//close case:
+app.post('/api/updatestatus', async(request,response)=>{
+
+    try{
+        const { status ,id } = request.body;
+        if (id === undefined) {
+            throw new Error(`Please provide a valid caseKey`);
+        }
+        const updatecases = "update cases set status = ? where id = ? "
+        const updateStatus= [status, id];
+        const updatequery= mysql.format(updatecases, updateStatus);
+        console.log('case query ', updatequery);
+        const caseupdate = await db.query(updatequery);
+        console.log(caseupdate)
+
+        response.send({
+            success: true,
+
+        })
+    }catch (error) {
+        handleError(response, error);
+    }
+
+})
+
+
+
+
+
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 });
+
+
+
 
 // Listen
 app.listen(PORT, HOST, () => {

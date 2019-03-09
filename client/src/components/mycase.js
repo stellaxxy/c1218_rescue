@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Modal from './general/modal/modal';
 import axios from 'axios';
 import {Fragment} from 'react';
+import '../assets/css/mycase.scss';
 
 class MyCase extends Component {
     state = {
@@ -36,6 +37,19 @@ class MyCase extends Component {
         }
     };
 
+    closeCase=async () =>{
+        console.log('this.state.data:', this.state.data)
+        const {id} =this.state.data
+        console.log(this.state.data)
+        const response = await axios.post('/api/updatestatus',{id: id, status:'closed'});
+        console.log('response',response);
+
+
+    }
+
+
+
+
     render(){
         console.log('current state', this.state);
 
@@ -62,30 +76,35 @@ class MyCase extends Component {
             <Fragment>
                 <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
                 <div className="myCaseContainer">
-                    <h2 className="header ">Please help me</h2>
+                    <h2 className="header">Please help me</h2>
                     <div className="w3-container w3-half">
                         <img src={this.state.data.coverImg}/>
                     </div>
 
                     <div className="w3-container w3-half">
-                        <div className="orange text-white bold s12">City
-                            : {this.state.data.location.city}</div>
+                        <div className="orange text-white bold s12">City: {this.state.data.location.city}</div>
                         <div>Case id: {this.state.data.id}</div>
-                        <div>PET NAME:{this.state.data.animalDetail.name}</div>
-                        <div>PET TYPE : {this.state.data.animalDetail.animalType}</div>
-                        <div>PET BREED : {this.state.data.animalDetail.breed}</div>
-                        <div>PET COLOR: {this.state.data.animalDetail.color}</div>
-                        <div>GENDER: {this.state.data.animalDetail.gender}</div>
-                        <div>Animal Size: {this.state.data.animalDetail.size}</div>
-                        <div>DATE LOST: {this.state.data.date}</div>
-                        <div>PHONE: mobile</div>
-                        <div>PET DESCRIPTION:{this.state.data.animalDetail.description} </div>
-                        <div>AREA LAST SEEN : {this.state.data.location.location}</div>
-                        <div>Zip Code:{this.state.data.location.zipcode}</div>
+                        <div>Pet name:{this.state.data.animalDetail.name}</div>
+                        <div>Pet type: {this.state.data.animalDetail.animalType}</div>
+                        <div>Pet breed: {this.state.data.animalDetail.breed}</div>
+                        <div>Pet color: {this.state.data.animalDetail.color}</div>
+                        <div>Gender: {this.state.data.animalDetail.gender}</div>
+                        <div>Animal size: {this.state.data.animalDetail.size}</div>
+                        <div>Date lost: {this.state.data.date}</div>
+                        <div>Pet description: {this.state.data.animalDetail.description} </div>
+                        <div>Area last seen: {this.state.data.location.location}</div>
+                        <div>Zip code: {this.state.data.location.zipcode}</div>
                     </div>
 
                     <div className="center">
-                        <button className="btn">CLOSE CASE</button>
+                        {
+                            this.state.data.status==='active' ?
+
+                                (<Link to="/closecase" className="waves-effect waves-light btn orange text-white"
+                                  onClick={this.closeCase}>CLOSE CASE</Link>)
+                                :
+                                 null
+                        }
                     </div>
                 </div>
             </Fragment>
