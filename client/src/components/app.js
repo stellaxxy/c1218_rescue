@@ -33,7 +33,6 @@ const App = () => (
         <Route path="/upload" component={Upload}/>
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
         <Route path="/resource" component={Resource}/>
-        <Route path="/searchpet" component={SearchPet}/>
         <Route path="/typeselection" component={TypeSelection}/>
         <Route path="/sizeselection" component={SizeSelection}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
