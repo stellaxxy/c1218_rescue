@@ -1,14 +1,13 @@
 import React from 'react';
 import exampleImage from "../../assets/images/cover1.jpg";
-import { Link } from 'react-router-dom';
 
 export default (props) => {
     const { caseType, location, id, coverImg } = props;
     let prefixForAddress = null;
     if(caseType === 'lost'){
-        prefixForAddress = 'Last seen';
+        prefixForAddress = 'Last seen on';
     } else {
-        prefixForAddress = 'Found';
+        prefixForAddress = 'Found on';
     }
 
     return(
@@ -28,3 +27,4 @@ export default (props) => {
         </div>
     );
 }
+

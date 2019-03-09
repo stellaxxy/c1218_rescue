@@ -7,6 +7,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const s3 = require('./s3');
 const { s3Config } = require('../config');
+require('dotenv').config();
 
 // Location for files uploaded with local configuration
 const LOCAL_DIR = 'public/images/';

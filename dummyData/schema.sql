@@ -80,6 +80,7 @@ INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `state`, `zipcode`, `
 (20, 'lost', 'Irvine', 'UC IRVINE', 'CA', 92648, 33.6405, -117.844, '/images/b71b80bb672e8ecbff0649cde0e7bb9a', 29, 29, '2019-03-04', ''),
 (21, 'lost', 'Irvine', '8691 Irvine Center Dr', 'CA', 92618, 33.6986, -117.76, '/images/94d2f0204ebf41cd10842261aeb5855e', 30, 30, '2019-03-07', 'UN1UT3');
 
+
 -- --------------------------------------------------------
 
 --
