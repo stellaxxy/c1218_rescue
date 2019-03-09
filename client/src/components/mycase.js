@@ -41,7 +41,7 @@ class MyCase extends Component {
         console.log('this.state.data:', this.state.data)
         const {id} =this.state.data
         console.log(this.state.data)
-        const response = await axios.post('/api/updatestatus',{id: id, status:'inactive'});
+        const response = await axios.post('/api/updatestatus',{id: id, status:'closed'});
         console.log('response',response);
 
 
