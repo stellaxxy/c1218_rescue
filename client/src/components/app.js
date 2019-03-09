@@ -22,11 +22,7 @@ import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
-<<<<<<< HEAD
 import CloseCase from "./cases/case-confirmation";
-
-=======
->>>>>>> 325ce24ef07c2b83bbe0bac6aa4cde5c744f131c
 
 
 const App = () => (
