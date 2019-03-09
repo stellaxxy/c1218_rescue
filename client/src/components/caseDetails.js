@@ -22,6 +22,8 @@ class CaseDetails extends Component {
     }
 
     render() {
+
+        console.log('state.data',this.state.data)
         if (!this.state.data) {
             return (
                 <h1>Loading</h1>
@@ -48,6 +50,7 @@ class CaseDetails extends Component {
         }
 
         return (
+
             <div>
                 <div className="w3-container">
                     <h2 className="header ">Please help me</h2>
@@ -57,20 +60,18 @@ class CaseDetails extends Component {
                     </div>
 
                     <div className="w3-container w3-half">
-                        <div className="orange text-white bold s12">City
-                            : {this.state.data.location.city}</div>
+                        <div className="orange text-white bold s12">City: {this.state.data.location.city}</div>
                         <div>Case id: {this.state.data.id}</div>
-                        <div>PET NAME:{this.state.data.animalDetail.name}</div>
-                        <div>PET TYPE : {this.state.data.animalDetail.animalType}</div>
-                        <div>PET BREED : {this.state.data.animalDetail.breed}</div>
-                        <div>PET COLOR: {this.state.data.animalDetail.color}</div>
-                        <div>GENDER: {this.state.data.animalDetail.gender}</div>
-                        <div>Animal Size: {this.state.data.animalDetail.size}</div>
-                        <div>DATE LOST: {this.state.data.date}</div>
-                        <div>PHONE: mobile</div>
-                        <div>PET DESCRIPTION:{this.state.data.animalDetail.description} </div>
-                        <div>AREA LAST SEEN : {this.state.data.location.location}</div>
-                        <div>Zip Code:{this.state.data.location.zipcode}</div>
+                        <div>Pet name: {this.state.data.animalDetail.name}</div>
+                        <div>Pet type: {this.state.data.animalDetail.animalType}</div>
+                        <div>Pet breed: {this.state.data.animalDetail.breed}</div>
+                        <div>Pet color: {this.state.data.animalDetail.color}</div>
+                        <div>Gender: {this.state.data.animalDetail.gender}</div>
+                        <div>Animal size: {this.state.data.animalDetail.size}</div>
+                        <div>Date lost: {this.state.data.date}</div>
+                        <div>Pet description: {this.state.data.animalDetail.description} </div>
+                        <div>Area last seen: {this.state.data.location.location}</div>
+                        <div>Zip code: {this.state.data.location.zipcode}</div>
                     </div>
                 </div>
                 <div className="center">

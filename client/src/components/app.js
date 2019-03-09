@@ -22,6 +22,8 @@ import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import Filter from "./case-filter/filtermodal";
+import CloseCase from "./cases/case-confirmation";
+
 
 
 const App = () => (
@@ -44,6 +46,7 @@ const App = () => (
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
+        <Route path="/closecase" component={CloseCase}/>
 
     </div>
 );

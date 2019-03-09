@@ -262,10 +262,42 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
     }
 
 });
+//close case:
+app.post('/api/updatestatus', async(request,response)=>{
+
+    try{
+        const { status ,id } = request.body;
+        if (id === undefined) {
+            throw new Error(`Please provide a valid caseKey`);
+        }
+        const updatecases = "update cases set status = ? where id = ? "
+        const updateStatus= [status, id];
+        const updatequery= mysql.format(updatecases, updateStatus);
+        console.log('case query ', updatequery);
+        const caseupdate = await db.query(updatequery);
+        console.log(caseupdate)
+
+        response.send({
+            success: true,
+
+        })
+    }catch (error) {
+        handleError(response, error);
+    }
+
+})
+
+
+
+
+
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 });
+
+
+
 
 // Listen
 app.listen(PORT, HOST, () => {
