@@ -12,10 +12,10 @@ class SideNav extends Component{
         return(
             <ul ref={element => {this.sideNav = element}} className="sidenav" id="sidenav">
                 <li>
-                    <Link className="sidenav-close" to="/caselist">SEARCH</Link>
+                    <Link className="sidenav-close" to="/search?mode=list">SEARCH</Link>
                 </li>
                 <li>
-                    <Link className="sidenav-close" to="/casemap">MAP</Link>
+                    <Link className="sidenav-close" to="/search?mode=map">MAP</Link>
                 </li>
                 <li>
                     <Link className="sidenav-close" to="/upload">UPLOAD CASE</Link>

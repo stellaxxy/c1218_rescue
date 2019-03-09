@@ -55,8 +55,8 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`) VALUES
-(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, -117.83, 33.68, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF'),
-(2, 'lost', 'Irvine', 'Jefferey Rd', 92618, -117.83, 36.05, '/images/image4.jpg', 2, 2, '2019-02-07', '123ABC'),
+(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, 33.68, -117.83, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF'),
+(2, 'lost', 'Irvine', 'Jefferey Rd', 92618,  36.05, -117.83,'/images/image4.jpg', 2, 2, '2019-02-07', '123ABC'),
 (3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT');
 
 -- --------------------------------------------------------
