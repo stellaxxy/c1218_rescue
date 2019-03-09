@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import PetImage from "../../assets/images/image11.jpg";
-
+import axios from 'axios';
 
 class OfficeInfo extends Component {
+    async componentDidMount(){
+
+        const {id} = this.props.match.params;
+
+        const result = await axios.get(`/api/yelp/businesses${id}`);
+        //console.log(result);
+    }
+
     render() {
         return (
 
-            <div className="w3-container">
+            <div className="w3-container ">
                 <div>
                     <h4>Vet Office</h4>
                     <div>Address: 111 jefferey Road</div>

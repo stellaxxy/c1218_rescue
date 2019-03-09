@@ -3,7 +3,7 @@ import NavButton from "../general/navbutton";
 
 export default () => {
     return (
-        <div>
+        <div className="bottomContainer">
             <h1>Dog Care</h1>
             <div>
                 <p>Food dogs can eat: rice/pasta, meat, carrots, cucumber, broccoli</p>

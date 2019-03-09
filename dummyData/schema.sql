@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `animals`;
 
 -- --------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `animals`
@@ -11,12 +12,12 @@ DROP TABLE IF EXISTS `animals`;
 
 CREATE TABLE `animals` (
   `id` bigint(20) NOT NULL,
-  `breed` varchar(25),
-  `color` varchar(15),
-  `name` varchar(15),
+  `breed` varchar(25) DEFAULT NULL,
+  `color` varchar(15) DEFAULT NULL,
+  `name` varchar(15) DEFAULT NULL,
   `size` varchar(15) NOT NULL,
   `animalType` varchar(15) NOT NULL,
-  `gender` varchar(8),
+  `gender` varchar(8) DEFAULT NULL,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -25,9 +26,20 @@ CREATE TABLE `animals` (
 --
 
 INSERT INTO `animals` (`id`, `breed`, `color`, `name`, `size`, `animalType`, `gender`, `description`) VALUES
-(1, 'golden retriever', 'golden', 'Unknown', 'large', 'dog', 'female', 'description'),
-(2, 'pug', 'black', 'Mr Puggles', 'small', 'dog', 'male', 'The world\'s cutest snorting, sneezing dog.'),
-(3, 'siamese', 'white', 'Unknown', 'medium', 'cat', '', '');
+(17, 'golden retriever', 'yellow', 'Rocky', 'large', 'dog', 'female', 'A description'),
+(18, 'golden retriever', 'yellow', 'Rocky', 'medium', 'dog', 'male', 'A description'),
+(19, 'pug', 'black', 'Rocky', 'small', 'dog', 'male', 'A description'),
+(20, 'unknown', 'white', 'Cutie', 'small', 'cat', 'male', 'A description'),
+(21, 'unknown', 'white', 'Miya', 'medium', 'cat', 'female', 'A description'),
+(22, 'golden retreiver', 'white', 'Miya', 'medium', 'dog', 'female', 'A description'),
+(23, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(24, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(25, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(26, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(27, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(28, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(29, 'golden retreiver', 'golden', 'Max', 'large', 'dog', 'female', 'A description'),
+(30, NULL, NULL, NULL, 'medium', 'cat', NULL, 'white');
 
 -- --------------------------------------------------------
 
@@ -38,8 +50,9 @@ INSERT INTO `animals` (`id`, `breed`, `color`, `name`, `size`, `animalType`, `ge
 CREATE TABLE `cases` (
   `id` bigint(20) NOT NULL,
   `caseType` varchar(5) NOT NULL,
-  `city` varchar(15) NOT NULL,
+  `city` varchar(40) NOT NULL,
   `location` varchar(100) NOT NULL,
+  `state` varchar(2) NOT NULL,
   `zipcode` mediumint(9) NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
@@ -54,10 +67,18 @@ CREATE TABLE `cases` (
 -- Dumping data for table `cases`
 --
 
-INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`) VALUES
-(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, -117.83, 33.68, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF'),
-(2, 'lost', 'Irvine', 'Jefferey Rd', 92618, -117.83, 36.05, '/images/image4.jpg', 2, 2, '2019-02-07', '123ABC'),
-(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT');
+INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `state`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`) VALUES
+(11, 'lost', 'Irvine', 'Spectrum Center Drive', 'CA', 92648, 44.0541, -123.074, '/images/87e77324afdbc07f20c0b1dbf5c99ff2', 17, 17, '2019-03-04', '123'),
+(12, 'found', 'Irvine', 'jefferey rd', 'CA', 92648, 33.8135, -117.924, '/images/fa58a1bf6cd1e24809017e6b8ef71034', 18, 18, '2019-03-04', '234'),
+(13, 'found', 'Irvine', '9200 Irvine center drive', 'CA', 92648, 33.6685, -117.763, '/images/d76fbd9e8a8c6f2c8595a7500633af4f', 19, 19, '2019-03-04', '345'),
+(14, 'found', 'Anaheim', 'orangewood drive', 'CA', 92648, 32.9827, -117.251, '/images/c4676833fa0662102730a86ae8792045', 20, 20, '2019-03-04', '456'),
+(15, 'found', 'Anaheim', 'Disneyland Drive', 'CA', 92648, 33.6405, -117.844, '/images/919ed208370fea381dfc53f0a1c87ba9', 21, 21, '2019-03-04', '567'),
+(16, 'lost', 'Garden Grove', 'garden grove boulevard', 'CA', 92648, 33.7198, -117.885, '/images/0de5f9358e3c5aa946affd8a1951658d', 22, 22, '2019-03-04', '678'),
+(17, 'lost', 'Costa Mesa', 'West 19th Street', 'CA', 92648, 33.66, -117.86, '/images/3fb6b5a15f9bd218d84d13279080e7ca', 23, 23, '2019-03-04', '789'),
+(18, 'lost', 'Costa Mesa', 'Bristol St', 'CA', 92648, 33.7198, -117.885, '/images/3e135e83d7c41973a215cb2aa70098f1', 27, 27, '2019-03-04', ''),
+(19, 'lost', 'Irvine', 'Costa Mesa', 'CA', 92648, 33.7198, -117.885, '/images/5ec18168831469bf74e2da0f7d4b60f9', 28, 28, '2019-03-04', ''),
+(20, 'lost', 'Irvine', 'UC IRVINE', 'CA', 92648, 33.6405, -117.844, '/images/b71b80bb672e8ecbff0649cde0e7bb9a', 29, 29, '2019-03-04', ''),
+(21, 'lost', 'Irvine', '8691 Irvine Center Dr', 'CA', 92618, 33.6986, -117.76, '/images/94d2f0204ebf41cd10842261aeb5855e', 30, 30, '2019-03-07', 'UN1UT3');
 
 -- --------------------------------------------------------
 
@@ -70,15 +91,6 @@ CREATE TABLE `images` (
   `imgURL` varchar(40) NOT NULL,
   `animalID` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `imgURL`, `animalID`) VALUES
-(1, '/images/image1.jpg', 1),
-(2, '/images/image2.jpg', 1),
-(3, '/images/image3.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -98,9 +110,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`) VALUES
-(1, 'Stella', 'test@test.com', '1111111111'),
-(2, 'Billy Bob', 'bb1010@gmail.com', '8005551212'),
-(3, 'SpongeBob', 'spongey25@underthesea.com', '2223331234');
+(17, 'John Doe', 'hohum@gmail.com', '1-888-555-1212'),
+(18, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(19, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(20, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(21, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(22, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(23, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(24, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(25, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(26, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(27, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(28, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(29, 'Ann ', 'hohum@gmail.com', '1-888-555-1212'),
+(30, 'human', '123@123.com', '232949343');
 
 --
 -- Indexes for dumped tables
@@ -141,25 +164,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `animals`
 --
 ALTER TABLE `animals`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -178,3 +201,5 @@ ALTER TABLE `cases`
 ALTER TABLE `images`
   ADD CONSTRAINT `images_fk0` FOREIGN KEY (`animalID`) REFERENCES `animals` (`id`);
 COMMIT;
+
+

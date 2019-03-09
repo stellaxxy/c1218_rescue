@@ -137,7 +137,7 @@ class CaseMap extends Component {
 
     render() {
         return (
-            <div>
+            <div className="bottomContainer">
                 <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
                 <div id="map">
                 </div>

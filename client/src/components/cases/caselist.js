@@ -110,7 +110,7 @@ class CaseList extends Component {
 
         if (this.state.error === true) {
             return (
-                <div>
+                <div className="bottomContainer">
                     <div>
                         <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
                         <div className="caseListContainer">
@@ -123,7 +123,7 @@ class CaseList extends Component {
         }
         if (this.state.cases.length === 0) {
             return (
-                <div>Loading</div>
+                <div className="bottomContainer">Loading</div>
             );
         }
 
@@ -132,7 +132,7 @@ class CaseList extends Component {
         });
 
         return (
-            <div>
+            <div className="bottomContainer">
                 <FilterPanel applyFilter={this.applyFilter.bind(this)}/>
                 <div className="caseListContainer">
                     {caseItemArray}

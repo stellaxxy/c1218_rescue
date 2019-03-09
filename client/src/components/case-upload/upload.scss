@@ -38,7 +38,11 @@ $color-action-buttons: #EB5E30;
     text-align: center;
 }
 
-.preloader-wrapper.active {
+.preloader-wrapper.big {
+    position: static
+}
+
+.preloader-wrapper.active.big {
     position: absolute;
     top :0;
     left: 0;

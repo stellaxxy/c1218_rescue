@@ -40,7 +40,7 @@ const App = () => (
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
-        <Route path="/vetinfo" component={OfficeInfo}/>
+        <Route path="/vetinfo/:id" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
 
     </div>

@@ -22,7 +22,7 @@ class TypeSelection extends Component {
         const {animalType} = this.props;
 
         return (
-            <div className="page-body">
+            <div className="page-body bottomContainer">
                 <main>
                     <div className="container">
 

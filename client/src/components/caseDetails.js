@@ -9,7 +9,7 @@ class CaseDetails extends Component {
 
     state = {
         data: null
-    }
+    };
 
     async componentDidMount() {
         const {caseid} = this.props.match.params;
@@ -34,7 +34,7 @@ class CaseDetails extends Component {
                     <div className="w3-container w3-half">
                         <img src={this.state.data.coverImg}/>
                     </div>
-                    <div className="w3-container w3-half">
+                    <div className="w3-container w3-half details">
                         <div className="orange text-white">City
                             : {this.state.data.location.city}</div>
                         <div>Case id: {this.state.data.id}</div>
@@ -48,15 +48,15 @@ class CaseDetails extends Component {
         }
 
         return (
-            <div>
-                <div className="w3-container">
-                    <h2 className="header ">Please help me</h2>
+            <div className="bottomContainer">
+                <div className="caseDetailsDiv">
+                    <h4 className="header ">Please help me</h4>
 
-                    <div className="w3-container w3-half">
+                    <div className="detailsImgContainer">
                         <img src={this.state.data.coverImg}/>
                     </div>
 
-                    <div className="w3-container w3-half">
+                    <div className="details">
                         <div className="orange text-white bold s12">City
                             : {this.state.data.location.city}</div>
                         <div>Case id: {this.state.data.id}</div>

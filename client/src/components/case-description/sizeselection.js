@@ -9,7 +9,7 @@ class AnimalSizeSelector extends Component{
     render(){
         const { animalSize, animalType, caseType } = this.props;
         return (
-            <div className="page-body">
+            <div className="page-body bottomContainer">
                 <main>
                     <div className="container">
 

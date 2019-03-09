@@ -28,7 +28,7 @@ class Contact extends Component{
 
     render(){
         return(
-            <div className= "center form">
+            <div className= "center form bottomContainer">
                 <div>
             <form onSubmit={this.handelSubmit}>
                 <label>

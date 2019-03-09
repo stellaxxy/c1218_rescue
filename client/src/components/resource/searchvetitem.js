@@ -2,19 +2,20 @@ import React from 'react';
 
 export default (props) => {
     //console.log('vet item:', props);
-    const { phone, image, location, name } = props;
+    const { id, phone, image, location, name } = props;
 
-    let address = location.address1;
-
-    if(location.address2){
-        address += `, ${location.address2}`;
-        if(location.address3){
-            address += ` ${location.address3}, `;
-        }
+    let address1 = '';
+    let address2 = '';
+    if(location.display_address[2]){
+        address1 = location.display_address[0] + " " + location.display_address[1];
+        address2 = location.display_address[2];
+    } else {
+        address1 = location.display_address[0];
+        address2 = location.display_address[1];
     }
-
-    address += `${location.city} `;
-    console.log(address);
+    //console.log('location:', location);
+    console.log(address1);
+    console.log(address2);
 
     return (
         <div className="card small horizontal">
@@ -25,10 +26,11 @@ export default (props) => {
                 <div className="card-content">
                     <p>{name}</p>
                     <p>Phone: {phone}</p>
-                    <p>Address: {}</p>
+                    <p>Address: {address1}</p>
+                    <p>{address2}</p>
                 </div>
                 <div className="card-action">
-                    <a href={"/casedetails/"}>Details</a>
+                    <a href={"/vetinfo/"+id}>Details</a>
                 </div>
             </div>
         </div>

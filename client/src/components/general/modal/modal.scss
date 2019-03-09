@@ -1,7 +1,23 @@
 .modal.open {
   display: block;
+  height: 95%;
 }
 
 .modal {
   display: none;
+  position: absolute;
+  top: 10%;
+
+
+
+  .modalHeading {
+    margin: 0;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .modalRow {
+    margin-bottom: 0;
+    text-align: center;
+  }
 }

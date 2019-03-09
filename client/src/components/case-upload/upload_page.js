@@ -74,7 +74,7 @@ class UploadPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="bottomContainer">
         {this.renderSpinner()}
         <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
       </div>     

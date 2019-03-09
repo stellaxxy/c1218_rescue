@@ -3,7 +3,7 @@ import NavButton from "../general/navbutton";
 
 export default () => {
     return (
-        <div>
+        <div className="bottomContainer">
             <h1>Cat Care</h1>
             <div>
                 <p>Food cats can eat: meat, whole grains,  fish, veggies</p>

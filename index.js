@@ -242,8 +242,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `state`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
@@ -271,7 +271,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 // API Call for Yelp Data
 app.post('/api/yelp/businesses', async (request, response) =>{
-    const { latitude, longitude, location } = request.body;
+    const { location } = request.body;
 
     try {
         let yelpURL = 'https://api.yelp.com/v3/businesses/search';
@@ -286,13 +286,10 @@ app.post('/api/yelp/businesses', async (request, response) =>{
         };
 
         //yelpURL += `?location=${location}`;
-         if (latitude && longitude) {
-             config.params.latitude = latitude;
-             config.params.longitude = longitude;
-         } else if(location) {
+        if(location) {
              config.params.location = location;
          } else {
-             throw new Error('Please enter in valid latitude / longitude OR location');
+             throw new Error('Please enter in valid location');
          }
 /*
          for (let parameter in request.body) {

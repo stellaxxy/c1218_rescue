@@ -33,7 +33,7 @@ class Landing extends Component {
 
         console.log('this.props.caseFilterValues: ', this.props.caseFilterValues);
         return(
-            <div className="landing">
+            <div className="landing bottomContainer">
                 <img className="responsive-img" src={landingImage} alt=""/>
                 <p className="landing-title">Getting Pets Home</p>
                 <p className="landing-text">Search for a lost pet or list one found.</p>

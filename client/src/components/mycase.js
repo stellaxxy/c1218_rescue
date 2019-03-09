@@ -18,14 +18,14 @@ class MyCase extends Component {
     };
 
     handleSubmit = async formValues => {
-        console.log('my case info:', formValues);
+        //console.log('my case info:', formValues);
 
         const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
 
-        console.log(result);
+        //console.log(result);
 
         if(result.data.success === true){
-            console.log('my case result data:', result.data.data);
+            //console.log('my case result data:', result.data.data);
             this.setState({
                 data: result.data.data
             })
@@ -60,7 +60,7 @@ class MyCase extends Component {
         return (
             <Fragment>
                 <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
-                <div className="myCaseContainer">
+                <div className="myCaseContainer bottomContainer">
                     <h2 className="header ">Please help me</h2>
                     <div className="w3-half">
                         <img src={this.state.data.coverImg}/>
