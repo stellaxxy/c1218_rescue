@@ -119,7 +119,7 @@ app.get('/api/caselist', async (request, response) => {
 
 app.get('/api/casedetails', async (request, response) => {
     try {
-        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`, c.`zipcode`, \n" +
+        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`zipcode`, \n" +
             "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
             "            a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
             "            FROM `cases` AS c \n" +

@@ -38,15 +38,12 @@ class MyCase extends Component {
     };
 
     closeCase=async () =>{
-
+        console.log('this.state.data:', this.state.data)
         const {id} =this.state.data
         console.log(this.state.data)
-        const response = await axios.get('/api/updatestatus?id=' + id);
+        const response = await axios.post('/api/updatestatus',{id: id, status:'inactive'});
         console.log('response',response);
 
-        this.setState({
-            data: response.data.data
-        })
 
     }
 
@@ -100,7 +97,14 @@ class MyCase extends Component {
                     </div>
 
                     <div className="center">
-                        <Link to = "/closecase" className="waves-effect waves-light btn orange text-white" onClick={this.closeCase}>CLOSE CASE</Link>
+                        {
+                            this.state.data.status==='active' ?
+
+                                (<Link to="/closecase" className="waves-effect waves-light btn orange text-white"
+                                  onClick={this.closeCase}>CLOSE CASE</Link>)
+                                :
+                                 null
+                        }
                     </div>
                 </div>
             </Fragment>
