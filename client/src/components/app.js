@@ -21,7 +21,6 @@ import {Route} from 'react-router-dom';
 import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
-import Filter from "./case-filter/filtermodal";
 import CloseCase from "./cases/case-confirmation";
 
 
