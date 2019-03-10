@@ -114,7 +114,7 @@ class CaseMap extends Component {
 
     render() {
         return (
-            <div>
+            <div className="mapContainer">
                 <div id="map">
                 </div>
 

@@ -8,7 +8,7 @@ import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
-import Resource from './resource';
+import Resource from './resourcepage';
 import Landing from './landing';
 import TypeSelection from './case-description/typeselection';
 import SizeSelection from './case-description/sizeselection';
@@ -26,7 +26,7 @@ import CloseCase from "./cases/case-confirmation";
 
 
 const App = () => (
-    <div>
+    <div className="mainContainer">
         <MainNav/>
         <Route exact path="/" component={Landing}/>
         <Route path="/search" component={SearchPage}/>

@@ -11,12 +11,12 @@ DROP TABLE IF EXISTS `animals`;
 
 CREATE TABLE `animals` (
   `id` bigint(20) NOT NULL,
-  `breed` varchar(25),
-  `color` varchar(15),
-  `name` varchar(15),
+  `breed` varchar(25) DEFAULT NULL,
+  `color` varchar(15) DEFAULT NULL,
+  `name` varchar(15) DEFAULT NULL,
   `size` varchar(15) NOT NULL,
   `animalType` varchar(15) NOT NULL,
-  `gender` varchar(8),
+  `gender` varchar(8) DEFAULT NULL,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -38,8 +38,9 @@ INSERT INTO `animals` (`id`, `breed`, `color`, `name`, `size`, `animalType`, `ge
 CREATE TABLE `cases` (
   `id` bigint(20) NOT NULL,
   `caseType` varchar(5) NOT NULL,
-  `city` varchar(15) NOT NULL,
+  `city` varchar(40) NOT NULL,
   `location` varchar(100) NOT NULL,
+  `state` varchar(2) NOT NULL,
   `zipcode` mediumint(9) NOT NULL,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
@@ -48,17 +49,17 @@ CREATE TABLE `cases` (
   `userID` bigint(20) NOT NULL,
   `date` date NOT NULL,
   `caseKey` varchar(6) NOT NULL,
-  `status` enum('active','inactive','closed','') DEFAULT 'active'
+  `status` enum('active','inactive','closed','') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cases`
 --
 
-INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`, `status`) VALUES
-(1, 'found', 'Irvine', 'Irvine Center Drive', 92618, 33.68, -117.83, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF', 'active'),
-(2, 'lost', 'Irvine', 'Jefferey Rd', 92618,  36.05, -117.83,'/images/image4.jpg', 2, 2, '2019-02-07', '123ABC', 'active'),
-(3, 'found', 'Irvine', 'Mullen Drive', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT', 'active');
+INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `state`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`, `status`) VALUES
+(1, 'found', 'Irvine', 'Irvine Center Drive', 'CA', 92618, 33.68, -117.83, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF', 'active'),
+(2, 'lost', 'Irvine', 'Jefferey Rd', 'CA', 92618,  36.05, -117.83,'/images/image4.jpg', 2, 2, '2019-02-07', '123ABC', 'active'),
+(3, 'found', 'Irvine', 'Mullen Drive', 'CA', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT', 'active');
 
 -- --------------------------------------------------------
 
@@ -71,15 +72,6 @@ CREATE TABLE `images` (
   `imgURL` varchar(40) NOT NULL,
   `animalID` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `imgURL`, `animalID`) VALUES
-(1, '/images/image1.jpg', 1),
-(2, '/images/image2.jpg', 1),
-(3, '/images/image3.jpg', 1);
 
 -- --------------------------------------------------------
 

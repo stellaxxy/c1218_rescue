@@ -11,33 +11,35 @@ class MainNav extends Component {
     render() {
         return (
             <Fragment>
-                <nav>
-                    <div className="nav-wrapper">
-                        <Link className="brand-logo" to='/'>PAWS</Link>
+                <div className="navbar-fixed navBar">
+                    <nav>
+                        <div className="nav-wrapper">
+                            <Link className="brand-logo" to='/'>PAWS</Link>
 
 
-                        <Link to="#" className="sidenav-trigger" data-target="sidenav">
-                            <i className="material-icons">menu</i>
-                        </Link>
-                        <ul className="right hide-on-med-and-down">
-                            <li>
-                                <Link to="/search?mode=list">SEARCH</Link>
-                            </li>
-                            <li>
-                                <Link to="/search?mode=map">MAP</Link>
-                            </li>
-                            <li>
-                                <Link to="/upload">UPLOAD CASE</Link>
-                            </li>
-                            <li>
-                                <Link to="/mycase">MY CASE</Link>
-                            </li>
-                            <li>
-                                <Link to="/resource">RESOURCE</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                            <Link to="#" className="sidenav-trigger" data-target="sidenav">
+                                <i className="material-icons">menu</i>
+                            </Link>
+                            <ul className="right hide-on-med-and-down">
+                                <li>
+                                    <Link to="/search?mode=list">SEARCH</Link>
+                                </li>
+                                <li>
+                                    <Link to="/search?mode=map">MAP</Link>
+                                </li>
+                                <li>
+                                    <Link to="/upload">UPLOAD CASE</Link>
+                                </li>
+                                <li>
+                                    <Link to="/mycase">MY CASE</Link>
+                                </li>
+                                <li>
+                                    <Link to="/resource">RESOURCE</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
                 <SideNav/>
             </Fragment>
         );

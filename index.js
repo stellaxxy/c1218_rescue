@@ -238,8 +238,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `state`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
