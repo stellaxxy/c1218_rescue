@@ -5,6 +5,7 @@ $color-bars: #e79307;
 $color-action-buttons: #EB5E30;
 $color-text: #752a07;
 $btn-color: #d84315 !default;
+$color-background: #fff3e0 !default;
 /*
  * FONTS
  */
@@ -13,10 +14,10 @@ $font-size-normal: 1.4em;
 body {
     background-image: url(../images/landing-page-background.png);
 
-
     .mainContainer {
         height: 100vh;
         font-family: 'Concert One', cursive;
+        background-color: $color-background;
 
         .navBar {
             height: 9%;
@@ -27,6 +28,9 @@ body {
 
             .btn {
                 background-color: $btn-color;
+                border-radius: 10px;
+                font-weight: bold;
+                font-family: 'Sniglet', cursive;
             }
         }
 

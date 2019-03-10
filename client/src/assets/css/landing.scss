@@ -5,6 +5,7 @@
     width: 100%;
     text-align: center;
     color: #752a07;
+    background-color: #eeeeee;
 
     .landingHeading {
         position: relative;
@@ -12,7 +13,7 @@
 
         .landing-title {
             font-family: 'Staatliches', cursive;
-            font-size: 20px;
+            font-size: 25px;
             margin-bottom: 5px;
             margin-top: 0;
 
@@ -74,6 +75,7 @@
             width: 87%;
             font-weight: bold;
             font-family: 'Sniglet', cursive;
+            border-radius: 5px;
         }
 
         @media (min-width: 635px) {

@@ -1,12 +1,17 @@
+$color-background: #fff3e0 !default;
 .caseListContainer {
-  position:relative;
+  position: relative;
   top: 2vh;
+  background-color: $color-background;
+  overflow-y: scroll;
 
   .card {
     max-height: 130px;
     max-width: 90%;
     position: relative;
     left: 5%;
+    border-radius: 10px;
+
 
     img {
       max-width: 50px;

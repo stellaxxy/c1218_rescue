@@ -36,6 +36,8 @@ $color-action-buttons: #d84315;
         .btn {
             background-color: $color-action-buttons;
             font-weight: bold;
+            font-family: 'Sniglet', cursive;
+            border-radius: 10px;
         }
     }
 }
