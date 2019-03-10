@@ -9,6 +9,8 @@ class CloseCase extends Component {
             <div className="close-case center">
                 <h5>Your case is closed.</h5>
                 <p>Thanks for using PAWS.</p>
+
+
             </div>
         )
     }

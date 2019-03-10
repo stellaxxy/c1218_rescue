@@ -1,4 +1,6 @@
 $color-background: #fff3e0 !default;
+
+
 .caseListContainer {
   position: relative;
   top: 2vh;
@@ -12,14 +14,22 @@ $color-background: #fff3e0 !default;
     left: 5%;
     border-radius: 10px;
 
+    .card-image {
+      width: 50%;
 
-    img {
-      max-width: 50px;
+      img {
+        width: 100%;
+      }
+
     }
 
-    .card-action {
-      padding: 5px;
-      padding-left: 25px;
+    .card-stacked {
+      .card-action {
+        padding: 5px;
+        padding-left: 25px;
+      }
     }
+
+
   }
 }

@@ -74,7 +74,7 @@ class MyCase extends Component {
         return (
             <Fragment>
 
-                <div className="myCaseContainer">
+                <div className="myCaseContainer bottomContainer">
                     <h2 className="header">Please help me</h2>
                     <div className="w3-container w3-half">
                         <img src={this.state.data.coverImg}/>

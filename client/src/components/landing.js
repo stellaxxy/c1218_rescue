@@ -10,7 +10,7 @@ class Landing extends Component {
 
     state = {
         modal: null
-    }
+    };
 
     componentDidMount(){
         const modal = M.Modal.init(this.refs.modalBegin, {});
@@ -31,19 +31,22 @@ class Landing extends Component {
     render(){
         const {activeCaseType} = this.props;
 
-        console.log('this.props.caseFilterValues: ', this.props.caseFilterValues);
+        //console.log('this.props.caseFilterValues: ', this.props.caseFilterValues);
         return(
             <div className="landing bottomContainer">
-                <img className="responsive-img" src={landingImage} alt=""/>
-                <div className="landingHeading">
-                    <p className="landing-title">Getting Pets Home</p>
-                    <p className="landing-text">Search for a lost pet or list one found.</p>
+                <img className="responsive-img" src={landingImage} alt="dog"/>
+                <div className="landingText">
+                    <div className="landingHeading">
+                        <p className="landing-title">Getting Pets Home</p>
+                        <p className="landing-text">Search for a lost pet or list one found.</p>
+                    </div>
+
+                    <div className="btn-container">
+                        <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
+                        <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
+                    </div>
                 </div>
 
-                <div className="btn-container">
-                    <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
-                    <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
-                </div>
 
                 <div id="modalBegin" ref="modalBegin" className="modal">
                     <div className="modal-content">
