@@ -48,7 +48,7 @@ CREATE TABLE `cases` (
   `userID` bigint(20) NOT NULL,
   `date` date NOT NULL,
   `caseKey` varchar(6) NOT NULL,
-  `status` enum('active','inactive','close','') NOT NULL DEFAULT 'active'
+  `status` enum('active','inactive','closed','') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
