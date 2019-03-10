@@ -8,7 +8,7 @@ import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
-import Resource from './resource';
+import Resource from './resourcepage';
 import Landing from './landing';
 import TypeSelection from './case-description/typeselection';
 import SizeSelection from './case-description/sizeselection';
