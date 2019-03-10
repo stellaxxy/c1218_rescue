@@ -7,6 +7,11 @@ $color-background: #fff3e0 !default;
   background-color: $color-background;
   overflow-y: scroll;
 
+  @media (min-width: 635px){
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .card {
     max-height: 130px;
     max-width: 90%;
@@ -14,16 +19,26 @@ $color-background: #fff3e0 !default;
     left: 5%;
     border-radius: 10px;
 
+    @media (min-width: 635px) {
+      width: 35%;
+      margin: 15px;
+      position: relative;
+      left: 30%;
+      transform: translateX(-50%);
+    }
+
     .card-image {
       width: 50%;
 
       img {
         width: 100%;
+        border-radius: 10px 0 0 10px;
       }
 
     }
 
     .card-stacked {
+
       .card-action {
         padding: 5px;
         padding-left: 25px;

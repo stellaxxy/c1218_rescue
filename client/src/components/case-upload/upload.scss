@@ -1,9 +1,13 @@
 $color-bars: #e79307;
 $color-action-buttons: #d84315;
+$color-background: #fff3e0 !default;
+
 .page-body {
     display: flex;
     min-height: calc(100vh - 56px);
     flex-direction: column;
+    background-color: $color-background;
+
 
     @media (min-width: 600px) {
         min-height: calc(100vh - 64px);
@@ -23,6 +27,19 @@ $color-action-buttons: #d84315;
             margin: 1.4em 0;
             font-weight: bold;
         }
+        .image-container{
+            height: 30%;
+            .uploadImg {
+                width: 100%;
+
+                @media (min-width: 635px) {
+                    width: 60%;
+                    position: relative;
+                    left: 20%;
+                }
+            }
+        }
+
     }
 
     footer {
