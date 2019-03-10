@@ -1,5 +1,5 @@
 $color-bars: #e79307;
-$color-action-buttons: #EB5E30;
+$color-action-buttons: #d84315;
 .page-body {
     display: flex;
     min-height: calc(100vh - 56px);
@@ -21,6 +21,7 @@ $color-action-buttons: #EB5E30;
 
         h5 {
             margin: 1.4em 0;
+            font-weight: bold;
         }
     }
 
@@ -31,6 +32,11 @@ $color-action-buttons: #EB5E30;
         width: 100%;
         position: fixed;
         bottom: 0;
+
+        .btn {
+            background-color: $color-action-buttons;
+            font-weight: bold;
+        }
     }
 }
 

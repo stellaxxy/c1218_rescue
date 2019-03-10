@@ -11,7 +11,7 @@ class MainNav extends Component {
     render() {
         return (
             <Fragment>
-                <div className="navbar-fixed">
+                <div className="navbar-fixed navBar">
                     <nav>
                         <div className="nav-wrapper">
                             <Link className="brand-logo" to='/'>PAWS</Link>

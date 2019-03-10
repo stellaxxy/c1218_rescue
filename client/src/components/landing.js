@@ -33,10 +33,13 @@ class Landing extends Component {
 
         console.log('this.props.caseFilterValues: ', this.props.caseFilterValues);
         return(
-            <div className="landing">
+            <div className="landing bottomContainer">
                 <img className="responsive-img" src={landingImage} alt=""/>
-                <p className="landing-title">Getting Pets Home</p>
-                <p className="landing-text">Search for a lost pet or list one found.</p>
+                <div className="landingHeading">
+                    <p className="landing-title">Getting Pets Home</p>
+                    <p className="landing-text">Search for a lost pet or list one found.</p>
+                </div>
+
                 <div className="btn-container">
                     <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
                     <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
@@ -44,7 +47,7 @@ class Landing extends Component {
 
                 <div id="modalBegin" ref="modalBegin" className="modal">
                     <div className="modal-content">
-                        <h5>Welcome</h5>
+                        <h4>Welcome</h4>
                         <p>How would you like to begin?</p>
                     </div>
                     <div className="modal-footer">

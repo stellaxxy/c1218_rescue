@@ -26,7 +26,7 @@ import CloseCase from "./cases/case-confirmation";
 
 
 const App = () => (
-    <div>
+    <div className="mainContainer">
         <MainNav/>
         <Route exact path="/" component={Landing}/>
         <Route path="/search" component={SearchPage}/>

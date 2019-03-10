@@ -4,7 +4,7 @@
 $color-bars: #e79307;
 $color-action-buttons: #EB5E30;
 $color-text: #752a07;
-
+$btn-color: #d84315 !default;
 /*
  * FONTS
  */
@@ -12,6 +12,28 @@ $font-size-normal: 1.4em;
 
 body {
     background-image: url(../images/landing-page-background.png);
+
+
+    .mainContainer {
+        height: 100vh;
+        font-family: 'Concert One', cursive;
+
+        .navBar {
+            height: 9%;
+        }
+
+        .bottomContainer {
+            height: 91%;
+
+            .btn {
+                background-color: $btn-color;
+            }
+        }
+
+        .bottomContainer.map {
+            font-size: 0;
+        }
+    }
 }
 
 /*
