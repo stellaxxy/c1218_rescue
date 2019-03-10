@@ -25,8 +25,9 @@ CREATE TABLE `animals` (
 --
 
 INSERT INTO `animals` (`id`, `breed`, `color`, `name`, `size`, `animalType`, `gender`, `description`) VALUES
-(37, 'golden retreiver', 'golden', NULL, 'large', 'dog', 'female', 'smart and cute'),
-(38, 'golden retreiver', 'golden', NULL, 'small', 'dog', 'male', 'smart and cute');
+(1, 'golden retriever', 'golden', 'Unknown', 'large', 'dog', 'female', 'description'),
+(2, 'pug', 'black', 'Mr Puggles', 'small', 'dog', 'male', 'The world\'s cutest snorting, sneezing dog.'),
+(3, 'siamese', 'white', 'Unknown', 'medium', 'cat', '', '');
 
 -- --------------------------------------------------------
 
@@ -56,8 +57,9 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`id`, `caseType`, `city`, `location`, `state`, `zipcode`, `latitude`, `longitude`, `coverImg`, `animalID`, `userID`, `date`, `caseKey`, `status`) VALUES
-(27, 'lost', 'Irvine', 'UC IRVINE', 'CA', 92617, 33.6405, -117.844, '/images/c72eac9a404789e6ad875fdba04f073a', 37, 37, '2019-03-04', '123a', 'active'),
-(28, 'found', 'Irvine', '10 McLaren', 'CA', 92618, 33.6342, -117.718, '/images/ee24f98a4d6ce76d8e5d71f40e3b13b3', 38, 38, '2019-03-08', '234v', 'active');
+(1, 'found', 'Irvine', 'Irvine Center Drive', 'CA', 92618, 33.68, -117.83, '/images/image3.jpg', 1, 1, '2019-02-03', 'ABCDEF', 'active'),
+(2, 'lost', 'Irvine', 'Jefferey Rd', 'CA', 92618,  36.05, -117.83,'/images/image4.jpg', 2, 2, '2019-02-07', '123ABC', 'active'),
+(3, 'found', 'Irvine', 'Mullen Drive', 'CA', 92618, 33.63, -117.83, '/images/image5.jpg', 3, 3, '2019-02-14', 'BOBCAT', 'active');
 
 -- --------------------------------------------------------
 
@@ -89,8 +91,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`) VALUES
-(37, 'Max', 'hohum@gmail.com', '1-888-555-1212'),
-(38, 'Max', '123@123.com', '1-888-555-1212');
+(1, 'Stella', 'test@test.com', '1111111111'),
+(2, 'Billy Bob', 'bb1010@gmail.com', '8005551212'),
+(3, 'SpongeBob', 'spongey25@underthesea.com', '2223331234');
 
 --
 -- Indexes for dumped tables
@@ -131,25 +134,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `animals`
 --
 ALTER TABLE `animals`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -168,5 +171,3 @@ ALTER TABLE `cases`
 ALTER TABLE `images`
   ADD CONSTRAINT `images_fk0` FOREIGN KEY (`animalID`) REFERENCES `animals` (`id`);
 COMMIT;
-
-
