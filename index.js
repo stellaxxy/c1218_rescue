@@ -217,7 +217,7 @@ app.get('/api/casedetails', async (request, response) => {
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {color, breed, name, animalType, gender, description, street, size, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
+        const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
@@ -232,7 +232,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
-        const insert = [breed, color, petName, animalType, gender, description, size,];
+        const insert = [breed, color, petName, animalType, gender, description, animalSize];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
         var animalID = insertResult.insertId;
