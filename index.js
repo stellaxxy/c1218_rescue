@@ -4,6 +4,10 @@ const mysql = require('mysql');
 const db = require('./db');
 const googleMap = require('./services/maps');
 const upload = require('./services/upload');
+const nodemailer = require('nodemailer');
+const { mailConfig } = require('./config');
+var transporter = nodemailer.createTransport(mailConfig);
+
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
@@ -13,6 +17,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static(__dirname + '/client/dist'));
+
 
 const CASELIST_FILTERS = [
     {
@@ -289,12 +294,57 @@ app.post('/api/updatestatus', async(request,response)=>{
 
 
 
+app.post('/api/contactuser', async (request, response) => {
+    try {
+        const {emailMessage, caseId} = request.body;
 
+        // TODO: Get info from DB using caseId
 
+        const userInfo="select c.caseKey,c.city,c.caseType,a.animalType,u.email,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
+        const userCaseId =[caseId]
+        const userEmail=mysql.format(userInfo,userCaseId);
+        const userSendEmail= await db.query(userEmail);
+        console.log('useremail:', userSendEmail[0]);
+
+        // const caseKey = 'ABCDEF';
+        // const animalType = 'dog';
+        // const userEmail = 'kk99807@gmail.com';
+        // const city = 'Irvine';
+        // const caseType = 'lost';
+
+        /* seremail: [ RowDataPacket {
+    caseKey: 'ABCDEF',
+    city: 'Irvine',
+    caseType: 'found',
+    animalType: 'dog',
+    email: 'test@test.com',
+    id: 1 } ]*/
+        const {caseType,caseKey,city,animalType,email,id} = userSendEmail[0]
+
+        const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
+        // Four important options for our mailOptions
+        const mailOptions = {
+            from: mailConfig.auth.user,
+            to: email,
+            subject: subject,
+            text: emailMessage
+        };
+
+        await transporter.sendMail(mailOptions);
+        response.send({success: true});
+    } catch (error) {
+        handleError(response, error);
+    }
+});
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 });
+
+
+
+
+
 
 
 
