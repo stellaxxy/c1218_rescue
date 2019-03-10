@@ -34,8 +34,9 @@ const getAddress = async (location) => {
         latitude: null,
         longitude: null,
         city: null,
-        zipcode: null
-    }
+        zipcode: null,
+        state: null
+    };
 
     let result = await googleMaps.geocode({address: location}).asPromise();
     if (!result || !result.json.results || !result.json.results.length) return address;
@@ -56,9 +57,10 @@ const getAddress = async (location) => {
     
     firstResult = result.json.results[0];
     address.zipcode = googleMaps.getAddressComponentShortName(firstResult, 'postal_code');
+    address.state = googleMaps.getAddressComponentShortName(firstResult, 'administrative_area_level_1');
 
     return address;
-}
+};
 
 googleMaps.getAddressComponentShortName = getAddressComponentShortName;
 googleMaps.getAddress = getAddress;

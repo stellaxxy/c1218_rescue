@@ -222,7 +222,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
         const address = await googleMap.getAddress(`${street}, ${city}`);
-
+        console.log('address:', address);
 // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
         const insertUserInfo = [email, name, phone];
@@ -238,11 +238,11 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         var animalID = insertResult.insertId;
 
         //  insert into cases table
-        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
+        const casesTable = "INSERT INTO `cases` (`city`,`location`,`caseType`,`latitude`,`longitude`, `state`, `zipcode`,`coverImg`,`date`,`animalID`,`userID`, `caseKey`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
-
+        console.log('insercase:', insertcase);
 
         //  insert into image table
         if (imgURL) {
