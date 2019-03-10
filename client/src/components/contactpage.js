@@ -8,10 +8,11 @@ import EmailConfirmation from "./emailconfirmation";
 
 
 class Contact extends Component{
-    constructor(props){
+    constructor(props, context){
         super(props);
         this.state={
-            value:''
+            value:'',
+            emailsent:false
         }
 
 }
@@ -23,6 +24,10 @@ class Contact extends Component{
             caseId : caseid,
             emailMessage: this.state.value
         })
+
+       this.setState({
+           emailsent: true
+       });
     }
 
 
@@ -33,6 +38,11 @@ class Contact extends Component{
     }
 
     render(){
+        if(this.state.emailsent) {
+            return (
+                <EmailConfirmation/>
+            )
+        }
         return(
             <div className= "center form">
                 <div>
