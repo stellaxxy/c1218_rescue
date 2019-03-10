@@ -325,8 +325,8 @@ app.post('/api/contactuser', async (request, response) => {
         // Four important options for our mailOptions
         const mailOptions = {
             from: mailConfig.auth.user,
-            to:'charubenjwal04@gmail.com',
-            //to: email,
+            //to:'charubenjwal04@gmail.com',
+            to: email,
             subject: subject,
             text: emailMessage
         };
