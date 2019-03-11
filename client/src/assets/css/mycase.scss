@@ -1,6 +1,9 @@
 
 
 .myCaseContainer {
+  background-color: #fff3e0;
+  overflow-y: scroll;
+
   .header {
       text-align: center;
       color: green;
@@ -12,6 +15,7 @@
 
   }
 
+
   .striped {
     th {
       padding: 0px 0px;
@@ -19,5 +23,7 @@
   }
 
   }
+
+
 
 

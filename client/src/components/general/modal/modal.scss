@@ -1,5 +1,24 @@
+$btn-color: #d84315 !default;
+
 .modal.open {
   display: block;
+  border-radius: 10px;
+  position: relative;
+  top: 10%;
+
+  .modal-content {
+    text-align: center;
+  }
+
+  .modal-footer {
+    text-align: center;
+
+    .btn {
+      background-color: $btn-color;
+      font-weight: bold;
+      font-family: 'Sniglet', cursive;
+    }
+  }
 }
 
 .modal {

@@ -49,6 +49,8 @@ class CaseDetails extends Component {
             )
         }
 
+        var caseUrl= "/contactPage/"+this.state.data.id;
+
         return (
 
             <div>
@@ -57,6 +59,7 @@ class CaseDetails extends Component {
                     <div className="w3-container w3-half">
                         <img src={this.state.data.coverImg}/>
                     </div>
+
                     <table className="centered striped">
                         <thead>
                         <tr>
@@ -98,7 +101,10 @@ class CaseDetails extends Component {
                         </thead>
 
                     </table>
-                </div>
+
+
+
+               </div>
                 <footer className="page-footer">
                     <div className="btn-panel">
                     <Link to="/caselist" className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>

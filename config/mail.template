@@ -1,0 +1,7 @@
+module.exports = {
+    service: 'gmail',
+    auth: {
+        user: 'someemail@gmail.com',
+        pass: 'your_password'
+    }
+}
