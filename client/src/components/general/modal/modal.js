@@ -5,8 +5,6 @@ import { Field, reduxForm } from 'redux-form';
 import Input from './input';
 
 const Modal = (props) => {
-
-
     //console.log('modal props', props);
     const { handleSubmit, onSubmit, showModal, closeModal} = props;
 
@@ -31,8 +29,24 @@ const Modal = (props) => {
 
 }
 
+
+function validate({email, caseKey}){
+    const errors = {};
+    console.log('email and caseKey:', email , caseKey)
+
+    if(!email){
+        errors.email= 'Please enter valid email.';
+    }
+
+    if(!caseKey){
+        errors.caseKey='Please enter valid casekey.';
+    }
+    return errors;
+}
+
 export default reduxForm({
-    form: 'my_case_user_info'
+    form: 'my_case_user_info',
+    validate: validate
 })(Modal);
 
 /*
