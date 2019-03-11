@@ -19,7 +19,7 @@ export default props => {
     return (
         <div className="upload-confirmation">
             <h5>We're sorry.  An error has occurred.  Please try again later.</h5>
-            <Link to="/upload" className="waves-effect waves-light btn orange text-white">Back</Link>
+            <Link to="/" className="waves-effect waves-light btn orange text-white">Back</Link>
         </div>        
     )
 }
