@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default props => {
-    //console.log('input props:', props);
 
     const { input, label, type } = props;
 

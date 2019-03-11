@@ -101,7 +101,6 @@ class CaseMap extends Component {
             }
         }
 
-        console.log('In initMap. center: ', center);
         this.renderedMap = new google.maps.Map(document.getElementById("map"), {
 
             center: center,

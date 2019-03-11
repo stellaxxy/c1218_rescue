@@ -23,7 +23,6 @@ class CaseDetails extends Component {
 
     render() {
 
-        console.log('state.data',this.state.data)
         if (!this.state.data) {
             return (
                 <h1>Loading</h1>

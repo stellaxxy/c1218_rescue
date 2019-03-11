@@ -89,8 +89,6 @@ app.get('/api/caselist', async (request, response) => {
             }
         });
 
-        //console.log(request.query);
-
         if (filter_criteria.length) {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
         }
@@ -126,7 +124,7 @@ app.get('/api/casedetails', async (request, response) => {
             "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
             "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
         let data = {};
-        console.log(request.query);
+
         if(request.query.caseKey || request.query.email){
             if(request.query.caseKey === undefined){
                 throw new Error(`Please provide valid case key`);
@@ -273,9 +271,7 @@ app.post('/api/updatestatus', async(request,response)=>{
         const updatecases = "update cases set status = ? where id = ? "
         const updateStatus= [status, id];
         const updatequery= mysql.format(updatecases, updateStatus);
-        console.log('case query ', updatequery);
         const caseupdate = await db.query(updatequery);
-        console.log(caseupdate)
 
         response.send({
             success: true,

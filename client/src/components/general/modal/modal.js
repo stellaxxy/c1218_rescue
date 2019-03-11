@@ -6,8 +6,6 @@ import Input from './input';
 
 const Modal = (props) => {
 
-
-    //console.log('modal props', props);
     const { handleSubmit, onSubmit, showModal, closeModal} = props;
 
     return (
