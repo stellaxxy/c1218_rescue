@@ -7,7 +7,7 @@ import './caselist.scss';
 class CaseList extends Component {
     state = {
         cases: []
-    }
+    };
 
     async componentDidMount(){
         this.setState({
@@ -42,3 +42,9 @@ class CaseList extends Component {
     }
 }
 export default CaseList;
+
+/*
+  <div className="decor">
+                    <img src="../../assets/images/image1.jpg"/>
+                </div>
+ */

@@ -10,6 +10,11 @@ $color-background: #fff3e0 !default;
   @media (min-width: 635px){
     display: flex;
     flex-wrap: wrap;
+/*
+    .decor {
+      background-image: url('../../assets/images/pawsprint.png');
+    }
+    */
   }
 
   .card {
@@ -38,7 +43,36 @@ $color-background: #fff3e0 !default;
     }
 
     .card-stacked {
+      .card-content {
+        padding: 15px;
+        @media (min-width: 635px) {
+            padding: 10px;
+        }
+        .contentDiv {
 
+          .mobile {
+            display: none;
+          }
+
+          @media (min-width: 635px) {
+            height: 80%;
+            overflow-y: scroll;
+
+            .contentDiv::-webkit-scrollbar{
+              width: 10px;
+            }
+
+            .contentDiv::-webkit-scrollbar-track {
+              background: #f1f1f1;
+            }
+
+          }
+
+
+        }
+
+
+      }
       .card-action {
         padding: 5px;
         padding-left: 25px;

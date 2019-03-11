@@ -34,6 +34,10 @@
             position: absolute;
             top: 20%;
             right: 8%;
+
+            p.landing-text::after {
+                content: ' We help reunite pet owners with their loved ones.'
+            }
         }
 
         .landingHeading {
@@ -59,13 +63,13 @@
     }
     }
 
-
+/*
     @media (min-width: 1236px) {
         p.landing-text::after {
             content: ' We help reunite pet owners with their loved ones.'
         }
     }
-
+*/
     .btn-container {
         position: absolute;
         top: 60%;
