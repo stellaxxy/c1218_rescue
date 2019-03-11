@@ -10,8 +10,6 @@ import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
 import Resource from './resourcepage';
 import Landing from './landing';
-import TypeSelection from './case-description/typeselection';
-import SizeSelection from './case-description/sizeselection';
 import Contact from './contactpage';
 //import SearchModal from './searchmodal';
 import SearchVet from './resource/searchVet';
@@ -36,8 +34,6 @@ const App = () => (
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
-        <Route path="/typeselection" component={TypeSelection}/>
-        <Route path="/sizeselection" component={SizeSelection}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
         <Route path="/dogcare" component={DogCare}/>
         <Route path="/catcare" component={CatCare}/>
