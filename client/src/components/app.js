@@ -2,6 +2,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
 import React from 'react';
+import SelectCaseType from './case-upload/select_case_type';
 import SearchPage from './case-search';
 import SearchForm from './case-search/searchform';
 import CaseDetails from './caseDetails';
@@ -27,6 +28,7 @@ const App = () => (
     <div className="mainContainer">
         <MainNav/>
         <Route exact path="/" component={Landing}/>
+        <Route path="/selectcasetype" component={SelectCaseType}/>
         <Route path="/search" component={SearchPage}/>
         <Route path="/searchform" component={SearchForm}/>
         <Route path="/casemap" component={CaseMap}/>
