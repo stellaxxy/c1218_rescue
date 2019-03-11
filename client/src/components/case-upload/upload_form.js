@@ -99,7 +99,7 @@ class UploadForm extends Component {
         const { page } = this.state;
 
         return (
-            <div className="container upload-form">
+            <div className="upload-form">
                 {page === 1 && <UploadFormPage1 onSubmit={this.nextPage}  onDrop={this.handleOnDrop} imageFile={this.state.imageFile} />}
                 {page === 2 && <UploadFormPage2 previousPage={this.previousPage} onSubmit={this.nextPage} />}
                 {page === 3 && <UploadFormPage3 previousPage={this.previousPage} onSubmit={this.nextPage} />}
