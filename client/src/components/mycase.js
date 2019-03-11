@@ -30,6 +30,7 @@ class MyCase extends Component {
             this.setState({
                 data: result.data.data
             })
+            this.closeModal();
         } else {
             this.setState({
                 error: true
@@ -66,7 +67,7 @@ class MyCase extends Component {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
-                    <div>Loading</div>
+                    <div>Loading ....</div>
                 </Fragment>
 
             );

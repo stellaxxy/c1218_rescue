@@ -21,7 +21,7 @@ const Modal = (props) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button onClick={closeModal} className="btn">Submit</button>
+                <button  className="btn">Submit</button>
             </div>
         </form>
 
