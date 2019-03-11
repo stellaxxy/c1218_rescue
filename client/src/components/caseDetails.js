@@ -48,6 +48,8 @@ class CaseDetails extends Component {
             )
         }
 
+        var caseUrl= "/contactPage/"+this.state.data.id;
+
         return (
 
             <div>
@@ -75,7 +77,7 @@ class CaseDetails extends Component {
                 </div>
                 <div className="center">
                     <Link to="/caselist" className="waves-effect waves-light btn orange text-white">Go Back</Link>
-                    <Link to="/contactPage" className="waves-effect waves-light btn orange text-white"
+                    <Link to={caseUrl} className="waves-effect waves-light btn orange text-white"
                           float="right">CONTACT</Link>
                 </div>
 

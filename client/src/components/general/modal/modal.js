@@ -10,7 +10,7 @@ const Modal = (props) => {
 
     return (
 
-        <form onSubmit={handleSubmit(onSubmit)} className={ showModal ? "modal open" : "modal" } >
+        <form onSubmit={handleSubmit(onSubmit)} className={ showModal ? "z-depth-10 modal open" : "modal" } >
             <div className="modal-content">
                 <h5>Please provide your email and unique key</h5>
                 <div className="row">

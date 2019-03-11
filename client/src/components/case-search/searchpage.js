@@ -71,7 +71,7 @@ class SearchPage extends Component {
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap cases={this.state.cases}/> :
+                    <CaseMap cases={this.state.cases}/>
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
@@ -79,7 +79,7 @@ class SearchPage extends Component {
             return(
                 <div className="bottomContainer">
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
-                    <CaseList cases={this.state.cases}/>;
+                    <CaseList cases={this.state.cases}/>
                 </div>
             );
         }
