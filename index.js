@@ -96,8 +96,6 @@ app.get('/api/caselist', async (request, response) => {
             }
         });
 
-        //console.log(request.query);
-
         if (filter_criteria.length) {
             sql = sql + ' WHERE ' + filter_criteria.join(' AND ');
         }
@@ -135,7 +133,7 @@ app.get('/api/casedetails', async (request, response) => {
             "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
             "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
         let data = {};
-        console.log(request.query);
+
         if(request.query.caseKey || request.query.email){
             if(request.query.caseKey === undefined){
                 throw new Error(`Please provide valid case key`);
@@ -226,7 +224,7 @@ app.get('/api/casedetails', async (request, response) => {
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
-        const {color, breed, name, animalType, gender, description, street, size, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
+        const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
@@ -241,7 +239,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
-        const insert = [breed, color, petName, animalType, gender, description, size,];
+        const insert = [breed, color, petName, animalType, gender, description, animalSize];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
         var animalID = insertResult.insertId;
@@ -282,9 +280,7 @@ app.post('/api/updatestatus', async(request,response)=>{
         const updatecases = "update cases set status = ? where id = ? "
         const updateStatus= [status, id];
         const updatequery= mysql.format(updatecases, updateStatus);
-        console.log('case query ', updatequery);
         const caseupdate = await db.query(updatequery);
-        console.log(caseupdate);
 
         response.send({
             success: true,
@@ -307,7 +303,6 @@ app.post('/api/contactuser', async (request, response) => {
         const userCaseId =[caseId]
         const userEmail=mysql.format(userInfo,userCaseId);
         const userSendEmail= await db.query(userEmail);
-        console.log('useremail:', userSendEmail[0]);
 
         // const caseKey = 'ABCDEF';
         // const animalType = 'dog';

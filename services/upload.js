@@ -10,7 +10,7 @@ const { s3Config } = require('../config');
 require('dotenv').config();
 
 // Location for files uploaded with local configuration
-const LOCAL_DIR = 'public/images/';
+const LOCAL_DIR = 'client/dist/images/';
 
 // Get environment variable to determine type of storage
 const STORAGE_S3 = 's3';
@@ -51,7 +51,7 @@ if (storageType === STORAGE_LOCAL) {
 // Handles the different properties Multer stores this in based on storage type
 const getFilepath = req => (
     storageType === 'local' ? 
-        LOCAL_DIR.replace('public','') + req.file.filename :
+        LOCAL_DIR.replace('client/dist','') + req.file.filename :
         req.file.location
 );
 

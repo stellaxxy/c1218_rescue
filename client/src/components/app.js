@@ -2,6 +2,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import '../assets/css/app.scss';
 import React from 'react';
+import SelectCaseType from './case-upload/select_case_type';
 import SearchPage from './case-search';
 import SearchForm from './case-search/searchform';
 import CaseDetails from './caseDetails';
@@ -10,8 +11,6 @@ import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
 import Resource from './resourcepage';
 import Landing from './landing';
-import TypeSelection from './case-description/typeselection';
-import SizeSelection from './case-description/sizeselection';
 import Contact from './contactpage';
 //import SearchModal from './searchmodal';
 import SearchVet from './resource/searchVet';
@@ -29,6 +28,7 @@ const App = () => (
     <div className="mainContainer">
         <MainNav/>
         <Route exact path="/" component={Landing}/>
+        <Route path="/selectcasetype" component={SelectCaseType}/>
         <Route path="/search" component={SearchPage}/>
         <Route path="/searchform" component={SearchForm}/>
         <Route path="/casemap" component={CaseMap}/>
@@ -36,8 +36,6 @@ const App = () => (
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
         <Route path="/resource" component={Resource}/>
         <Route path="/searchpet" component={SearchPet}/>
-        <Route path="/typeselection" component={TypeSelection}/>
-        <Route path="/sizeselection" component={SizeSelection}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
         <Route path="/dogcare" component={DogCare}/>
         <Route path="/catcare" component={CatCare}/>

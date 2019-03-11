@@ -18,7 +18,6 @@ class Landing extends Component {
     } 
 
     handleButtonClick(selectedCaseType) {
-        console.log('selectedCaseType: ', selectedCaseType);
         this.props.setActiveCaseType(selectedCaseType);
 
         this.props.setCaseFilterValues({
@@ -30,8 +29,8 @@ class Landing extends Component {
 
     render(){
         const {activeCaseType} = this.props;
+        const searchType = activeCaseType === 'lost' ? 'Found' : 'Lost';
 
-        //console.log('this.props.caseFilterValues: ', this.props.caseFilterValues);
         return(
             <div className="landing bottomContainer">
                 <img className="responsive-img" src={landingImage} alt="dog"/>
@@ -54,8 +53,10 @@ class Landing extends Component {
                         <p>How would you like to begin?</p>
                     </div>
                     <div className="modal-footer">
-                        <Link to="/typeselection" className="waves-effect waves-light btn">Describe {activeCaseType === 'lost' ? 'Your':'The'} Pet</Link>
-                        <Link to="/caselist" className="waves-effect waves-light btn">See List of All {activeCaseType === 'lost' ? 'Found' : 'Lost'} Pets</Link>
+                        <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Describe {activeCaseType === 'lost' ? 'Your':'The'} Pet</Link>
+                        <Link to={"/search?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
+                            See List of All {searchType} Pets
+                        </Link>
                     </div>
                 </div>
             </div>

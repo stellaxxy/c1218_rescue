@@ -6,6 +6,6 @@ import React from "react";
 export default () => (
   <div className="placeholder-preview">
     <p><i className="material-icons">cloud_upload</i></p>
-    <p>Click or drag image file to this area to upload.</p>
+    <p>Click or drag pet photo to this area to upload.</p>
   </div>
 );
