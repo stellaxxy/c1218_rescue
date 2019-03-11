@@ -1,0 +1,88 @@
+
+
+.vetMapContainer {
+    height: 50%;
+}
+
+.searchContainer {
+    .vetSearchBtn {
+        height: 30px;
+        width: 80px;
+        border-radius: 10px;
+        background-color: #d84315;
+        color: white;
+        font-family: 'Sniglet', cursive;
+        font-weight: bold;
+        position: absolute;
+        right: 10%;
+        top: 56%;
+    }
+}
+
+.vetListContainer {
+    background-color: #fff3e0;
+
+    .card {
+        height: 170px;
+        border-radius: 10px;
+
+        .card-image {
+            width: 35%;
+
+            .responsive {
+                border-radius: 10px;
+                width: 100%;
+            }
+
+        }
+
+        .card-stacked {
+            width: 65%;
+
+            .card-content {
+                padding: 10px;
+
+                .vetContent {
+                    height: 70%;
+                    overflow-y: scroll;
+                }
+            }
+        }
+
+    }
+}
+/*
+    .listContainer {
+      height: 42%;
+      background-color: beige;
+        .card.horizontal {
+
+
+            .card-image {
+              width: 100px;
+              height: 100px;
+
+            }
+            .card-image {
+              width: 100px;
+              height: 100px;
+
+              .card-content {
+                height: 100px;
+                justify-content: center;
+
+              }
+            }
+          }
+        }
+          img {
+            height: 50vh;
+            width: 100vw;
+          }
+*/
+
+
+
+
+
+

@@ -43,7 +43,7 @@ const App = () => (
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage/:caseid" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
-        <Route path="/vetoffice" component={OfficeInfo}/>
+        <Route path="/vetoffice/:id" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
 

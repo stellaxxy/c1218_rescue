@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
+const { yelpApi } = require('./config/api');
 const mysql = require('mysql');
 const db = require('./db');
 const googleMap = require('./services/maps');
@@ -265,7 +267,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
             caseKey: caseKey
         })
     } catch (error) {
-        handleError(response, error);
+        handleError(response, error.message);
     }
 
 });
@@ -289,7 +291,7 @@ app.post('/api/updatestatus', async(request,response)=>{
 
         })
     }catch (error) {
-        handleError(response, error);
+        handleError(response, error.message);
     }
 
 });
@@ -335,19 +337,71 @@ app.post('/api/contactuser', async (request, response) => {
         await transporter.sendMail(mailOptions);
         response.send({success: true});
     } catch (error) {
-        handleError(response, error);
+        handleError(response, error.message);
+    }
+});
+
+// API Call for Yelp Data
+app.post('/api/yelp/businesses', async (request, response) =>{
+    const { location } = request.body;
+
+    try {
+        let yelpURL = 'https://api.yelp.com/v3/businesses/search';
+
+        let config = {
+            params: {
+                term: 'vet'
+            },
+            headers: {
+                'Authorization': "Bearer " + yelpApi
+            }
+        };
+
+        //yelpURL += `?location=${location}`;
+        if(location) {
+            config.params.location = location;
+        } else {
+            throw new Error('Please enter in valid location');
+        }
+        /*
+                 for (let parameter in request.body) {
+                     yelpURL += `${parameter}=${request.body[parameter]}`;
+                 }
+        */
+        const data = await axios.get(yelpURL, config);
+
+        response.send({
+            result: data.data
+        });
+
+    } catch(error) {
+        handleError(response, error.message);
+    }
+});
+
+//API Call for Yelp Business Detail
+app.get('/api/yelp/details', async (request, response)=>{
+
+    try {
+        const {id} = request.query;
+
+        let config = {
+            headers: {
+                'Authorization': "Bearer " + yelpApi
+            }
+        };
+
+        console.log('yelp detail id', id);
+        const result = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, config);
+        console.log('vet details result:', result.data);
+    } catch(error){
+        handleError(response, error.message);
     }
 });
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 });
-
-
-
-
-
-
 
 
 
