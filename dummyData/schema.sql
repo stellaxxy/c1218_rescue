@@ -83,17 +83,17 @@ CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `name` varchar(60) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `phone` varchar(15) NOT NULL
+  `phone` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`) VALUES
-(1, 'Stella', 'test@test.com', '1111111111'),
-(2, 'Billy Bob', 'bb1010@gmail.com', '8005551212'),
-(3, 'SpongeBob', 'spongey25@underthesea.com', '2223331234');
+INSERT INTO `users` (`id`, `name`, `email`) VALUES
+(1, 'Stella', 'test@test.com'),
+(2, 'Billy Bob', 'bb1010@gmail.com'),
+(3, 'SpongeBob', 'spongey25@underthesea.com');
 
 --
 -- Indexes for dumped tables
