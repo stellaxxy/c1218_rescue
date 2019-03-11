@@ -1,61 +1,36 @@
-$color-bars: #e79307;
-$color-action-buttons: #d84315;
-.page-body {
-    display: flex;
-    min-height: calc(100vh - 56px);
-    flex-direction: column;
-
-    @media (min-width: 600px) {
-        min-height: calc(100vh - 64px);
-    }
-    
-    main {
-        // flex: 1 0 auto;
-        position: absolute;
-        top: 60px;
-        bottom: 60px;
-        left: 0;
-        right: 0;
-        overflow-y: scroll;
-        padding-bottom: 30px;
-
-        h5 {
-            margin: 1.4em 0;
-            font-weight: bold;
-        }
-    }
-
-    footer {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-
-        .btn {
-            background-color: $color-action-buttons;
-            font-weight: bold;
-        }
-    }
-}
 
 .upload-confirmation {
     text-align: center;
 }
 
-.preloader-wrapper.active {
-    position: absolute;
-    top :0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 1;
-}
+.upload-form {
 
-.placeholder-preview {
-    text-align: center;
-    border-radius: 5px;
-    border: 2px dashed black;
+    .btn-panel {
+        margin-top: 20px;
+        .btn {
+            font-family: 'Concert One', cursive;
+        }
+    }
+
+    .prompt {
+        text-align: center;
+        color:  #752a07;
+        font-size: 1.4em;
+    }
+
+    .preloader-wrapper.active {
+        position: absolute;
+        top :0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 1;
+    }
+    
+    .placeholder-preview {
+        text-align: center;
+        border-radius: 5px;
+        border: 2px dashed black;
+    }
 }
