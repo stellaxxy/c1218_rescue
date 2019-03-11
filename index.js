@@ -385,15 +385,22 @@ app.get('/api/yelp/details', async (request, response)=>{
     try {
         const {id} = request.query;
 
+        if(!id){
+            throw new Error('Please provide valid id.');
+        }
+
         let config = {
             headers: {
                 'Authorization': "Bearer " + yelpApi
             }
         };
 
-        console.log('yelp detail id', id);
         const result = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, config);
-        console.log('vet details result:', result.data);
+        //console.log('vet details result:', result.data);
+
+        response.send({
+            data: result.data
+        })
     } catch(error){
         handleError(response, error.message);
     }
