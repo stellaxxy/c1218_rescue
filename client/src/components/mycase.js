@@ -30,6 +30,7 @@ class MyCase extends Component {
             this.setState({
                 data: result.data.data
             })
+            this.closeModal();
         } else {
             this.setState({
                 error: true
@@ -66,6 +67,9 @@ class MyCase extends Component {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
+
+                    <div>Loading</div>
+
                 </Fragment>
 
             );
@@ -80,31 +84,58 @@ class MyCase extends Component {
                         <img src={this.state.data.coverImg}/>
                     </div>
 
-                    <div className="w3-container w3-half">
-                        <div className="orange text-white bold s12">City: {this.state.data.location.city}</div>
-                        <div>Case id: {this.state.data.id}</div>
-                        <div>Pet name:{this.state.data.animalDetail.name}</div>
-                        <div>Pet type: {this.state.data.animalDetail.animalType}</div>
-                        <div>Pet breed: {this.state.data.animalDetail.breed}</div>
-                        <div>Pet color: {this.state.data.animalDetail.color}</div>
-                        <div>Gender: {this.state.data.animalDetail.gender}</div>
-                        <div>Animal size: {this.state.data.animalDetail.size}</div>
-                        <div>Date lost: {this.state.data.date}</div>
-                        <div>Pet description: {this.state.data.animalDetail.description} </div>
-                        <div>Area last seen: {this.state.data.location.location}</div>
-                        <div>Zip code: {this.state.data.location.zipcode}</div>
-                    </div>
+                    <table className="centered striped">
+                        <thead>
+                        <tr>
+                            <th>City:{this.state.data.location.city} </th>
+                        </tr>
+                        <tr>
+                            <th>Case id: {this.state.data.id}</th>
+                        </tr>
+                        <tr>
+                            <th>Pet name: {this.state.data.animalDetail.name}</th>
+                        </tr>
+                        <tr>
+                            <th>Pet name: {this.state.data.animalDetail.name}</th>
+                        </tr>
+                        <tr>
+                            <th>Pet breed: {this.state.data.animalDetail.breed}</th>
+                        </tr>
+                        <tr>
+                            <th>Pet color: {this.state.data.animalDetail.color}</th>
+                        </tr>
+                        <tr>
+                            <th>Gender: {this.state.data.animalDetail.gender}</th>
+                        </tr>
+                        <tr>
+                            <th>Animal size: {this.state.data.animalDetail.size}</th>
+                        </tr>
+                        <tr>
+                            <th>Date lost: {this.state.data.date}</th>
+                        </tr>
+                        <tr>
+                            <th>Pet description: {this.state.data.animalDetail.description}</th>
+                        </tr>
+                        <tr>
+                            <th>Area last seen: {this.state.data.location.location}</th>
+                        </tr>
+                        <tr>
+                            <th>Zip code: {this.state.data.location.zipcode}</th>
+                        </tr>
+                        </thead>
 
-                    <div className="center">
+                    </table>
+
+                    <footer className="page-footer center">
                         {
                             this.state.data.status==='active' ?
 
-                                (<Link to="/closecase" className="waves-effect waves-light btn orange text-white"
+                                (<Link to="/closecase" className="waves-effect waves-light btn btn-action deep-orange accent-4"
                                   onClick={this.closeCase}>CLOSE CASE</Link>)
                                 :
                                  null
                         }
-                    </div>
+                    </footer>
                 </div>
                 <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
             </Fragment>
