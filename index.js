@@ -301,7 +301,6 @@ app.post('/api/contactuser', async (request, response) => {
         const userCaseId =[caseId]
         const userEmail=mysql.format(userInfo,userCaseId);
         const userSendEmail= await db.query(userEmail);
-        console.log('useremail:', userSendEmail[0]);
 
         // const caseKey = 'ABCDEF';
         // const animalType = 'dog';
