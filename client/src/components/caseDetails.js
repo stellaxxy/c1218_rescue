@@ -53,10 +53,11 @@ class CaseDetails extends Component {
         return (
 
             <div>
-                <div className="w3-container">
+                <div className="container case-details">
+                    <main>
                     <h2 className="header ">Please help me</h2>
                     <div className="w3-container w3-half">
-                        <img src={this.state.data.coverImg}/>
+                        <img  className="responsive-img"  src={this.state.data.coverImg}/>
                     </div>
 
                     <table className="centered striped">
@@ -101,7 +102,7 @@ class CaseDetails extends Component {
 
                     </table>
 
-
+                    </main>
 
                </div>
                 <footer className="page-footer">
