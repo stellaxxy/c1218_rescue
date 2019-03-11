@@ -4,14 +4,10 @@ import exampleImage from "../../assets/images/cover1.jpg";
 class CaseItem extends Component{
 
     state = {
-        mobile: false
+        mobile: window.innerWidth < 635
     };
 
     componentDidMount(){
-        this.setState({
-            mobile: window.innerWidth < 635
-        });
-
         window.addEventListener('resize', ()=>{
             this.setState({
                 mobile: window.innerWidth < 635
@@ -26,15 +22,12 @@ class CaseItem extends Component{
 
         const dateObj = new Date(date);
         const dateString = dateObj.toLocaleDateString();
-        console.log(description);
+
         let prefixForAddress = null;
-        //let prefixForDate = null;
         if(caseType === 'lost'){
             prefixForAddress = 'Last seen';
-            //prefixForDate = 'Lost';
         } else {
             prefixForAddress = 'Found';
-            //prefixForDate = 'Found';
         }
 
         return(
