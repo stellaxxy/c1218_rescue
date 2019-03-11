@@ -1,20 +1,84 @@
+$color-background: #fff3e0 !default;
+
+
 .caseListContainer {
-  position:relative;
+  position: relative;
   top: 2vh;
+  background-color: $color-background;
+  overflow-y: scroll;
+
+  @media (min-width: 635px){
+    display: flex;
+    flex-wrap: wrap;
+/*
+    .decor {
+      background-image: url('../../assets/images/pawsprint.png');
+    }
+    */
+  }
 
   .card {
     max-height: 130px;
     max-width: 90%;
     position: relative;
     left: 5%;
+    border-radius: 10px;
 
-    img {
-      max-width: 50px;
+    @media (min-width: 635px) {
+      width: 35%;
+      margin: 15px;
+      position: relative;
+      left: 30%;
+      transform: translateX(-50%);
     }
 
-    .card-action {
-      padding: 5px;
-      padding-left: 25px;
+    .card-image {
+      width: 50%;
+
+      img {
+        width: 100%;
+        border-radius: 10px 0 0 10px;
+      }
+
     }
+
+    .card-stacked {
+      .card-content {
+        padding: 15px;
+        @media (min-width: 635px) {
+            padding: 10px;
+        }
+        .contentDiv {
+
+          .mobile {
+            display: none;
+          }
+
+          @media (min-width: 635px) {
+            height: 80%;
+            overflow-y: scroll;
+
+            .contentDiv::-webkit-scrollbar{
+              width: 10px;
+            }
+
+            .contentDiv::-webkit-scrollbar-track {
+              background: #f1f1f1;
+            }
+
+          }
+
+
+        }
+
+
+      }
+      .card-action {
+        padding: 5px;
+        padding-left: 25px;
+      }
+    }
+
+
   }
 }

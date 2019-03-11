@@ -8,7 +8,7 @@ const ImagePreview = ({ imagefile }) =>
   imagefile.map(({ name, preview, size }) => (
     <ul key={name} className="render-preview">
       <li className="image-container">
-        <img src={preview} alt={name} />
+        <img className="uploadImg" src={preview} alt={name} />
       </li>
       <li className="details">
         {name} - {size} bytes

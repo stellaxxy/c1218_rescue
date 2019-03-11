@@ -12,8 +12,18 @@
 }
 
 form{
-  .modal-footer{
-    margin-right:60px;
+  position: relative;
+  top: 40px;
 
+  .modal-footer{
+    //margin-right:60px;
+    display: flex;
+    justify-content: space-around;
+
+      button {
+        background-color: #d84315;
+        font-weight: bold;
+        font-family: 'Sniglet', cursive;
+      }
   }
 }

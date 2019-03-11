@@ -66,7 +66,6 @@ class MyCase extends Component {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
-                    <div>Loading</div>
                 </Fragment>
 
             );
@@ -74,8 +73,8 @@ class MyCase extends Component {
 
         return (
             <Fragment>
-                <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
-                <div className="myCaseContainer">
+
+                <div className="myCaseContainer bottomContainer">
                     <h2 className="header">Please help me</h2>
                     <div className="w3-container w3-half">
                         <img src={this.state.data.coverImg}/>
@@ -107,6 +106,7 @@ class MyCase extends Component {
                         }
                     </div>
                 </div>
+                <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
             </Fragment>
         );
     }

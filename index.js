@@ -76,8 +76,8 @@ app.use(cors());
 app.get('/api/caselist', async (request, response) => {
     try {
 
-        let sql = "SELECT c.`id`, a.`animalType`, c.`caseType`,\n" +
-            "            c.`city`,c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
+        let sql = "SELECT c.`id`, c.`date`, a.`animalType`, a.`description`, c.`caseType`,\n" +
+            "            c.`city`, c.`state`, c.`location`,c.`zipcode`,c.`latitude`, c.`longitude`,c.`coverImg`\n" +
             "            FROM `cases` c\n" +
             "            INNER JOIN `animals` a ON c.`animalID` = a.`id`";
 
@@ -107,13 +107,15 @@ app.get('/api/caselist', async (request, response) => {
                 location: row.location,
                 zipcode: row.zipcode,
                 latitude: row.latitude,
-                longitude: row.longitude
+                longitude: row.longitude,
+                state: row.state
             };
 
             delete row.city;
             delete row.zipcode;
             delete row.latitude;
             delete row.longitude;
+            delete row.state;
         });
 
         response.send({success: true, data});
@@ -280,7 +282,7 @@ app.post('/api/updatestatus', async(request,response)=>{
         const updatequery= mysql.format(updatecases, updateStatus);
         console.log('case query ', updatequery);
         const caseupdate = await db.query(updatequery);
-        console.log(caseupdate)
+        console.log(caseupdate);
 
         response.send({
             success: true,
@@ -290,8 +292,7 @@ app.post('/api/updatestatus', async(request,response)=>{
         handleError(response, error);
     }
 
-})
-
+});
 
 
 app.post('/api/contactuser', async (request, response) => {
