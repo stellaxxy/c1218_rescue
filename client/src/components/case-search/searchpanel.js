@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import queryString from 'query-string';
 import './filterform.scss';
 
-class FilterPanel extends Component {
+class SearchPanel extends Component {
 
     handleFilterClick = () => {
         this.props.onFilterClick(this.props.filterValues);
@@ -73,5 +73,5 @@ class FilterPanel extends Component {
     }
 }
 
-export default FilterPanel;
+export default SearchPanel;
 

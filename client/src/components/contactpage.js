@@ -18,7 +18,7 @@ class Contact extends Component{
 }
 
    async handelSubmit(event){
-        console.log('this.props.params.caseid:',this.props.match.params)
+
        const {caseid} = this.props.match.params;
         await axios.post('/api/contactuser', {
             caseId : caseid,

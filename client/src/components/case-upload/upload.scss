@@ -1,80 +1,82 @@
-$color-bars: #e79307;
-$color-action-buttons: #d84315;
-$color-background: #fff3e0 !default;
-
-.page-body {
-    display: flex;
-    min-height: calc(100vh - 56px);
-    flex-direction: column;
-    background-color: $color-background;
-
-
-    @media (min-width: 600px) {
-        min-height: calc(100vh - 64px);
-    }
-    
-    main {
-        // flex: 1 0 auto;
-        position: absolute;
-        top: 60px;
-        bottom: 60px;
-        left: 0;
-        right: 0;
-        overflow-y: scroll;
-        padding-bottom: 30px;
-
-        h5 {
-            margin: 1.4em 0;
-            font-weight: bold;
-        }
-        .image-container{
-            height: 30%;
-            .uploadImg {
-                width: 100%;
-
-                @media (min-width: 635px) {
-                    width: 60%;
-                    position: relative;
-                    left: 20%;
-                }
-            }
-        }
-
-    }
-
-    footer {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-
-        .btn {
-            background-color: $color-action-buttons;
-            font-weight: bold;
-            font-family: 'Sniglet', cursive;
-            border-radius: 10px;
-        }
-    }
-}
 
 .upload-confirmation {
     text-align: center;
 }
+$color-bars: #e79307;
+$color-action-buttons: #d84315;
+$color-background: #fff3e0 !default;
 
-.preloader-wrapper.active {
-    position: absolute;
-    top :0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 1;
-}
+// .page-body {
+//     display: flex;
+//     min-height: calc(100vh - 56px);
+//     flex-direction: column;
+//     background-color: $color-background;
 
-.placeholder-preview {
-    text-align: center;
-    border-radius: 5px;
-    border: 2px dashed black;
+
+//     @media (min-width: 600px) {
+//         min-height: calc(100vh - 64px);
+//     }
+
+// }
+
+.upload-form {
+    height: 100%;
+
+    form {
+        top: auto;
+    }
+
+    footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        background-color: $color-bars;
+
+        .btn-panel {
+            padding: 15px 0px;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+
+            .btn {
+                margin: 0;
+                background-color: $color-action-buttons;
+                font-weight: bold;
+                font-family: 'Sniglet', cursive;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .prompt {
+        text-align: center;
+        color:  #752a07;
+        font-size: 1.4em;
+    }
+
+    .preloader-wrapper.active {
+        position: absolute;
+        top :0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 1;
+    }
+    
+    .placeholder-preview {
+        text-align: center;
+        border-radius: 5px;
+        border: 2px dashed black;
+    }
+
+    .render-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .details {
+            text-align: center;
+        }
+    }
 }

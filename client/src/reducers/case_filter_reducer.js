@@ -14,7 +14,6 @@ function caseFilterReducer(state = DEFAULT_STATE, action) {
     switch(action.type) {
         case types.SET_CASE_FILTER_VALUES:
             let returnValue = { ...state, values: {...DEFAULT_STATE.values, ...state.values, ...action.payload} };
-            console.log('in reducer.  returnValue: ', returnValue);
             return returnValue;
         default:
             return state;

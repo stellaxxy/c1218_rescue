@@ -19,14 +19,10 @@ class MyCase extends Component {
     };
 
     handleSubmit = async formValues => {
-        console.log('my case info:', formValues);
 
         const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
 
-        console.log(result);
-
         if(result.data.success === true){
-            console.log('my case result data:', result.data.data);
             this.setState({
                 data: result.data.data
             })
@@ -39,21 +35,14 @@ class MyCase extends Component {
     };
 
     closeCase=async () =>{
-        console.log('this.state.data:', this.state.data)
         const {id} =this.state.data
-        console.log(this.state.data)
         const response = await axios.post('/api/updatestatus',{id: id, status:'closed'});
-        console.log('response',response);
-
-
     }
 
 
 
 
     render(){
-        console.log('current state', this.state);
-
         if(this.state.error === true){
             return (
                 <Fragment>

@@ -37,7 +37,6 @@ class SearchPage extends Component {
             })
 
         } catch(error) {
-            console.log('Error: ', error.message);
             this.setState({
                 cases: []
             });

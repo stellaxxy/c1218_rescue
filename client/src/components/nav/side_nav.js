@@ -18,7 +18,7 @@ class SideNav extends Component{
                     <Link className="sidenav-close" to="/search?mode=map"><i className="material-icons left">map</i>MAP</Link>
                 </li>
                 <li>
-                    <Link className="sidenav-close" to="/upload"><i className="material-icons left">add</i>UPLOAD CASE</Link>
+                    <Link className="sidenav-close" to="/selectcasetype"><i className="material-icons left">add</i>UPLOAD CASE</Link>
                 </li>
                 <li>
                     <Link className="sidenav-close" to="/mycase"><i className="material-icons left">find_in_page</i>MY CASE</Link>
