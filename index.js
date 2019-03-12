@@ -340,8 +340,8 @@ app.post('/api/contactuser', async (request, response) => {
 
 
 // API Call for Yelp Data
-app.post('/api/yelp/businesses', async (request, response) =>{
-    const { location } = request.body;
+app.post('/api/yelp/businesses', async (request, response) => {
+    const {location} = request.body;
 
     try {
         let yelpURL = 'https://api.yelp.com/v3/businesses/search';
@@ -356,7 +356,7 @@ app.post('/api/yelp/businesses', async (request, response) =>{
         };
 
         //yelpURL += `?location=${location}`;
-        if(location) {
+        if (location) {
             config.params.location = location;
         } else {
             throw new Error('Please enter in valid location');
@@ -372,9 +372,10 @@ app.post('/api/yelp/businesses', async (request, response) =>{
             result: data.data
         });
 
-    } catch(error) {
+    } catch (error) {
         handleError(response, error.message);
     }
+});
 
 
 app.post('/api/email', async (request,response)=> {
