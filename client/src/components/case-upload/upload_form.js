@@ -57,6 +57,8 @@ class UploadForm extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             });
 
+
+
             caseId = response.data.insertID;
             caseKey = response.data.caseKey;
         } catch (error) {
