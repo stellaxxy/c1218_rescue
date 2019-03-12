@@ -47,7 +47,7 @@ class CaseItem extends Component{
 
                         </div>
                         <div className="card-action">
-                            <a href={"/casedetails/"+id}>Details</a>
+                            <div>Details</div>
                         </div>
                     </div>
                 </div>

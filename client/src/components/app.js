@@ -9,7 +9,7 @@ import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
-import Resource from './resourcepage';
+//import Resource from './resourcepage';
 import Landing from './landing';
 import Contact from './contactpage';
 //import SearchModal from './searchmodal';
@@ -18,7 +18,6 @@ import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import MainNav from './nav';
 import {Route} from 'react-router-dom';
-import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
@@ -34,20 +33,17 @@ const App = () => (
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
-        <Route path="/resource" component={Resource}/>
-        <Route path="/searchpet" component={SearchPet}/>
         <Route path="/casedetails/:caseid" component={CaseDetails}/>
         <Route path="/dogcare" component={DogCare}/>
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage/:caseid" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
-        <Route path="/vetoffice/:id" component={OfficeInfo}/>
+        <Route path="/vetoffice" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
-
-
     </div>
 );
 
 export default App;
 //<Route path="/searchmodal" component={SearchModal}/>
+//<Route path="/resource" component={Resource}/>

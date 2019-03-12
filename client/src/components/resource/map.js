@@ -19,7 +19,6 @@ class Map extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
-            console.log(this.props);
 
             window.initMap = this.initMap.bind(this);
             loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
@@ -33,6 +32,8 @@ class Map extends Component {
                 );
             }
 
+            const query = this.props.queryString;
+
             const markers = this.props.data.map(item => {
                 const longitude = item.coordinates.longitude;
                 const latitude = item.coordinates.latitude;
@@ -44,9 +45,10 @@ class Map extends Component {
 
                 // To add the marker to the map, call setMap();
                 marker.setMap(this.renderedMap);
+                let infoUrl = '/vetoffice'+query+'&id='+item.id;
 
                 const img = item.image_url;
-                let contentString = `<a href='/vetoffice/'+item.id><img src=${img} alt="vet"/></a><div><p>${item.name}</p></div>`;
+                let contentString = `<a href=${infoUrl}><img class="vetMapImg" src=${img} alt="vet"/></a><div><p>${item.name}</p></div>`;
 
 
                 const infowindow = new google.maps.InfoWindow({
