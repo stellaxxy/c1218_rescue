@@ -17,7 +17,7 @@ body {
 
     .mainContainer {
         height: 100vh;
-        font-family: 'Concert One', cursive;
+        font-family: 'Kanit', sans-serif;
         background-color: $color-background;
 
         .navBar {
@@ -31,7 +31,7 @@ body {
                 background-color: $btn-color;
                 border-radius: 10px;
                 font-weight: bold;
-                font-family: 'Sniglet', cursive;
+                font-family: 'Kanit', sans-serif;
             }
         }
 
@@ -53,7 +53,7 @@ body {
         /*background-color: white;*/
         padding: 5px;
         color: $color-text;
-        font-family: 'Staatliches', cursive;
+        font-family: 'Kanit', sans-serif;
         font-size: 1.2em;
 
         width: 70vw;

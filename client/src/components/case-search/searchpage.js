@@ -68,10 +68,11 @@ class SearchPage extends Component {
             </div>
         );
         */
+        //console.log('search page:', filterValues);
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap cases={this.state.cases}/>
+                    <CaseMap cases={this.state.cases} url={filterValues}/>
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
@@ -79,7 +80,7 @@ class SearchPage extends Component {
             return(
                 <div className="bottomContainer">
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
-                    <CaseList cases={this.state.cases}/>
+                    <CaseList cases={this.state.cases} filterValues={filterValues}/>
                 </div>
             );
         }

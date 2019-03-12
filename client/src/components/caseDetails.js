@@ -2,20 +2,29 @@ import '../assets/css/casedetails.scss';
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import queryString from 'query-string';
 
 class CaseDetails extends Component {
 
     state = {
-        data: null
+        data: null,
+        query: {}
     }
 
     async componentDidMount() {
-        const {caseid} = this.props.match.params;
-        const response = await axios.get('/api/casedetails?id=' + caseid);
+
+        const queryObj = queryString.parse(this.props.location.search);
+        console.log('case details url:', queryObj);
+        const {id} = queryObj;
+
+        delete queryObj.id;
+        //console.log('case details url after:', queryObj);
+
+        const response = await axios.get('/api/casedetails?id=' + id);
 
         this.setState({
-            data: response.data.data
+            data: response.data.data,
+            query: queryObj
         })
 
     }
@@ -49,6 +58,9 @@ class CaseDetails extends Component {
 
         var caseUrl = "/contactPage/" + this.state.data.id;
 
+        console.log('case details state', this.state.query);
+        const goBackUrl = queryString.stringify(this.state.query);
+        console.log('case details gobackurl', goBackUrl);
         return (
 
             <div>
@@ -92,11 +104,11 @@ class CaseDetails extends Component {
                 </div>
                 <footer className="page-footer">
                     <div className="btn-panel">
-                        <Link to="/caselist" className="waves-effect waves-light btn btn-action deep-orange accent-4">Go
-                            Back</Link>
-                        <Link to={"/contactPage/" + this.state.data.id}
-                              className="waves-effect waves-light btn btn-action deep-orange accent-4"
-                              float="right">Contact</Link>
+
+                    <Link to={`/search?${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>
+                    <Link to={"/contactPage/"+this.state.data.id} className="waves-effect waves-light btn btn-action deep-orange accent-4"
+                          float="right">Contact</Link>
+
                     </div>
                 </footer>
 
