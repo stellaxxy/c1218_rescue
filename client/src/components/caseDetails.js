@@ -19,7 +19,7 @@ class CaseDetails extends Component {
         const {id} = queryObj;
 
         delete queryObj.id;
-        console.log('case details url after:', queryObj);
+        //console.log('case details url after:', queryObj);
 
         const response = await axios.get('/api/casedetails?id=' + id);
 

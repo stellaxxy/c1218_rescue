@@ -46,6 +46,8 @@ class CaseMap extends Component {
             lost: lostIcon
         };
 
+
+
         const markers = this.props.cases.map(item => {
             const longitude = item.location.longitude;
             const latitude = item.location.latitude;
@@ -63,9 +65,9 @@ class CaseMap extends Component {
             let contentString = '';
 
             if (item.caseType === 'found'){
-                contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/casedetails/?id=${item.id}&mode=map"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             } else if(item.caseType === 'lost') {
-                contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/casedetails/?id=${item.id}&mode=map"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             }
 
 
