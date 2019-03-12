@@ -1,19 +1,6 @@
 
-
-.myCaseContainer {
-  background-color: #fff3e0;
-  overflow-y: scroll;
-
-  .header {
-      text-align: center;
-      color: green;
-      font-style: italic;
-    }
-  .w3-half{
-    font-weight: bold;
-    font-size:1rem;
-
-  }
+.case-details {
+  text-align: center;
 
 
   .striped {
@@ -21,8 +8,68 @@
       padding: 0px 0px;
     }
   }
+  footer{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 
+    .btn {
+      margin-left: 100%;
+      margin-bottom: 20px;
+      margin: 10px;
+      font-size: 2rem;
+    }
   }
+
+  .header {
+    text-align: center;
+    color: green;
+    font-style: italic;
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//.myCaseContainer {
+//  background-color: #fff3e0;
+//  overflow-y: scroll;
+//
+//  .header {
+//      text-align: center;
+//      color: green;
+//      font-style: italic;
+//    }
+//  .w3-half{
+//    font-weight: bold;
+//    font-size:1rem;
+//
+//  }
+//
+//
+//  .striped {
+//    th {
+//      padding: 0px 0px;
+//    }
+//  }
+//
+//  }
+
+
 
 
 
