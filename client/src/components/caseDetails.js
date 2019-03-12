@@ -4,7 +4,6 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import queryString from 'query-string';
 
-
 class CaseDetails extends Component {
 
     state = {
@@ -57,7 +56,7 @@ class CaseDetails extends Component {
             )
         }
 
-        var caseUrl= "/contactPage/"+this.state.data.id;
+        var caseUrl = "/contactPage/" + this.state.data.id;
 
         console.log('case details state', this.state.query);
         const goBackUrl = queryString.stringify(this.state.query);
@@ -67,68 +66,53 @@ class CaseDetails extends Component {
             <div>
                 <div className="container case-details">
                     <main>
-                    <h2 className="header ">Please help me</h2>
-                    <div className="w3-container w3-half">
-                        <img  className="responsive-img"  src={this.state.data.coverImg}/>
-                    </div>
+                        <h5 className="header ">Please help me</h5>
+                        <div className="w3-container w3-half">
+                            <img className="responsive-img" src={this.state.data.coverImg}/>
+                        </div>
 
-                    <table className="centered striped">
-                        <thead>
-                        <tr>
-                            <th>City:{this.state.data.location.city} </th>
-                        </tr>
-                        <tr>
-                            <th>Case id: {this.state.data.id}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet name: {this.state.data.animalDetail.name}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet name: {this.state.data.animalDetail.name}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet breed: {this.state.data.animalDetail.breed}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet color: {this.state.data.animalDetail.color}</th>
-                        </tr>
-                        <tr>
-                            <th>Gender: {this.state.data.animalDetail.gender}</th>
-                        </tr>
-                        <tr>
-                            <th>Animal size: {this.state.data.animalDetail.size}</th>
-                        </tr>
-                        <tr>
-                            <th>Date lost: {this.state.data.date}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet description: {this.state.data.animalDetail.description}</th>
-                        </tr>
-                        <tr>
-                            <th>Area last seen: {this.state.data.location.location}</th>
-                        </tr>
-                        <tr>
-                            <th>Zip code: {this.state.data.location.zipcode}</th>
-                        </tr>
-                        </thead>
+                        <table className="centered striped">
+                            <thead>
+                            <tr>
+                                <th>Case type:{this.state.data.caseType.toUpperCase()} </th>
+                            </tr>
+                            <tr>
+                                <th>City:{this.state.data.location.city} </th>
+                            </tr>
+                            <tr>
+                                <th>Area last seen: {this.state.data.location.location}</th>
+                            </tr>
+                            <tr>
+                                <th>Zip code: {this.state.data.location.zipcode}</th>
+                            </tr>
+                            <tr>
+                                <th>Animal size: {this.state.data.animalDetail.size}</th>
+                            </tr>
+                            <tr>
+                                <th>Date lost: {this.state.data.date}</th>
+                            </tr>
 
-                    </table>
+                            <tr>
+                                <th>Pet description: {this.state.data.animalDetail.description}</th>
+                            </tr>
+                            </thead>
+
+                        </table>
 
                     </main>
 
-               </div>
+                </div>
                 <footer className="page-footer">
                     <div className="btn-panel">
+
                     <Link to={`/search?${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>
                     <Link to={"/contactPage/"+this.state.data.id} className="waves-effect waves-light btn btn-action deep-orange accent-4"
                           float="right">Contact</Link>
+
                     </div>
                 </footer>
 
             </div>
-
-
-
 
 
         );

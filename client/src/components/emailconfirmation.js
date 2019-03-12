@@ -7,7 +7,7 @@ class EmailConfirmation extends Component {
             <div>
                 <div className= "center"> Your Email has been sent</div>
                 <div className="center">
-                    <Link to="/" className="waves-effect waves-light btn orange text-white"
+                    <Link to="/" className="waves-effect waves-light btn orange text-white deep-orange accent-4"
                           float="right">Go Back</Link>
 
                 </div>
