@@ -13,6 +13,7 @@ class CaseList extends Component {
         this.setState({
             cases: this.props.cases || []
         })
+
     }
 
     async componentDidUpdate(prevProps){
@@ -24,6 +25,8 @@ class CaseList extends Component {
     }
 
     render(){
+        //console.log('caselist props:', this.props.filterValues);
+
         if(!this.state.cases || this.state.cases.length === 0){
             return(
                 <div>Loading</div>
@@ -31,7 +34,7 @@ class CaseList extends Component {
         }
 
         const caseItemArray = this.state.cases.map(item => {
-            return <CaseItem key={item.id} {...item}/>
+            return <CaseItem filterValues={this.props.filterValues} key={item.id} {...item}/>
         });
 
         return(

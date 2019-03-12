@@ -33,7 +33,7 @@ const App = () => (
         <Route path="/casemap" component={CaseMap}/>
         <Route path="/upload" component={Upload}/>
         <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
-        <Route path="/casedetails/:caseid" component={CaseDetails}/>
+        <Route path="/casedetails" component={CaseDetails}/>
         <Route path="/dogcare" component={DogCare}/>
         <Route path="/catcare" component={CatCare}/>
         <Route path="/contactPage/:caseid" component={Contact}/>
