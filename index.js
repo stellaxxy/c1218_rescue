@@ -5,7 +5,7 @@ const db = require('./db');
 const googleMap = require('./services/maps');
 const upload = require('./services/upload');
 const nodemailer = require('nodemailer');
-const { mailConfig } = require('./config');
+const {mailConfig} = require('./config');
 var transporter = nodemailer.createTransport(mailConfig);
 
 
@@ -132,17 +132,17 @@ app.get('/api/casedetails', async (request, response) => {
             "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
         let data = {};
 
-        if(request.query.caseKey || request.query.email){
-            if(request.query.caseKey === undefined){
+        if (request.query.caseKey || request.query.email) {
+            if (request.query.caseKey === undefined) {
                 throw new Error(`Please provide valid case key`);
-            } else if (request.query.email === undefined){
+            } else if (request.query.email === undefined) {
                 throw new Error(`Please provide valid email`);
             }
 
             const caseKey = request.query.caseKey;
             const email = request.query.email;
 
-            query = query +  "INNER JOIN `users` u ON c.`userID` = u.`id`" + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
+            query = query + "INNER JOIN `users` u ON c.`userID` = u.`id`" + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
 
             data = await db.query(query, [email, caseKey]);
 
@@ -270,23 +270,23 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 });
 //close case:
-app.post('/api/updatestatus', async(request,response)=>{
+app.post('/api/updatestatus', async (request, response) => {
 
-    try{
-        const { status ,id } = request.body;
+    try {
+        const {status, id} = request.body;
         if (id === undefined) {
             throw new Error(`Please provide a valid caseKey`);
         }
         const updatecases = "update cases set status = ? where id = ? "
-        const updateStatus= [status, id];
-        const updatequery= mysql.format(updatecases, updateStatus);
+        const updateStatus = [status, id];
+        const updatequery = mysql.format(updatecases, updateStatus);
         const caseupdate = await db.query(updatequery);
 
         response.send({
             success: true,
 
         })
-    }catch (error) {
+    } catch (error) {
         handleError(response, error);
     }
 
@@ -299,10 +299,10 @@ app.post('/api/contactuser', async (request, response) => {
 
         // TODO: Get info from DB using caseId
 
-        const userInfo="select c.caseKey,c.city,c.caseType,a.animalType,u.email,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
-        const userCaseId =[caseId]
-        const userEmail=mysql.format(userInfo,userCaseId);
-        const userSendEmail= await db.query(userEmail);
+        const userInfo = "select c.caseKey,c.city,c.caseType,a.animalType,u.email,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
+        const userCaseId = [caseId]
+        const userEmail = mysql.format(userInfo, userCaseId);
+        const userSendEmail = await db.query(userEmail);
 
         // const caseKey = 'ABCDEF';
         // const animalType = 'dog';
@@ -317,7 +317,7 @@ app.post('/api/contactuser', async (request, response) => {
     animalType: 'dog',
     email: 'test@test.com',
     id: 1 } ]*/
-        const {caseType,caseKey,city,animalType,email,id} = userSendEmail[0]
+        const {caseType, caseKey, city, animalType, email, id} = userSendEmail[0]
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
         // Four important options for our mailOptions
@@ -337,51 +337,39 @@ app.post('/api/contactuser', async (request, response) => {
 });
 
 
-app.post('/api/email', async (request,response)=> {
-    try{
+app.post('/api/email', async (request, response) => {
+    try {
 
-    const {id} = request.body
-    const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
-    const userEmail = [id]
-    const sendEmail = mysql.format(emailInfo, userEmail);
-    const confirmationEmail = await db.query(sendEmail);
-    console.log(confirmationEmail)
-    const {caseType, caseKey,email,name} = confirmationEmail[0]
+        const {id} = request.body
+        const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
+        const userEmail = [id]
+        const sendEmail = mysql.format(emailInfo, userEmail);
+        const confirmationEmail = await db.query(sendEmail);
+        console.log(confirmationEmail)
+        const {caseType, caseKey, email, name} = confirmationEmail[0]
 
-    const subject = `Your casekey is ${caseKey} ${caseType} `;
-    const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
+        const subject = `Your casekey is ${caseKey} ${caseType} `;
+        const emailMessage = `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
 
-    // Four important options for our mailOptions
-    const mailOptions = {
-        from: mailConfig.auth.user,
-        //to:'charubenjwal04@gmail.com',
-        to: email,
-        subject: subject,
-        text: emailMessage
-    };
+        const mailOptions = {
+            from: mailConfig.auth.user,
+            to: email,
+            subject: subject,
+            text: emailMessage
+        };
 
-    await transporter.sendMail(mailOptions);
-    response.send({success: true});
-}catch (error){
-    handleError(response, error);
-}
+        await transporter.sendMail(mailOptions);
+        response.send({success: true});
+    } catch (error) {
+        handleError(response, error);
+    }
 
 })
-
-
-
 
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 });
-
-
-
-
-
-
-
 
 
 // Listen
