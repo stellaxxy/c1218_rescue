@@ -48,6 +48,7 @@ class Contact extends Component {
         return (
             <Fragment>
                 <div className="container contact-page center">
+                    <h5>Contact</h5>
                     <main>
 
                         <form onSubmit={this.handelSubmit}>
