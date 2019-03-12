@@ -55,7 +55,6 @@ class SearchPage extends Component {
 
     render(props) {
         const filterValues = queryString.parse(this.props.location.search);
-        console.log('searchpage filter:', filterValues);
         /*
         const displayPanel = filterValues.mode === 'map' ? 
             <CaseMap cases={this.state.cases}/> :
@@ -73,7 +72,7 @@ class SearchPage extends Component {
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap cases={this.state.cases}/>
+                    <CaseMap cases={this.state.cases} url={filterValues}/>
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
