@@ -1,10 +1,6 @@
-$color-background: #fff3e0 !default;
-
-
 .caseListContainer {
   position: relative;
   top: 2vh;
-  background-color: $color-background;
   overflow-y: scroll;
 
   @media (min-width: 635px){
@@ -23,6 +19,7 @@ $color-background: #fff3e0 !default;
     position: relative;
     left: 5%;
     border-radius: 10px;
+    border: 2px solid darkgrey;
 
     @media (min-width: 635px) {
       width: 35%;
@@ -44,7 +41,9 @@ $color-background: #fff3e0 !default;
 
     .card-stacked {
       .card-content {
+        color: black;
         padding: 15px;
+
         @media (min-width: 635px) {
             padding: 10px;
         }
@@ -76,6 +75,8 @@ $color-background: #fff3e0 !default;
       .card-action {
         padding: 5px;
         padding-left: 25px;
+        color: #EB5E30;
+        font-weight: bold;
       }
     }
 

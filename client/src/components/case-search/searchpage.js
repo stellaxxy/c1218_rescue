@@ -80,38 +80,43 @@ class SearchPage extends Component {
         } else {
             return(
                 <div className="bottomContainer">
-                    <form className="listForm">
-                        <h5>Case Type:</h5>
-                        <div className="radioFound">
-                            <label htmlFor="found">Found</label>
-                            <input className="radioBtn" type="radio" name="caseType" value="found"/>
-                        </div>
-                        <div className="radioLost">
-                            <label htmlFor="lost">Lost</label>
-                            <input className="radioBtn" type="radio" name="caseType" value="lost"/>
-                        </div>
-                        <div className="locationDiv">
-                            <h5>Location</h5>
-                            <h6>City, Zip Code or Address</h6>
-                            <input type="text" placeholder="Irvine"/>
-                        </div>
-                        <div className="animalDiv">
-                            <h5>Animal</h5>
-                            <h6>Type</h6>
-                            <select className="selectOpt" name="animalType">
-                                <option value="dog">Dog</option>
-                                <option value="cat">Cat</option>
-                                <option value="others">Others</option>
-                            </select>
-                            <h6>Size</h6>
-                            <select className="selectOpt" name="animalSize">
-                                <option value="small">Small</option>
-                                <option value="medium">Medium</option>
-                                <option value="large">Large</option>
-                            </select>
-                        </div>
-                    </form>
-
+                    <h5 className="searchListTitle">LOST & FOUND LIST</h5>
+                    <h6 className="searchListTitle">SEARCH FOR BEST MATCHES</h6>
+                    <div className="formDiv">
+                        <form className="listForm">
+                            <h5>Case Type:</h5>
+                            <div className="radioFound">
+                                <label htmlFor="found">Found</label>
+                                <input className="radioBtn" type="radio" name="caseType" value="found" id="found"/>
+                            </div>
+                            <div className="radioLost">
+                                <label htmlFor="lost">Lost</label>
+                                <input className="radioBtn" type="radio" name="caseType" value="lost" id="lost"/>
+                            </div>
+                            <div className="locationDiv">
+                                <h5>Location:</h5>
+                                <h6>City, Zip Code or Address</h6>
+                                <input type="text" placeholder="Irvine"/>
+                            </div>
+                            <div className="animalDiv">
+                                <h5>Animal:</h5>
+                                <h6>Type</h6>
+                                <select className="selectOpt" name="animalType">
+                                    <option value="all species">All Species</option>
+                                    <option value="dog">Dog</option>
+                                    <option value="cat">Cat</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <h6>Size</h6>
+                                <select className="selectOpt" name="animalSize">
+                                    <option value="all size">All Size</option>
+                                    <option value="small">Small</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="large">Large</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                     <CaseList cases={this.state.cases} filterValues={filterValues}/>
                 </div>
             );

@@ -1,11 +1,71 @@
-.listForm {
-  height: 80%;
+.searchListTitle {
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  top: 15px;
+}
 
-  .radioBtn {
-    opacity: 1;
+.formDiv {
+  height: 78%;
+  margin-bottom: 10px;
+
+  .listForm {
+    width: 88%;
+    margin: 0 auto;
+    border: 2px solid black;
+    padding: 0 15px 15px 15px;
+    border-radius: 10px;
+
+    h5 {
+      font-weight: bold;
+    }
+
+    .radioFound {
+      display: inline-block;
+      width: 35%;
+      input {
+        position: relative;
+        left: 10px;
+      }
+    }
+    .radioLost {
+      display: inline-block;
+      width: 35%;
+      input {
+        position: relative;
+        left: 10px;
+      }
+    }
+
+    .locationDiv {
+      input {
+        border: 1px solid grey;
+        border-radius: 10px;
+        background-color: white;
+        padding: 0 5px;
+        width: 96%;
+      }
+    }
+
+    .selectOpt {
+      border: 1px solid grey;
+      border-radius: 10px;
+    }
+
+    label {
+      font-size: 120%;
+      color: black;
+    }
+
+    .radioBtn {
+      opacity: 1;
+    }
+
+    .selectOpt {
+      display: block;
+    }
+
   }
 
-  .selectOpt {
-    display: block;
-  }
+
 }

@@ -36,7 +36,7 @@ class CaseItem extends Component{
 
         return(
             <Link to={`/casedetails/?id=${id}&${query}`}>
-                <div className="card small horizontal">
+                <div className="card small horizontal z-depth-3">
                     <div className="card-image">
                         <img className="responsive" src={coverImg}/>
                     </div>
