@@ -71,7 +71,7 @@ class CaseMap extends Component {
             if (item.caseType === 'found'){
                 contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             } else if(item.caseType === 'lost') {
-                contentString = `<a href="/casedetails/?id=${item.id}}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             }
 
 
