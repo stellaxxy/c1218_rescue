@@ -247,6 +247,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
+        console.log(insertcase)
 
 
         //  insert into image table
@@ -260,7 +261,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         response.send({
             success: true,
             insertID: insertcase.insertId,
-            caseKey: caseKey
+            caseKey: caseKey,
+
         })
     } catch (error) {
         handleError(response, error);
@@ -333,6 +335,42 @@ app.post('/api/contactuser', async (request, response) => {
         handleError(response, error);
     }
 });
+
+
+app.post('/api/email', async (request,response)=> {
+    try{
+
+    const {id} = request.body
+    const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
+    const userEmail = [id]
+    const sendEmail = mysql.format(emailInfo, userEmail);
+    const confirmationEmail = await db.query(sendEmail);
+    console.log(confirmationEmail)
+    const {caseType, caseKey,email,name} = confirmationEmail[0]
+
+    const subject = `Your casekey is ${caseKey} ${caseType} `;
+    const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
+
+    // Four important options for our mailOptions
+    const mailOptions = {
+        from: mailConfig.auth.user,
+        //to:'charubenjwal04@gmail.com',
+        to: email,
+        subject: subject,
+        text: emailMessage
+    };
+
+    await transporter.sendMail(mailOptions);
+    response.send({success: true});
+}catch (error){
+    handleError(response, error);
+}
+
+})
+
+
+
+
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
