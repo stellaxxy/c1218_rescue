@@ -5,7 +5,7 @@ $color-bars: #e79307;
 $color-action-buttons: #EB5E30;
 $color-text: #752a07;
 $btn-color: #d84315 !default;
-$color-background: #fff3e0 !default;
+
 /*
  * FONTS
  */
@@ -18,7 +18,7 @@ body {
     .mainContainer {
         height: 100vh;
         font-family: 'Kanit', sans-serif;
-        background-color: $color-background;
+
 
         .navBar {
             height: 9%;

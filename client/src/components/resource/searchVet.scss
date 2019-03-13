@@ -5,6 +5,17 @@
 }
 
 .searchContainer {
+
+    input.vetSearchInput {
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 0 10px;
+    }
+
+    input.vetSearchInput:focus {
+        border: black;
+    }
+
     .vetSearchBtn {
         height: 30px;
         width: 80px;
@@ -20,7 +31,7 @@
 }
 
 .vetListContainer {
-    background-color: #fff3e0;
+
 
     .card {
         height: 170px;
