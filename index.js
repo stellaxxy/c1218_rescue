@@ -324,20 +324,6 @@ app.post('/api/contactuser', async (request, response) => {
         const userCaseId = [caseId]
         const userEmail = mysql.format(userInfo, userCaseId);
         const userSendEmail = await db.query(userEmail);
-
-        // const caseKey = 'ABCDEF';
-        // const animalType = 'dog';
-        // const userEmail = 'kk99807@gmail.com';
-        // const city = 'Irvine';
-        // const caseType = 'lost';
-
-        /* seremail: [ RowDataPacket {
-    caseKey: 'ABCDEF',
-    city: 'Irvine',
-    caseType: 'found',
-    animalType: 'dog',
-    email: 'test@test.com',
-    id: 1 } ]*/
         const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0]
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
@@ -397,37 +383,6 @@ app.post('/api/yelp/businesses', async (request, response) => {
 });
 
 
-// app.post('/api/email', async (request,response)=> {
-//     try{
-//
-//     const {id} = request.body
-//     const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
-//     const userEmail = [id]
-//     const sendEmail = mysql.format(emailInfo, userEmail);
-//     const confirmationEmail = await db.query(sendEmail);
-//     console.log(confirmationEmail)
-//     const {caseType, caseKey,email,name} = confirmationEmail[0]
-//
-//     const subject = `Your casekey is ${caseKey} ${caseType} `;
-//     const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
-//
-//     // Four important options for our mailOptions
-//     const mailOptions = {
-//         from: mailConfig.auth.user,
-//         //to:'charubenjwal04@gmail.com',
-//         to: email,
-//         subject: subject,
-//         text: emailMessage
-//     };
-//
-//     await transporter.sendMail(mailOptions);
-//     response.send({success: true});
-// }catch (error){
-//     handleError(response, error);
-// }
-//
-// })
-
 
 // contact user via phone
 
@@ -449,6 +404,7 @@ app.post('/api/calluser', async (request, response) => {
     }
 
 });
+
 
 
 app.get('*', (request, response) => {
