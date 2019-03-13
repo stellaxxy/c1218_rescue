@@ -20,6 +20,9 @@ class Contact extends Component {
     }
 
     async componenetDidMount() {
+
+
+        console.log('url', this.props.url);
         const {caseid, phoneNo} = this.props.data
         console.log('this.props.data:', this.props.data)
         await axios.get('/api/userdetails', {
@@ -57,6 +60,9 @@ class Contact extends Component {
     }
 
     render() {
+        console.log('contact url:', this.props.location.search)
+
+
         if (this.state.emailsent) {
             return (
                 <EmailConfirmation/>
@@ -83,7 +89,7 @@ class Contact extends Component {
                                 </div>
                             </div>
                             <div>
-                                <a href={"tel:{phone}"}
+                                <a href={`tel:+91${this.phone}`}                           // {"tel:{phone}"}
                                    className="btn-floating btn-large waves-effect waves-light red center"><i
                                     className="material-icons center">phone</i></a>
                             </div>
@@ -94,7 +100,7 @@ class Contact extends Component {
                 <footer>
                     <div className="btn-panel">
 
-                        <Link to={"/casedetails/" + this.props.match.params.caseid}
+                        <Link to={"/casedetails" +this.props.location.search}
                               className="waves-effect waves-light btn orange text-white deep-orange accent-4">Back</Link>
                         <button className="waves-effect waves-light btn orange text-white deep-orange accent-4"
                                 float="right" onClick={this.handelSubmit.bind(this)}>Send
