@@ -115,6 +115,7 @@ class SearchPage extends Component {
                                     <option value="large">Large</option>
                                 </select>
                             </div>
+                            <button className="searchBtn waves-effect waves-light btn-small">SEARCH</button>
                         </form>
                     </div>
                     <CaseList cases={this.state.cases} filterValues={filterValues}/>
