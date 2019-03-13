@@ -257,7 +257,9 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 
         const subject = `Your casekey is ${caseKey} ${caseType} `;
-        const emailMessage = `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
+        const emailMessage = `Hello ${name} Thanks for using paws, please find your caseid in details below:
+         caseid: ${caseKey} ,
+         case type: ${caseType}`
 
         // Four important options for our mailOptions
         const mailOptions = {
@@ -386,17 +388,21 @@ app.post('/api/yelp/businesses', async (request, response) => {
 
 // contact user via phone
 
-app.post('/api/calluser', async (request, response) => {
+app.get('/api/userdetails', async (request, response) => {
 
     try {
-        const {caseid} = request.body;
-        const phonenoquery = "select c.caseKey,u.phone from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
-        const usercaseid = [caseid];
-        const usercall = mysql.format(phonenoquery, usercaseid);
-        const calluser = await db.query(calluser);
+        const {caseid} = request.query;
+        console.log(caseid);
+        const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
+        //const usercaseid = [caseid];
+        const usercall = mysql.format(phonenoquery, [caseid]);
+        console.log(usercall)
+        const calluser = await db.query(usercall);
+        console.log(calluser);
 
         response.send({
             success: true,
+            data:calluser[0]
 
         })
     } catch (error) {

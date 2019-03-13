@@ -1,10 +1,6 @@
-$color-background: #fff3e0 !default;
-
-
 .caseListContainer {
   position: relative;
-  top: 2vh;
-  background-color: $color-background;
+  //top: 2vh;
   overflow-y: scroll;
 
   @media (min-width: 635px){
@@ -19,10 +15,13 @@ $color-background: #fff3e0 !default;
 
   .card {
     max-height: 130px;
-    max-width: 90%;
+    max-width: 95%;
     position: relative;
-    left: 5%;
-    border-radius: 10px;
+    left: 2.5%;
+   // border-radius: 10px;
+    border-bottom: 1px solid darkgrey;
+    margin: 0.5rem 0 0.1rem 0;
+    //background-color: #eeeeee;
 
     @media (min-width: 635px) {
       width: 35%;
@@ -35,16 +34,23 @@ $color-background: #fff3e0 !default;
     .card-image {
       width: 50%;
 
-      img {
-        width: 100%;
-        border-radius: 10px 0 0 10px;
+      img.responsive {
+        //width: 100%;
+        //border-radius: 10px 0 0 10px;
+        height: 80%;
+        width: 80%;
+        position: relative;
+        top: 10%;
+        left: 10%;
       }
 
     }
 
     .card-stacked {
       .card-content {
+        color: black;
         padding: 15px;
+
         @media (min-width: 635px) {
             padding: 10px;
         }
@@ -76,6 +82,8 @@ $color-background: #fff3e0 !default;
       .card-action {
         padding: 5px;
         padding-left: 25px;
+        color: #EB5E30;
+        font-weight: bold;
       }
     }
 
