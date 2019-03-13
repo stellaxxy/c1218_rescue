@@ -4,6 +4,8 @@ import queryString from 'query-string';
 import SearchPanel from './searchpanel';
 import CaseList from '../cases';
 import CaseMap from '../casemap';
+import './searchpage.scss'
+import Filter from './filterform';
 
 class SearchPage extends Component {
     constructor(props) {
@@ -55,34 +57,25 @@ class SearchPage extends Component {
 
     render(props) {
         const filterValues = queryString.parse(this.props.location.search);
-        /*
-        const displayPanel = filterValues.mode === 'map' ? 
-            <CaseMap cases={this.state.cases}/> :
-            <CaseList cases={this.state.cases}/>;
-
-        return (
-            <div className="bottomContainer">
-                <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
-
-                {displayPanel}
-            </div>
-        );
-        */
+      
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap cases={this.state.cases}/>
+                    <CaseMap cases={this.state.cases} url={filterValues}/>
                     <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
         } else {
             return(
                 <div className="bottomContainer">
-                    <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
-                    <CaseList cases={this.state.cases}/>
+                    <h5 className="searchListTitle">LOST & FOUND LIST</h5>
+                    <h6 className="searchListTitle">SEARCH FOR BEST MATCHES</h6>
+                    <Filter onFilterChange={this.handleFilterChange}/>
+                    <CaseList cases={this.state.cases} filterValues={filterValues}/>
                 </div>
             );
         }
+        //<SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
     }
 }
 

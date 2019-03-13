@@ -5,7 +5,7 @@ $color-bars: #e79307;
 $color-action-buttons: #EB5E30;
 $color-text: #752a07;
 $btn-color: #d84315 !default;
-$color-background: #fff3e0 !default;
+
 /*
  * FONTS
  */
@@ -17,8 +17,8 @@ body {
 
     .mainContainer {
         height: 100vh;
-        font-family: 'Concert One', cursive;
-        background-color: $color-background;
+        font-family: 'Kanit', sans-serif;
+
 
         .navBar {
             height: 9%;
@@ -31,7 +31,7 @@ body {
                 background-color: $btn-color;
                 border-radius: 10px;
                 font-weight: bold;
-                font-family: 'Sniglet', cursive;
+                font-family: 'Kanit', sans-serif;
             }
         }
 
@@ -53,7 +53,7 @@ body {
         /*background-color: white;*/
         padding: 5px;
         color: $color-text;
-        font-family: 'Staatliches', cursive;
+        font-family: 'Kanit', sans-serif;
         font-size: 1.2em;
 
         width: 70vw;

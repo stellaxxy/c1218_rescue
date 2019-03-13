@@ -5,6 +5,7 @@ import config from '../../../config/api';
 import foundIcon from '../assets/images/icons8-region-filled-48.png';
 import lostIcon from '../assets/images/icons8-region-48.png';
 import connect from "react-redux/es/connect/connect";
+import queryString from 'query-string';
 
 
 class CaseMap extends Component {
@@ -46,6 +47,8 @@ class CaseMap extends Component {
             lost: lostIcon
         };
 
+
+
         const markers = this.props.cases.map(item => {
             const longitude = item.location.longitude;
             const latitude = item.location.latitude;
@@ -55,17 +58,20 @@ class CaseMap extends Component {
                 icon: icons[item.caseType],
                 map: this.renderedMap
             });
-            
+            console.log('case map filter:', this.props.url);
             // To add the marker to the map, call setMap();
             marker.setMap(this.renderedMap);
 
             const img = item.coverImg;
             let contentString = '';
 
+            const urlstring = queryString.stringify(this.props.url);
+            console.log('urlstring:', urlstring);
+
             if (item.caseType === 'found'){
-                contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             } else if(item.caseType === 'lost') {
-                contentString = `<a href="/casedetails/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             }
 
 

@@ -12,7 +12,7 @@ class MyCase extends Component {
         error: false
     };
 
-    closeModal = () =>{
+    closeModal = () => {
         this.setState({
             modal: false
         })
@@ -22,7 +22,7 @@ class MyCase extends Component {
 
         const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
 
-        if(result.data.success === true){
+        if (result.data.success === true) {
             this.setState({
                 data: result.data.data
             })
@@ -34,16 +34,14 @@ class MyCase extends Component {
         }
     };
 
-    closeCase=async () =>{
-        const {id} =this.state.data
-        const response = await axios.post('/api/updatestatus',{id: id, status:'closed'});
+    closeCase = async () => {
+        const {id} = this.state.data
+        const response = await axios.post('/api/updatestatus', {id: id, status: 'closed'});
     }
 
 
-
-
-    render(){
-        if(this.state.error === true){
+    render() {
+        if (this.state.error === true) {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
@@ -52,7 +50,7 @@ class MyCase extends Component {
             );
         }
 
-        if(this.state.data === null){
+        if (this.state.data === null) {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
@@ -65,69 +63,62 @@ class MyCase extends Component {
         }
 
         return (
-            <Fragment>
 
-                <div className="myCaseContainer bottomContainer">
-                    <h2 className="header">Please help me</h2>
-                    <div className="w3-container w3-half">
-                        <img src={this.state.data.coverImg}/>
-                    </div>
+            <div>
+                <div className="container my-case">
+                    <main>
+                        <h5 className="header ">Please help me</h5>
+                        <div className="w3-container w3-half">
+                            <img className="responsive-img" src={this.state.data.coverImg}/>
+                        </div>
 
-                    <table className="centered striped">
-                        <thead>
-                        <tr>
-                            <th>City:{this.state.data.location.city} </th>
-                        </tr>
-                        <tr>
-                            <th>Case id: {this.state.data.id}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet name: {this.state.data.animalDetail.name}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet name: {this.state.data.animalDetail.name}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet breed: {this.state.data.animalDetail.breed}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet color: {this.state.data.animalDetail.color}</th>
-                        </tr>
-                        <tr>
-                            <th>Gender: {this.state.data.animalDetail.gender}</th>
-                        </tr>
-                        <tr>
-                            <th>Animal size: {this.state.data.animalDetail.size}</th>
-                        </tr>
-                        <tr>
-                            <th>Date lost: {this.state.data.date}</th>
-                        </tr>
-                        <tr>
-                            <th>Pet description: {this.state.data.animalDetail.description}</th>
-                        </tr>
-                        <tr>
-                            <th>Area last seen: {this.state.data.location.location}</th>
-                        </tr>
-                        <tr>
-                            <th>Zip code: {this.state.data.location.zipcode}</th>
-                        </tr>
-                        </thead>
+                        <table className="centered striped">
+                            <thead>
+                            <tr>
+                                <th>Case type:{this.state.data.caseType.toUpperCase()} </th>
+                            </tr>
+                            <tr>
+                                <th>City:{this.state.data.location.city} </th>
+                            </tr>
+                            <tr>
+                                <th>Area last seen: {this.state.data.location.location}</th>
+                            </tr>
+                            <tr>
+                                <th>Zip code: {this.state.data.location.zipcode}</th>
+                            </tr>
+                            <tr>
+                                <th>Animal size: {this.state.data.animalDetail.size}</th>
+                            </tr>
+                            <tr>
+                                <th>Date lost: {this.state.data.date}</th>
+                            </tr>
 
-                    </table>
+                            <tr>
+                                <th>Pet description: {this.state.data.animalDetail.description}</th>
+                            </tr>
+                            </thead>
 
-                    <footer className="page-footer center">
-                        {
-                            this.state.data.status==='active' ?
+                        </table>
 
-                                (<Link to="/closecase" className="waves-effect waves-light btn btn-action deep-orange accent-4"
-                                  onClick={this.closeCase}>CLOSE CASE</Link>)
-                                :
-                                 null
-                        }
-                    </footer>
+                    </main>
+
                 </div>
+
+                <footer className="page-footer">
+                    <div className="btn-panel">
+                        {
+                            this.state.data.status === 'active' ?
+
+                                (<Link to="/closecase"
+                                       className="waves-effect waves-light btn btn-action deep-orange accent-4"
+                                       onClick={this.closeCase}>CLOSE CASE</Link>)
+                                :
+                                null
+                        }
+                    </div>
+                </footer>
                 <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
-            </Fragment>
+            </div>
         );
     }
 }

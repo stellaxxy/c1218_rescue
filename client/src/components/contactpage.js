@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../assets/css/contactpage.scss';
 import {Link} from 'react-router-dom';
 import EmailConfirmation from "./emailconfirmation";
+import queryString from "query-string";
 
 
 class Contact extends Component {
@@ -11,14 +12,33 @@ class Contact extends Component {
         super(props);
         this.state = {
             value: '',
-            emailsent: false
+            emailsent: false,
+            call: false
+
         }
 
     }
 
-    async handelSubmit(event) {
+    async componenetDidMount() {
+        const {caseid, phoneNo} = this.props.data
+        console.log('this.props.data:', this.props.data)
+        await axios.get('/api/userdetails', {
+            caseId: caseid,
+            phone: phoneNo
+        })
+        this.setState({
+            call: true
+        })
 
+
+    }
+
+
+
+
+    async handelSubmit(event) {
         const {caseid} = this.props.match.params;
+        console.log('this.props.match:', this.props.match.params);
         await axios.post('/api/contactuser', {
             caseId: caseid,
             emailMessage: this.state.value
@@ -43,8 +63,9 @@ class Contact extends Component {
             )
         }
 
-        const placeholder = " Example : Hello How are you. Thanks for posting the case here. I think this pet is mine. " +
-            "Please contact me at this number ********, also here is my email : **@**.**";
+        const goBackUrl = queryString.stringify(this.state.query);
+        console.log('case details gobackurl', goBackUrl);
+
         return (
             <Fragment>
                 <div className="container contact-page center">
@@ -53,13 +74,18 @@ class Contact extends Component {
 
                         <form onSubmit={this.handelSubmit}>
                             <div className="row">
-                            <div className="input-field col s12">
+                                <div className="input-field col s12">
 
-                                <textarea className="materialize-textarea" id = "text"value={this.state.value}
+                                <textarea className="materialize-textarea" id="text" value={this.state.value}
                                           onChange={this.handelChange.bind(this)}/>
 
-                                <label htmlFor="text">Please enter your message</label>
+                                    <label htmlFor="text">Please enter your message</label>
+                                </div>
                             </div>
+                            <div>
+                                <a href={"tel:{phone}"}
+                                   className="btn-floating btn-large waves-effect waves-light red center"><i
+                                    className="material-icons center">phone</i></a>
                             </div>
                         </form>
                     </main>
@@ -68,7 +94,7 @@ class Contact extends Component {
                 <footer>
                     <div className="btn-panel">
 
-                        <Link to={"/casedetails/"+this.props.match.params.caseid}
+                        <Link to={"/casedetails/" + this.props.match.params.caseid}
                               className="waves-effect waves-light btn orange text-white deep-orange accent-4">Back</Link>
                         <button className="waves-effect waves-light btn orange text-white deep-orange accent-4"
                                 float="right" onClick={this.handelSubmit.bind(this)}>Send

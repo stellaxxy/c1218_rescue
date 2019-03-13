@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import exampleImage from "../../assets/images/cover1.jpg";
+import queryString from 'query-string';
 
 class CaseItem extends Component{
 
@@ -18,8 +20,10 @@ class CaseItem extends Component{
     }
 
     render(){
-        const { caseType, location, id, coverImg, date, description } = this.props;
-
+        const { caseType, location, id, coverImg, date, description, filterValues } = this.props;
+       // console.log('case item filter:', filterValues);
+        const query = queryString.stringify(filterValues);
+        //console.log('case item query:', query);
         const dateObj = new Date(date);
         const dateString = dateObj.toLocaleDateString();
 
@@ -31,25 +35,27 @@ class CaseItem extends Component{
         }
 
         return(
+            <Link to={`/casedetails/?id=${id}&${query}`}>
+                <div className="card small horizontal">
+                    <div className="card-image">
+                        <img className="responsive" src={coverImg}/>
+                    </div>
+                    <div className="card-stacked">
+                        <div className="card-content">
+                            <div className="contentDiv">
+                                <p>{prefixForAddress} in {location.city}, {location.state}</p>
+                                <p>On: {dateString}</p>
+                                <p className={this.state.mobile ? 'mobile':''}>Description: {description}</p>
+                            </div>
 
-            <div className="card small horizontal">
-                <div className="card-image">
-                    <img className="responsive" src={coverImg}/>
-                </div>
-                <div className="card-stacked">
-                    <div className="card-content">
-                        <div className="contentDiv">
-                            <p>{prefixForAddress} in {location.city}, {location.state}</p>
-                            <p>On: {dateString}</p>
-                            <p className={this.state.mobile ? 'mobile':''}>Description: {description}</p>
                         </div>
-
-                    </div>
-                    <div className="card-action">
-                        <a href={"/casedetails/"+id}>Details</a>
+                        <div className="card-action">
+                            <div>Details</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
+
         );
     }
 }
