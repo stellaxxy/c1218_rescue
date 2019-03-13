@@ -17,11 +17,10 @@ class Contact extends Component {
     }
 
     async handelSubmit(event) {
-        const {caseid,phone} = this.props.match.params;
+        const {caseid} = this.props.match.params;
         console.log('this.props.match:',this.props.match.params);
         await axios.post('/api/contactuser', {
             caseId: caseid,
-            phone: phone,
             emailMessage: this.state.value
         })
 
