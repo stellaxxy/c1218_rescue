@@ -17,14 +17,14 @@ class Filter extends Component {
 
         inputObj.animalSize = document.getElementById('size').value;
 
-        console.log(inputObj);
+        //console.log(inputObj);
         const queryObj = {mode: 'list'};
         for(let [key, value] of Object.entries(inputObj)){
             if(value){
                 queryObj[key] = value;
             }
         }
-        console.log(queryObj);
+        //console.log(queryObj);
         this.props.onFilterChange(queryObj);
         //const query = queryString.stringify(queryObj);
        // console.log(query);
