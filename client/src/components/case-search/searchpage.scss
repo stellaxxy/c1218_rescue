@@ -10,16 +10,21 @@
 }
 
 .formDiv {
-  height: 85%;
+  height: 91%;
   margin-bottom: 10px;
+  position: relative;
+  bottom: 25px;
 
   .listForm {
-    width: 88%;
+    width: 95%;
     margin: 0 auto;
-    border: 2px solid black;
+    border-bottom: 1px solid darkgrey;
+    border-top: 1px solid darkgrey;
     padding: 0 15px 15px 15px;
-    border-radius: 10px;
+    //border-radius: 10px;
     background-color: white;
+    position: relative;
+    bottom: 20px;
 
     h5 {
       font-weight: bold;
@@ -78,6 +83,8 @@
       transform: translateX(-50%);
       border-radius: 10px;
       background-color: #d84315;
+      font-family: 'Kanit', sans-serif;
+      font-size: 120%;
     }
 
   }

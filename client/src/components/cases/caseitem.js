@@ -21,9 +21,9 @@ class CaseItem extends Component{
 
     render(){
         const { caseType, location, id, coverImg, date, description, filterValues } = this.props;
-        console.log('case item filter:', filterValues);
+       // console.log('case item filter:', filterValues);
         const query = queryString.stringify(filterValues);
-        console.log('case item query:', query);
+        //console.log('case item query:', query);
         const dateObj = new Date(date);
         const dateString = dateObj.toLocaleDateString();
 
@@ -36,7 +36,7 @@ class CaseItem extends Component{
 
         return(
             <Link to={`/casedetails/?id=${id}&${query}`}>
-                <div className="card small horizontal z-depth-3">
+                <div className="card small horizontal">
                     <div className="card-image">
                         <img className="responsive" src={coverImg}/>
                     </div>
