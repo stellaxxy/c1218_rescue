@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../assets/css/contactpage.scss';
 import {Link} from 'react-router-dom';
 import EmailConfirmation from "./emailconfirmation";
+import queryString from "query-string";
 
 
 class Contact extends Component {
@@ -11,7 +12,8 @@ class Contact extends Component {
         super(props);
         this.state = {
             value: '',
-            emailsent: false
+            emailsent: false,
+
         }
 
     }
@@ -42,6 +44,9 @@ class Contact extends Component {
                 <EmailConfirmation/>
             )
         }
+
+        const goBackUrl = queryString.stringify(this.state.query);
+        console.log('case details gobackurl', goBackUrl);
 
         return (
             <Fragment>
