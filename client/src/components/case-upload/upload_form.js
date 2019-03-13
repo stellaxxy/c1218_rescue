@@ -55,8 +55,9 @@ class UploadForm extends Component {
                 url: '/api/createcase',
                 data: data,
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
-            });
 
+            });
+                console.log('response', response)
 
 
             caseId = response.data.insertID;

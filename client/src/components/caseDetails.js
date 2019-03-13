@@ -123,8 +123,3 @@ class CaseDetails extends Component {
 
 export default CaseDetails;
 
-/* <footer className="page-footer">
-          <div className="btn-panel">
-            <button className="waves-effect waves-light btn btn-action" form="uploadform" type="submit">Submit</button>
-          </div>
-        </footer>*/

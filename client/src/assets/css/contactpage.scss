@@ -4,12 +4,11 @@ textarea.materialize-textarea{
   border: 1px solid silver;
 }
 
-Fragment{
-  footer{
-    .btn-panel{
-      .btn{
-        display:flex;
-      }
-    }
+
+.contact-page{
+  h5{
+    color:green;
+    font-style: italic;
+    font-weight: bold;
   }
 }
