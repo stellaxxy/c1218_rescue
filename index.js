@@ -222,6 +222,7 @@ app.get('/api/casedetails', async (request, response) => {
 //API for for lost dog
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
+        console.log('createcase api');
         const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, caseKey, imgURL} = request.body;
         const coverImg = upload.getFilepath(request);
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];

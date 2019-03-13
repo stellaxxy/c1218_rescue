@@ -1,114 +1,109 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import queryString from 'query-string';
-import UploadFormPage1 from './upload_form_page1';
-import UploadFormPage2 from './upload_form_page2';
-import UploadFormPage3 from './upload_form_page3';
-import UploadFormPage4 from './upload_form_page4';
-import UploadFormPage5 from './upload_form_page5';
-import {createCaseKey} from '../../helpers';
+import React, {Fragment} from 'react';
+import { Field, reduxForm } from 'redux-form';
+import DropZoneField from '../general/dropzone/dropzone_field';
 import './upload.scss';
 
-class UploadForm extends Component {
+const imageIsRequired = value => (!value ? "Required" : undefined);
 
-    constructor(props) {
-        super(props)
-        this.nextPage = this.nextPage.bind(this)
-        this.previousPage = this.previousPage.bind(this)
-        this.state = {
-            page: 1,
-            imageFile: [],
-            uploading: false            
-        }
-    }
+let UploadForm = props => {
+  const { handleSubmit } = props;
+  return (
+      <div className="page-body">
+        <main>
+          <div className="container">
+            <h5>Upload Pet Info</h5>
 
-    handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
+            <form id="uploadform" autoComplete="off" onSubmit={handleSubmit}>
 
-    handleSubmit = async values => {
-        let caseId = 0;
-        let caseKey = 0;
+            <Field
+              name="coverImg"
+              component={DropZoneField}
+              type="file"
+              imagefile={props.imageFile}
+              handleOnDrop={props.onDrop}
+              validate={[imageIsRequired]}
+              />
 
-        try {
-            this.setState({uploading: true});
-
-            let data = new FormData();
-
-            for (let [key, value] of Object.entries(values)) {            
-                if (key === 'coverImg') {
-                    // For now, only send 1st image
-                    value = value[0];       
-                }            
-                data.append(key, value);
-            }
-        
-            data.append('caseKey', createCaseKey());
-
-            const params = queryString.parse(this.props.location.search);
-            if (!params.caseType) {
-                throw new Error('QueryStringParameter caseType is missing');
-            }
-
-            data.append('caseType', params.caseType);
-
-            const response = await axios({
-                method: 'post',
-                url: '/api/createcase',
-                data: data,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
-            });
-
-            caseId = response.data.insertID;
-            caseKey = response.data.caseKey;
-        } catch (error) {
-            console.log('Had an error');
-        }
-        
-        caseId = caseId ? caseId : 0;
-        this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
-    }
-
-    nextPage() {
-        this.setState({ page: this.state.page + 1 })
-    }
-
-    previousPage() {
-        this.setState({ page: this.state.page - 1 })
-    }
-
-    renderSpinner() {
-        const {uploading} = this.state;
-
-        return (
-            <div className={"preloader-wrapper big " + (uploading ? 'active' : '')}>
-            <div className="spinner-layer spinner-green-only">
-                <div className="circle-clipper left">
-                <div className="circle"></div>
+              <div>
+                <label>Case Type*</label>
+                <div className="row">
+                  <label className="col s6"><Field name="caseType" component="input" type="radio" value="lost"/><span>Lost Animal</span></label>
+                  <label className="col s6"><Field name="caseType" component="input" type="radio" value="found"/><span>Found Animal</span></label>
                 </div>
-                <div className="gap-patch">
-                <div className="circle"></div>
-                </div>
-                <div className="circle-clipper right">
-                <div className="circle"></div>
-                </div>
-            </div>
-            </div>
-        )
-    }
+              </div>
 
-    render() {
-        const { page } = this.state;
+              <div>
+                <label>Animal Type*</label>
+                <div className="row">
+                  <label className="col s4"><Field name="animalType" component="input" type="radio" value="cat"/><span>Cat</span></label>
+                  <label className="col s4"><Field name="animalType" component="input" type="radio" value="dog"/><span>Dog</span></label>
+                  <label className="col s4"><Field name="animalType" component="input" type="radio" value="other"/><span>Other</span></label>
+                </div>
+              </div>
 
-        return (
-            <div className="upload-form">
-                {page === 1 && <UploadFormPage1 onSubmit={this.nextPage}  onDrop={this.handleOnDrop} imageFile={this.state.imageFile} />}
-                {page === 2 && <UploadFormPage2 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-                {page === 3 && <UploadFormPage3 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-                {page === 4 && <UploadFormPage4 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-                {page === 5 && <UploadFormPage5 previousPage={this.previousPage} onSubmit={this.handleSubmit} />}
-                {this.renderSpinner()}
-            </div>
-        )
-    }
+              <div>
+                <label>Animal Size*</label>
+                <div className="row">
+                  <label className="col s4"><Field name="size" component="input" type="radio" value="small"/><span>Small</span></label>
+                  <label className="col s4"><Field name="size" component="input" type="radio" value="medium"/><span>Medium</span></label>
+                  <label className="col s4"><Field name="size" component="input" type="radio" value="large"/><span>Large</span></label>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="street">Location Pet Last Seen*</label>
+                <Field name="street" component="input" type="text" placeholder="Street address or cross streets" />
+              </div>
+
+              <div>
+                <label htmlFor="city">City Pet Last Seen*</label>
+                <Field name="city" component="input" type="text" placeholder="Zipcode or City, State" />
+              </div>
+
+              <div>
+                <label htmlFor="email">Your Email*</label>
+                <Field name="email" component="input" type="email" />
+              </div>
+
+              <div>
+                <label htmlFor="name">Your Name*</label>
+                <Field name="name" component="input" type="text" />
+              </div>
+
+              <div>
+                <label htmlFor="phone">Your Phone</label>
+                <Field name="phone" component="input" type="text" />
+              </div>
+
+              <div>
+                <label htmlFor="caseDate">Date Pet Last Seen</label>
+                <Field name="caseDate" component="input" type="text" />
+              </div>
+
+              <div>
+                <label>Notes</label>
+                <div>
+                  <Field name="description" component="textarea" placeholder="Animal color, breed, gender..."/>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </main>
+
+        <footer className="page-footer">
+          <div className="btn-panel">
+            <button className="waves-effect waves-light btn btn-action" form="uploadform" type="submit">Submit</button>
+          </div>
+        </footer>
+      </div>
+  )
 }
+
+UploadForm = reduxForm({
+  form: 'caseupload',
+  initialValues: {caseDate: new Date().toLocaleDateString()}
+})(UploadForm);
 
 export default UploadForm;
