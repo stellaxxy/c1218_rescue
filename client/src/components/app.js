@@ -22,6 +22,7 @@ import SearchPet from "./serachpet";
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
+import FlyerCode from "./case-upload/flyercode";
 
 
 const App = () => (
@@ -44,6 +45,7 @@ const App = () => (
         <Route path="/vetoffice" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
+        <Route path="/flyer/:caseid" component={FlyerCode}/>
 
 
     </div>
