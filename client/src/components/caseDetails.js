@@ -105,7 +105,7 @@ class CaseDetails extends Component {
                 <footer className="page-footer">
                     <div className="btn-panel">
 
-                    <Link to={`/casedetails/?${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>
+                    <Link to={`/search?${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>
                     <Link to={"/contactPage/"+this.state.data.id} className="waves-effect waves-light btn btn-action deep-orange accent-4"
                           float="right">Contact</Link>
 
