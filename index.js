@@ -249,7 +249,29 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
-        console.log(insertcase)
+        console.log(insertcase);
+
+       // send mail after registering case
+
+        const {id} = request.body
+        const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
+        const userEmail = [id]
+        const sendEmail = mysql.format(emailInfo, userEmail);
+        const confirmationEmail = await db.query(sendEmail);
+        console.log(confirmationEmail)
+        //const {caseType, caseKey,email,name} = confirmationEmail[0]
+
+        const subject = `Your casekey is ${caseKey} ${caseType} `;
+        const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
+
+        // Four important options for our mailOptions
+        const mailOptions = {
+            from: mailConfig.auth.user,
+            //to:'charubenjwal04@gmail.com',
+            to: email,
+            subject: subject,
+            text: emailMessage
+        };
 
 
         //  insert into image table
@@ -301,7 +323,7 @@ app.post('/api/contactuser', async (request, response) => {
 
         // TODO: Get info from DB using caseId
 
-        const userInfo="select c.caseKey,c.city,c.caseType,a.animalType,u.email,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
+        const userInfo="select c.caseKey,c.city,c.caseType,a.animalType,u.email,u.phone,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
         const userCaseId =[caseId]
         const userEmail=mysql.format(userInfo,userCaseId);
         const userSendEmail= await db.query(userEmail);
@@ -319,7 +341,7 @@ app.post('/api/contactuser', async (request, response) => {
     animalType: 'dog',
     email: 'test@test.com',
     id: 1 } ]*/
-        const {caseType,caseKey,city,animalType,email,id} = userSendEmail[0]
+        const {caseType,caseKey,city,animalType,email,id,phone} = userSendEmail[0]
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
         // Four important options for our mailOptions
@@ -378,36 +400,36 @@ app.post('/api/yelp/businesses', async (request, response) => {
 });
 
 
-app.post('/api/email', async (request,response)=> {
-    try{
-
-    const {id} = request.body
-    const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
-    const userEmail = [id]
-    const sendEmail = mysql.format(emailInfo, userEmail);
-    const confirmationEmail = await db.query(sendEmail);
-    console.log(confirmationEmail)
-    const {caseType, caseKey,email,name} = confirmationEmail[0]
-
-    const subject = `Your casekey is ${caseKey} ${caseType} `;
-    const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
-
-    // Four important options for our mailOptions
-    const mailOptions = {
-        from: mailConfig.auth.user,
-        //to:'charubenjwal04@gmail.com',
-        to: email,
-        subject: subject,
-        text: emailMessage
-    };
-
-    await transporter.sendMail(mailOptions);
-    response.send({success: true});
-}catch (error){
-    handleError(response, error);
-}
-
-})
+// app.post('/api/email', async (request,response)=> {
+//     try{
+//
+//     const {id} = request.body
+//     const emailInfo = "SELECT u.name,u.email,c.caseKey,c.id,c.caseType from users as u JOIN cases as c ON u.id= c.userID where u.id = ?"
+//     const userEmail = [id]
+//     const sendEmail = mysql.format(emailInfo, userEmail);
+//     const confirmationEmail = await db.query(sendEmail);
+//     console.log(confirmationEmail)
+//     const {caseType, caseKey,email,name} = confirmationEmail[0]
+//
+//     const subject = `Your casekey is ${caseKey} ${caseType} `;
+//     const emailMessage= `Hello ${name} Thanks for using paws, please find your below details : ${caseKey} ${caseType}`
+//
+//     // Four important options for our mailOptions
+//     const mailOptions = {
+//         from: mailConfig.auth.user,
+//         //to:'charubenjwal04@gmail.com',
+//         to: email,
+//         subject: subject,
+//         text: emailMessage
+//     };
+//
+//     await transporter.sendMail(mailOptions);
+//     response.send({success: true});
+// }catch (error){
+//     handleError(response, error);
+// }
+//
+// })
 
 
 

@@ -17,10 +17,11 @@ class Contact extends Component {
     }
 
     async handelSubmit(event) {
-
-        const {caseid} = this.props.match.params;
+        const {caseid,phone} = this.props.match.params;
+        console.log('this.props.match:',this.props.match.params);
         await axios.post('/api/contactuser', {
             caseId: caseid,
+            phone: phone,
             emailMessage: this.state.value
         })
 
@@ -43,8 +44,6 @@ class Contact extends Component {
             )
         }
 
-        const placeholder = " Example : Hello How are you. Thanks for posting the case here. I think this pet is mine. " +
-            "Please contact me at this number ********, also here is my email : **@**.**";
         return (
             <Fragment>
                 <div className="container contact-page center">
@@ -60,6 +59,9 @@ class Contact extends Component {
 
                                 <label htmlFor="text">Please enter your message</label>
                             </div>
+                            </div>
+                            <div>
+                                <a href= {"tel:"+this.props.match.params.phone} className= "btn-floating btn-large waves-effect waves-light red center"><i className="material-icons center">phone</i></a>
                             </div>
                         </form>
                     </main>
