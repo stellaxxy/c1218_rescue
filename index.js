@@ -126,12 +126,13 @@ app.get('/api/caselist', async (request, response) => {
 
 app.get('/api/casedetails', async (request, response) => {
     try {
-        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`zipcode`, \n" +
+        let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`state`, c.`zipcode`, \n" +
             "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
-            "            a.`color`, a.`gender`, a.`size`, a.`description`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "            a.`color`, a.`gender`, a.`size`, a.`description`, u.`phone`, u.`email`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
             "            FROM `cases` AS c \n" +
             "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
-            "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n";
+            "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
+            "            INNER JOIN `users` u ON c.`userID` = u.`id` ";
         let data = {};
 
         if (request.query.caseKey || request.query.email) {
@@ -144,7 +145,7 @@ app.get('/api/casedetails', async (request, response) => {
             const caseKey = request.query.caseKey;
             const email = request.query.email;
 
-            query = query + "INNER JOIN `users` u ON c.`userID` = u.`id`" + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
+            query = query + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
 
             data = await db.query(query, [email, caseKey]);
 
@@ -156,7 +157,7 @@ app.get('/api/casedetails', async (request, response) => {
                 throw new Error(`ID must be a number`);
             }
 
-            query = query + "WHERE c.`id` = ?" + "GROUP BY c.`id`";
+            query = query + "WHERE c.`id` = ? GROUP BY c.`id`";
 
             data = await db.query(query, [id]);
         }
@@ -172,6 +173,7 @@ app.get('/api/casedetails', async (request, response) => {
 
             data.location = {
                 city: data.city,
+                state: data.state,
                 location: data.location,
                 zipcode: data.zipcode,
                 latitude: data.latitude,
@@ -179,6 +181,7 @@ app.get('/api/casedetails', async (request, response) => {
             };
 
             delete data.city;
+            delete data.state;
             delete data.zipcode;
             delete data.latitude;
             delete data.longitude;
