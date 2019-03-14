@@ -225,7 +225,6 @@ app.get('/api/casedetails', async (request, response) => {
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
         const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, imgURL, caseKey} = request.body;
-        console.log("body ....", request.body);
         const coverImg = upload.getFilepath(request);
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
@@ -250,7 +249,6 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
-        console.log('insertcase',insertcase);
 
         // send mail after registering case
 
@@ -326,13 +324,11 @@ app.post('/api/contactuser', async (request, response) => {
         const userCaseId = [caseId]
         const userEmail = mysql.format(userInfo, userCaseId);
         const userSendEmail = await db.query(userEmail);
-        const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0]
+        const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0];
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
-        // Four important options for our mailOptions
         const mailOptions = {
             from: mailConfig.auth.user,
-            //to:'charubenjwal04@gmail.com',
             to: email,
             subject: subject,
             text: emailMessage
@@ -362,17 +358,12 @@ app.post('/api/yelp/businesses', async (request, response) => {
             }
         };
 
-        //yelpURL += `?location=${location}`;
         if (location) {
             config.params.location = location;
         } else {
             throw new Error('Please enter in valid location');
         }
-        /*
-                 for (let parameter in request.body) {
-                     yelpURL += `${parameter}=${request.body[parameter]}`;
-                 }
-        */
+
         const data = await axios.get(yelpURL, config);
 
         response.send({
@@ -392,13 +383,9 @@ app.get('/api/userdetails', async (request, response) => {
 
     try {
         const {caseid} = request.query;
-        console.log(caseid);
         const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
-        //const usercaseid = [caseid];
         const usercall = mysql.format(phonenoquery, [caseid]);
-        console.log(usercall)
         const calluser = await db.query(usercall);
-        console.log(calluser);
 
         response.send({
             success: true,
@@ -411,19 +398,11 @@ app.get('/api/userdetails', async (request, response) => {
 
 });
 
-
-
-app.get('*', (request, response) => {
-    response.sendFile(__dirname + '/client/dist/index.html');
-
-});
-
 //API Call for Yelp Business Detail
 app.get('/api/yelp/details', async (request, response) => {
 
     try {
         const {id} = request.query;
-
         if (!id) {
             throw new Error('Please provide valid id.');
         }
@@ -435,7 +414,6 @@ app.get('/api/yelp/details', async (request, response) => {
         };
 
         const result = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, config);
-        //console.log('vet details result:', result.data);
 
         response.send({
             data: result.data
@@ -444,6 +422,13 @@ app.get('/api/yelp/details', async (request, response) => {
         handleError(response, error.message);
     }
 });
+
+app.get('*', (request, response) => {
+    response.sendFile(__dirname + '/client/dist/index.html');
+
+});
+
+
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');

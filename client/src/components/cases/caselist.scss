@@ -1,3 +1,10 @@
+.noData {
+  text-align: center;
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 0.95rem;
+}
+
 .caseListContainer {
   position: relative;
   //top: 2vh;
@@ -6,11 +13,6 @@
   @media (min-width: 635px){
     display: flex;
     flex-wrap: wrap;
-/*
-    .decor {
-      background-image: url('../../assets/images/pawsprint.png');
-    }
-    */
   }
 
   .card {
@@ -18,8 +20,8 @@
     max-width: 95%;
     position: relative;
     left: 2.5%;
-   // border-radius: 10px;
-    border-bottom: 1px solid darkgrey;
+    border-radius: 10px;
+    border: 1px solid darkgrey;
     margin: 0.5rem 0 0.1rem 0;
     //background-color: #eeeeee;
 

@@ -5,12 +5,21 @@ export default props => {
 
     const {caseid, casekey} = props.match.params;
 
-    if (caseid !== '0') {
+    if (Number(caseid)) {
         return (
             <div className="upload-confirmation">
-                <h5>Your case has been uploaded.</h5>
-                <h6>Case Key: {casekey}</h6>
-                <Link to={"/casedetails/"+caseid} className="waves-effect waves-light btn orange text-white">View Case</Link>
+                <div className="row">
+                    <h5>Your case has been uploaded.</h5>
+                    <h6>Case Key: {casekey}</h6>
+                </div>
+
+                <div className="row">
+                    <Link to={"/flyer/"+caseid} className="waves-effect waves-light btn orange text-white">View Flyer</Link>
+                </div>
+                <div className="row">
+                    <Link to={"/search"} className="waves-effect waves-light btn orange text-white">Lost/Found Pet List</Link>
+                </div>
+
                 <p>Best wishes from the PAWS team for a successful search.</p>
             </div>
         )

@@ -12,17 +12,13 @@ class OfficeInfo extends Component {
     };
 
     async componentDidMount(){
-        console.log('vet info url:', this.props.location.search);
         const query = this.props.location.search;
         const queryObj =  queryString.parse(query);
         const {location} = queryObj;
-        console.log('location:', location);
 
 
         const {id} = queryObj;
-        //console.log(id);
         const result = await axios.get(`/api/yelp/details?id=${id}`);
-        //console.log('result:',result);
         this.setState({
             data: result.data.data,
             location: location
@@ -37,8 +33,7 @@ class OfficeInfo extends Component {
         }
 
         const { display_phone, hours, image_url, location, name, rating } = this.state.data;
-       // console.log('hours:', hours[0].open);
-       // console.log('phone:', display_phone);
+
         let address1 = '';
         let address2 = '';
         if(location.display_address[2]){
@@ -49,8 +44,6 @@ class OfficeInfo extends Component {
             address2 = location.display_address[1];
         }
 
-        //const date = new Date();
-        //const day = date.getDay();
         const arrayOfHours = hours[0].open;
         const arrayOfDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         const hoursDiv = arrayOfHours.map(item => {
@@ -66,8 +59,10 @@ class OfficeInfo extends Component {
            return <div key={dayOfWeek}>{dayOfWeek}: {start} to {end}</div>
         });
 
+        const index = Math.floor(hoursDiv.length / 2);
+        const halfArray = hoursDiv.splice(0, index);
+
         const goBackUrl = queryString.stringify({location: this.state.location});
-        console.log('gobackurl:', goBackUrl);
 
         return (
 
@@ -77,14 +72,18 @@ class OfficeInfo extends Component {
                     <div>Address: {address1}</div>
                     <div>{address2}</div>
                     <div>Rating: {rating}</div>
-                    <div>Hours: {hoursDiv}</div>
+                    <div>
+                        <p>Hours:</p>
+                        <div className="vetHours firstHalf">{halfArray}</div>
+                        <div className="vetHours">{hoursDiv}</div>
+                    </div>
                 </div>
                 <div className="imgContainer">
                     <img src={image_url} className="vetDetailImage"/>
                 </div>
                 <div className="callContainer">
-                    <Link to={`/searchvet?${goBackUrl}`} className="waves-effect waves-light btn orange text-white call">Go Back</Link>
-                    <Link to={`tel:+${display_phone}`} className="waves-effect waves-light btn orange text-white call">Call</Link>
+                    <Link to={`/searchvet?${goBackUrl}`} className="waves-effect waves-light btn text-white call">Go Back</Link>
+                    <Link to={`tel:+${display_phone}`} className="waves-effect waves-light btn text-white call">Call</Link>
                 </div>
             </div>
 

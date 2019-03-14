@@ -14,11 +14,10 @@ class CaseDetails extends Component {
     async componentDidMount() {
 
         const queryObj = queryString.parse(this.props.location.search);
-        console.log('case details url:', queryObj);
+
         const {id} = queryObj;
 
         delete queryObj.id;
-        //console.log('case details url after:', queryObj);
 
         const response = await axios.get('/api/casedetails?id=' + id);
 
@@ -58,9 +57,8 @@ class CaseDetails extends Component {
 
         var caseUrl = "/contactPage/" + this.state.data.id;
 
-        console.log('case details state', this.state.query);
         const goBackUrl = queryString.stringify(this.state.query);
-        console.log('case details gobackurl', goBackUrl);
+       
         return (
 
             <div>

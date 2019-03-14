@@ -58,7 +58,7 @@ class CaseMap extends Component {
                 icon: icons[item.caseType],
                 map: this.renderedMap
             });
-            console.log('case map filter:', this.props.url);
+
             // To add the marker to the map, call setMap();
             marker.setMap(this.renderedMap);
 
@@ -66,7 +66,6 @@ class CaseMap extends Component {
             let contentString = '';
 
             const urlstring = queryString.stringify(this.props.url);
-            console.log('urlstring:', urlstring);
 
             if (item.caseType === 'found'){
                 contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
@@ -122,7 +121,6 @@ class CaseMap extends Component {
             <div className="mapContainer">
                 <div id="map">
                 </div>
-
             </div>
         );
     }

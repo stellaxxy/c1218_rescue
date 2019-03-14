@@ -12,7 +12,7 @@ $btn-color: #d84315 !default;
 $font-size-normal: 1.4em;
 
 body {
-    background-image: url(../images/landing-page-background.png);
+    //background-image: url(../images/landing-page-background.png);
 
 
     .mainContainer {
@@ -147,6 +147,7 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
+    left: 0;
     background-color: $color-bars;
 
     .btn-panel {
