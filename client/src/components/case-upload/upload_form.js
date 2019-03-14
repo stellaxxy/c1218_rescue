@@ -11,7 +11,7 @@ let UploadForm = props => {
       <div className="page-body">
         <main>
           <div className="container">
-            <h5>Upload Pet Info</h5>
+            <h5>Pet Details</h5>
 
             <form id="uploadform" autoComplete="off" onSubmit={handleSubmit}>
 
@@ -44,9 +44,9 @@ let UploadForm = props => {
               <div>
                 <label>Animal Size*</label>
                 <div className="row">
-                  <label className="col s4"><Field name="size" component="input" type="radio" value="small"/><span>Small</span></label>
-                  <label className="col s4"><Field name="size" component="input" type="radio" value="medium"/><span>Medium</span></label>
-                  <label className="col s4"><Field name="size" component="input" type="radio" value="large"/><span>Large</span></label>
+                  <label className="col s4"><Field name="animalSize" component="input" type="radio" value="small"/><span>Small</span></label>
+                  <label className="col s4"><Field name="animalSize" component="input" type="radio" value="medium"/><span>Medium</span></label>
+                  <label className="col s4"><Field name="animalSize" component="input" type="radio" value="large"/><span>Large</span></label>
                 </div>
               </div>
 
