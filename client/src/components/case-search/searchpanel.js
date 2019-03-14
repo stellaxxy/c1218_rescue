@@ -66,7 +66,9 @@ class SearchPanel extends Component {
                 <div className="chip-panel">
                     {this.renderChips()}
                 </div>
-                <button type="button" className="waves-effect waves-green btn" onClick={this.handleFilterClick}>Filter</button>
+                <div className="filterButtonDiv">
+                    <button type="button" className="waves-effect waves-green btn" onClick={this.handleFilterClick}>Filter</button>
+                </div>
             </div>
 
         )

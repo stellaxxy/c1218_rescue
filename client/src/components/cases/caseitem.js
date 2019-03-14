@@ -21,9 +21,9 @@ class CaseItem extends Component{
 
     render(){
         const { caseType, location, id, coverImg, date, description, filterValues } = this.props;
-       // console.log('case item filter:', filterValues);
+
         const query = queryString.stringify(filterValues);
-        //console.log('case item query:', query);
+
         const dateObj = new Date(date);
         const dateString = dateObj.toLocaleDateString();
 

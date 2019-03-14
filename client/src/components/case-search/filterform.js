@@ -17,22 +17,17 @@ class Filter extends Component {
 
         inputObj.animalSize = document.getElementById('size').value;
 
-        //console.log(inputObj);
         const queryObj = {mode: 'list'};
         for(let [key, value] of Object.entries(inputObj)){
             if(value){
                 queryObj[key] = value;
             }
         }
-        //console.log(queryObj);
+
         this.props.onFilterChange(queryObj);
-        //const query = queryString.stringify(queryObj);
-       // console.log(query);
-       // this.props.history.push('/search?' + query);
-    }
+    };
 
     render(){
-        console.log('filter form:', this.props.filterValues);
 
         return(
             <div className="formDiv">

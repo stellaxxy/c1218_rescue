@@ -396,7 +396,7 @@ app.get('/api/userdetails', async (request, response) => {
         const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
         //const usercaseid = [caseid];
         const usercall = mysql.format(phonenoquery, [caseid]);
-        console.log(usercall)
+        console.log(usercall);
         const calluser = await db.query(usercall);
         console.log(calluser);
 
@@ -411,19 +411,12 @@ app.get('/api/userdetails', async (request, response) => {
 
 });
 
-
-
-app.get('*', (request, response) => {
-    response.sendFile(__dirname + '/client/dist/index.html');
-
-});
-
 //API Call for Yelp Business Detail
 app.get('/api/yelp/details', async (request, response) => {
 
     try {
         const {id} = request.query;
-
+        console.log('yelp detail id:', id);
         if (!id) {
             throw new Error('Please provide valid id.');
         }
@@ -444,6 +437,13 @@ app.get('/api/yelp/details', async (request, response) => {
         handleError(response, error.message);
     }
 });
+
+app.get('*', (request, response) => {
+    response.sendFile(__dirname + '/client/dist/index.html');
+
+});
+
+
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
