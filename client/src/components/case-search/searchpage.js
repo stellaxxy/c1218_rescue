@@ -12,7 +12,7 @@ class SearchPage extends Component {
         super(props);
 
         this.state = {
-            cases: null
+            cases: []
         };
     }
 
