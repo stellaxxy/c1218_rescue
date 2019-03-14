@@ -9,7 +9,7 @@ class CaseDetails extends Component {
     state = {
         data: null,
         query: {}
-    }
+    };
 
     async componentDidMount() {
 
@@ -106,7 +106,7 @@ class CaseDetails extends Component {
                     <div className="btn-panel">
 
                     <Link to={`/search?${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4">Go Back</Link>
-                    <Link to={"/contactPage/"+this.state.data.id} className="waves-effect waves-light btn btn-action deep-orange accent-4"
+                    <Link to={`/contactPage?id=${this.state.data.id}&${goBackUrl}`} className="waves-effect waves-light btn btn-action deep-orange accent-4"
                           float="right">Contact</Link>
 
                     </div>

@@ -6,6 +6,7 @@ import './caselist.scss';
 
 class CaseList extends Component {
     state = {
+        error: false,
         cases: []
     };
 
@@ -17,7 +18,12 @@ class CaseList extends Component {
     }
 
     async componentDidUpdate(prevProps){
-        if(prevProps != this.props && this.props.cases && this.props.cases.length > 0){
+        if(prevProps != this.props && this.props.cases){
+            if(this.props.cases.length === 0){
+                this.setState({
+                    error: true
+                });
+            }
             this.setState({
                 cases: this.props.cases
             })
@@ -26,6 +32,12 @@ class CaseList extends Component {
 
     render(){
         //console.log('caselist props:', this.props.filterValues);
+
+        if(this.state.error === true){
+            return (
+                <div>No Data Available</div>
+            );
+        }
 
         if(!this.state.cases || this.state.cases.length === 0){
             return(

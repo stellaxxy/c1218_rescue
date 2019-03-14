@@ -22,7 +22,7 @@ class MainNav extends Component {
                             </Link>
                             <ul className="right hide-on-med-and-down">
                                 <li>
-                                    <Link className="sidenav-close" to="/"><i className="material-icons left">home</i>Home</Link>
+                                    <Link className="sidenav-close" to="/"><i className="material-icons left">home</i>HOME</Link>
                                 </li>
                                 <li>
                                     <Link className="sidenav-close" to="/search?mode=list"><i className="material-icons left">search</i>FOUND&LOST</Link>
