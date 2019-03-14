@@ -71,6 +71,9 @@ class UploadPage extends Component {
   }
 
   render() {
+    // Have to reset because Materialize modals set to HIDDEN
+    document.body.style.overflow = "";
+
     return (
       <div>
         <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
