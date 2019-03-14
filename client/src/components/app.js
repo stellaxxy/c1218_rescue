@@ -24,6 +24,10 @@ import CloseCase from "./cases/case-confirmation";
 import Flyer from "./case-upload/flyer";
 
 
+
+
+
+
 const App = () => (
     <div className="mainContainer">
         <MainNav/>
@@ -43,6 +47,7 @@ const App = () => (
         <Route path="/closecase" component={CloseCase}/>
         <Route path="/flyer/:caseid" component={Flyer}/>
         <Route path="/casedescription" component={DescribeForm}/>
+
 
 
     </div>
