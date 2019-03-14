@@ -38,17 +38,16 @@ class UploadPage extends Component {
         data: data,
         config: { headers: {'Content-Type': 'multipart/form-data' }}
       });
-      
+
       caseId = response.data.insertID;
       caseKey = response.data.caseKey;
 
-      console.log('response', response);
+      this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
     } catch (error) {
+      this.props.history.push(`/upload-complete/0/0`);
       console.log('Had an error');
     }
- 
-    this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
-    console.log('caseId: ', caseId);
+    
   }
 
   renderSpinner() {
@@ -74,8 +73,8 @@ class UploadPage extends Component {
   render() {
     return (
       <div>
-        {this.renderSpinner()}
         <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
+        {this.renderSpinner()}
       </div>     
     );
   }
