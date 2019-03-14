@@ -90,7 +90,7 @@ class Contact extends Component {
                             </div>
                             <div>
                                 <a href={`tel:+91${this.phone}`}                           // {"tel:{phone}"}
-                                   className="btn-floating btn-large waves-effect waves-light red center"><i
+                                   className="btn-floating btn-large waves-effect waves-light pulse red center"><i
                                     className="material-icons center">phone</i></a>
                             </div>
                         </form>

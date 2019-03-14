@@ -257,7 +257,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
 
         const subject = `Your casekey is ${caseKey} ${caseType} `;
-        const emailMessage = `Hello ${name} Thanks for using paws, please find your caseid in details below:
+        const emailMessage = `Hello ${name} Thanks for using paws, please find your case id in details below:
          caseid: ${caseKey} ,
          case type: ${caseType}`
 
