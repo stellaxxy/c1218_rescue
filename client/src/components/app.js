@@ -21,7 +21,7 @@ import {Route} from 'react-router-dom';
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
-import FlyerCode from "./case-upload/flyercode";
+import Flyer from "./case-upload/flyer";
 
 
 const App = () => (
@@ -41,7 +41,7 @@ const App = () => (
         <Route path="/vetoffice" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
-        <Route path="/flyer/:caseid" component={FlyerCode}/>
+        <Route path="/flyer/:caseid" component={Flyer}/>
         <Route path="/casedescription" component={DescribeForm}/>
 
 
