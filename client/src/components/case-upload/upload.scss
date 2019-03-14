@@ -6,68 +6,127 @@ $color-bars: #e79307;
 $color-action-buttons: #d84315;
 $color-background: #fff3e0 !default;
 
-// .page-body {
-//     display: flex;
-//     min-height: calc(100vh - 56px);
-//     flex-direction: column;
-//     background-color: $color-background;
+.page-body {
+    
+    main {
+        position: relative;
+        height: 100%;
+        overflow-y: scroll;
 
+        h5 {
+            font-weight: bold;
+        }
 
-//     @media (min-width: 600px) {
-//         min-height: calc(100vh - 64px);
-//     }
-
-// }
-
-.upload-form {
-    height: 100%;
-
-    form {
-        top: auto;
-    }
-
-
-/*
-            .btn {
-                margin: 0;
-                background-color: $color-action-buttons;
-                font-weight: bold;
-                font-family: 'Kanit', sans-serif;
-                border-radius: 10px;
-            }
+        form {
+            top: 0;
         }
     }
-*/
 
-    .prompt {
-        text-align: center;
-        color:  #752a07;
-        font-size: 1.4em;
-    }
-
-    .preloader-wrapper.active {
-        position: absolute;
-        top :0;
-        left: 0;
-        right: 0;
+    footer {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        position: fixed;
         bottom: 0;
-        margin: auto;
-        z-index: 1;
+
+        .btn {
+            background-color: $color-action-buttons;
+            font-weight: bold;
+        }
     }
-    
+}
+
+.image-preview-container {
+    margin: 20px 0px;
+
     .placeholder-preview {
         text-align: center;
         border-radius: 5px;
         border: 2px dashed black;
     }
+}
+.preloader-wrapper.active {
+    position: absolute;
+    top :0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
 
-    .render-preview {
+.render-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .details {
+        text-align: center;
+    }
+}
+
+@media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
+    .navBar, .sidenav {
+        display: none;
+    }
+}
+
+#flyer {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+
+    .buttons {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: center;
 
-        .details {
-            text-align: center;
+        .SocialMediaShareButton {
+            display: inline;
+            padding: 5px 5px 5px 5px;
+            outline: none;
+        }
+
+        button {
+            margin: 5px;
+            box-shadow: none;
+        }
+    }
+
+    .bottom {
+        .qrcode {
+            display: none;
+        }
+    }
+
+    .description {
+        font-weight: normal;
+        font-family: Montserrat;
+    }
+
+    @media print {
+
+        .buttons {
+            display: none;
+        }
+
+        .bottom{
+            display: flex;
+
+            .details {
+                width: 70%;
+            }
+
+            .qrcode {
+                height: 100%;
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }

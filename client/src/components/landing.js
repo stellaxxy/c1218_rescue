@@ -46,18 +46,16 @@ class Landing extends Component {
                             <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
                         </div>
                     </div>
-
-
                     <div id="modalBegin" ref="modalBegin" className="modal">
                         <div className="modal-content">
                             <h4>Welcome</h4>
                             <p>How would you like to begin?</p>
                         </div>
                         <div className="modal-footer">
-                            <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Describe {activeCaseType === 'lost' ? 'Your':'The'} Pet</Link>
-                            <Link to={"/search?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
-                                See List of All {searchType} Pets
+                            <Link to={"/casedescription?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
+                                Search List of {searchType} Pets
                             </Link>
+                            <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Create a Flyer</Link>
                         </div>
                     </div>
                 </div>

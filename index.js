@@ -225,7 +225,6 @@ app.get('/api/casedetails', async (request, response) => {
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
         const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, imgURL, caseKey} = request.body;
-        console.log("body ....", request.body);
         const coverImg = upload.getFilepath(request);
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
@@ -250,7 +249,6 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
-        console.log('insertcase',insertcase);
 
         // send mail after registering case
 
@@ -392,13 +390,10 @@ app.get('/api/userdetails', async (request, response) => {
 
     try {
         const {caseid} = request.query;
-        console.log(caseid);
         const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
         //const usercaseid = [caseid];
         const usercall = mysql.format(phonenoquery, [caseid]);
-        console.log(usercall);
         const calluser = await db.query(usercall);
-        console.log(calluser);
 
         response.send({
             success: true,
@@ -428,7 +423,6 @@ app.get('/api/yelp/details', async (request, response) => {
         };
 
         const result = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, config);
-        //console.log('vet details result:', result.data);
 
         response.send({
             data: result.data
