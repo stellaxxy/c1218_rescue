@@ -58,7 +58,7 @@ class CaseDetails extends Component {
         var caseUrl = "/contactPage/" + this.state.data.id;
 
         const goBackUrl = queryString.stringify(this.state.query);
-       
+
         return (
 
             <div>
