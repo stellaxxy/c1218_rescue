@@ -3,126 +3,131 @@
     width: 100%;
     text-align: center;
     color: #752a07;
-    background-color: #eeeeee;
 
-    .responsive-img {
-        position: absolute;
-        top: 29%;
-        left: 3%;
-        width: 75%;
-        opacity: .8;
-        z-index: 0;
 
-        @media (min-width: 635px) {
-            height: 90%;
+    .landingContainer {
+        height: 100%;
+        background-color: #eeeeee;
 
-            max-width: 520px;
-            top: 50%;
-            left: 36%;
-            transform: translate(-80%, -45%);
-        }
-    }
-
-    .landingText {
-        @media (min-width: 635px) {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            width: 40%;
-            height: 50%;
+        .responsive-img {
             position: absolute;
-            top: 20%;
-            right: 8%;
+            top: 29%;
+            left: 3%;
+            width: 75%;
+            opacity: .8;
+            z-index: 0;
 
-            p.landing-text::after {
-                content: ' We help reunite pet owners with their loved ones.'
+            @media (min-width: 635px) {
+                height: 90%;
+
+                max-width: 520px;
+                top: 50%;
+                left: 36%;
+                transform: translate(-80%, -45%);
             }
         }
 
-        .landingHeading {
-            position: relative;
-            top: 20px;
+        .landingText {
+            @media (min-width: 635px) {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                width: 40%;
+                height: 50%;
+                position: absolute;
+                top: 20%;
+                right: 8%;
 
-
-            .landing-title {
-                font-family: 'Kanit', sans-serif;
-                font-size: 25px;
-                margin-bottom: 5px;
-                margin-top: 0;
-
+                p.landing-text::after {
+                    content: ' We help reunite pet owners with their loved ones.'
+                }
             }
 
-            .landing-text {
+            .landingHeading {
                 position: relative;
-                font-family: 'Kanit', sans-serif;
-                font-size: 18px;
-                z-index: 1;
+                top: 20px;
 
-            }
-    }
-    }
 
-/*
-    @media (min-width: 1236px) {
-        p.landing-text::after {
-            content: ' We help reunite pet owners with their loved ones.'
-        }
-    }
-*/
-    .btn-container {
-        position: absolute;
-        top: 60%;
-        left: 55%;
+                .landing-title {
+                    font-family: 'Kanit', sans-serif;
+                    font-size: 25px;
+                    margin-bottom: 5px;
+                    margin-top: 0;
 
-        .btn {
-            background-color: #EB5E30;
-            margin: 10px 5px;
-            width: 87%;
-            font-weight: bold;
-            font-family: 'Kanit', sans-serif;
-            border-radius: 5px;
-        }
+                }
 
-        @media (min-width: 635px) {
-            position: relative;
-            width: 50%;
-            top: 30%;
-            left: 0;
-        }
+                .landing-text {
+                    position: relative;
+                    font-family: 'Kanit', sans-serif;
+                    font-size: 18px;
+                    z-index: 1;
 
-        @media (min-width: 1236px) {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 10px;
-            min-width: 25vw;
-            max-width: 30vw;
-        }
-    }
-
-    #modalBegin {
-        height: 40vh;
-        border-radius: 10px;
-
-        .modal-content {
-            padding-bottom: 10px;
-
-            p {
-                font-size: 130%;
-                margin-bottom: 10px;
+                }
             }
         }
 
-        .modal-footer {
-            height: 50%;
-            display: flex;
-            flex-direction: column;
+        /*
+            @media (min-width: 1236px) {
+                p.landing-text::after {
+                    content: ' We help reunite pet owners with their loved ones.'
+                }
+            }
+        */
+        .btn-container {
+            position: absolute;
+            top: 60%;
+            left: 55%;
 
             .btn {
-                background-color: #26a69a;
+                background-color: #EB5E30;
+                margin: 10px 5px;
+                width: 87%;
+                font-weight: bold;
+                font-family: 'Kanit', sans-serif;
+                border-radius: 5px;
             }
 
+            @media (min-width: 635px) {
+                position: relative;
+                width: 50%;
+                top: 30%;
+                left: 0;
+            }
+
+            @media (min-width: 1236px) {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 10px;
+                min-width: 25vw;
+                max-width: 30vw;
+            }
+        }
+
+        #modalBegin {
+            height: 40vh;
+            border-radius: 10px;
+
+            .modal-content {
+                padding-bottom: 10px;
+
+                p {
+                    font-size: 130%;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .modal-footer {
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+
+                .btn {
+                    background-color: #26a69a;
+                }
+
+            }
         }
     }
 }

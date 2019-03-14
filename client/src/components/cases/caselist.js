@@ -31,11 +31,9 @@ class CaseList extends Component {
     }
 
     render(){
-        //console.log('caselist props:', this.props.filterValues);
-
         if(this.state.error === true){
             return (
-                <div>No Data Available</div>
+                <div className="noData">No Data Available</div>
             );
         }
 

@@ -69,12 +69,20 @@ class Map extends Component {
     }
 
     initMap() {
+
+        let center = {
+            lat: 33.6846,
+            lng: -117.8265
+        };
+
+        if(this.props.data.length > 0){
+            center.lat = this.props.data[0].coordinates.latitude;
+            center.lng = this.props.data[0].coordinates.longitude;
+        }
+
         this.renderedMap = new google.maps.Map(document.getElementById("vetMap"), {
 
-            center: {
-                lat: 33.6846,
-                lng: -117.8265
-            },
+            center,
             zoom: 10,
             gestureHandling: 'greedy'
         });

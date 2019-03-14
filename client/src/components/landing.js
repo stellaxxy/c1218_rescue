@@ -33,30 +33,30 @@ class Landing extends Component {
 
         return(
             <div className="landing bottomContainer">
-                <img className="responsive-img" src={landingImage} alt="dog"/>
-                <div className="landingText">
-                    <div className="landingHeading">
-                        <p className="landing-title">Getting Pets Home</p>
-                        <p className="landing-text">Search for a lost pet or list one found.</p>
-                    </div>
+                <div className="landingContainer">
+                    <img className="responsive-img" src={landingImage} alt="dog"/>
+                    <div className="landingText">
+                        <div className="landingHeading">
+                            <p className="landing-title">Getting Pets Home</p>
+                            <p className="landing-text">Search for a lost pet or list one found.</p>
+                        </div>
 
-                    <div className="btn-container">
-                        <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
-                        <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
+                        <div className="btn-container">
+                            <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
+                            <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
+                        </div>
                     </div>
-                </div>
-
-
-                <div id="modalBegin" ref="modalBegin" className="modal">
-                    <div className="modal-content">
-                        <h4>Welcome</h4>
-                        <p>How would you like to begin?</p>
-                    </div>
-                    <div className="modal-footer">
-                        <Link to={"/casedescription?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
-                            Search List of {searchType} Pets
-                        </Link>
-                        <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Create a Flyer</Link>
+                    <div id="modalBegin" ref="modalBegin" className="modal">
+                        <div className="modal-content">
+                            <h4>Welcome</h4>
+                            <p>How would you like to begin?</p>
+                        </div>
+                        <div className="modal-footer">
+                            <Link to={"/casedescription?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
+                                Search List of {searchType} Pets
+                            </Link>
+                            <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Create a Flyer</Link>
+                        </div>
                     </div>
                 </div>
             </div>

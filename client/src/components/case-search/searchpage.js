@@ -33,7 +33,7 @@ class SearchPage extends Component {
 
             const qs = queryString.stringify(filterValues);
             const result = await axios.get('/api/caselist?' + qs);
-            console.log('search page data:', result.data.data);
+
             this.setState({
                 cases: result.data.data || []
             })
@@ -68,14 +68,13 @@ class SearchPage extends Component {
         } else {
             return(
                 <div className="bottomContainer">
-                    <h5 className="searchListTitle">LOST & FOUND LIST</h5>
+                    <h4 className="searchListTitle">LOST & FOUND LIST</h4>
                     <h6 className="searchListTitle">SEARCH FOR BEST MATCHES</h6>
                     <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
                     <CaseList cases={this.state.cases} filterValues={filterValues}/>
                 </div>
             );
         }
-        //<SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
     }
 }
 
