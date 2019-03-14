@@ -9,7 +9,7 @@ class CaseDetails extends Component {
     state = {
         data: null,
         query: {}
-    }
+    };
 
     async componentDidMount() {
 
