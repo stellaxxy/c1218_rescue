@@ -53,7 +53,7 @@ class Landing extends Component {
                         <p>How would you like to begin?</p>
                     </div>
                     <div className="modal-footer">
-                        <Link to={"/search?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
+                        <Link to={"/casedescription?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
                             Search List of {searchType} Pets
                         </Link>
                         <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Create a Flyer</Link>
