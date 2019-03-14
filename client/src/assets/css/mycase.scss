@@ -1,11 +1,10 @@
-
 .case-details {
   text-align: center;
 
 
   .striped {
     th {
-      padding: 0px 0px;
+      padding: 0;
     }
   }
   footer{
@@ -26,48 +25,19 @@
 
   .header {
     text-align: center;
-    color: green;
-    font-style: italic;
+    color: black;
+   // font-style: italic;
   }
 
 
 }
 
+.my-case .header {
+  color: black;
+}
 
 
 
-
-
-
-
-
-
-
-
-
-//.myCaseContainer {
-//  background-color: #fff3e0;
-//  overflow-y: scroll;
-//
-//  .header {
-//      text-align: center;
-//      color: green;
-//      font-style: italic;
-//    }
-//  .w3-half{
-//    font-weight: bold;
-//    font-size:1rem;
-//
-//  }
-//
-//
-//  .striped {
-//    th {
-//      padding: 0px 0px;
-//    }
-//  }
-//
-//  }
 
 
 
