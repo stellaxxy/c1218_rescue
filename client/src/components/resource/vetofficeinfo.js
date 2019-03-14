@@ -59,6 +59,9 @@ class OfficeInfo extends Component {
            return <div key={dayOfWeek}>{dayOfWeek}: {start} to {end}</div>
         });
 
+        const index = Math.floor(hoursDiv.length / 2);
+        const halfArray = hoursDiv.splice(0, index);
+
         const goBackUrl = queryString.stringify({location: this.state.location});
 
         return (
@@ -69,14 +72,18 @@ class OfficeInfo extends Component {
                     <div>Address: {address1}</div>
                     <div>{address2}</div>
                     <div>Rating: {rating}</div>
-                    <div>Hours: {hoursDiv}</div>
+                    <div>
+                        <p>Hours:</p>
+                        <div className="vetHours firstHalf">{halfArray}</div>
+                        <div className="vetHours">{hoursDiv}</div>
+                    </div>
                 </div>
                 <div className="imgContainer">
                     <img src={image_url} className="vetDetailImage"/>
                 </div>
                 <div className="callContainer">
-                    <Link to={`/searchvet?${goBackUrl}`} className="waves-effect waves-light btn orange text-white call">Go Back</Link>
-                    <Link to={`tel:+${display_phone}`} className="waves-effect waves-light btn orange text-white call">Call</Link>
+                    <Link to={`/searchvet?${goBackUrl}`} className="waves-effect waves-light btn text-white call">Go Back</Link>
+                    <Link to={`tel:+${display_phone}`} className="waves-effect waves-light btn text-white call">Call</Link>
                 </div>
             </div>
 

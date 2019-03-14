@@ -324,13 +324,11 @@ app.post('/api/contactuser', async (request, response) => {
         const userCaseId = [caseId]
         const userEmail = mysql.format(userInfo, userCaseId);
         const userSendEmail = await db.query(userEmail);
-        const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0]
+        const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0];
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
-        // Four important options for our mailOptions
         const mailOptions = {
             from: mailConfig.auth.user,
-            //to:'charubenjwal04@gmail.com',
             to: email,
             subject: subject,
             text: emailMessage
@@ -360,17 +358,12 @@ app.post('/api/yelp/businesses', async (request, response) => {
             }
         };
 
-        //yelpURL += `?location=${location}`;
         if (location) {
             config.params.location = location;
         } else {
             throw new Error('Please enter in valid location');
         }
-        /*
-                 for (let parameter in request.body) {
-                     yelpURL += `${parameter}=${request.body[parameter]}`;
-                 }
-        */
+
         const data = await axios.get(yelpURL, config);
 
         response.send({
@@ -391,7 +384,6 @@ app.get('/api/userdetails', async (request, response) => {
     try {
         const {caseid} = request.query;
         const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
-        //const usercaseid = [caseid];
         const usercall = mysql.format(phonenoquery, [caseid]);
         const calluser = await db.query(usercall);
 
@@ -411,7 +403,6 @@ app.get('/api/yelp/details', async (request, response) => {
 
     try {
         const {id} = request.query;
-        console.log('yelp detail id:', id);
         if (!id) {
             throw new Error('Please provide valid id.');
         }
