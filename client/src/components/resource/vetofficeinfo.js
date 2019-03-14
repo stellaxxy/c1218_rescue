@@ -4,6 +4,7 @@ import PetImage from "../../assets/images/image11.jpg";
 import axios from 'axios';
 import './vetofficeinfo.scss';
 import queryString from 'query-string';
+import Star from '../general/star-rating/star_rating';
 
 class OfficeInfo extends Component {
     state = {
@@ -71,7 +72,10 @@ class OfficeInfo extends Component {
                     <h4>{name}</h4>
                     <div>Address: {address1}</div>
                     <div>{address2}</div>
-                    <div>Rating: {rating}</div>
+                    <div>Rating:
+                        <Star rating={rating}/>
+                    </div>
+
                     <div>
                         <p>Hours:</p>
                         <div className="vetHours firstHalf">{halfArray}</div>
