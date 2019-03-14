@@ -23,6 +23,10 @@ import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
 
 
+
+
+
+
 const App = () => (
     <div className="mainContainer">
         <MainNav/>
@@ -41,6 +45,9 @@ const App = () => (
         <Route path="/vetoffice" component={OfficeInfo}/>
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
+
+
+
     </div>
 );
 

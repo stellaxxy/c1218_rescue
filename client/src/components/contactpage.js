@@ -93,7 +93,7 @@ class Contact extends Component {
                             </div>
                             <div>
                                 <a href={`tel:${this.state.phone}`}                        // {"tel:{phone}"}
-                                   className="btn-floating btn-large waves-effect waves-light pulse red center"><i
+                                   className="btn-floating btn-large waves-effect waves-light pulse green center"><i
                                     className="material-icons center">phone</i></a>
                             </div>
                         </form>
@@ -106,7 +106,7 @@ class Contact extends Component {
                         <Link to={"/casedetails" +this.props.location.search}
                               className="waves-effect waves-light btn orange text-white deep-orange accent-4">Back</Link>
                         <button className="waves-effect waves-light btn orange text-white deep-orange accent-4"
-                                float="right" onClick={this.handelSubmit.bind(this)}>Send
+                                float="right" onClick={this.handelSubmit.bind(this)}>Send<i className="material-icons center">email</i>
                         </button>
                     </div>
                 </footer>
