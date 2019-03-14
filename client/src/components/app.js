@@ -4,6 +4,7 @@ import '../assets/css/app.scss';
 import React from 'react';
 import SearchPage from './case-search';
 import SearchForm from './case-search/searchform';
+import DescribeForm from './case-description';
 import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
@@ -41,6 +42,7 @@ const App = () => (
         <Route path="/mycase" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
         <Route path="/flyer/:caseid" component={FlyerCode}/>
+        <Route path="/casedescription" component={DescribeForm}/>
 
 
     </div>

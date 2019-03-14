@@ -73,7 +73,7 @@ class FlyerCode extends Component {
                         <div className="details">
                             <table>
                                 <tbody>
-                                    <tr><td><i className="material-icons">phone</i>  {data.phone}</td></tr>
+                                    <tr><td><i className="material-icons">phone</i> {data.phone}</td></tr>
                                     <tr><td><i className="material-icons">location_on</i> {locationText}</td></tr>
                                 </tbody>
                             </table>
