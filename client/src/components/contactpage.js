@@ -19,18 +19,21 @@ class Contact extends Component {
 
     }
 
-    async componenetDidMount() {
+    async componentDidMount() {
 
 
-        console.log('url', this.props.url);
-        const {caseid, phoneNo} = this.props.data
+
+        const queryObj = queryString.parse(this.props.location.search);
+        console.log('contact page queryObj:',queryObj);
         console.log('this.props.data:', this.props.data)
-        await axios.get('/api/userdetails', {
-            caseId: caseid,
-            phone: phoneNo
-        })
+
+        const {id}= queryObj;
+        let response= await axios.get('/api/userdetails?caseid='+id)
+
+        console.log('contact page response',response)
         this.setState({
-            call: true
+            call: true,
+            phone: response.data.data.phone
         })
 
 
@@ -89,8 +92,8 @@ class Contact extends Component {
                                 </div>
                             </div>
                             <div>
-                                <a href={`tel:+91${this.phone}`}                           // {"tel:{phone}"}
-                                   className="btn-floating btn-large waves-effect waves-light red center"><i
+                                <a href={`tel:${this.state.phone}`}                        // {"tel:{phone}"}
+                                   className="btn-floating btn-large waves-effect waves-light pulse green center"><i
                                     className="material-icons center">phone</i></a>
                             </div>
                         </form>
@@ -103,7 +106,7 @@ class Contact extends Component {
                         <Link to={"/casedetails" +this.props.location.search}
                               className="waves-effect waves-light btn orange text-white deep-orange accent-4">Back</Link>
                         <button className="waves-effect waves-light btn orange text-white deep-orange accent-4"
-                                float="right" onClick={this.handelSubmit.bind(this)}>Send
+                                float="right" onClick={this.handelSubmit.bind(this)}>Send<i className="material-icons center">email</i>
                         </button>
                     </div>
                 </footer>

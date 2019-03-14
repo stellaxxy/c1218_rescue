@@ -55,8 +55,6 @@ class MyCase extends Component {
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} closeModal={this.closeModal}/>
 
-                    <div>Loading</div>
-
                 </Fragment>
 
             );
