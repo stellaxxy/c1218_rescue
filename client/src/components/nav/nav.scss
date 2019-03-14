@@ -1,5 +1,11 @@
 $color-bars: #e79307;
 
+.brand-logo {
+    //font-family: 'Kanit', sans-serif;
+    font-family: 'Sniglet', cursive;
+    font-weight: bold;
+}
+
 nav, .sidenav {
     background-color: $color-bars;
 
