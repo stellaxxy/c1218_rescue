@@ -11,11 +11,17 @@ class FlyerCode extends Component {
         error: false
     }
 
+    //-----------------------------------------------------------------------------------------
+    // PRINT FLYER
+    //-----------------------------------------------------------------------------------------   
     handlePrintClick = () => {
         window.print();
         return false;
     }
 
+    //-----------------------------------------------------------------------------------------
+    // SEND EMAIL
+    //----------------------------------------------------------------------------------------- 
     async handleEmailSubmit(event) {
         try {
             event.preventDefault();
@@ -42,7 +48,7 @@ class FlyerCode extends Component {
     }
 
     //-------------------------------------------------------------------------
-    // Get case details and store in state
+    // RETRIEVE CASE DETAILS (INTO STATE)
     //-------------------------------------------------------------------------
     async componentDidMount() {
         try {
@@ -57,6 +63,9 @@ class FlyerCode extends Component {
         }
     }
 
+    //-------------------------------------------------------------------------
+    // RENDER
+    //-------------------------------------------------------------------------
     render() {
 
         // Have to reset because Materialize modals set to HIDDEN

@@ -11,7 +11,6 @@ import lostIcon from "../../assets/images/icons8-region-48.png";
 class Map extends Component {
 
     componentDidMount() {
-        //console.log('map props:', this.props);
         window.initMap = this.initMap.bind(this);
         loadJS('https://maps.googleapis.com/maps/api/js?key='+config.googleMapApi+'&callback=initMap');
 

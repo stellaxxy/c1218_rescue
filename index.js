@@ -8,10 +8,8 @@ const googleMap = require('./services/maps');
 const upload = require('./services/upload');
 const nodemailer = require('nodemailer');
 const {mailConfig} = require('./config');
-var transporter = nodemailer.createTransport(mailConfig);
+const transporter = nodemailer.createTransport(mailConfig);
 const Email = require('email-templates');
-
-
 
 const PORT = process.env.PORT || 9000;
 const HOST = process.env.HOST || 'localhost';
@@ -21,7 +19,15 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static(__dirname + '/client/dist'));
+app.use(cors());
 
+//===========================================================================================
+// API
+//===========================================================================================
+
+//-------------------------------------------------------------------------------------------
+// CASE LIST
+//-------------------------------------------------------------------------------------------
 
 const CASELIST_FILTERS = [
     {
@@ -46,37 +52,10 @@ const CASELIST_FILTERS = [
         param: 'animalType',
         validValues: ['cat', 'dog'],
         sqlCriteria: 'a.`animalType` = ?'
-    },
-    {
-        param: 'gender',
-        validValues: ['female', 'male'],
-        sqlCriteria: 'a.`gender` = ?'
-    },
-    {
-        param: 'color',
-        validValues: ['black',
-            'blue',
-            'brown',
-            'chocolate',
-            'cinnamon',
-            'cream',
-            'fawn',
-            'gold',
-            'gray',
-            'lilac',
-            'red',
-            'smoke',
-            'white',
-            'yellow'],
-        sqlCriteria: 'LOWER(a.`color`) = ?'
     }
 ];
 
-// Middleware
-app.use(cors());
-
-
-// API
+// ENDPOINT
 app.get('/api/caselist', async (request, response) => {
     try {
 
@@ -126,6 +105,9 @@ app.get('/api/caselist', async (request, response) => {
     }
 });
 
+//-------------------------------------------------------------------------------------------
+// CASE DETAILS
+//-------------------------------------------------------------------------------------------
 app.get('/api/casedetails', async (request, response) => {
     try {
         let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`state`, c.`zipcode`, \n" +
@@ -137,6 +119,7 @@ app.get('/api/casedetails', async (request, response) => {
             "            INNER JOIN `users` u ON c.`userID` = u.`id` ";
         let data = {};
 
+        // LOOKUP BY CASE KEY
         if (request.query.caseKey || request.query.email) {
             if (request.query.caseKey === undefined) {
                 throw new Error(`Please provide valid case key`);
@@ -151,6 +134,7 @@ app.get('/api/casedetails', async (request, response) => {
 
             data = await db.query(query, [email, caseKey]);
 
+        // LOOKUP BY CASE ID
         } else {
             const id = request.query.id;
             if (id === undefined) {
@@ -165,6 +149,7 @@ app.get('/api/casedetails', async (request, response) => {
         }
 
 
+        // ASSEMBLE RESPONSE DATA
         const output = {
             success: false
         };
@@ -226,7 +211,9 @@ app.get('/api/casedetails', async (request, response) => {
 
 });
 
-//API for for lost dog
+//-------------------------------------------------------------------------------------------
+// CREATE A CASE
+//-------------------------------------------------------------------------------------------
 app.post('/api/createcase', upload.single('coverImg'), async (request, response) => {
     try {
         const {color, breed, name, animalType, gender, description, street, animalSize, city, email, petName, phone, caseType, caseDate, imgURL, caseKey} = request.body;
@@ -235,20 +222,18 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
 
         const address = await googleMap.getAddress(`${street}, ${city}`);
 
-// insert into users table
+        // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
         const insertUserInfo = [email, name, phone];
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
         var userID = insertuser.insertId;
-        console.log('insertuser',insertuser);
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
         const insert = [breed, color, petName, animalType, gender, description, animalSize];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
-        console.log('insertResult',insertResult);
         var animalID = insertResult.insertId;
 
         //  insert into cases table
@@ -256,27 +241,8 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
-        console.log('insertResult',insertResult);
 
         // send mail after registering case
-
-
-
-        // const subject = `Your casekey is ${caseKey} ${caseType} `;
-        //         // const emailMessage = `Hello ${name} Thanks for using paws, please find your case id in details below:
-        //         //  caseid: ${caseKey} ,
-        //         //  case type: ${caseType}`
-        //         //
-        //         // // Four important options for our mailOptions
-        //         // const mailOptions = {
-        //         //     from: mailConfig.auth.user,
-        //         //     //to:'charubenjwal04@gmail.com',
-        //         //     to: email,
-        //         //     subject: subject,
-        //         //     text: emailMessage
-        //         // };
-        //         //
-        //         // await transporter.sendMail(mailOptions);
 
         const emailTemplate = new Email({
             message: {
@@ -324,7 +290,10 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
     }
 
 });
-//close case:
+
+//-------------------------------------------------------------------------------------------
+// CLOSE A CASE
+//-------------------------------------------------------------------------------------------
 app.post('/api/updatestatus', async (request, response) => {
 
     try {
@@ -347,7 +316,9 @@ app.post('/api/updatestatus', async (request, response) => {
 
 });
 
-
+//-------------------------------------------------------------------------------------------
+// CONTACT USER WHO REPORTED A CASE
+//-------------------------------------------------------------------------------------------
 app.post('/api/contactuser', async (request, response) => {
     try {
         const {emailMessage, caseId} = request.body;
@@ -375,8 +346,31 @@ app.post('/api/contactuser', async (request, response) => {
     }
 });
 
+//-------------------------------------------------------------------------------------------
+// USER DETAILS
+//-------------------------------------------------------------------------------------------
+app.get('/api/userdetails', async (request, response) => {
 
-// API Call for Yelp Data
+    try {
+        const {caseid} = request.query;
+        const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
+        const usercall = mysql.format(phonenoquery, [caseid]);
+        const calluser = await db.query(usercall);
+
+        response.send({
+            success: true,
+            data:calluser[0]
+
+        })
+    } catch (error) {
+        handleError(response, error.message);
+    }
+
+});
+
+//-------------------------------------------------------------------------------------------
+// YELP VET LIST
+//-------------------------------------------------------------------------------------------
 app.post('/api/yelp/businesses', async (request, response) => {
     const {location} = request.body;
 
@@ -409,30 +403,9 @@ app.post('/api/yelp/businesses', async (request, response) => {
     }
 });
 
-
-
-// contact user via phone
-
-app.get('/api/userdetails', async (request, response) => {
-
-    try {
-        const {caseid} = request.query;
-        const phonenoquery = "select u.* from cases as c join users as u ON c.userID =u.id WHERE c.id=?";
-        const usercall = mysql.format(phonenoquery, [caseid]);
-        const calluser = await db.query(usercall);
-
-        response.send({
-            success: true,
-            data:calluser[0]
-
-        })
-    } catch (error) {
-        handleError(response, error.message);
-    }
-
-});
-
-//API Call for Yelp Business Detail
+//-------------------------------------------------------------------------------------------
+// YELP VET DETAILS
+//-------------------------------------------------------------------------------------------
 app.get('/api/yelp/details', async (request, response) => {
 
     try {
@@ -460,12 +433,6 @@ app.get('/api/yelp/details', async (request, response) => {
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 
-});
-
-
-
-app.get('*', (request, response) => {
-    response.sendFile(__dirname + '/client/dist/index.html');
 });
 
 

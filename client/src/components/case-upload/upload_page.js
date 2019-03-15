@@ -9,29 +9,38 @@ class UploadPage extends Component {
     uploading: false
   };
 
+  //-----------------------------------------------------------------------------------------
+  // STORE SELECTED PHOTO IN STATE
+  //----------------------------------------------------------------------------------------- 
   handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
 
+  //-----------------------------------------------------------------------------------------
+  // CREATE CASE / FLYER
+  //----------------------------------------------------------------------------------------- 
   submit = async values => {
     let caseId = 0;
     let caseKey = 0;
 
     try {
+      // TRIGGERS RENDER WITH SPINNER
       this.setState({uploading: true});
 
+      // COLLECT USER INPUT INTO FORM DATA FOR POST REQUEST
       let data = new FormData();
-
       for (let [key, value] of Object.entries(values)) {
         
         if (key === 'coverImg') {
-          // For now, only send 1st image
+          // CURRENTLY ONLY SEND 1 IMAGE
           value = value[0];       
         }
   
         data.append(key, value);
       }
   
+      // GENERATE & ADD A CASE KEY
       data.append('caseKey', createCaseKey());
   
+      // CALL ENDPOINT
       const response = await axios({
         method: 'post',
         url: '/api/createcase',
@@ -39,10 +48,11 @@ class UploadPage extends Component {
         config: { headers: {'Content-Type': 'multipart/form-data' }}
       });
 
-      console.log(response);
+      // GET CASEID AND CASE KEY FROM RESPONSE
       caseId = response.data.insertID;
       caseKey = response.data.caseKey;
 
+      // REDIRECT TO UPLOAD CONFIRMATION PAGE
       this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
     } catch (error) {
       this.props.history.push(`/upload-complete/0/0`);
