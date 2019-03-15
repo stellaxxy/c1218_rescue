@@ -90,10 +90,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`) VALUES
-(1, 'Stella', 'test@test.com'),
-(2, 'Billy Bob', 'bb1010@gmail.com'),
-(3, 'SpongeBob', 'spongey25@underthesea.com');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`) VALUES
+(1, 'Stella', 'test@test.com', '9196042030'),
+(2, 'Billy Bob', 'bb1010@gmail.com', '9196042030'),
+(3, 'SpongeBob', 'spongey25@underthesea.com', '9196042030');
 
 --
 -- Indexes for dumped tables
