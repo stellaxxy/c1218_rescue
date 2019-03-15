@@ -114,10 +114,18 @@ $color-background: #fff3e0 !default;
         cursor: pointer;
     }
 
+    form {
+        top: 0px;
+
+        button {
+            background-color: $color-action-buttons;
+        }
+    }
+
     .footer {
         display: none;
     }
-    
+
     @media print {
 
         .buttons {
@@ -147,6 +155,10 @@ $color-background: #fff3e0 !default;
                 justify-content: center;
                 align-items: center;
             }
+        }
+
+        form {
+            display: none;
         }
 
         .footer {
