@@ -3,7 +3,7 @@ import queryString from 'query-string';
 
 class SearchForm extends Component {
 
-    onSubmit = async () => {
+    onSubmit = () => {
         event.preventDefault();
         let formData = new FormData(event.target);
 
@@ -15,12 +15,9 @@ class SearchForm extends Component {
         this.props.history.push('/search?' + queryString.stringify(filters));
     };
 
-    onCancel = async () => {
-        console.log('on cancel called');
-
-        console.log('state:', this.props.history.location.search);
+    onCancel = () => {
         this.props.history.push('/search' + this.props.history.location.search);
-        //this.props.history.push('/search?'+ queryString.stringify(this.state.filters));
+
     };
 
     render() {
