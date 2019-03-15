@@ -16,12 +16,13 @@ class FlyerCode extends Component {
         return false;
     }
 
+    //-------------------------------------------------------------------------
+    // Get case details and store in state
+    //-------------------------------------------------------------------------
     async componentDidMount() {
         try {
             const { caseid } = this.props.match.params;
-
             const response = await axios.get('/api/casedetails?id=' + caseid);
-            console.log('response: ', response);
 
             this.setState({
                 data: response.data.data
@@ -33,24 +34,36 @@ class FlyerCode extends Component {
 
     render() {
 
+        // Have to reset because Materialize modals set to HIDDEN
+        document.body.style.overflow = "";
+
         const errorMessage = <h5>We're sorry.  An error has occurred.  Please try again.</h5>;
 
         try {
             const {data, error} = this.state;
 
+            // HANDLE ERROR
             if (error) {
                 return errorMessage;
             }
 
+            // HANDLE STATE PRIOR TO DID MOUNT
             if (data === null) {
                 return <div>Loading</div>
             }
 
+            //----------------------------------------------------------------
+            // GET VARIABLES FROM DATA
+            //----------------------------------------------------------------
             const {phone} = data;
             const {location, city, state, zipcode} = data.location;
             const {animalType, description, size} = data.animalDetail;
 
-            const url = `http://pawsfindhome.com/casedetails/${data.id}`;
+
+            //----------------------------------------------------------------
+            // CREATE DERIVED VARIABLES
+            //----------------------------------------------------------------
+            const url = `http://pawsfindhome.com/flyer/${data.id}`;
             const animalTypeDisplay = animalType === 'other' ? 'pet' : animalType;
             const caseTypeDisplay = data.caseType[0].toUpperCase() + data.caseType.slice(1);
             const socialMediaTitle = data.caseType === 'found' ?
