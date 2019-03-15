@@ -9,6 +9,8 @@ const upload = require('./services/upload');
 const nodemailer = require('nodemailer');
 const {mailConfig} = require('./config');
 var transporter = nodemailer.createTransport(mailConfig);
+const Email = require('email-templates');
+
 
 
 const PORT = process.env.PORT || 9000;
@@ -239,12 +241,14 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
         var userID = insertuser.insertId;
+        console.log('insertuser',insertuser);
 
         //  insert into animal table
         const animalsTable = " INSERT INTO `animals` (`breed`,`color`,`name`,`animalType`,`gender`,`description`,`size`) VALUES (?,?,?,?,?,?,?)";
         const insert = [breed, color, petName, animalType, gender, description, animalSize];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
+        console.log('insertResult',insertResult);
         var animalID = insertResult.insertId;
 
         //  insert into cases table
@@ -252,26 +256,53 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insertlocation = [address.city, street, caseType, address.latitude, address.longitude, address.state, address.zipcode, coverImg, caseDateFormatted, animalID, userID, caseKey];
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
+        console.log('insertResult',insertResult);
 
         // send mail after registering case
 
 
 
-        const subject = `Your casekey is ${caseKey} ${caseType} `;
-        const emailMessage = `Hello ${name} Thanks for using paws, please find your case id in details below:
-         caseid: ${caseKey} ,
-         case type: ${caseType}`
+        // const subject = `Your casekey is ${caseKey} ${caseType} `;
+        //         // const emailMessage = `Hello ${name} Thanks for using paws, please find your case id in details below:
+        //         //  caseid: ${caseKey} ,
+        //         //  case type: ${caseType}`
+        //         //
+        //         // // Four important options for our mailOptions
+        //         // const mailOptions = {
+        //         //     from: mailConfig.auth.user,
+        //         //     //to:'charubenjwal04@gmail.com',
+        //         //     to: email,
+        //         //     subject: subject,
+        //         //     text: emailMessage
+        //         // };
+        //         //
+        //         // await transporter.sendMail(mailOptions);
 
-        // Four important options for our mailOptions
-        const mailOptions = {
-            from: mailConfig.auth.user,
-            //to:'charubenjwal04@gmail.com',
-            to: email,
-            subject: subject,
-            text: emailMessage
-        };
+        const emailTemplate = new Email({
+            message: {
+                from: mailConfig.auth.user
+            },
+            // uncomment below to send emails in development/test env:
+            //send: true,
+            preview: false,
+            transport: transporter
+        });
 
-        await transporter.sendMail(mailOptions);
+        emailTemplate
+            .send({
+                template: 'paws',
+                message: {
+                    to: email
+                },
+                locals: {
+                    name: name,
+                    caseKey:caseKey,
+                    caseType:caseType,
+                    city:city
+                }
+            })
+            .then(console.log)
+            .catch(console.error);
 
 
         //  insert into image table
