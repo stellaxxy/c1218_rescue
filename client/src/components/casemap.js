@@ -68,9 +68,9 @@ class CaseMap extends Component {
             const urlstring = queryString.stringify(this.props.url);
 
             if (item.caseType === 'found'){
-                contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/flyer/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             } else if(item.caseType === 'lost') {
-                contentString = `<a href="/casedetails/?id=${item.id}&${urlstring}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                contentString = `<a href="/flyer/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
             }
 
 
