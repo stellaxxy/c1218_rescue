@@ -33,9 +33,11 @@
   "homepage": "https://github.com/stellaxxy/c1218_rescue#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "email-templates": "^5.0.4",
     "materialize-css": "1.0.0",
     "nodemailer": "^5.1.1",
-    "qrcode.react": "0.9.3",
+    "pug": "^2.0.3",
+    "qrcode.react": "^0.9.3",
     "query-string": "5.1.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
