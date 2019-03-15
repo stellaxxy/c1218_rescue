@@ -39,7 +39,7 @@ class UploadPage extends Component {
         config: { headers: {'Content-Type': 'multipart/form-data' }}
       });
 
-
+      console.log(response);
       caseId = response.data.insertID;
       caseKey = response.data.caseKey;
 
