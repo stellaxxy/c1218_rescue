@@ -65,7 +65,7 @@ class MyCase extends Component {
             <div>
                 <div className="container my-case">
                     <main>
-                        <h5 className="header ">Please help me</h5>
+                        <h4 className="header mycaseHeading">Please help me</h4>
                         <div className="w3-container w3-half">
                             <img className="responsive-img" src={this.state.data.coverImg}/>
                         </div>
@@ -73,10 +73,10 @@ class MyCase extends Component {
                         <table className="centered striped">
                             <thead>
                             <tr>
-                                <th>Case type:{this.state.data.caseType.toUpperCase()} </th>
+                                <th>Case type: {this.state.data.caseType.toUpperCase()} </th>
                             </tr>
                             <tr>
-                                <th>City:{this.state.data.location.city} </th>
+                                <th>City: {this.state.data.location.city} </th>
                             </tr>
                             <tr>
                                 <th>Area last seen: {this.state.data.location.location}</th>

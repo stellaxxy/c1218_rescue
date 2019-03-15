@@ -39,13 +39,14 @@ class UploadPage extends Component {
         config: { headers: {'Content-Type': 'multipart/form-data' }}
       });
 
+
       caseId = response.data.insertID;
       caseKey = response.data.caseKey;
 
       this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
     } catch (error) {
       this.props.history.push(`/upload-complete/0/0`);
-      console.log('Had an error');
+
     }
     
   }
