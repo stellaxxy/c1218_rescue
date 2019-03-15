@@ -31,7 +31,6 @@ const Modal = (props) => {
 
 function validate({email, caseKey}){
     const errors = {};
-    console.log('email and caseKey:', email , caseKey)
 
     if(!email){
         errors.email= 'Please enter valid email.';

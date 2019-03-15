@@ -20,31 +20,19 @@ class Contact extends Component {
     }
 
     async componentDidMount() {
-
-
-
         const queryObj = queryString.parse(this.props.location.search);
-        console.log('contact page queryObj:',queryObj);
-        console.log('this.props.data:', this.props.data)
 
         const {id}= queryObj;
         let response= await axios.get('/api/userdetails?caseid='+id)
 
-        console.log('contact page response',response)
         this.setState({
             call: true,
             phone: response.data.data.phone
         })
-
-
     }
-
-
-
 
     async handelSubmit(event) {
         const {caseid} = this.props.match.params;
-        console.log('this.props.match:', this.props.match.params);
         await axios.post('/api/contactuser', {
             caseId: caseid,
             emailMessage: this.state.value
@@ -55,17 +43,11 @@ class Contact extends Component {
         });
     }
 
-
     handelChange(event) {
-
         this.setState({value: event.target.value});
-
     }
 
     render() {
-        console.log('contact url:', this.props.location.search)
-
-
         if (this.state.emailsent) {
             return (
                 <EmailConfirmation/>
@@ -73,7 +55,6 @@ class Contact extends Component {
         }
 
         const goBackUrl = queryString.stringify(this.state.query);
-        console.log('case details gobackurl', goBackUrl);
 
         return (
             <Fragment>
