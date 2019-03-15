@@ -107,7 +107,7 @@ class FlyerCode extends Component {
             return (
                 <div id="flyer">
                     <div className="buttons center">
-                        <FacebookShareButton url={url}>
+                        <FacebookShareButton url={url} quote={socialMediaTitle}>
                             <FacebookIcon size={40} round />
                         </FacebookShareButton>
                         <GooglePlusShareButton url={url}>
