@@ -23,7 +23,7 @@ const DescribeFormPage1 = props => {
         </main>
         <footer>
             <div className="btn-panel">
-                <button type="button" className="btn" onClick={previousPage}>{"< Prev"}</button>
+                <button type="button" className="btn" onClick={props.goToLanding}>{"< Prev"}</button>
                 <button type="submit" className="btn" form="describeform">{"Next >"}</button>
             </div>
         </footer>

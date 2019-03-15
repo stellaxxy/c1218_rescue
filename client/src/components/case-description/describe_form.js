@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DescribeFormPage1 from './describe_form_page1';
 import DescribeFormPage2 from './describe_form_page2';
 import queryString from 'query-string';
+import Landing from '../landing';
 import './describe.scss';
 
 class DescribeForm extends Component {
@@ -36,12 +37,16 @@ class DescribeForm extends Component {
         this.setState({ page: this.state.page - 1 })
     }
 
+    goToLanding = () => {
+        this.props.history.push('/');
+    };
+
     render() {
         const { page } = this.state;
 
         return (
             <div className="container describe-form">
-                {page === 1 && <DescribeFormPage1 onSubmit={this.nextPage} />}
+                {page === 1 && <DescribeFormPage1 onSubmit={this.nextPage} goToLanding={this.goToLanding}/>}
                 {page === 2 && <DescribeFormPage2 previousPage={this.previousPage} onSubmit={this.handleSubmit} />}
             </div>
         )

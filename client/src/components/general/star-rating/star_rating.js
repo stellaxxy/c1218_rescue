@@ -2,10 +2,9 @@ import React from 'react';
 import './star_rating.scss';
 
 export default props => {
-    console.log(props);
     const wholeStar = parseInt(props.rating);
     const partialStar = props.rating - wholeStar;
-    console.log(wholeStar, partialStar);
+
     const stars = [];
     for(let starIndex = 0; starIndex < wholeStar; starIndex++){
         stars.push(
