@@ -128,6 +128,20 @@ $color-background: #fff3e0 !default;
 
     @media print {
 
+        .title {
+            position: relative;
+            right: 6%;
+        }
+
+        .image-container{
+            width: 70%;
+            height: 40vh;
+            img {
+                max-height: 100%;
+                width: 100%;
+            }
+        }
+
         .buttons {
             display: none;
         }
