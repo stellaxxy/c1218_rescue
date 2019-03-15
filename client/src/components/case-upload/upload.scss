@@ -110,7 +110,7 @@ $color-background: #fff3e0 !default;
     }
 
     a {
-        color: #EB5E30;
+        color: #26a69a;
         cursor: pointer;
     }
 
@@ -183,4 +183,8 @@ $color-background: #fff3e0 !default;
             transform: translate(-50%, 0);
         }
     }
+}
+
+#toast-container .toast{
+	background-color: $color-bars;
 }

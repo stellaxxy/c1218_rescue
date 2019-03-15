@@ -11,9 +11,34 @@ class FlyerCode extends Component {
         error: false
     }
 
-    printFlyer = () => {
+    handlePrintClick = () => {
         window.print();
         return false;
+    }
+
+    async handleEmailSubmit(event) {
+        try {
+            event.preventDefault();
+
+            const {caseid} = this.props.match.params;
+
+            const response = await axios.post('/api/contactuser', {
+                caseId: caseid,
+                emailMessage: event.target.emailMessage.value
+            })
+
+            if (response.data.success) {
+                M.toast({html: 'Thank you!  Your email has been sent'});
+            } else {
+                throw new Error('Email could not be sent');
+            }
+
+            this.setState({
+                emailsent: true
+            });
+        } catch(error) {
+            M.toast({html: "We're sorry.  The email could not be delivered at this time."});
+        }
     }
 
     //-------------------------------------------------------------------------
@@ -82,7 +107,7 @@ class FlyerCode extends Component {
                         <TwitterShareButton url={url} title={socialMediaTitle}>
                             <TwitterIcon size={40} round />
                         </TwitterShareButton>
-                        <button onClick={this.printFlyer} className="btn-floating"><i className="material-icons">print</i></button>
+                        <button onClick={this.handlePrintClick} className="btn-floating"><i className="material-icons">print</i></button>
                     </div>
                     <div className="row">
                         <div className="col s10 offset-s1 center title">
@@ -135,12 +160,12 @@ class FlyerCode extends Component {
                     </div>
 
                     <div className="row center">
-                        <form>
+                        <form onSubmit={this.handleEmailSubmit.bind(this)}>
                             <div className="input-field col s12">
-                                <textarea className="materialize-textarea" id="text"/>
-                                <label htmlFor="text">Please enter your message to send an email.</label>
+                                <textarea className="materialize-textarea" id="emailMessage"/>
+                                <label htmlFor="emailMessage">Please enter your message to send an email.</label>
                             </div>
-                            <button className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
+                            <button type="submit" className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
                         </form>
                     </div>
             </div>
