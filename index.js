@@ -373,7 +373,7 @@ app.get('/api/userdetails', async (request, response) => {
 //-------------------------------------------------------------------------------------------
 app.post('/api/yelp/businesses', async (request, response) => {
     const {location} = request.body;
-
+    console.log('yelp api');
     try {
         let yelpURL = 'https://api.yelp.com/v3/businesses/search';
 
