@@ -35,11 +35,11 @@ class Filter extends Component {
                     <h5>Pet Reported As:</h5>
                     <div className="radioFound">
                         <label htmlFor="found">Found</label>
-                        <input className="radioBtn" type="radio" name="caseType" value="lost" id="found" defaultChecked={this.props.filterValues.caseType==='lost' ? 'checked':''}/>
+                        <input className="radioBtn" type="radio" name="caseType" value="found" id="found" defaultChecked={this.props.filterValues.caseType==='found' ? 'checked':''}/>
                     </div>
                     <div className="radioLost">
                         <label htmlFor="lost">Lost</label>
-                        <input className="radioBtn" type="radio" name="caseType" value="found" id="lost" defaultChecked={this.props.filterValues.caseType==='found' ? 'checked':''}/>
+                        <input className="radioBtn" type="radio" name="caseType" value="lost" id="lost" defaultChecked={this.props.filterValues.caseType==='lost' ? 'checked':''}/>
                     </div>
                     <div className="locationDiv">
                         <h5>Location:</h5>
