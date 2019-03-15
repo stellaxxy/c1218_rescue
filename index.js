@@ -283,7 +283,7 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
                 from: mailConfig.auth.user
             },
             // uncomment below to send emails in development/test env:
-            //send: true,
+            send: true,
             preview: false,
             transport: transporter
         });
