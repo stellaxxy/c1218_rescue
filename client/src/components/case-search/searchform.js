@@ -3,7 +3,7 @@ import queryString from 'query-string';
 
 class SearchForm extends Component {
 
-    onSubmit = () => {
+    onSubmit = async () => {
         event.preventDefault();
         let formData = new FormData(event.target);
 
@@ -11,9 +11,17 @@ class SearchForm extends Component {
         for (let [key, value] of formData.entries()) {
             if (value) filters[key] = value;
         }
-        
+
         this.props.history.push('/search?' + queryString.stringify(filters));
-    }
+    };
+
+    onCancel = async () => {
+        console.log('on cancel called');
+
+        console.log('state:', this.props.history.location.search);
+        this.props.history.push('/search' + this.props.history.location.search);
+        //this.props.history.push('/search?'+ queryString.stringify(this.state.filters));
+    };
 
     render() {
         const {caseType, zipcode, city, animalType, size, mode} = queryString.parse(this.props.location.search);
@@ -47,7 +55,7 @@ class SearchForm extends Component {
 
                     <div className="modal-footer">
                         <button type="submit" className="modal-close waves-effect waves-green btn left">Apply</button>
-                        <button type= "reset" className="modal-close waves-effect waves-green btn">Cancel</button>
+                        <button type= "reset" className="modal-close waves-effect waves-green btn" onClick={this.onCancel}>Cancel</button>
                     </div>
 
                 </form>
