@@ -36,9 +36,9 @@ class MainNav extends Component {
                                 <li>
                                     <Link className="sidenav-close" to="/mycase"><i className="material-icons left">find_in_page</i>MY CASE</Link>
                                 </li>
-                                {/* <li>
+                                 <li>
                                     <Link className="sidenav-close" to="/searchvet"><i className="material-icons left">info</i>VET</Link>
-                                </li> */}
+                                </li>
                             </ul>
                         </div>
                     </nav>
