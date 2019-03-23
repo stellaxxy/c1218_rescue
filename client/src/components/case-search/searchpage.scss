@@ -13,11 +13,65 @@
     top: 15px;
   }
 
+  .leftDiv {
+    @media (min-width: 635px) {
+      width: 15%;
+      height: 100%;
+      display: inline-block;
+    }
+
+    .pawsPrintLeft {
+      display: none;
+
+      @media (min-width: 635px){
+        display: inline-block;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 20%;
+      }
+    }
+  }
+
+  .rightDiv {
+    @media (min-width: 635px) {
+      width: 15%;
+      height: 100%;
+      display: inline-block;
+    }
+
+    .pawsPrintRight {
+      display: none;
+
+      @media (min-width: 635px){
+        display: inline-block;
+        position: fixed;
+        right: 0;
+        top: 50px;
+        width: 20%;
+        z-index: -1;
+      }
+    }
+  }
+
+  .centerDiv {
+    @media (min-width: 635px) {
+      width: 70%;
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 15px;
+    }
+  }
+
   .formDiv {
     height: 91%;
     margin-bottom: 10px;
     position: relative;
     bottom: 25px;
+
+    @media (min-width: 635px){
+      width: 100%;
+    }
 
     .listForm {
       width: 95%;
@@ -29,8 +83,24 @@
       position: relative;
       bottom: 20px;
 
+      @media (min-width: 635px) {
+        width: 100%;
+        font-size: 90%;
+        padding: 0 15px 30px 15px;
+      }
+
       h5 {
         font-weight: bold;
+
+        @media (min-width: 635px) {
+          font-size: 1.30rem;
+        }
+      }
+
+      h6 {
+        @media (min-width: 635px) {
+          font-size: 0.95rem;
+        }
       }
 
       .radioFound {
@@ -57,17 +127,27 @@
           background-color: white;
           padding: 0 5px;
           width: 96%;
+
+          @media (min-width: 635px) {
+            height: 30px;
+            width: 98.3%;
+          }
         }
       }
 
       .selectOpt {
         border: 1px solid grey;
         border-radius: 10px;
+
+        @media (min-width: 635px) {
+          height: 30px;
+        }
       }
 
       label {
         font-size: 120%;
         color: black;
+
       }
 
       .radioBtn {
@@ -88,6 +168,11 @@
         background-color: #d84315;
         font-family: 'Kanit', sans-serif;
         font-size: 120%;
+
+        @media (min-width: 635px) {
+          width: 80%;
+          margin-top: 25px;
+        }
       }
 
     }

@@ -11,7 +11,7 @@ $color-background: #fff3e0 !default;
     main {
         position: relative;
         height: 100%;
-        overflow-y: scroll;
+        //overflow-y: scroll;
 
         h5 {
             font-weight: bold;
@@ -21,6 +21,19 @@ $color-background: #fff3e0 !default;
             top: 0;
         }
     }
+
+    .uploadSubmitBtnContainer {
+        margin-top: 20px;
+        text-align: center;
+
+        .uploadSubmitBtn {
+            background-color: #d84315;
+            font-family: 'Sniglet', cursive;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    }
+
 
     footer {
         margin: 0;
@@ -79,46 +92,75 @@ $color-background: #fff3e0 !default;
     width: 100vw;
     background-color: white;
 
-    .buttons {
-        display: flex;
-        justify-content: center;
+    @media (min-width: 635px){
+        width: 80%;
+        margin: auto;
+    }
 
-        .SocialMediaShareButton {
-            display: inline;
-            padding: 5px 5px 5px 5px;
-            outline: none;
+    @media (min-width: 1024px) {
+        width: 55%;
+    }
+
+    .emailDiv{
+        margin-bottom: 70px;
+    }
+
+    .flyerDiv {
+
+        .image-container {
+            @media (min-width: 635px) {
+                height: 300px;
+                img {
+                    height: 100%;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                height: 300px;
+            }
         }
 
-        button {
-            margin: 5px;
-            box-shadow: none;
+        .buttons {
+            display: flex;
+            justify-content: center;
+
+            .SocialMediaShareButton {
+                display: inline;
+                padding: 5px 5px 5px 5px;
+                outline: none;
+            }
+
+            button {
+                margin: 5px;
+                box-shadow: none;
+            }
         }
-    }
 
-    .bottom {
-        .qrcode {
-            display: none;
+        .bottom {
+            .qrcode {
+                display: none;
+            }
         }
-    }
 
-    .label {
-        font-weight: bold;
-    }
+        .label {
+            font-weight: bold;
+        }
 
-    .description {
-        font-weight: normal;
-    }
+        .description {
+            font-weight: normal;
+        }
 
-    a {
-        color: #26a69a;
-        cursor: pointer;
-    }
+        a {
+            color: #26a69a;
+            cursor: pointer;
+        }
 
-    form {
-        top: 0px;
-
-        button {
-            background-color: $color-action-buttons;
+        form {
+            top: 0;
+            
+            button {
+                background-color: $color-action-buttons;
+            }
         }
     }
 

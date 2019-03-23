@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import QRCode from 'qrcode.react';
 import { FacebookShareButton, FacebookIcon, GooglePlusShareButton, GooglePlusIcon, TwitterShareButton, TwitterIcon } from 'react-share';
@@ -26,8 +26,10 @@ class FlyerCode extends Component {
         try {
             event.preventDefault();
 
-            const {caseid} = this.props.match.params;
+            //const {caseid} = this.props.match.params;
 
+            const caseid = this.props.match.params.caseid || this.props.id;
+            console.log('caseid:', caseid);
             const response = await axios.post('/api/contactuser', {
                 caseId: caseid,
                 emailMessage: event.target.emailMessage.value
@@ -51,8 +53,11 @@ class FlyerCode extends Component {
     // RETRIEVE CASE DETAILS (INTO STATE)
     //-------------------------------------------------------------------------
     async componentDidMount() {
+
         try {
-            const { caseid } = this.props.match.params;
+            //const { caseid } = this.props.match.params;
+            const caseid = this.props.id || this.props.match.params.caseid;
+            console.log('caseid:', caseid);
             const response = await axios.get('/api/casedetails?id=' + caseid);
 
             this.setState({
@@ -106,33 +111,34 @@ class FlyerCode extends Component {
 
             return (
                 <div id="flyer">
-                    <div className="buttons center">
-                        <FacebookShareButton url={url} quote={socialMediaTitle}>
-                            <FacebookIcon size={40} round />
-                        </FacebookShareButton>
-                        <GooglePlusShareButton url={url}>
-                            <GooglePlusIcon size={40} round />
-                        </GooglePlusShareButton>
-                        <TwitterShareButton url={url} title={socialMediaTitle}>
-                            <TwitterIcon size={40} round />
-                        </TwitterShareButton>
-                        <button onClick={this.handlePrintClick} className="btn-floating"><i className="material-icons">print</i></button>
-                    </div>
-                    <div className="row">
-                        <div className="col s10 offset-s1 center title">
-                            <h2>{caseTypeDisplay.toUpperCase()} {animalTypeDisplay.toUpperCase()}</h2>
+                    <div className="flyerDiv">
+                        <div className="buttons center">
+                            <FacebookShareButton url={url} quote={socialMediaTitle}>
+                                <FacebookIcon size={40} round />
+                            </FacebookShareButton>
+                            <GooglePlusShareButton url={url}>
+                                <GooglePlusIcon size={40} round />
+                            </GooglePlusShareButton>
+                            <TwitterShareButton url={url} title={socialMediaTitle}>
+                                <TwitterIcon size={40} round />
+                            </TwitterShareButton>
+                            <button onClick={this.handlePrintClick} className="btn-floating"><i className="material-icons">print</i></button>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s10 offset-s1 m8 offset-m2 center image-container">
-                            <img src={data.coverImg} className="responsive-img"/>
+                        <div className="row">
+                            <div className="col s10 offset-s1 center title">
+                                <h2>{caseTypeDisplay.toUpperCase()} {animalTypeDisplay.toUpperCase()}</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12 bottom">
-                            <div className="details">
-                                <table>
-                                    <tbody>
+                        <div className="row">
+                            <div className="col s10 offset-s1 m8 offset-m2 l12 center image-container">
+                                <img src={data.coverImg} className="responsive-img"/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col s12 bottom">
+                                <div className="details">
+                                    <table>
+                                        <tbody>
                                         <tr>
                                             <td><i className="material-icons">phone</i></td>
                                             <td><a href={'tel:+1' + phone}>{phone.slice(0, 3)}-{phone.slice(3, 6)}-{phone.slice(6)}</a></td>
@@ -141,42 +147,47 @@ class FlyerCode extends Component {
                                             <td><i className="material-icons">location_on</i></td>
                                             <td>{city} {state} {zipcode}</td>
                                         </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="qrcode">
-                                <QRCode
-                                    value={url}
-                                    size={128}
-                                    fgColor='#000000'
-                                    bgColor='#ffffff'
-                                    level='L'
-                                    renderAs='svg'
-                                    includeMargin={true}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="qrcode">
+                                    <QRCode
+                                        value={url}
+                                        size={128}
+                                        fgColor='#000000'
+                                        bgColor='#ffffff'
+                                        level='L'
+                                        renderAs='svg'
+                                        includeMargin={true}
                                     />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col s12">
+                                <span className="label">DESCRIPTION:</span> <span className="description">{caseTypeDisplay} on {data.date}. Size: {size}.  Last seen near {location}. {description}</span>
                             </div>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col s12">
-                        <span className="label">DESCRIPTION:</span> <span className="description">{caseTypeDisplay} on {data.date}. Size: {size}.  Last seen near {location}. {description}</span>
+                    {this.props.id ? <div>{''}</div> :
+                        <Fragment>
+                        <div className="row footer">
+                            <div className="col s12 center">
+                                Generated by PAWSFindHome.com
+                            </div>
                         </div>
-                    </div>
-                    <div className="row footer">
-                        <div className="col s12 center">
-                        Generated by PAWSFindHome.com
-                        </div>
-                    </div>
 
-                    <div className="row center">
-                        <form onSubmit={this.handleEmailSubmit.bind(this)}>
-                            <div className="input-field col s12">
-                                <textarea className="materialize-textarea" id="emailMessage"/>
-                                <label htmlFor="emailMessage">Please enter your message to send an email.</label>
-                            </div>
-                            <button type="submit" className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
-                        </form>
-                    </div>
+                        <div className="row center emailDiv">
+                            <form onSubmit={this.handleEmailSubmit.bind(this)}>
+                                <div className="input-field col s12">
+                                    <textarea className="materialize-textarea" id="emailMessage"/>
+                                    <label htmlFor="emailMessage">Please enter your message to send an email.</label>
+                                </div>
+                                <button type="submit" className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
+                            </form>
+                        </div>
+                    </Fragment>}
+
             </div>
             )
         } catch (error) {

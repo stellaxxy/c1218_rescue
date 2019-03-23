@@ -430,6 +430,24 @@ app.get('/api/yelp/details', async (request, response) => {
     }
 });
 
+//-------------------------------------------------------------------------------------------
+// ANIMAL SHELTER API
+//-------------------------------------------------------------------------------------------
+app.get('/api/shelterdata', async (request, response) =>{
+    try{
+        const result = await axios.get(`https://service.sheltermanager.com/asmservice?method=animal_thumbnail&animalid=520`);
+        console.log(result);
+        response.send({
+            data: result.data
+        });
+
+    } catch(error){
+        handleError(response, error.message);
+    }
+
+});
+
+
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 
