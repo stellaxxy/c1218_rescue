@@ -1,12 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import UploadForm from './upload_form';
 import axios from 'axios';
 import {createCaseKey} from '../../helpers';
+import BullDog from '../../assets/images/FrenchBulldog.gif';
+import OrangeBone from '../../assets/images/dogBoneOrange.png';
+import BrownBone from '../../assets/images/dog-bone-brown-hi.png';
 
 class UploadPage extends Component {
   state = { 
-    imageFile: [],
-    uploading: false
+      imageFile: [],
+      uploading: false,
+      petFound : null,
+      memberTotal: null
   };
 
   //-----------------------------------------------------------------------------------------
@@ -61,6 +66,21 @@ class UploadPage extends Component {
     
   }
 
+  async componentDidMount(){
+    const petFoundResult = await axios.get('/api/petfound');
+    const memberTotalResult = await axios.get('/api/memebertotal');
+
+    const petFound = petFoundResult.data.successCount;
+    const memberTotal = memberTotalResult.data.memberCount;
+
+    this.setState({
+        petFound,
+        memberTotal
+    });
+    console.log('petFound', petFound);
+    console.log('memberTotal', memberTotal);
+  }
+
   renderSpinner() {
     const {uploading} = this.state;
 
@@ -85,11 +105,33 @@ class UploadPage extends Component {
     // Have to reset because Materialize modals set to HIDDEN
     document.body.style.overflow = "";
 
+
     return (
-      <div>
-        <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
-        {this.renderSpinner()}
-      </div>     
+        <Fragment>
+            <div className="leftUploadDiv">
+              <img src={BullDog}/>
+            </div>
+            <div className="uploadDiv">
+                <UploadForm onSubmit={this.submit} onDrop={this.handleOnDrop} imageFile={this.state.imageFile}/>
+                {this.renderSpinner()}
+            </div>
+            <div className="rightUploadDiv">
+                <div className="rightUploadContent">
+                    <h5>Our Reach</h5>
+                    <p>
+                        Pet Found: {this.state.petFound}
+                    </p>
+                    <p>
+                        Members: {this.state.memberTotal}
+                    </p>
+                    <img className="orangeBone leftTiltedOrangeBone" src={OrangeBone}/>
+                    <img className="brownBone" src={BrownBone}/>
+                    <img className="orangeBone tiltedOrangeBone" src={OrangeBone}/>
+                    <img className="brownBone tiltedBrownBone" src={BrownBone}/>
+                </div>
+            </div>
+        </Fragment>
+
     );
   }
 }

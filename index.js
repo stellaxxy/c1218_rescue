@@ -431,22 +431,42 @@ app.get('/api/yelp/details', async (request, response) => {
 });
 
 //-------------------------------------------------------------------------------------------
-// ANIMAL SHELTER API
+// PET FOUND DATA
 //-------------------------------------------------------------------------------------------
-app.get('/api/shelterdata', async (request, response) =>{
-    try{
-        const result = await axios.get(`https://service.sheltermanager.com/asmservice?method=animal_thumbnail&animalid=520`);
-        console.log(result);
-        response.send({
-            data: result.data
-        });
+app.get('/api/petfound', async (request, response) => {
 
-    } catch(error){
+    try {
+       const query = "SELECT COUNT(c.`status`) AS successCount FROM `cases` AS c WHERE c.`status` = 'closed'";
+
+       const data = await db.query(query);
+
+       response.send({
+           successCount: data[0].successCount
+        })
+
+    } catch (error) {
         handleError(response, error.message);
     }
-
 });
 
+//-------------------------------------------------------------------------------------------
+// PET FOUND DATA
+//-------------------------------------------------------------------------------------------
+app.get('/api/memebertotal', async (request, response) => {
+
+    try {
+        const query = "SELECT COUNT(c.`userID`) AS memberCount FROM `cases` AS c";
+
+        const data = await db.query(query);
+
+        response.send({
+            memberCount: data[0].memberCount
+        })
+
+    } catch (error) {
+        handleError(response, error.message);
+    }
+});
 
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');

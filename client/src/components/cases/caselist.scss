@@ -7,54 +7,52 @@
 
 .caseListContainer {
   position: relative;
-  //top: 2vh;
-  //overflow-y: scroll;
+  margin-top: 25px;
 
   @media (min-width: 635px){
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
   }
 
   .cardContainer {
 
     @media (min-width: 635px) {
 
-      width: 49%;
+      width: 49.5%;
       position: relative;
     }
 
     @media (min-width: 1024px) {
-      width: 32.5%;
+      width: 49.5%;
     }
 
     .card {
-      max-height: 130px;
+      height: 130px;
       max-width: 95%;
       position: relative;
       left: 2.5%;
       border-radius: 10px;
       border: 1px solid darkgrey;
       margin: 0.5rem 0 0.1rem 0;
-      //background-color: #eeeeee;
 
       @media (min-width: 635px) {
         width: 100%;
         max-width: 100%;
-        //margin: 15px;
-        //position: relative;
-        //left: 30%;
-        //transform: translateX(-50%);
+        height: 165px;
         position: relative;
         left: 0;
+      }
+
+      @media (min-width: 1024px) {
+        height: 190px;
       }
 
       .card-image {
         width: 50%;
 
         img.responsive {
-          //width: 100%;
-          //border-radius: 10px 0 0 10px;
           height: 80%;
           width: 80%;
           position: relative;
@@ -68,6 +66,7 @@
         .card-content {
           color: black;
           padding: 15px;
+          //overflow-y: scroll;
 
           @media (min-width: 635px) {
             padding: 10px;
@@ -80,19 +79,21 @@
 
             @media (min-width: 635px) {
               height: 80%;
-              overflow-y: scroll;
-
-              .contentDiv::-webkit-scrollbar{
-                width: 10px;
-              }
-
-              .contentDiv::-webkit-scrollbar-track {
-                background: #f1f1f1;
-              }
-
+              overflow-y: auto;
             }
+          }
 
+          .contentDiv::-webkit-scrollbar-track {
+            background-color: white;
+          }
 
+          .contentDiv::-webkit-scrollbar {
+            width: 2px;
+            background-color: white;
+          }
+
+          .contentDiv::-webkit-scrollbar-thumb {
+            background-color: white;
           }
 
 

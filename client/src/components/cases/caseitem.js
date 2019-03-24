@@ -43,7 +43,7 @@ class CaseItem extends Component{
                         </div>
                         <div className="card-stacked">
                             <div className="card-content">
-                                <div className="contentDiv">
+                                <div className="contentDiv" id='content'>
                                     <p>{prefixForAddress} in {location.city}, {location.state}</p>
                                     <p>On: {dateString}</p>
                                     <p className={this.state.mobile ? 'mobile':''}>Description: {description}</p>

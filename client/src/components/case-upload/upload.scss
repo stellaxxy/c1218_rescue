@@ -6,49 +6,144 @@ $color-bars: #e79307;
 $color-action-buttons: #d84315;
 $color-background: #fff3e0 !default;
 
-.page-body {
-    
-    main {
-        position: relative;
-        height: 100%;
-        //overflow-y: scroll;
 
-        h5 {
-            font-weight: bold;
-        }
+.leftUploadDiv {
+    display: none;
 
-        form {
-            top: 0;
-        }
-    }
-
-    .uploadSubmitBtnContainer {
-        margin-top: 20px;
+    @media (min-width: 1024px){
+        display: inline-block;
         text-align: center;
-
-        .uploadSubmitBtn {
-            background-color: #d84315;
-            font-family: 'Sniglet', cursive;
-            border-radius: 10px;
-            font-weight: bold;
-        }
     }
 
-
-    footer {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
+    img {
+        width: 25vw;
         position: fixed;
         bottom: 0;
+    }
 
-        .btn {
-            background-color: $color-action-buttons;
-            font-weight: bold;
+}
+
+.rightUploadDiv {
+    display: none;
+
+    @media (min-width: 1024px){
+        display: inline-block;
+        text-align: center;
+        position: fixed;
+        top: 55%;
+        transform: translateY(-50%);
+        right: 5%;
+        height: 40vh;
+    }
+
+    .rightUploadContent {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    h5 {
+        @media (min-width: 1024px) {
+            font-size: 280%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #d84315;
+        }
+    }
+
+    p {
+        @media (min-width: 1024px) {
+            font-size: 210%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #e79307;
+        }
+    }
+
+    .orangeBone,
+    .brownBone {
+        width: 50px;
+    }
+
+    .leftTiltedOrangeBone {
+        position: relative;
+        left: 4%;
+    }
+
+    .tiltedOrangeBone {
+        position: relative;
+        right: 6%;
+        transform: rotate(30deg);
+    }
+
+    .tiltedBrownBone {
+        position: relative;
+        right: 5%;
+        transform: rotate(-15deg);
+    }
+
+}
+
+.uploadDiv {
+    @media (min-width: 1024px){
+        display: inline-block;
+        width: 75%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .page-body {
+
+        main {
+            position: relative;
+            height: 100%;
+            //overflow-y: scroll;
+
+            .container {
+                @media (min-width: 1024px) {
+                    width: 60%;
+                }
+            }
+
+            h5 {
+                font-weight: bold;
+            }
+
+            form {
+                top: 0;
+            }
+        }
+
+        .uploadSubmitBtnContainer {
+            margin-top: 20px;
+            text-align: center;
+
+            .uploadSubmitBtn {
+                background-color: #d84315;
+                font-family: 'Sniglet', cursive;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+        }
+
+
+        footer {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+
+            .btn {
+                background-color: $color-action-buttons;
+                font-weight: bold;
+            }
         }
     }
 }
+
 
 .image-preview-container {
     margin: 20px 0px;
@@ -157,7 +252,7 @@ $color-background: #fff3e0 !default;
 
         form {
             top: 0;
-            
+
             button {
                 background-color: $color-action-buttons;
             }
