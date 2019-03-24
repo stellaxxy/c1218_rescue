@@ -28,7 +28,7 @@ class FlyerCode extends Component {
 
             //const {caseid} = this.props.match.params;
 
-            const caseid = this.props.match.params.caseid || this.props.id;
+            const caseid =  this.props.id || this.props.match.params.caseid;
             console.log('caseid:', caseid);
             const response = await axios.post('/api/contactuser', {
                 caseId: caseid,
@@ -57,9 +57,9 @@ class FlyerCode extends Component {
         try {
             //const { caseid } = this.props.match.params;
             const caseid = this.props.id || this.props.match.params.caseid;
-            console.log('caseid:', caseid);
-            const response = await axios.get('/api/casedetails?id=' + caseid);
 
+            const response = await axios.get('/api/casedetails?id=' + caseid);
+            console.log('response:', response);
             this.setState({
                 data: response.data.data
             });
@@ -112,7 +112,7 @@ class FlyerCode extends Component {
             return (
                 <div id="flyer">
                     <div className="flyerDiv">
-                        <div className="buttons center">
+                        <div className="buttons center socialMediaBtn">
                             <FacebookShareButton url={url} quote={socialMediaTitle}>
                                 <FacebookIcon size={40} round />
                             </FacebookShareButton>
