@@ -317,6 +317,74 @@ app.post('/api/updatestatus', async (request, response) => {
 });
 
 //-------------------------------------------------------------------------------------------
+// UPDATE A CASE
+//-------------------------------------------------------------------------------------------
+app.post('/api/updatecase', async (request, response) => {
+
+    try {
+        const {id} = request.body;
+        delete request.body.id;
+
+        if(!id){
+            throw new Error(`Please provide a valid id`);
+        } else if(isNaN(id)){
+            throw new Error(`Id must be a number`);
+        }
+
+        const getIdFormat = "SELECT `animalID`, `userID` FROM `cases` WHERE `id` = ?";
+        const getId = [id];
+        const getIdQuery = mysql.format(getIdFormat, getId);
+        const getIdResult = await db.query(getIdQuery);
+        const animalId = getIdResult[0].animalID;
+        const userId = getIdResult[0].userID;
+        //console.log('id', id);
+        //console.log('request:', request.body);
+       // console.log('get id result', animalId);
+       // console.log('get id result', userId);
+
+        const arrayResult = Object.entries(request.body).map(async (item) => {
+            //console.log('post request:', item);
+            let statement = null;
+            let query = null;
+
+            if(item[0] === 'caseType'|| item[0] === 'city' || item[0] === 'street' || item[0] === 'date'){
+                if(item[0] === 'street' || item[0] === 'city'){
+                    const address = await googleMap.getAddress(item[0]);
+                    console.log('address:', address);
+                }
+
+                statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
+                query = mysql.format(statement, [item[0], item[1], id])
+            } else if(item[0] === 'animalSize' || item[0] === 'animalType' || item[0] === 'description'){
+                if(item[0] === 'animalSize'){
+                    item[0] = 'size';
+                }
+                statement = "UPDATE `animals` SET ?? = ? WHERE `id` = ?";
+                query = mysql.format(statement, [item[0], item[1], animalId]);
+            } else if(item[0] === 'phone'){
+                statement = "UPDATE `users` SET ?? = ? WHERE `id` = ?";
+                query = mysql.format(statement, [item[0], item[1], userId]);
+            }
+
+            const result = await db.query(query);
+            if(!result){
+                throw new Error(`Error in database query`)
+            }
+            //console.log('query result:', result);
+        });
+
+        response.send({
+            success: true
+        });
+
+
+    } catch (error) {
+        handleError(response, error.message);
+    }
+
+});
+
+//-------------------------------------------------------------------------------------------
 // CONTACT USER WHO REPORTED A CASE
 //-------------------------------------------------------------------------------------------
 app.post('/api/contactuser', async (request, response) => {

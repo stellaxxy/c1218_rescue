@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import './modal.scss';
 import { Field, reduxForm } from 'redux-form';
 import Input from './input';
 
 const Modal = (props) => {
-    const { handleSubmit, onSubmit, showModal, closeModal} = props;
+    const { handleSubmit, onSubmit, showModal, heading } = props;
 
     return (
 
         <form onSubmit={handleSubmit(onSubmit)} className={ showModal ? "z-depth-10 modal open" : "modal" } >
             <div className="modal-content">
-                <h5>Please provide your email and unique key</h5>
+                <h5>{heading}</h5>
                 <div className="row">
                     <Field name="email" component={Input} label="Enter your email" type="email"/>
                 </div>
