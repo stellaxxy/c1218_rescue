@@ -291,14 +291,9 @@ $color-background: #fff3e0 !default;
             margin-bottom: 50px;
         }
 
-        a {
-            color: black;
-        }
-
         .flyerDiv {
             .socialMediaBtn {
-                position: relative;
-                right: 5.5%;
+                display: none;
             }
 
             .bottom{
@@ -306,15 +301,16 @@ $color-background: #fff3e0 !default;
 
                 .details {
                     width: 70%;
+
+                    a {
+                        color: black;
+                    }
                 }
 
                 .qrcode {
                     height: 100%;
                     width: 30%;
                     display: inline-block;
-                    //flex-direction: column;
-                    //justify-content: center;
-                    align-items: center;
                 }
             }
         }
