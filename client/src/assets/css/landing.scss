@@ -31,12 +31,11 @@
             @media (min-width: 635px) {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 align-items: center;
                 width: 40%;
                 height: 50%;
                 position: absolute;
-                top: 20%;
+                top: 30%;
                 right: 8%;
 
                 p.landing-text::after {

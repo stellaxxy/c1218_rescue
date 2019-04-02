@@ -92,11 +92,9 @@ let UploadForm = props => {
           </div>
         </main>
 
-        <footer className="page-footer">
-          <div className="btn-panel">
-            <button className="waves-effect waves-light btn btn-action" form="uploadform" type="submit">Submit</button>
+          <div className="uploadSubmitBtnContainer">
+              <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
           </div>
-        </footer>
       </div>
   )
 }
@@ -107,3 +105,9 @@ UploadForm = reduxForm({
 })(UploadForm);
 
 export default UploadForm;
+
+/*
+<footer className="page-footer">
+
+        </footer>
+ */

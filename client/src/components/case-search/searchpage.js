@@ -6,6 +6,8 @@ import CaseList from '../cases';
 import CaseMap from '../casemap';
 import './searchpage.scss'
 import Filter from './filterform';
+import pawsPrint from '../../assets/images/print.png';
+import pawsPrintRight from '../../assets/images/print.png';
 
 class SearchPage extends Component {
     constructor(props) {
@@ -70,8 +72,16 @@ class SearchPage extends Component {
                 <div className="bottomContainer">
                     <h4 className="searchListTitle">LOST & FOUND LIST</h4>
                     <h6 className="searchListTitle">SEARCH FOR BEST MATCHES</h6>
-                    <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
-                    <CaseList cases={this.state.cases} filterValues={filterValues}/>
+                    <div className="leftDiv">
+                        <img src={pawsPrint} className="pawsPrintLeft"/>
+                    </div>
+                    <div className="centerDiv">
+                        <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
+                        <CaseList cases={this.state.cases} filterValues={filterValues}/>
+                    </div>
+                    <div className="rightDiv">
+                        <img src={pawsPrintRight} className="pawsPrintRight"/>
+                    </div>
                 </div>
             );
         }

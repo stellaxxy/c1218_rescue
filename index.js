@@ -430,6 +430,44 @@ app.get('/api/yelp/details', async (request, response) => {
     }
 });
 
+//-------------------------------------------------------------------------------------------
+// PET FOUND DATA
+//-------------------------------------------------------------------------------------------
+app.get('/api/petfound', async (request, response) => {
+
+    try {
+       const query = "SELECT COUNT(c.`status`) AS successCount FROM `cases` AS c WHERE c.`status` = 'closed'";
+
+       const data = await db.query(query);
+
+       response.send({
+           successCount: data[0].successCount
+        })
+
+    } catch (error) {
+        handleError(response, error.message);
+    }
+});
+
+//-------------------------------------------------------------------------------------------
+// PET FOUND DATA
+//-------------------------------------------------------------------------------------------
+app.get('/api/memebertotal', async (request, response) => {
+
+    try {
+        const query = "SELECT COUNT(c.`userID`) AS memberCount FROM `cases` AS c";
+
+        const data = await db.query(query);
+
+        response.send({
+            memberCount: data[0].memberCount
+        })
+
+    } catch (error) {
+        handleError(response, error.message);
+    }
+});
+
 app.get('*', (request, response) => {
     response.sendFile(__dirname + '/client/dist/index.html');
 

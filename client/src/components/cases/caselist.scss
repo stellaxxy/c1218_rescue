@@ -7,87 +7,107 @@
 
 .caseListContainer {
   position: relative;
-  //top: 2vh;
-  overflow-y: scroll;
+  margin-top: 25px;
 
   @media (min-width: 635px){
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+
   }
 
-  .card {
-    max-height: 130px;
-    max-width: 95%;
-    position: relative;
-    left: 2.5%;
-    border-radius: 10px;
-    border: 1px solid darkgrey;
-    margin: 0.5rem 0 0.1rem 0;
-    //background-color: #eeeeee;
+  .cardContainer {
 
     @media (min-width: 635px) {
-      width: 35%;
-      margin: 15px;
+
+      width: 49.5%;
       position: relative;
-      left: 30%;
-      transform: translateX(-50%);
     }
 
-    .card-image {
-      width: 50%;
+    @media (min-width: 1024px) {
+      width: 49.5%;
+    }
 
-      img.responsive {
-        //width: 100%;
-        //border-radius: 10px 0 0 10px;
-        height: 80%;
-        width: 80%;
+    .card {
+      height: 130px;
+      max-width: 95%;
+      position: relative;
+      left: 2.5%;
+      border-radius: 10px;
+      border: 1px solid darkgrey;
+      margin: 0.5rem 0 0.1rem 0;
+
+      @media (min-width: 635px) {
+        width: 100%;
+        max-width: 100%;
+        height: 165px;
         position: relative;
-        top: 10%;
-        left: 10%;
+        left: 0;
       }
 
-    }
+      @media (min-width: 1024px) {
+        height: 190px;
+      }
 
-    .card-stacked {
-      .card-content {
-        color: black;
-        padding: 15px;
+      .card-image {
+        width: 50%;
 
-        @media (min-width: 635px) {
-            padding: 10px;
+        img.responsive {
+          height: 80%;
+          width: 80%;
+          position: relative;
+          top: 10%;
+          left: 10%;
         }
-        .contentDiv {
 
-          .mobile {
-            display: none;
-          }
+      }
+
+      .card-stacked {
+        .card-content {
+          color: black;
+          padding: 15px;
+          //overflow-y: scroll;
 
           @media (min-width: 635px) {
-            height: 80%;
-            overflow-y: scroll;
+            padding: 10px;
+          }
+          .contentDiv {
 
-            .contentDiv::-webkit-scrollbar{
-              width: 10px;
+            .mobile {
+              display: none;
             }
 
-            .contentDiv::-webkit-scrollbar-track {
-              background: #f1f1f1;
+            @media (min-width: 635px) {
+              height: 80%;
+              overflow-y: auto;
             }
+          }
 
+          .contentDiv::-webkit-scrollbar-track {
+            background-color: white;
+          }
+
+          .contentDiv::-webkit-scrollbar {
+            width: 2px;
+            background-color: white;
+          }
+
+          .contentDiv::-webkit-scrollbar-thumb {
+            background-color: white;
           }
 
 
         }
-
-
+        .card-action {
+          padding: 5px;
+          padding-left: 25px;
+          color: #EB5E30;
+          font-weight: bold;
+        }
       }
-      .card-action {
-        padding: 5px;
-        padding-left: 25px;
-        color: #EB5E30;
-        font-weight: bold;
-      }
+
     }
+
 
 
   }

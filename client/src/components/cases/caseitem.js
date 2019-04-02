@@ -35,27 +35,28 @@ class CaseItem extends Component{
         }
 
         return(
-            <Link to={`/flyer/${id}`}>
-                <div className="card small horizontal">
-                    <div className="card-image">
-                        <img className="responsive" src={coverImg}/>
-                    </div>
-                    <div className="card-stacked">
-                        <div className="card-content">
-                            <div className="contentDiv">
-                                <p>{prefixForAddress} in {location.city}, {location.state}</p>
-                                <p>On: {dateString}</p>
-                                <p className={this.state.mobile ? 'mobile':''}>Description: {description}</p>
+            <div className="cardContainer">
+                <Link to={`/flyer/${id}`}>
+                    <div className="card small horizontal">
+                        <div className="card-image">
+                            <img className="responsive" src={coverImg}/>
+                        </div>
+                        <div className="card-stacked">
+                            <div className="card-content">
+                                <div className="contentDiv" id='content'>
+                                    <p>{prefixForAddress} in {location.city}, {location.state}</p>
+                                    <p>On: {dateString}</p>
+                                    <p className={this.state.mobile ? 'mobile':''}>Description: {description}</p>
+                                </div>
+
                             </div>
-
-                        </div>
-                        <div className="card-action">
-                            <div>Details</div>
+                            <div className="card-action">
+                                <div>Details</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Link>
-
+                </Link>
+            </div>
         );
     }
 }

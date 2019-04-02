@@ -6,36 +6,144 @@ $color-bars: #e79307;
 $color-action-buttons: #d84315;
 $color-background: #fff3e0 !default;
 
-.page-body {
-    
-    main {
+
+.leftUploadDiv {
+    display: none;
+
+    @media (min-width: 1024px){
+        display: inline-block;
+        text-align: center;
+    }
+
+    img {
+        width: 25vw;
+        position: fixed;
+        bottom: 0;
+    }
+
+}
+
+.rightUploadDiv {
+    display: none;
+
+    @media (min-width: 1024px){
+        display: inline-block;
+        text-align: center;
+        position: fixed;
+        top: 55%;
+        transform: translateY(-50%);
+        right: 5%;
+        height: 40vh;
+    }
+
+    .rightUploadContent {
         position: relative;
-        height: 100%;
-        overflow-y: scroll;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-        h5 {
-            font-weight: bold;
-        }
-
-        form {
-            top: 0;
+    h5 {
+        @media (min-width: 1024px) {
+            font-size: 280%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #d84315;
         }
     }
 
-    footer {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
+    p {
+        @media (min-width: 1024px) {
+            font-size: 210%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #e79307;
+        }
+    }
 
-        .btn {
-            background-color: $color-action-buttons;
-            font-weight: bold;
+    .orangeBone,
+    .brownBone {
+        width: 50px;
+    }
+
+    .leftTiltedOrangeBone {
+        position: relative;
+        left: 4%;
+    }
+
+    .tiltedOrangeBone {
+        position: relative;
+        right: 6%;
+        transform: rotate(30deg);
+    }
+
+    .tiltedBrownBone {
+        position: relative;
+        right: 5%;
+        transform: rotate(-15deg);
+    }
+
+}
+
+.uploadDiv {
+    @media (min-width: 1024px){
+        display: inline-block;
+        width: 75%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .page-body {
+
+        main {
+            position: relative;
+            height: 100%;
+            //overflow-y: scroll;
+
+            .container {
+                @media (min-width: 1024px) {
+                    width: 60%;
+                }
+            }
+
+            h5 {
+                font-weight: bold;
+            }
+
+            form {
+                top: 0;
+            }
+        }
+
+        .uploadSubmitBtnContainer {
+            margin-top: 20px;
+            text-align: center;
+
+            .uploadSubmitBtn {
+                background-color: #d84315;
+                font-family: 'Sniglet', cursive;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+        }
+
+
+        footer {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+
+            .btn {
+                background-color: $color-action-buttons;
+                font-weight: bold;
+            }
         }
     }
 }
+
 
 .image-preview-container {
     margin: 20px 0px;
@@ -79,46 +187,79 @@ $color-background: #fff3e0 !default;
     width: 100vw;
     background-color: white;
 
-    .buttons {
-        display: flex;
-        justify-content: center;
+    @media (min-width: 635px){
+        width: 80%;
+        margin: auto;
+    }
 
-        .SocialMediaShareButton {
-            display: inline;
-            padding: 5px 5px 5px 5px;
-            outline: none;
+    @media (min-width: 1024px) {
+        width: 55%;
+    }
+
+    .emailDiv{
+        margin-bottom: 70px;
+    }
+
+    .flyerDiv {
+
+        .socialMediaBtn {
+            margin-top: 20px;
         }
 
-        button {
-            margin: 5px;
-            box-shadow: none;
+        .image-container {
+            @media (min-width: 635px) {
+                height: 300px;
+                img {
+                    height: 100%;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                height: 300px;
+            }
         }
-    }
 
-    .bottom {
-        .qrcode {
-            display: none;
+        .buttons {
+            display: flex;
+            justify-content: center;
+
+            .SocialMediaShareButton {
+                display: inline;
+                padding: 5px 5px 5px 5px;
+                outline: none;
+            }
+
+            button {
+                margin: 5px;
+                box-shadow: none;
+            }
         }
-    }
 
-    .label {
-        font-weight: bold;
-    }
+        .bottom {
+            .qrcode {
+                display: none;
+            }
+        }
 
-    .description {
-        font-weight: normal;
-    }
+        .label {
+            font-weight: bold;
+        }
 
-    a {
-        color: #26a69a;
-        cursor: pointer;
-    }
+        .description {
+            font-weight: normal;
+        }
 
-    form {
-        top: 0px;
+        a {
+            color: #26a69a;
+            cursor: pointer;
+        }
 
-        button {
-            background-color: $color-action-buttons;
+        form {
+            top: 0;
+
+            button {
+                background-color: $color-action-buttons;
+            }
         }
     }
 
@@ -135,10 +276,10 @@ $color-background: #fff3e0 !default;
 
         .image-container{
             width: 70%;
-            height: 40vh;
+            height: 35vh;
             img {
                 max-height: 100%;
-                width: 100%;
+                width: 90%;
             }
         }
 
@@ -154,22 +295,30 @@ $color-background: #fff3e0 !default;
             color: black;
         }
 
-        .bottom{
-            display: flex;
-
-            .details {
-                width: 70%;
+        .flyerDiv {
+            .socialMediaBtn {
+                position: relative;
+                right: 5.5%;
             }
 
-            .qrcode {
-                height: 100%;
-                width: 30%;
+            .bottom{
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+
+                .details {
+                    width: 70%;
+                }
+
+                .qrcode {
+                    height: 100%;
+                    width: 30%;
+                    display: inline-block;
+                    //flex-direction: column;
+                    //justify-content: center;
+                    align-items: center;
+                }
             }
         }
+
 
         form {
             display: none;

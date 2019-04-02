@@ -21,11 +21,11 @@ body {
 
 
         .navBar {
-            height: 9%;
+            height: 8%;
         }
 
         .bottomContainer {
-            height: 91%;
+            height: 92%;
 
             .btn {
                 background-color: $btn-color;
@@ -103,6 +103,7 @@ body {
     input:checked +.typecard{
         box-shadow: 0 5px 0 0 rgba(0,0,0,0.2);
         transform: translateY(4px);
+        background-color: beige;
 
         -webkit-filter: none;
            -moz-filter: none;
@@ -151,7 +152,7 @@ footer {
     background-color: $color-bars;
 
     .btn-panel {
-        padding: 15px 0px;
+        padding: 15px 0;
         display: flex;
         width: 100%;
         justify-content: space-around;
