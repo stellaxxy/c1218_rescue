@@ -1,3 +1,7 @@
+.landingBody {
+    background-color: #eeeeee;
+}
+
 .landing.bottomContainer {
     transition: ease all .75s;
     width: 100%;
@@ -7,7 +11,6 @@
 
     .landingContainer {
         height: 100%;
-        background-color: #eeeeee;
 
         .responsive-img {
             position: absolute;
@@ -66,13 +69,6 @@
             }
         }
 
-        /*
-            @media (min-width: 1236px) {
-                p.landing-text::after {
-                    content: ' We help reunite pet owners with their loved ones.'
-                }
-            }
-        */
         .btn-container {
             position: absolute;
             top: 60%;
