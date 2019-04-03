@@ -23,7 +23,6 @@ import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
 import Flyer from "./case-upload/flyer";
 import UpdateSuccess from "./update-modal/update_success";
-import Update from "./update-modal/update_form"
 
 
 
@@ -48,9 +47,7 @@ const App = () => (
         <Route path="/closecase" component={CloseCase}/>
         <Route path="/flyer/:caseid" component={Flyer}/>
         <Route path="/casedescription" component={DescribeForm}/>
-        <Route path="/update/:caseid" component={Update}/>
-
-
+            
     </div>
 );
 
