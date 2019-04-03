@@ -6,14 +6,15 @@ import './upload.scss';
 const imageIsRequired = value => (!value ? "Required" : undefined);
 
 let UploadForm = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, isUpdate, onSubmit, onReturn } = props;
+
   return (
       <div className="page-body">
         <main>
           <div className="container">
             <h5>Pet Details</h5>
 
-            <form id="uploadform" autoComplete="off" onSubmit={handleSubmit}>
+            <form id="uploadform" autoComplete="off" onSubmit={isUpdate ? handleSubmit(onSubmit) : handleSubmit}>
 
             <Field
               name="coverImg"
@@ -91,17 +92,23 @@ let UploadForm = props => {
 
           </div>
         </main>
+          {
+            isUpdate ? (<div className="uploadSubmitBtnContainer">
+                <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
+                <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="button" onClick={onReturn}>Go Back</button>
+            </div>) : (<div className="uploadSubmitBtnContainer">
+                <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
+            </div>)
+          }
 
-          <div className="uploadSubmitBtnContainer">
-              <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
-          </div>
       </div>
   )
 }
 
 UploadForm = reduxForm({
-  form: 'caseupload',
-  initialValues: {caseDate: new Date().toLocaleDateString()}
+    form: 'caseupload',
+    initialValues: {caseDate: new Date().toLocaleDateString()},
+
 })(UploadForm);
 
 export default UploadForm;

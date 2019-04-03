@@ -25,7 +25,7 @@ class UploadPage extends Component {
   submit = async values => {
     let caseId = 0;
     let caseKey = 0;
-
+    console.log('upload values', values);
     try {
       // TRIGGERS RENDER WITH SPINNER
       this.setState({uploading: true});
@@ -77,8 +77,7 @@ class UploadPage extends Component {
         petFound,
         memberTotal
     });
-    console.log('petFound', petFound);
-    console.log('memberTotal', memberTotal);
+
   }
 
   renderSpinner() {

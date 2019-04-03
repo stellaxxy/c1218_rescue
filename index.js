@@ -322,6 +322,8 @@ app.post('/api/updatestatus', async (request, response) => {
 app.post('/api/updatecase', async (request, response) => {
 
     try {
+        //const coverImg = upload.getFilepath(request);
+        //console.log('updatecase cover img:', coverImg);
         const {id} = request.body;
         delete request.body.id;
 
@@ -337,31 +339,36 @@ app.post('/api/updatecase', async (request, response) => {
         const getIdResult = await db.query(getIdQuery);
         const animalId = getIdResult[0].animalID;
         const userId = getIdResult[0].userID;
-        //console.log('id', id);
-        //console.log('request:', request.body);
-       // console.log('get id result', animalId);
-       // console.log('get id result', userId);
+        let streetValue = null;
+
 
         const arrayResult = Object.entries(request.body).map(async (item) => {
-            //console.log('post request:', item);
             let statement = null;
             let query = null;
 
             if(item[0] === 'caseType'|| item[0] === 'city' || item[0] === 'street' || item[0] === 'date'){
                 if(item[0] === 'street' || item[0] === 'city'){
-                    const address = await googleMap.getAddress(item[0]);
-                    console.log('address:', address);
+                    if(item[0] === 'street'){
+                        streetValue = item[1];
+                        return;
+                    }
+                    //console.log('street', streetValue);
+                    //console.log('city', item[1]);
+                    const address = await googleMap.getAddress(`${streetValue}, ${item[1]}`);
+                    //console.log('address:', address);
+                    statement = "UPDATE `cases` SET `location` = ?, `city` = ?, `state` = ?, `zipcode` = ?, `latitude` = ?, `longitude` = ? WHERE `id` = ?";
+                    query = mysql.format(statement, [streetValue, address.city, address.state, address.zipcode, address.latitude, address.longitude, id]);
+                } else {
+                    statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
+                    query = mysql.format(statement, [item[0], item[1], id])
                 }
-
-                statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
-                query = mysql.format(statement, [item[0], item[1], id])
             } else if(item[0] === 'animalSize' || item[0] === 'animalType' || item[0] === 'description'){
                 if(item[0] === 'animalSize'){
                     item[0] = 'size';
                 }
                 statement = "UPDATE `animals` SET ?? = ? WHERE `id` = ?";
                 query = mysql.format(statement, [item[0], item[1], animalId]);
-            } else if(item[0] === 'phone'){
+            } else if(item[0] === 'phone' || item[0] === 'name' || item[0] === 'email'){
                 statement = "UPDATE `users` SET ?? = ? WHERE `id` = ?";
                 query = mysql.format(statement, [item[0], item[1], userId]);
             }
