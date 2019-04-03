@@ -13,9 +13,17 @@ class Landing extends Component {
     };
 
     componentDidMount(){
+        // Allow BODY to be styled differently for landing page
+        document.body.classList.add('landingBody');
+
         const modal = M.Modal.init(this.refs.modalBegin, {});
         this.setState({modal});
     } 
+
+    componentWillUnmount() {
+        // Allow BODY to be styled differently for landing page
+        document.body.classList.remove('landingBody');
+    }
 
     handleButtonClick(selectedCaseType) {
         this.props.setActiveCaseType(selectedCaseType);

@@ -10,3 +10,6 @@ public
 
 config/*.js
 !config /index.js
+
+client/dist/images/*
+!client/dist/images/image*.jpg
