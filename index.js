@@ -319,9 +319,10 @@ app.post('/api/updatestatus', async (request, response) => {
 //-------------------------------------------------------------------------------------------
 // UPDATE A CASE
 //-------------------------------------------------------------------------------------------
-app.post('/api/updatecase', async (request, response) => {
+app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, response) => {
 
     try {
+        //console.log('backend data:', request);
         //const coverImg = upload.getFilepath(request);
         //console.log('updatecase cover img:', coverImg);
         const {id} = request.body;

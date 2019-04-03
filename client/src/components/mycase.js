@@ -78,9 +78,9 @@ class MyCase extends Component {
 
     handleUpdate = async (formValues) => {
         event.preventDefault();
-        console.log('DATA:', formValues);
+
         //console.log('imagefile:', this.state.imageFile);
-/*
+
         for (let [key, value] of Object.entries(formValues)) {
 
             if (key === 'coverImg') {
@@ -88,10 +88,10 @@ class MyCase extends Component {
                 formValues.coverImg = value[0];
             }
         }
-*/
+        console.log('DATA:', formValues);
         const postData = {id: this.state.data.id, ...formValues};
         console.log('postData', postData);
-        const updateResult = await axios.post('/api/updatecase', {id: this.state.data.id, ...formValues});
+        const updateResult = await axios.post('/api/updatecase', postData);
         console.log('update result', updateResult);
         if(updateResult.data.success === true){
             const result = await axios.get('/api/casedetails?id=' + this.state.data.id);
