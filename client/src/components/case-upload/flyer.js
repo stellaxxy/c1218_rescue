@@ -59,7 +59,6 @@ class FlyerCode extends Component {
             const caseid = this.props.id || this.props.match.params.caseid;
 
             const response = await axios.get('/api/casedetails?id=' + caseid);
-            console.log('response:', response);
             this.setState({
                 data: response.data.data
             });

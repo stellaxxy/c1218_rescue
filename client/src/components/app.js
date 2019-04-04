@@ -22,8 +22,7 @@ import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
 import Flyer from "./case-upload/flyer";
-
-
+import UpdateSuccess from "./update-modal/update_success";
 
 
 
@@ -43,13 +42,12 @@ const App = () => (
         <Route path="/contactPage" component={Contact}/>
         <Route path="/searchvet" component={SearchVet}/>
         <Route path="/vetoffice" component={OfficeInfo}/>
-        <Route path="/mycase" component={MyCase}/>
+        <Route path="/updatesuccessful/:caseid" component={UpdateSuccess}/>
+        <Route path="/mycase/:caseid?" component={MyCase}/>
         <Route path="/closecase" component={CloseCase}/>
         <Route path="/flyer/:caseid" component={Flyer}/>
         <Route path="/casedescription" component={DescribeForm}/>
-
-
-
+            
     </div>
 );
 
