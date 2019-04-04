@@ -70,8 +70,8 @@ class SearchPage extends Component {
         } else {
             return(
                 <div className="bottomContainer">
-                    <h4 className="searchListTitle">LOST & FOUND LIST</h4>
-                    <h6 className="searchListTitle">SEARCH FOR BEST MATCHES</h6>
+                    <h4 className="searchListTitle">PET SEARCH</h4>
+                    <h6 className="searchListTitle">SELECT SEARCH CRITERIA AND CLICK SEARCH</h6>
                     <div className="leftDiv">
                         <img src={pawsPrint} className="pawsPrintLeft"/>
                     </div>

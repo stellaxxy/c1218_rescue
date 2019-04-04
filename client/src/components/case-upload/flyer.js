@@ -180,7 +180,7 @@ class FlyerCode extends Component {
                             <form onSubmit={this.handleEmailSubmit.bind(this)}>
                                 <div className="input-field col s12">
                                     <textarea className="materialize-textarea" id="emailMessage"/>
-                                    <label htmlFor="emailMessage">Please enter your message to send an email.</label>
+                                    <label htmlFor="emailMessage">Please enter your message to send an email to poster.</label>
                                 </div>
                                 <button type="submit" className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
                             </form>

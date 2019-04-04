@@ -50,8 +50,8 @@ class Landing extends Component {
                         </div>
 
                         <div className="btn-container">
-                            <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet</button>
-                            <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet</button>
+                            <button onClick={()=>{this.handleButtonClick('lost')}} className="waves-effect waves-light btn">Lost a Pet ?</button>
+                            <button onClick={()=>{this.handleButtonClick('found')}} className="waves-effect waves-light btn">Found a Pet ?</button>
                         </div>
                     </div>
                     <div id="modalBegin" ref="modalBegin" className="modal">
@@ -61,7 +61,7 @@ class Landing extends Component {
                         </div>
                         <div className="modal-footer">
                             <Link to={"/casedescription?caseType=" + searchType.toLowerCase()} className="waves-effect waves-light btn">
-                                Search List of {searchType} Pets
+                                Go to Pet Search
                             </Link>
                             <Link to={"/upload?caseType=" + activeCaseType} className="waves-effect waves-light btn">Create a Flyer</Link>
                         </div>

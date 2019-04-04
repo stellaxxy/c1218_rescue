@@ -94,8 +94,8 @@ let UploadForm = props => {
         </main>
           {
             isUpdate ? (<div className="uploadSubmitBtnContainer">
-                <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
                 <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="button" onClick={onReturn}>Go Back</button>
+                <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
             </div>) : (<div className="uploadSubmitBtnContainer">
                 <button className="waves-effect waves-light btn btn-action uploadSubmitBtn" form="uploadform" type="submit">Submit</button>
             </div>)
