@@ -344,47 +344,53 @@ app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, respo
 
 
         const arrayResult = Object.entries(request.body).map(async (item) => {
-            let statement = null;
-            let query = null;
+            try {
+                let statement = null;
+                let query = null;
 
-            if(item[0] === 'caseType'|| item[0] === 'city' || item[0] === 'street' || item[0] === 'date'){
-                if(item[0] === 'street' || item[0] === 'city'){
-                    if(item[0] === 'street'){
-                        streetValue = item[1];
-                        return;
+                if(item[0] === 'caseType'|| item[0] === 'city' || item[0] === 'street' || item[0] === 'date'){
+                    if(item[0] === 'street' || item[0] === 'city'){
+                        if(item[0] === 'street'){
+                            streetValue = item[1];
+                            return;
+                        }
+                        //console.log('street', streetValue);
+                        //console.log('city', item[1]);
+                        const address = await googleMap.getAddress(`${streetValue}, ${item[1]}`);
+                        //console.log('address:', address);
+                        statement = "UPDATE `cases` SET `location` = ?, `city` = ?, `state` = ?, `zipcode` = ?, `latitude` = ?, `longitude` = ? WHERE `id` = ?";
+                        query = mysql.format(statement, [streetValue, address.city, address.state, address.zipcode, address.latitude, address.longitude, id]);
+                    } else {
+                        statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
+                        query = mysql.format(statement, [item[0], item[1], id])
                     }
-                    //console.log('street', streetValue);
-                    //console.log('city', item[1]);
-                    const address = await googleMap.getAddress(`${streetValue}, ${item[1]}`);
-                    //console.log('address:', address);
-                    statement = "UPDATE `cases` SET `location` = ?, `city` = ?, `state` = ?, `zipcode` = ?, `latitude` = ?, `longitude` = ? WHERE `id` = ?";
-                    query = mysql.format(statement, [streetValue, address.city, address.state, address.zipcode, address.latitude, address.longitude, id]);
-                } else {
-                    statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
-                    query = mysql.format(statement, [item[0], item[1], id])
+                } else if(item[0] === 'animalSize' || item[0] === 'animalType' || item[0] === 'description'){
+                    if(item[0] === 'animalSize'){
+                        item[0] = 'size';
+                    }
+                    statement = "UPDATE `animals` SET ?? = ? WHERE `id` = ?";
+                    query = mysql.format(statement, [item[0], item[1], animalId]);
+                } else if(item[0] === 'phone' || item[0] === 'name' || item[0] === 'email'){
+                    statement = "UPDATE `users` SET ?? = ? WHERE `id` = ?";
+                    query = mysql.format(statement, [item[0], item[1], userId]);
                 }
-            } else if(item[0] === 'animalSize' || item[0] === 'animalType' || item[0] === 'description'){
-                if(item[0] === 'animalSize'){
-                    item[0] = 'size';
+
+                const result = await db.query(query);
+                if(!result){
+                    throw new Error(`Error in database query`)
                 }
-                statement = "UPDATE `animals` SET ?? = ? WHERE `id` = ?";
-                query = mysql.format(statement, [item[0], item[1], animalId]);
-            } else if(item[0] === 'phone' || item[0] === 'name' || item[0] === 'email'){
-                statement = "UPDATE `users` SET ?? = ? WHERE `id` = ?";
-                query = mysql.format(statement, [item[0], item[1], userId]);
+                //console.log('query result:', result);
+
+
+            } catch(error) {
+                handleError(response, error.message);
             }
 
-            const result = await db.query(query);
-            if(!result){
-                throw new Error(`Error in database query`)
-            }
-            //console.log('query result:', result);
         });
 
         response.send({
             success: true
         });
-
 
     } catch (error) {
         handleError(response, error.message);

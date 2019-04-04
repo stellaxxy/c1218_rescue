@@ -88,11 +88,11 @@ class MyCase extends Component {
                 formValues.coverImg = value[0];
             }
         }
-        console.log('DATA:', formValues);
+        //console.log('DATA:', formValues);
         const postData = {id: this.state.data.id, ...formValues};
-        console.log('postData', postData);
+        //console.log('postData', postData);
         const updateResult = await axios.post('/api/updatecase', postData);
-        console.log('update result', updateResult);
+        //console.log('update result', updateResult);
         if(updateResult.data.success === true){
             const result = await axios.get('/api/casedetails?id=' + this.state.data.id);
 
