@@ -15,13 +15,13 @@ class SideNav extends Component{
                     <Link className="sidenav-close" to="/"><i className="material-icons left">home</i>HOME</Link>
                 </li>
                 <li>
-                    <Link className="sidenav-close" to="/search?mode=list"><i className="material-icons left">search</i>FOUND&LOST</Link>
+                    <Link className="sidenav-close" to="/search?mode=list"><i className="material-icons left">search</i>PET SEARCH</Link>
                 </li>
                 <li>
                     <Link className="sidenav-close" to="/search?mode=map"><i className="material-icons left">map</i>MAP</Link>
                 </li>
                 <li>
-                    <Link className="sidenav-close" to="/upload"><i className="material-icons left">add</i>UPLOAD CASE</Link>
+                    <Link className="sidenav-close" to="/upload"><i className="material-icons left">add</i>CREATE NEW LISTING</Link>
                 </li>
                 <li>
                     <Link className="sidenav-close" to="/mycase"><i className="material-icons left">find_in_page</i>MY CASE</Link>

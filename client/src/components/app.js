@@ -47,7 +47,7 @@ const App = () => (
         <Route path="/closecase" component={CloseCase}/>
         <Route path="/flyer/:caseid" component={Flyer}/>
         <Route path="/casedescription" component={DescribeForm}/>
-            
+
     </div>
 );
 

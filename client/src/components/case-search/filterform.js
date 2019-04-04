@@ -32,13 +32,13 @@ class Filter extends Component {
         return(
             <div className="formDiv">
                 <form className="listForm" onSubmit={this.onSubmit}>
-                    <h5>Pet Reported As:</h5>
+                    <h5>What are you searching for?</h5>
                     <div className="radioFound">
-                        <label htmlFor="found">Found</label>
+                        <label htmlFor="found">Found Pets</label>
                         <input className="radioBtn" type="radio" name="caseType" value="found" id="found" defaultChecked={this.props.filterValues.caseType==='found' ? 'checked':''}/>
                     </div>
                     <div className="radioLost">
-                        <label htmlFor="lost">Lost</label>
+                        <label htmlFor="lost">Missing Pets</label>
                         <input className="radioBtn" type="radio" name="caseType" value="lost" id="lost" defaultChecked={this.props.filterValues.caseType==='lost' ? 'checked':''}/>
                     </div>
                     <div className="locationDiv">
