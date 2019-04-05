@@ -6,15 +6,15 @@ import './upload.scss';
 const imageIsRequired = value => (!value ? "Required" : undefined);
 
 let UploadForm = props => {
-  const { handleSubmit, isUpdate, onSubmit, onReturn } = props;
-
+  const { handleSubmit, isUpdate, onSubmit, onReturn, id } = props;
+  console.log('id', id);
   return (
       <div className="page-body">
         <main>
           <div className="container">
             <h5>Pet Details</h5>
 
-            <form id="uploadform" autoComplete="off" onSubmit={isUpdate ? handleSubmit(onSubmit) : handleSubmit}>
+            <form id="uploadform" autoComplete="off" onSubmit={handleSubmit}>
 
             <Field
               name="coverImg"
@@ -53,7 +53,7 @@ let UploadForm = props => {
 
               <div>
                 <label htmlFor="street">Location Pet Last Seen*</label>
-                <Field name="street" component="input" type="text" placeholder="Street address or cross streets" />
+                <Field name="street" component="input" type="text" placeholder="Street address or cross streets"/>
               </div>
 
               <div>

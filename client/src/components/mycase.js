@@ -68,17 +68,16 @@ class MyCase extends Component {
     };
 
     handleUpdateBtn = () => {
-
+        this.handleOnDrop([{lastModified: '1551340347922',lastModifiedDate: new Date().toGMTString(), name: 'https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184', preview: "https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184", size: '13552 bytes', type: "image/jpeg", webkitRelativePath: ""}]);
         this.setState({
-            update: true
+            update: true,
         });
-
     };
 
 
     handleUpdate = async (formValues) => {
         event.preventDefault();
-
+        console.log('handle update is working');
         //console.log('imagefile:', this.state.imageFile);
 
         for (let [key, value] of Object.entries(formValues)) {
@@ -88,17 +87,14 @@ class MyCase extends Component {
                 formValues.coverImg = value[0];
             }
         }
-        console.log('DATA:', formValues);
+        //console.log('DATA:', formValues);
         const postData = {id: this.state.data.id, ...formValues};
-        console.log('postData', postData);
+        //console.log('postData', postData);
         const updateResult = await axios.post('/api/updatecase', postData);
-        console.log('update result', updateResult);
+        //console.log('update result', updateResult);
         if(updateResult.data.success === true){
-            const result = await axios.get('/api/casedetails?id=' + this.state.data.id);
-
             setTimeout(()=>{
                 this.setState({
-                    data: result.data.data,
                     update: false
                 });
                 this.props.history.push(`/updatesuccessful/${this.state.data.id}`);
@@ -139,14 +135,36 @@ class MyCase extends Component {
             );
         }
 
+        let initialValues = {};
+        //console.log('mycase update data:', this.state.data);
+        if(this.state.data){
+            initialValues = {...this.state.data};
+            console.log('initial values:', initialValues);
+            initialValues.animalType = initialValues.animalDetail.animalType;
+            initialValues.animalSize = initialValues.animalDetail.size;
+            initialValues.street = initialValues.location.location;
+            initialValues.city = initialValues.location.city;
+            initialValues.name = initialValues.userName;
+            initialValues.caseDate = initialValues.date;
+            initialValues.description = initialValues.animalDetail.description;
+
+            delete initialValues.animalDetail;
+            delete initialValues.location;
+            delete initialValues.userName;
+            delete initialValues.date;
+            delete initialValues.coverImg;
+        }
+        console.log(this.state.imageFile);
         return (
 
             <div className="myCaseContainer">
                 {
                     this.state.update ?
-                        (<UpdateForm onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>)
+                        (<UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>)
                         :
                         (<Fragment>
+
+
                             <FlyerCode id={this.state.data.id}/>
                             <div className="myCaseCloseBtnContainer">
                                 {
