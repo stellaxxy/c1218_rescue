@@ -112,7 +112,7 @@ app.get('/api/casedetails', async (request, response) => {
     try {
         let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`state`, c.`zipcode`, \n" +
             "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
-            "            a.`color`, a.`gender`, a.`size`, a.`description`, u.`phone`, u.`email`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
+            "            a.`color`, a.`gender`, a.`size`, a.`description`, u.`phone`, u.`name` AS userName, u.`email`, GROUP_CONCAT(i.`imgURL`) AS imgURL\n" +
             "            FROM `cases` AS c \n" +
             "            JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
             "            LEFT OUTER JOIN `images` AS i ON i.`animalID` = a.`id`\n" +
@@ -196,6 +196,7 @@ app.get('/api/casedetails', async (request, response) => {
             if (data.imgURL !== null) {
                 data.imgURL = data.imgURL.split(',');
             }
+
             data.date = data.date.toLocaleDateString();
 
             output.success = true;
@@ -322,9 +323,10 @@ app.post('/api/updatestatus', async (request, response) => {
 app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, response) => {
 
     try {
-        //console.log('backend data:', request);
+        console.log('backend data:', request.body);
         //const coverImg = upload.getFilepath(request);
         //console.log('updatecase cover img:', coverImg);
+
         const {id} = request.body;
         delete request.body.id;
 
@@ -334,59 +336,20 @@ app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, respo
             throw new Error(`Id must be a number`);
         }
 
-        const getIdFormat = "SELECT `animalID`, `userID` FROM `cases` WHERE `id` = ?";
-        const getId = [id];
-        const getIdQuery = mysql.format(getIdFormat, getId);
-        const getIdResult = await db.query(getIdQuery);
-        const animalId = getIdResult[0].animalID;
-        const userId = getIdResult[0].userID;
-        let streetValue = null;
+        const result = request.body;
 
+        const updateQuery = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` \n" +
+            "INNER JOIN `animals` AS a ON a.`id` = c.`animalID` SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
+            "c.`date` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
+            " WHERE c.`id` = ?";
 
-        const arrayResult = Object.entries(request.body).map(async (item) => {
-            try {
-                let statement = null;
-                let query = null;
+        const address = await googleMap.getAddress(`${result.street}, ${result.city}`);
+        console.log('address:', address);
+        const caseDateFormatted = new Date(result.caseDate).toISOString().split('T')[0];
+        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, caseDateFormatted, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
+        const updateFormattedQuery = mysql.format(updateQuery, updateValues);
+        const updateResult = await db.query(updateFormattedQuery);
 
-                if(item[0] === 'caseType'|| item[0] === 'city' || item[0] === 'street' || item[0] === 'date'){
-                    if(item[0] === 'street' || item[0] === 'city'){
-                        if(item[0] === 'street'){
-                            streetValue = item[1];
-                            return;
-                        }
-                        //console.log('street', streetValue);
-                        //console.log('city', item[1]);
-                        const address = await googleMap.getAddress(`${streetValue}, ${item[1]}`);
-                        //console.log('address:', address);
-                        statement = "UPDATE `cases` SET `location` = ?, `city` = ?, `state` = ?, `zipcode` = ?, `latitude` = ?, `longitude` = ? WHERE `id` = ?";
-                        query = mysql.format(statement, [streetValue, address.city, address.state, address.zipcode, address.latitude, address.longitude, id]);
-                    } else {
-                        statement = "UPDATE `cases` SET ?? = ? WHERE `id` = ?";
-                        query = mysql.format(statement, [item[0], item[1], id])
-                    }
-                } else if(item[0] === 'animalSize' || item[0] === 'animalType' || item[0] === 'description'){
-                    if(item[0] === 'animalSize'){
-                        item[0] = 'size';
-                    }
-                    statement = "UPDATE `animals` SET ?? = ? WHERE `id` = ?";
-                    query = mysql.format(statement, [item[0], item[1], animalId]);
-                } else if(item[0] === 'phone' || item[0] === 'name' || item[0] === 'email'){
-                    statement = "UPDATE `users` SET ?? = ? WHERE `id` = ?";
-                    query = mysql.format(statement, [item[0], item[1], userId]);
-                }
-
-                const result = await db.query(query);
-                if(!result){
-                    throw new Error(`Error in database query`)
-                }
-                //console.log('query result:', result);
-
-
-            } catch(error) {
-                handleError(response, error.message);
-            }
-
-        });
 
         response.send({
             success: true
