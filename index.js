@@ -320,13 +320,11 @@ app.post('/api/updatestatus', async (request, response) => {
 //-------------------------------------------------------------------------------------------
 // UPDATE A CASE
 //-------------------------------------------------------------------------------------------
-app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, response) => {
+app.post('/api/updatecase', upload.single('coverImg'), async (request, response) => {
 
     try {
-        console.log('backend data:', request.body);
-        //const coverImg = upload.getFilepath(request);
-        //console.log('updatecase cover img:', coverImg);
-
+        const coverImg = upload.getFilepath(request);
+        
         const {id} = request.body;
         delete request.body.id;
 
@@ -340,13 +338,12 @@ app.post('/api/updatecase', /*upload.single('coverImg'),*/ async (request, respo
 
         const updateQuery = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` \n" +
             "INNER JOIN `animals` AS a ON a.`id` = c.`animalID` SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
-            "c.`date` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
+            "c.`coverImg` = ?, c.`date` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
             " WHERE c.`id` = ?";
 
         const address = await googleMap.getAddress(`${result.street}, ${result.city}`);
-        console.log('address:', address);
         const caseDateFormatted = new Date(result.caseDate).toISOString().split('T')[0];
-        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, caseDateFormatted, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
+        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
         const updateFormattedQuery = mysql.format(updateQuery, updateValues);
         const updateResult = await db.query(updateFormattedQuery);
 
