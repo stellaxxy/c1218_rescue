@@ -55,10 +55,10 @@ class FlyerCode extends Component {
     async componentDidMount() {
 
         try {
-            //const { caseid } = this.props.match.params;
             const caseid = this.props.id || this.props.match.params.caseid;
 
             const response = await axios.get('/api/casedetails?id=' + caseid);
+
             this.setState({
                 data: response.data.data
             });
@@ -71,6 +71,7 @@ class FlyerCode extends Component {
     // RENDER
     //-------------------------------------------------------------------------
     render() {
+        console.log('flyer state:', this.state);
 
         // Have to reset because Materialize modals set to HIDDEN
         document.body.style.overflow = "";

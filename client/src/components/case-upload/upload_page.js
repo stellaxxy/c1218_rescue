@@ -25,7 +25,7 @@ class UploadPage extends Component {
   submit = async values => {
     let caseId = 0;
     let caseKey = 0;
-    console.log('upload values', values);
+
     try {
       // TRIGGERS RENDER WITH SPINNER
       this.setState({uploading: true});
@@ -130,7 +130,6 @@ class UploadPage extends Component {
                 </div>
             </div>
         </Fragment>
-
     );
   }
 }

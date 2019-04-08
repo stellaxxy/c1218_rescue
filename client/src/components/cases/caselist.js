@@ -6,8 +6,7 @@ import './caselist.scss';
 
 class CaseList extends Component {
     state = {
-        error: false,
-        cases: []
+        cases: null
     };
 
     async componentDidMount(){
@@ -19,11 +18,13 @@ class CaseList extends Component {
 
     async componentDidUpdate(prevProps){
         if(prevProps != this.props && this.props.cases){
+            /*
             if(this.props.cases.length === 0){
                 this.setState({
                     error: true
                 });
             }
+            */
             this.setState({
                 cases: this.props.cases
             })
@@ -31,15 +32,19 @@ class CaseList extends Component {
     }
 
     render(){
-        if(this.state.error === true){
+        if(this.props.error === true){
             return (
-                <div className="noData">No Data Available</div>
+                <div className="noData">Sorry an error has occurred. Please try again later.</div>
             );
         }
 
-        if(!this.state.cases || this.state.cases.length === 0){
+        if(!this.state.cases){
             return(
-                <div>Loading</div>
+                <div className="noData">Loading</div>
+            );
+        } else if(this.state.cases.length === 0){
+            return (
+                <div className="noData">No data available</div>
             );
         }
 
@@ -56,8 +61,3 @@ class CaseList extends Component {
 }
 export default CaseList;
 
-/*
-  <div className="decor">
-                    <img src="../../assets/images/image1.jpg"/>
-                </div>
- */
