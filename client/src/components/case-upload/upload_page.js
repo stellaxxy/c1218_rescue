@@ -61,9 +61,7 @@ class UploadPage extends Component {
       this.props.history.push(`/upload-complete/${caseId}/${caseKey}`);
     } catch (error) {
       this.props.history.push(`/upload-complete/0/0`);
-
     }
-    
   }
 
   async componentDidMount(){

@@ -135,6 +135,14 @@ class CaseMap extends Component {
     }
 
     render() {
+        if(this.props.error === true){
+            return (
+                <div className="mapContainer errorOnMap">
+                    <h4>Sorry an error has occurred. Please try again later.</h4>
+                </div>
+            );
+        }
+
         return (
             <div className="mapContainer">
                 <div id="map">
