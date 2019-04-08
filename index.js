@@ -366,10 +366,10 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
         }
 
         const result = request.body;
-
+        console.log(result);
         const updateQuery = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` \n" +
             "INNER JOIN `animals` AS a ON a.`id` = c.`animalID` SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
-            "c.`coverImg` = ?, c.`date` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
+            "c.`coverImg` = ?, c.`date` = ?, u.`name` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
             " WHERE c.`id` = ?";
 
         const address = await googleMap.getAddress(`${result.street}, ${result.city}`);
@@ -378,7 +378,7 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
         }
 
         const caseDateFormatted = new Date(result.caseDate).toISOString().split('T')[0];
-        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
+        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.name, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
         const updateFormattedQuery = mysql.format(updateQuery, updateValues);
         const updateResult = await db.query(updateFormattedQuery);
 

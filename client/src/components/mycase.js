@@ -15,7 +15,8 @@ class MyCase extends Component {
         error: false,
         update: false,
         imageFile: [],
-        matchingData: true
+        matchingData: true,
+        updating: false
     };
 
     closeModal = () => {
@@ -56,10 +57,32 @@ class MyCase extends Component {
                 this.setState({
                     modal: true,
                     data: null,
-                    update: false
+                    update: false,
+                    error: false,
+                    updating: false
                 })
             }
         }
+    }
+
+    renderSpinner() {
+        const {updating} = this.state;
+
+        return (
+            <div className={"preloader-wrapper big " + (updating ? 'active' : '')}>
+                <div className="spinner-layer spinner-green-only">
+                    <div className="circle-clipper left">
+                        <div className="circle"></div>
+                    </div>
+                    <div className="gap-patch">
+                        <div className="circle"></div>
+                    </div>
+                    <div className="circle-clipper right">
+                        <div className="circle"></div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     handleSubmit = async formValues => {
@@ -101,6 +124,8 @@ class MyCase extends Component {
     handleUpdate = async (formValues) => {
         try {
             event.preventDefault();
+
+            this.setState({updating: true});
 
             let data = new FormData();
             for (let [key, value] of Object.entries(formValues)) {
@@ -224,11 +249,12 @@ class MyCase extends Component {
             <div className="myCaseContainer">
                 {
                     this.state.update ?
-                        (<UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>)
+                        <Fragment>
+                            <UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>
+                            {this.renderSpinner()}
+                        </Fragment>
                         :
-                        (<Fragment>
-
-
+                        <Fragment>
                             <FlyerCode id={this.state.data.id}/>
                             <div className="myCaseCloseBtnContainer">
                                 {
@@ -244,10 +270,10 @@ class MyCase extends Component {
                             </div>
 
                             <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key"/>
-                        </Fragment>)
+                        </Fragment>
                 }
-
             </div>
+
         );
     }
 }
