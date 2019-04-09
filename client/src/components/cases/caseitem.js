@@ -51,7 +51,8 @@ class CaseItem extends Component{
 
                             </div>
                             <div className="card-action">
-                                <div>Details</div>
+                                <div className="details">Details</div>
+                                <div className={caseType === 'lost' ? "chip red" : "chip blue accent-1"}>{caseType}</div>
                             </div>
                         </div>
                     </div>
