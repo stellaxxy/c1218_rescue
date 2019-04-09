@@ -100,9 +100,26 @@
         }
         .card-action {
           padding: 5px;
-          padding-left: 25px;
+          //padding-left: 25px;
           color: #EB5E30;
           font-weight: bold;
+          display: flex;
+          justify-content: space-around;
+          align-items: baseline;
+
+           div {
+             display: inline-block;
+           }
+
+          .chip {
+            font-size: 80%;
+            height: 30px;
+            text-transform: capitalize;
+            width: 55px;
+            text-align: center;
+            font-weight: bold;
+          }
+
         }
       }
 

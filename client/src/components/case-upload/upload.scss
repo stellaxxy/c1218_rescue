@@ -127,6 +127,19 @@ $color-background: #fff3e0 !default;
             }
         }
 
+        .formCheckBox {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+
+            [type="checkbox"] {
+                opacity: 1;
+            }
+
+            label {
+                margin-left: 20px;
+            }
+        }
 
         footer {
             margin: 0;

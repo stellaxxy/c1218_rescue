@@ -42,6 +42,8 @@
   .myCaseCloseBtnContainer {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
+    top: 6%;
 
     @media (min-width: 635px) {
       margin-top: 40px;
@@ -56,8 +58,8 @@
       margin-right: 15px;
 
       @media (min-width: 635px) {
-        margin-left: 25px;
-        margin-right: 25px;
+        margin-left: 45px;
+        margin-right: 45px;
       }
     }
   }
@@ -71,92 +73,11 @@
   top: 18%;
 }
 
-
-
-
-/*
-.my-case {
-    height: 100%;
-
-    main {
-      height: 100%;
-
-      .leftMyCase {
-        .mycaseHeading {
-          color: black;
-        }
-      }
-
-      .leftMyCase,
-      .rightMyCase {
-        @media (min-width: 1024px) {
-          display: inline-block;
-          width: 45%;
-          vertical-align: top;
-          background-color: #fff8e1;
-          margin: 15px;
-          height: 80%;
-          position: relative;
-          top: 46%;
-          transform: translateY(-50%);
-          border-radius: 20px;
-
-          .striped {
-            thead {
-              @media (min-width: 1024px){
-                font-size: 140%;
-              }
-            }
-          }
-
-        }
-      }
-
-      .case-details {
-        text-align: center;
-
-
-        .striped {
-          th {
-            padding: 0;
-
-
-          }
-        }
-
-        footer{
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          width: 100%;
-          position: fixed;
-          bottom: 0;
-
-
-          .btn {
-            margin-left: 100%;
-            margin-bottom: 20px;
-            margin: 10px;
-            font-size: 2rem;
-          }
-        }
-
-        .header {
-          text-align: center;
-          color: black;
-          // font-style: italic;
-        }
-
-
-      }
-
-      .my-case .header {
-        color: black;
-      }
-
-    }
-  }
-
- */
-
-
+.preloaderHolder {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

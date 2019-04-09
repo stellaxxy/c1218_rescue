@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import DropZoneField from '../general/dropzone/dropzone_field';
 import './upload.scss';
 
@@ -7,7 +8,7 @@ const imageIsRequired = value => (!value ? "Required" : undefined);
 
 let UploadForm = props => {
   const { handleSubmit, isUpdate, onSubmit, onReturn, id } = props;
-  console.log('id', id);
+
   return (
       <div className="page-body">
         <main>
@@ -87,6 +88,17 @@ let UploadForm = props => {
                   <Field name="description" component="textarea" placeholder="Animal color, breed, gender..."/>
                 </div>
               </div>
+
+                {
+                  isUpdate ?
+                      ''
+                      :
+                      (<div className="formCheckBox">
+                          <Field type="checkbox" component="input" name="terms" value="termsAccepted" checked/>
+                          <label> I accept and agree to the <Link to="/">Terms of Use</Link>.</label>
+                      </div>)
+                }
+
 
             </form>
 
