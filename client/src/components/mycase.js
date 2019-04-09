@@ -68,7 +68,7 @@ class MyCase extends Component {
     };
 
     handleUpdateBtn = () => {
-        this.handleOnDrop([{lastModified: '1551340347922',lastModifiedDate: new Date().toGMTString(), name: 'https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184', preview: "https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184", size: '13552 bytes', type: "image/jpeg", webkitRelativePath: ""}]);
+        //this.handleOnDrop([{lastModified: '1551340347922',lastModifiedDate: new Date().toGMTString(), name: 'https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184', preview: "https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184", size: '13552 bytes', type: "image/jpeg", webkitRelativePath: ""}]);
         this.setState({
             update: true,
         });
@@ -77,22 +77,29 @@ class MyCase extends Component {
 
     handleUpdate = async (formValues) => {
         event.preventDefault();
-        console.log('handle update is working');
-        //console.log('imagefile:', this.state.imageFile);
 
+        let data = new FormData();
         for (let [key, value] of Object.entries(formValues)) {
 
             if (key === 'coverImg') {
                 // CURRENTLY ONLY SEND 1 IMAGE
-                formValues.coverImg = value[0];
+                value = value[0];
             }
+            if(value === null){
+                value = '';
+            }
+
+            data.append(key, value);
         }
-        //console.log('DATA:', formValues);
-        const postData = {id: this.state.data.id, ...formValues};
-        //console.log('postData', postData);
-        const updateResult = await axios.post('/api/updatecase', postData);
-        //console.log('update result', updateResult);
-        if(updateResult.data.success === true){
+
+        const response = await axios({
+            method: 'post',
+            url: '/api/updatecase',
+            data: data,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        });
+
+        if(response.data.success === true){
             setTimeout(()=>{
                 this.setState({
                     update: false
