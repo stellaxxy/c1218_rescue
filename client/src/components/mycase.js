@@ -230,7 +230,7 @@ class MyCase extends Component {
         //console.log('mycase update data:', this.state.data);
         if(this.state.data){
             initialValues = {...this.state.data};
-            console.log('initial values:', initialValues);
+
             initialValues.animalType = initialValues.animalDetail.animalType;
             initialValues.animalSize = initialValues.animalDetail.size;
             initialValues.street = initialValues.location.location;

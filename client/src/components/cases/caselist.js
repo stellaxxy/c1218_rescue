@@ -18,13 +18,7 @@ class CaseList extends Component {
 
     async componentDidUpdate(prevProps){
         if(prevProps != this.props && this.props.cases){
-            /*
-            if(this.props.cases.length === 0){
-                this.setState({
-                    error: true
-                });
-            }
-            */
+
             this.setState({
                 cases: this.props.cases
             })
@@ -49,7 +43,7 @@ class CaseList extends Component {
         }
 
         const caseItemArray = this.state.cases.map(item => {
-            return <CaseItem filterValues={this.props.filterValues} key={item.id} {...item}/>
+            return <CaseItem searchUrl={this.props.searchUrl} filterValues={this.props.filterValues} key={item.id} {...item}/>
         });
 
         return(

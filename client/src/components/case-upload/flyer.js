@@ -1,15 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import QRCode from 'qrcode.react';
-import { FacebookShareButton, FacebookIcon, GooglePlusShareButton, GooglePlusIcon, TwitterShareButton, TwitterIcon } from 'react-share';
+import {LineShareButton, LineIcon, FacebookShareButton, FacebookIcon, GooglePlusShareButton, GooglePlusIcon, TwitterShareButton, TwitterIcon } from 'react-share';
 import './upload.scss';
+import queryString from "query-string";
 
 class FlyerCode extends Component {
 
     state = {
         data: null,
         error: false
-    }
+    };
 
     //-----------------------------------------------------------------------------------------
     // PRINT FLYER
@@ -17,7 +18,7 @@ class FlyerCode extends Component {
     handlePrintClick = () => {
         window.print();
         return false;
-    }
+    };
 
     //-----------------------------------------------------------------------------------------
     // SEND EMAIL
@@ -26,10 +27,8 @@ class FlyerCode extends Component {
         try {
             event.preventDefault();
 
-            //const {caseid} = this.props.match.params;
-
             const caseid =  this.props.id || this.props.match.params.caseid;
-            console.log('caseid:', caseid);
+
             const response = await axios.post('/api/contactuser', {
                 caseId: caseid,
                 emailMessage: event.target.emailMessage.value
@@ -68,10 +67,21 @@ class FlyerCode extends Component {
     }
 
     //-------------------------------------------------------------------------
+    // HANDLE GO BACK TO PREVIOUS HISTORY
+    //-------------------------------------------------------------------------
+    handleGoBack = () => {
+        let searchUrl = '';
+        if(this.props.location.state.searchUrl){
+            searchUrl = '/search' + this.props.location.state.searchUrl;
+        }
+
+        this.props.history.push(searchUrl);
+    }
+
+    //-------------------------------------------------------------------------
     // RENDER
     //-------------------------------------------------------------------------
     render() {
-        console.log('flyer state:', this.state);
 
         // Have to reset because Materialize modals set to HIDDEN
         document.body.style.overflow = "";
@@ -116,9 +126,9 @@ class FlyerCode extends Component {
                             <FacebookShareButton url={url} quote={socialMediaTitle}>
                                 <FacebookIcon size={40} round />
                             </FacebookShareButton>
-                            <GooglePlusShareButton url={url}>
-                                <GooglePlusIcon size={40} round />
-                            </GooglePlusShareButton>
+                            <LineShareButton url={url}>
+                                <LineIcon size={40} round />
+                            </LineShareButton>
                             <TwitterShareButton url={url} title={socialMediaTitle}>
                                 <TwitterIcon size={40} round />
                             </TwitterShareButton>
@@ -183,7 +193,10 @@ class FlyerCode extends Component {
                                     <textarea className="materialize-textarea" id="emailMessage"/>
                                     <label htmlFor="emailMessage">Please enter your message to send an email to poster.</label>
                                 </div>
-                                <button type="submit" className="btn-floating waves-light waves-effect btn"><i className="material-icons">email</i></button>
+                                <div className="flyerBtnDiv">
+                                    <button type="btn" onClick={this.handleGoBack} className="btn-floating waves-light waves-effect btn leftBtn">Back</button>
+                                    <button type="submit" className="btn-floating waves-light waves-effect btn rightBtn"><i className="material-icons">email</i></button>
+                                </div>
                             </form>
                         </div>
                     </Fragment>}

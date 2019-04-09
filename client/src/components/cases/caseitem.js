@@ -36,7 +36,7 @@ class CaseItem extends Component{
 
         return(
             <div className="cardContainer">
-                <Link to={`/flyer/${id}`}>
+                <Link to={{pathname: `/flyer/${id}`, state: {searchUrl: this.props.searchUrl}}}>
                     <div className="card small horizontal">
                         <div className="card-image">
                             <img className="responsive" src={coverImg}/>
