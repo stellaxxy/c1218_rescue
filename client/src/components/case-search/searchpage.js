@@ -14,37 +14,65 @@ class SearchPage extends Component {
         super(props);
 
         this.state = {
-            cases: []
+            cases: [],
+            mapAllCases: [],
+            error: false
         };
-    }
-
-    handleFilterClick = (filterValues) => {
-        this.props.history.push('/searchform?' + queryString.stringify(filterValues));
     }
 
     handleFilterChange = (filterValues) => {
         this.props.history.push('/search?' + queryString.stringify(filterValues));
-    }
+    };
 
     async getData() {
         try {
             let filterValues = queryString.parse(this.props.location.search);
+
             for (let key in filterValues) {
                 if (!filterValues[key]) delete filterValues[key];
             }
 
             const qs = queryString.stringify(filterValues);
+
             const result = await axios.get('/api/caselist?' + qs);
 
-            this.setState({
-                cases: result.data.data || []
-            })
+            if(result.data.success){
+                this.setState({
+                    cases: result.data.data || []
+                })
+            } else {
+                this.setState({
+                   error: true
+                });
+            }
 
         } catch(error) {
             this.setState({
-                cases: []
+                cases: [],
+                error: true
             });
         }
+    }
+
+    async getAllData() {
+        try {
+            const result = await axios.get('/api/caselist');
+
+            if(result.data.success){
+                this.setState({
+                    mapAllCases: result.data.data
+                })
+            } else {
+                this.setState({
+                    error: true
+                });
+            }
+        } catch(error){
+            this.setState({
+                error: true
+            });
+        }
+
     }
 
     async componentDidUpdate(prevProps){
@@ -55,16 +83,17 @@ class SearchPage extends Component {
 
     async componentDidMount(){
         this.getData();
+        this.getAllData();
     }
 
-    render(props) {
+    render() {
         const filterValues = queryString.parse(this.props.location.search);
 
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap cases={this.state.cases} url={filterValues}/>
-                    <SearchPanel filterValues={filterValues} onFilterClick={this.handleFilterClick} onFilterChange={this.handleFilterChange}/>
+                    <CaseMap error={this.state.error} cases={this.state.cases} url={filterValues} allCases={this.state.mapAllCases}/>
+                    <SearchPanel filterValues={filterValues} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
         } else {
@@ -77,7 +106,7 @@ class SearchPage extends Component {
                     </div>
                     <div className="centerDiv">
                         <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
-                        <CaseList cases={this.state.cases} filterValues={filterValues}/>
+                        <CaseList error={this.state.error} cases={this.state.cases} filterValues={filterValues}/>
                     </div>
                     <div className="rightDiv">
                         <img src={pawsPrintRight} className="pawsPrintRight"/>

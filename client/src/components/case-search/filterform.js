@@ -54,7 +54,7 @@ class Filter extends Component {
                             <option value="">All Species</option>
                             <option value="dog">Dog</option>
                             <option value="cat">Cat</option>
-                            <option value="others">Others</option>
+                            <option value="other">Other</option>
                         </select>
                         <h6>Size</h6>
                         <select id="size" className="selectOpt" name="animalSize" defaultValue={this.props.filterValues.animalSize || ""}>

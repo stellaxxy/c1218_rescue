@@ -17,37 +17,41 @@ import SearchVet from './resource/searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
 import MainNav from './nav';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import OfficeInfo from "./resource/vetofficeinfo";
 import MyCase from "./mycase";
 import CloseCase from "./cases/case-confirmation";
 import Flyer from "./case-upload/flyer";
 import UpdateSuccess from "./update-modal/update_success";
-
+import Error404 from "./general/error_404";
 
 
 
 const App = () => (
     <div className="mainContainer">
         <MainNav/>
-        <Route exact path="/" component={Landing}/>
-        <Route path="/search" component={SearchPage}/>
-        <Route path="/searchform" component={SearchForm}/>
-        <Route path="/casemap" component={CaseMap}/>
-        <Route path="/upload" component={Upload}/>
-        <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
-        <Route path="/casedetails" component={CaseDetails}/>
-        <Route path="/dogcare" component={DogCare}/>
-        <Route path="/catcare" component={CatCare}/>
-        <Route path="/contactPage" component={Contact}/>
-        <Route path="/searchvet" component={SearchVet}/>
-        <Route path="/vetoffice" component={OfficeInfo}/>
-        <Route path="/updatesuccessful/:caseid" component={UpdateSuccess}/>
-        <Route path="/mycase/:caseid?" component={MyCase}/>
-        <Route path="/closecase" component={CloseCase}/>
-        <Route path="/flyer/:caseid" component={Flyer}/>
-        <Route path="/casedescription" component={DescribeForm}/>
 
+        <Switch>
+            <Route exact path="/" component={Landing}/>
+            <Route path="/search" component={SearchPage}/>
+            <Route path="/searchform" component={SearchForm}/>
+            <Route path="/casemap" component={CaseMap}/>
+            <Route path="/upload" component={Upload}/>
+            <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
+            <Route path="/casedetails" component={CaseDetails}/>
+            <Route path="/dogcare" component={DogCare}/>
+            <Route path="/catcare" component={CatCare}/>
+            <Route path="/contactPage" component={Contact}/>
+            <Route path="/searchvet" component={SearchVet}/>
+            <Route path="/vetoffice" component={OfficeInfo}/>
+            <Route path="/updatesuccessful/:caseid" component={UpdateSuccess}/>
+            <Route path="/mycase/:caseid?" component={MyCase}/>
+            <Route path="/closecase" component={CloseCase}/>
+            <Route path="/flyer/:caseid" component={Flyer}/>
+            <Route path="/casedescription" component={DescribeForm}/>
+
+            <Route component={Error404}/>
+        </Switch>
     </div>
 );
 

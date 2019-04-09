@@ -1,0 +1,20 @@
+.error404Div {
+  position: relative;
+  top: 20%;
+
+  h3 {
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+  }
+
+  .error404Home {
+    text-align: center;
+
+    .btn {
+      font-size: 140%;
+      font-weight: bold;
+      font-family: 'Sniglet', cursive;
+      border-radius: 10px;
+    }
+  }
+}

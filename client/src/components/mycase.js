@@ -14,7 +14,9 @@ class MyCase extends Component {
         data: null,
         error: false,
         update: false,
-        imageFile: []
+        imageFile: [],
+        matchingData: true,
+        updating: false
     };
 
     closeModal = () => {
@@ -24,47 +26,91 @@ class MyCase extends Component {
     };
 
     async componentDidMount(){
-        if(this.props.match.params.caseid){
-            //console.log('my case id', this.props.match.params.caseid);
-            const result = await axios.get('/api/casedetails?id=' + this.props.match.params.caseid);
-            //console.log('mycase result:', result);
+        try{
+            if(this.props.match.params.caseid){
+
+                const result = await axios.get('/api/casedetails?id=' + this.props.match.params.caseid);
+
+                if(result.data.success){
+                    this.setState({
+                        data: result.data.data,
+                        update: false,
+                        modal: false
+                    });
+                } else {
+                    throw new Error('axios call error');
+                }
+
+            }
+        } catch(error) {
             this.setState({
-                data: result.data.data,
-                update: false,
+                error: true,
                 modal: false
-            });
+            })
         }
+
     }
 
     componentDidUpdate(prevProps){
-        //console.log('preprops:', prevProps);
-        //console.log('props:', this.props);
         if(prevProps.location.pathname !== this.props.location.pathname){
             if(this.props.location.pathname === '/mycase'){
                 this.setState({
                     modal: true,
                     data: null,
-                    update: false
+                    update: false,
+                    error: false,
+                    updating: false
                 })
             }
         }
     }
 
+    renderSpinner() {
+        const {updating} = this.state;
+
+        return (
+            <div className={"preloader-wrapper big " + (updating ? 'active' : '')}>
+                <div className="spinner-layer spinner-green-only">
+                    <div className="circle-clipper left">
+                        <div className="circle"></div>
+                    </div>
+                    <div className="gap-patch">
+                        <div className="circle"></div>
+                    </div>
+                    <div className="circle-clipper right">
+                        <div className="circle"></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     handleSubmit = async formValues => {
+        try {
+            const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
 
-        const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
-
-        if (result.data.success === true) {
+            if(result.data.success){
+                this.setState({
+                    data: result.data.data
+                });
+                this.closeModal();
+                this.props.history.push(`/mycase/${this.state.data.id}`);
+            } else {
+                if(result.data.errorMessage === 'There is no matching case.'){
+                    this.setState({
+                        matchingData: false
+                    });
+                } else {
+                    throw new Error('axios call error');
+                }
+            }
+        } catch(error) {
             this.setState({
-                data: result.data.data
-            });
-            this.closeModal();
-            this.props.history.push(`/mycase/${this.state.data.id}`);
-        } else {
-            this.setState({
-                error: true
+                error: true,
+                modal: false
             });
         }
+
     };
 
     handleUpdateBtn = () => {
@@ -76,43 +122,66 @@ class MyCase extends Component {
 
 
     handleUpdate = async (formValues) => {
-        event.preventDefault();
+        try {
+            event.preventDefault();
 
-        let data = new FormData();
-        for (let [key, value] of Object.entries(formValues)) {
+            this.setState({updating: true});
 
-            if (key === 'coverImg') {
-                // CURRENTLY ONLY SEND 1 IMAGE
-                value = value[0];
+            let data = new FormData();
+            for (let [key, value] of Object.entries(formValues)) {
+
+                if (key === 'coverImg') {
+                    // CURRENTLY ONLY SEND 1 IMAGE
+                    value = value[0];
+                }
+                if(value === null){
+                    value = '';
+                }
+
+                data.append(key, value);
             }
-            if(value === null){
-                value = '';
+
+            const response = await axios({
+                method: 'post',
+                url: '/api/updatecase',
+                data: data,
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            });
+
+            if(response.data.success === true){
+                setTimeout(()=>{
+                    this.setState({
+                        update: false
+                    });
+                    this.props.history.push(`/updatesuccessful/${this.state.data.id}`);
+                }, 1800);
+
+            } else {
+                throw new Error('axios call error');
             }
 
-            data.append(key, value);
-        }
-
-        const response = await axios({
-            method: 'post',
-            url: '/api/updatecase',
-            data: data,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-        });
-
-        if(response.data.success === true){
-            setTimeout(()=>{
-                this.setState({
-                    update: false
-                });
-                this.props.history.push(`/updatesuccessful/${this.state.data.id}`);
-            }, 1800);
-
+        } catch(error) {
+            this.setState({
+                error: true,
+                modal: false
+            });
         }
     };
 
     closeCase = async () => {
-        const {id} = this.state.data;
-        const response = await axios.post('/api/updatestatus', {id: id, status: 'closed'});
+        try {
+            const {id} = this.state.data;
+            const response = await axios.post('/api/updatestatus', {id: id, status: 'closed'});
+
+            if(!response.data.success){
+                throw new Error('axios call error');
+            }
+        } catch(error) {
+            this.setState({
+                error: true,
+                modal: false
+            });
+        }
     };
 
     handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
@@ -128,7 +197,20 @@ class MyCase extends Component {
             return (
                 <Fragment>
                     <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key" info={[]}/>
-                    <div>No Matching Case</div>
+                    <div className="mycaseError">
+                        <h4>Sorry an error has occurred. Please try again later.</h4>
+                    </div>
+                </Fragment>
+            );
+        }
+
+        if (!this.state.matchingData) {
+            return (
+                <Fragment>
+                    <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key" info={[]}/>
+                    <div className="mycaseError">
+                        <h4>Invalid email or caseKey.</h4>
+                    </div>
                 </Fragment>
             );
         }
@@ -167,11 +249,12 @@ class MyCase extends Component {
             <div className="myCaseContainer">
                 {
                     this.state.update ?
-                        (<UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>)
+                        <Fragment>
+                            <UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>
+                            {this.renderSpinner()}
+                        </Fragment>
                         :
-                        (<Fragment>
-
-
+                        <Fragment>
                             <FlyerCode id={this.state.data.id}/>
                             <div className="myCaseCloseBtnContainer">
                                 {
@@ -187,10 +270,10 @@ class MyCase extends Component {
                             </div>
 
                             <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key"/>
-                        </Fragment>)
+                        </Fragment>
                 }
-
             </div>
+
         );
     }
 }

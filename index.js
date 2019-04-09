@@ -50,7 +50,7 @@ const CASELIST_FILTERS = [
     },
     {
         param: 'animalType',
-        validValues: ['cat', 'dog'],
+        validValues: ['cat', 'dog', 'other'],
         sqlCriteria: 'a.`animalType` = ?'
     }
 ];
@@ -82,24 +82,32 @@ app.get('/api/caselist', async (request, response) => {
         }
 
         const data = await db.query(sql, filter_values);
-        data.forEach(row => {
-            row.location = {
-                city: row.city,
-                location: row.location,
-                zipcode: row.zipcode,
-                latitude: row.latitude,
-                longitude: row.longitude,
-                state: row.state
-            };
 
-            delete row.city;
-            delete row.zipcode;
-            delete row.latitude;
-            delete row.longitude;
-            delete row.state;
-        });
+        if(!data){
+            throw new Error('sql error');
+        }
+
+        if(data.length > 0){
+            data.forEach(row => {
+                row.location = {
+                    city: row.city,
+                    location: row.location,
+                    zipcode: row.zipcode,
+                    latitude: row.latitude,
+                    longitude: row.longitude,
+                    state: row.state
+                };
+
+                delete row.city;
+                delete row.zipcode;
+                delete row.latitude;
+                delete row.longitude;
+                delete row.state;
+            });
+        }
 
         response.send({success: true, data});
+
     } catch (error) {
         handleError(response, error.message);
     }
@@ -147,7 +155,6 @@ app.get('/api/casedetails', async (request, response) => {
 
             data = await db.query(query, [id]);
         }
-
 
         // ASSEMBLE RESPONSE DATA
         const output = {
@@ -222,12 +229,19 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const caseDateFormatted = new Date(caseDate).toISOString().split('T')[0];
 
         const address = await googleMap.getAddress(`${street}, ${city}`);
+        if(!address){
+            throw new Error('google map geocode error');
+        }
 
         // insert into users table
         const usersTable = "INSERT INTO `users` (`email`,`name`,`phone`) VALUES (?,?,?)";
         const insertUserInfo = [email, name, phone];
         const userquery = mysql.format(usersTable, insertUserInfo);
         const insertuser = await db.query(userquery);
+
+        if(!insertuser){
+            throw new Error('sql error');
+        }
         var userID = insertuser.insertId;
 
         //  insert into animal table
@@ -235,6 +249,10 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const insert = [breed, color, petName, animalType, gender, description, animalSize];
         const query = mysql.format(animalsTable, insert);
         const insertResult = await db.query(query);
+
+        if(!insertResult){
+            throw new Error('sql error');
+        }
         var animalID = insertResult.insertId;
 
         //  insert into cases table
@@ -243,6 +261,9 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
         const casequery = mysql.format(casesTable, insertlocation);
         const insertcase = await db.query(casequery);
 
+        if(!insertcase){
+            throw new Error('sql error');
+        }
         // send mail after registering case
 
         const emailTemplate = new Email({
@@ -278,6 +299,10 @@ app.post('/api/createcase', upload.single('coverImg'), async (request, response)
             const imageInfo = [animalID, imgURL];
             const imagequery = mysql.format(imageTable, imageInfo);
             const insertimage = await db.query(imagequery);
+
+            if(!insertimage){
+                throw new Error('sql error');
+            }
         }
 
         response.send({
@@ -299,13 +324,19 @@ app.post('/api/updatestatus', async (request, response) => {
 
     try {
         const {status, id} = request.body;
-        if (id === undefined) {
-            throw new Error(`Please provide a valid caseKey`);
+        if(!id){
+            throw new Error(`Please provide a valid id`);
+        } else if(isNaN(id)){
+            throw new Error(`Id must be a number`);
         }
         const updatecases = "update cases set status = ? where id = ? "
         const updateStatus = [status, id];
         const updatequery = mysql.format(updatecases, updateStatus);
         const caseupdate = await db.query(updatequery);
+
+        if(!caseupdate){
+            throw new Error('sql error');
+        }
 
         response.send({
             success: true,
@@ -324,7 +355,7 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
 
     try {
         const coverImg = upload.getFilepath(request);
-        
+
         const {id} = request.body;
         delete request.body.id;
 
@@ -335,18 +366,25 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
         }
 
         const result = request.body;
-
+        console.log(result);
         const updateQuery = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` \n" +
             "INNER JOIN `animals` AS a ON a.`id` = c.`animalID` SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
-            "c.`coverImg` = ?, c.`date` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
+            "c.`coverImg` = ?, c.`date` = ?, u.`name` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
             " WHERE c.`id` = ?";
 
         const address = await googleMap.getAddress(`${result.street}, ${result.city}`);
+        if(!address){
+            throw new Error('google map geocode error');
+        }
+
         const caseDateFormatted = new Date(result.caseDate).toISOString().split('T')[0];
-        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
+        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.name, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
         const updateFormattedQuery = mysql.format(updateQuery, updateValues);
         const updateResult = await db.query(updateFormattedQuery);
 
+        if(!updateResult){
+            throw new Error('sql error');
+        }
 
         response.send({
             success: true
@@ -365,12 +403,22 @@ app.post('/api/contactuser', async (request, response) => {
     try {
         const {emailMessage, caseId} = request.body;
 
+        if(!caseId){
+            throw new Error(`Please provide a valid id`);
+        } else if(isNaN(caseId)){
+            throw new Error(`Id must be a number`);
+        }
         // TODO: Get info from DB using caseId
 
         const userInfo = "select c.caseKey,c.city,c.caseType,a.animalType,u.email,u.phone,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
         const userCaseId = [caseId]
         const userEmail = mysql.format(userInfo, userCaseId);
         const userSendEmail = await db.query(userEmail);
+
+        if(!userSendEmail){
+            throw new Error('sql error');
+        }
+
         const {caseType, caseKey, city, animalType, email, id, phone} = userSendEmail[0];
 
         const subject = `Possible match for ${caseType} ${animalType} in ${city}`;
@@ -399,6 +447,10 @@ app.get('/api/userdetails', async (request, response) => {
         const usercall = mysql.format(phonenoquery, [caseid]);
         const calluser = await db.query(usercall);
 
+        if(!calluser){
+            throw new Error('sql error');
+        }
+
         response.send({
             success: true,
             data:calluser[0]
@@ -414,9 +466,9 @@ app.get('/api/userdetails', async (request, response) => {
 // YELP VET LIST
 //-------------------------------------------------------------------------------------------
 app.post('/api/yelp/businesses', async (request, response) => {
-    const {location} = request.body;
 
     try {
+        const {location} = request.body;
         let yelpURL = 'https://api.yelp.com/v3/businesses/search';
 
         let config = {
@@ -435,6 +487,10 @@ app.post('/api/yelp/businesses', async (request, response) => {
         }
 
         const data = await axios.get(yelpURL, config);
+
+        if(!data){
+            throw new Error('yelp api error');
+        }
 
         response.send({
             result: data.data
@@ -464,6 +520,10 @@ app.get('/api/yelp/details', async (request, response) => {
 
         const result = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, config);
 
+        if(!result){
+            throw new Error('yelp api error');
+        }
+
         response.send({
             data: result.data
         })
@@ -481,6 +541,10 @@ app.get('/api/petfound', async (request, response) => {
        const query = "SELECT COUNT(c.`status`) AS successCount FROM `cases` AS c WHERE c.`status` = 'closed'";
 
        const data = await db.query(query);
+
+       if(!data){
+           throw new Error('sql error');
+       }
 
        response.send({
            successCount: data[0].successCount
@@ -500,6 +564,10 @@ app.get('/api/memebertotal', async (request, response) => {
         const query = "SELECT COUNT(c.`userID`) AS memberCount FROM `cases` AS c";
 
         const data = await db.query(query);
+
+        if(!data){
+            throw new Error('sql error');
+        }
 
         response.send({
             memberCount: data[0].memberCount
