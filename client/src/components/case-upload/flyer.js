@@ -27,7 +27,10 @@ class FlyerCode extends Component {
         try {
             event.preventDefault();
 
-            const filterValues = queryString.parse(this.props.location.search);
+            let filterValues = {};
+            if(this.props.location){
+                filterValues = queryString.parse(this.props.location.search);
+            }
 
             const caseid = this.props.id || filterValues.id;
 
