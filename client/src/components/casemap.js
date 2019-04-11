@@ -61,9 +61,9 @@ class CaseMap extends Component {
                 const urlstring = queryString.stringify(this.props.url);
 
                 if (item.caseType === 'found'){
-                    contentString = `<a href="/flyer/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/flyer${this.props.searchUrl}&id=${item.id}"><img src=${img} alt="pet picture"/></Link><div><p>Found on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 } else if(item.caseType === 'lost') {
-                    contentString = `<a href="/flyer/${item.id}"><img src=${img} alt="pet picture"/></a><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
+                    contentString = `<a href="/flyer${this.props.searchUrl}&id=${item.id}"><img src=${img} alt="pet picture"/></Link><div><p>Last seen on ${item.location.location}, ${item.location.zipcode}</p></div>`;
                 }
 
 
@@ -90,6 +90,7 @@ class CaseMap extends Component {
 
     async initMap() {
         try {
+            console.log('map search url', this.props);
             let center = {
                 lat: 33.6846,
                 lng: -117.8265

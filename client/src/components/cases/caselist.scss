@@ -113,11 +113,13 @@
 
           .chip {
             font-size: 80%;
-            height: 30px;
+            height: 27px;
             text-transform: capitalize;
-            width: 55px;
+            width: 53px;
             text-align: center;
             font-weight: bold;
+            margin: 0;
+            line-height: 27px;
           }
 
         }

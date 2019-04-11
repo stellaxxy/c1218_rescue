@@ -9,7 +9,7 @@ class FlyerCode extends Component {
 
     state = {
         data: null,
-        error: false
+        error: false,
     };
 
     //-----------------------------------------------------------------------------------------
@@ -27,7 +27,9 @@ class FlyerCode extends Component {
         try {
             event.preventDefault();
 
-            const caseid =  this.props.id || this.props.match.params.caseid;
+            const filterValues = queryString.parse(this.props.location.search);
+
+            const caseid = this.props.id || filterValues.id;
 
             const response = await axios.post('/api/contactuser', {
                 caseId: caseid,
@@ -54,7 +56,9 @@ class FlyerCode extends Component {
     async componentDidMount() {
 
         try {
-            const caseid = this.props.id || this.props.match.params.caseid;
+            const filterValues = queryString.parse(this.props.location.search);
+            console.log(filterValues);
+            const caseid = this.props.id || filterValues.id;
 
             const response = await axios.get('/api/casedetails?id=' + caseid);
 
@@ -70,19 +74,22 @@ class FlyerCode extends Component {
     // HANDLE GO BACK TO PREVIOUS HISTORY
     //-------------------------------------------------------------------------
     handleGoBack = () => {
-        let searchUrl = '';
-        if(this.props.location.state.searchUrl){
-            searchUrl = '/search' + this.props.location.state.searchUrl;
-        }
+        const filterValues = queryString.parse(this.props.location.search);
 
-        this.props.history.push(searchUrl);
+        delete filterValues.id;
+
+        const searchUrlQuery = queryString.stringify((filterValues));
+
+        console.log('search query:', searchUrlQuery);
+
+        this.props.history.push(`/search?${searchUrlQuery}`);
     }
 
     //-------------------------------------------------------------------------
     // RENDER
     //-------------------------------------------------------------------------
     render() {
-
+        console.log('flyer data:', this.state.data);
         // Have to reset because Materialize modals set to HIDDEN
         document.body.style.overflow = "";
 

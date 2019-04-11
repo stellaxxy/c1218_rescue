@@ -33,10 +33,11 @@ class CaseItem extends Component{
         } else {
             prefixForAddress = 'Found';
         }
-
+        console.log('search url:', this.props.searchUrl);
+//{pathname: `/flyer/${id}`, state: {searchUrl: this.props.searchUrl}}
         return(
             <div className="cardContainer">
-                <Link to={{pathname: `/flyer/${id}`, state: {searchUrl: this.props.searchUrl}}}>
+                <Link to={`/flyer${this.props.searchUrl}&id=${id}`}>
                     <div className="card small horizontal">
                         <div className="card-image">
                             <img className="responsive" src={coverImg}/>
