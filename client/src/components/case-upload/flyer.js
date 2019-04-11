@@ -56,8 +56,11 @@ class FlyerCode extends Component {
     async componentDidMount() {
 
         try {
-            const filterValues = queryString.parse(this.props.location.search);
-            console.log(filterValues);
+            let filterValues = {};
+            if(this.props.location){
+                filterValues = queryString.parse(this.props.location.search);
+            }
+
             const caseid = this.props.id || filterValues.id;
 
             const response = await axios.get('/api/casedetails?id=' + caseid);
@@ -79,8 +82,6 @@ class FlyerCode extends Component {
         delete filterValues.id;
 
         const searchUrlQuery = queryString.stringify((filterValues));
-
-        console.log('search query:', searchUrlQuery);
 
         this.props.history.push(`/search?${searchUrlQuery}`);
     }
