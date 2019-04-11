@@ -90,7 +90,6 @@ class FlyerCode extends Component {
     // RENDER
     //-------------------------------------------------------------------------
     render() {
-        console.log('flyer data:', this.state.data);
         // Have to reset because Materialize modals set to HIDDEN
         document.body.style.overflow = "";
 

@@ -90,7 +90,6 @@ class CaseMap extends Component {
 
     async initMap() {
         try {
-            console.log('map search url', this.props);
             let center = {
                 lat: 33.6846,
                 lng: -117.8265
