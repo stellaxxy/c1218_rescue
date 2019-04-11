@@ -119,7 +119,7 @@ class FlyerCode extends Component {
             //----------------------------------------------------------------
             // CREATE DERIVED VARIABLES
             //----------------------------------------------------------------
-            const url = `http://pawsfindhome.com/flyer/${data.id}`;
+            const url = `http://pawssolution.com/flyer?id=${data.id}`;
             const animalTypeDisplay = animalType === 'other' ? 'pet' : animalType;
             const caseTypeDisplay = data.caseType[0].toUpperCase() + data.caseType.slice(1);
             const socialMediaTitle = data.caseType === 'found' ?
