@@ -245,7 +245,7 @@ class MyCase extends Component {
             delete initialValues.date;
             delete initialValues.coverImg;
         }
-        console.log(this.state.imageFile);
+
         return (
 
             <div className="myCaseContainer">
