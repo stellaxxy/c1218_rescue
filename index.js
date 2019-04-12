@@ -354,10 +354,9 @@ app.post('/api/updatestatus', async (request, response) => {
 app.post('/api/updatecase', upload.single('coverImg'), async (request, response) => {
 
     try {
-        const coverImg = upload.getFilepath(request);
 
+        // VALIDATE CASE ID
         const {id} = request.body;
-        delete request.body.id;
 
         if(!id){
             throw new Error(`Please provide a valid id`);
@@ -365,12 +364,8 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
             throw new Error(`Id must be a number`);
         }
 
+        // DERIVE UPDATE VALUES
         const result = request.body;
-        console.log(result);
-        const updateQuery = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` \n" +
-            "INNER JOIN `animals` AS a ON a.`id` = c.`animalID` SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
-            "c.`coverImg` = ?, c.`date` = ?, u.`name` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n" +
-            " WHERE c.`id` = ?";
 
         const address = await googleMap.getAddress(`${result.street}, ${result.city}`);
         if(!address){
@@ -378,7 +373,26 @@ app.post('/api/updatecase', upload.single('coverImg'), async (request, response)
         }
 
         const caseDateFormatted = new Date(result.caseDate).toISOString().split('T')[0];
-        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, coverImg, caseDateFormatted, result.name, result.email, result.phone, result.animalSize, result.animalType, result.description, id];
+
+        const updateValues = [result.caseType, result.city, result.street, address.state, address.zipcode, address.latitude, address.longitude, caseDateFormatted, result.name, result.email, result.phone, result.animalSize, result.animalType, result.description];
+
+        // BASE SQL
+        let baseSQL = "UPDATE `cases` AS c INNER JOIN `users` AS u ON c.`userID` = u.`id` INNER JOIN `animals` AS a ON a.`id` = c.`animalID` \n" +
+            "SET c.`caseType` = ?, c.`city` = ?, c.`location` = ?, c.`state` = ?, c.`zipcode` = ?, c.`latitude` = ?, c.`longitude` = ?, \n" +
+            "c.`date` = ?, u.`name` = ?, u.`email` = ?, u.`phone` = ?, a.`size` = ?, a.`animalType` = ?, a.`description` = ? \n";
+
+        // CHANGE PHOTO IF PROVIDED
+        const coverImg = upload.getFilepath(request);
+        if (coverImg) {
+            updateValues.push(coverImg);
+            baseSQL += ", c.`coverImg` = ?";
+        }
+
+        // ADD WHERE CLAUSE TO SQL
+        const updateQuery = baseSQL + " WHERE c.`id` = ?";
+        updateValues.push(id);
+
+        // FORMAT SQL WITH VALUES & EXECUTE
         const updateFormattedQuery = mysql.format(updateQuery, updateValues);
         const updateResult = await db.query(updateFormattedQuery);
 

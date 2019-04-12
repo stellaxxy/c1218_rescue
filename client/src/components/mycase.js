@@ -8,6 +8,14 @@ import FlyerCode from './case-upload/flyer';
 import UpdateForm from './case-upload/upload_form';
 //import Update from './update-modal/update_form'
 
+class MockFile {
+    constructor(source) {
+        this.name = source;
+        this.preview = source;
+        this.size = '1000';
+    }
+}
+
 class MyCase extends Component {
     state = {
         modal: true,
@@ -31,9 +39,13 @@ class MyCase extends Component {
 
                 const result = await axios.get('/api/casedetails?id=' + this.props.match.params.caseid);
 
+                let data = result.data.data;
+                data.coverImg = new MockFile(data.coverImg);
+
                 if(result.data.success){
                     this.setState({
-                        data: result.data.data,
+                        data: data,
+                        imageFile: [data.coverImg],
                         update: false,
                         modal: false
                     });
@@ -134,7 +146,7 @@ class MyCase extends Component {
 
                 if (key === 'coverImg') {
                     // CURRENTLY ONLY SEND 1 IMAGE
-                    value = value[0];
+                    value = value[0] ? value[0] : null;
                 }
                 if(value === null){
                     value = '';
@@ -243,7 +255,6 @@ class MyCase extends Component {
             delete initialValues.location;
             delete initialValues.userName;
             delete initialValues.date;
-            delete initialValues.coverImg;
         }
 
         return (
