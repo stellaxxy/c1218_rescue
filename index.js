@@ -552,7 +552,7 @@ app.get('/api/yelp/details', async (request, response) => {
 app.get('/api/petfound', async (request, response) => {
 
     try {
-       const query = "SELECT COUNT(c.`status`) AS successCount FROM `cases` AS c WHERE c.`status` = 'closed'";
+       const query = "SELECT COUNT(*) AS successCount FROM `cases` AS c WHERE c.`status` = 'closed'";
 
        const data = await db.query(query);
 
@@ -575,7 +575,7 @@ app.get('/api/petfound', async (request, response) => {
 app.get('/api/memebertotal', async (request, response) => {
 
     try {
-        const query = "SELECT COUNT(c.`userID`) AS memberCount FROM `cases` AS c";
+        const query = "SELECT COUNT(*) AS memberCount FROM `cases`";
 
         const data = await db.query(query);
 
