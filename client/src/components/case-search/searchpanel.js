@@ -11,7 +11,6 @@ class SearchPanel extends Component {
     };
 
     render() {
-        console.log('search panel filter values', this.props.filterValues);
         return (
             <div className="filter-panel">
                 <input className="mapSearchInput col s6 offset-s1" type="text" placeholder="Zip Code" id="mapInput" defaultValue={this.props.filterValues.zipcode || ""}/>

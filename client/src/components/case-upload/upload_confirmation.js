@@ -13,7 +13,7 @@ export default props => {
                 </div>
 
                 <div className="row">
-                    <Link to={"/flyer/"+caseid} className="waves-effect waves-light btn orange text-white">View Flyer</Link>
+                    <Link to={"/flyer?id="+caseid} className="waves-effect waves-light btn orange text-white">View Flyer</Link>
                 </div>
                 <div className="row">
                     <Link to={"/search"} className="waves-effect waves-light btn orange text-white">Lost/Found Pet List</Link>
