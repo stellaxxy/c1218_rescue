@@ -47,7 +47,7 @@ const App = () => (
             <Route path="/updatesuccessful/:caseid" component={UpdateSuccess}/>
             <Route path="/mycase/:caseid?" component={MyCase}/>
             <Route path="/closecase" component={CloseCase}/>
-            <Route path="/flyer/:caseid" component={Flyer}/>
+            <Route path="/flyer" component={Flyer}/>
             <Route path="/casedescription" component={DescribeForm}/>
 
             <Route component={Error404}/>

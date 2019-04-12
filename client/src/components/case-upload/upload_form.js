@@ -95,7 +95,7 @@ let UploadForm = props => {
                       :
                       (<div className="formCheckBox">
                           <Field type="checkbox" component="input" name="terms" value="termsAccepted" checked/>
-                          <label> I accept and agree to the <Link to="/">Terms of Use</Link>.</label>
+                          <label> I accept and agree to the <Link to="#">Terms of Use</Link>.</label>
                       </div>)
                 }
 

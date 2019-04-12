@@ -92,7 +92,7 @@ class SearchPage extends Component {
         if(filterValues.mode==='map'){
             return(
                 <div className="bottomContainer map">
-                    <CaseMap error={this.state.error} cases={this.state.cases} url={filterValues} allCases={this.state.mapAllCases}/>
+                    <CaseMap searchUrl={this.props.location.search} error={this.state.error} cases={this.state.cases} url={filterValues} allCases={this.state.mapAllCases}/>
                     <SearchPanel filterValues={filterValues} onFilterChange={this.handleFilterChange}/>
                 </div>
             );
@@ -106,7 +106,7 @@ class SearchPage extends Component {
                     </div>
                     <div className="centerDiv">
                         <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
-                        <CaseList error={this.state.error} cases={this.state.cases} filterValues={filterValues}/>
+                        <CaseList searchUrl={this.props.location.search} error={this.state.error} cases={this.state.cases} filterValues={filterValues}/>
                     </div>
                     <div className="rightDiv">
                         <img src={pawsPrintRight} className="pawsPrintRight"/>

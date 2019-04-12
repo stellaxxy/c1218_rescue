@@ -276,6 +276,16 @@ $color-background: #fff3e0 !default;
         }
     }
 
+    .flyerBtnDiv{
+         .leftBtn {
+             margin-right: 50px;
+         }
+
+        .rightBtn {
+            margin-left: 50px;
+        }
+    }
+
     .footer {
         display: none;
     }
