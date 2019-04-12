@@ -49,11 +49,13 @@ if (storageType === STORAGE_LOCAL) {
 
 // Return filepath from request that has passed through Multer middleware
 // Handles the different properties Multer stores this in based on storage type
-const getFilepath = req => (
-    storageType === 'local' ? 
+const getFilepath = req => {
+    if (!req.file) return null;
+    
+    return storageType === 'local' ? 
         LOCAL_DIR.replace('client/dist','') + req.file.filename :
-        req.file.location
-);
+        req.file.location;
+};
 
 // Output configuration to server log
 console.log('upload service configured for storage type: ', storageType);
