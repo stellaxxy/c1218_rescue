@@ -2,9 +2,12 @@ import React, {Fragment} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import DropZoneField from '../general/dropzone/dropzone_field';
+import InputField from '../general/input-field';
 import './upload.scss';
 
 const imageIsRequired = value => (!value ? "Required" : undefined);
+
+const isRequired = (value, allValues, props, name) => !value ? `Required` : undefined;
 
 let UploadForm = props => {
   const { handleSubmit, isUpdate, onSubmit, onReturn, id } = props;
@@ -59,7 +62,7 @@ let UploadForm = props => {
 
               <div>
                 <label htmlFor="city">City Pet Last Seen*</label>
-                <Field name="city" component="input" type="text" placeholder="Zipcode or City, State" />
+                <Field name="city" component="input" type="text" component={InputField} validate={isRequired} placeholder="Zipcode or City, State" />
               </div>
 
               <div>
