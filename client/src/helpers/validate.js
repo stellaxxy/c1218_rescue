@@ -1,3 +1,13 @@
 import React from 'react';
+import {capitalize} from './index';
 
-export const isRequired = (value, allValues, props, name) => !value ? name[0].toUpperCase() + name.slice(1) + ' Required' : undefined;
+const labels = {
+    caseDate: 'Date',
+    coverImg: 'Photo'
+};
+
+export const isRequired = (value, allValues, props, name) => {
+    if (value) return;
+
+    return (labels[name] || capitalize(name)) + ' Required';
+}

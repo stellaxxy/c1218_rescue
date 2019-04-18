@@ -6,8 +6,6 @@ import InputField from '../general/input-field';
 import {isRequired} from '../../helpers/validate';
 import './upload.scss';
 
-const imageIsRequired = value => (!value ? "Required" : undefined);
-
 let UploadForm = props => {
   const { handleSubmit, isUpdate, onSubmit, onReturn, id } = props;
 
@@ -25,7 +23,7 @@ let UploadForm = props => {
               type="file"
               imagefile={props.imageFile}
               handleOnDrop={props.onDrop}
-              validate={[imageIsRequired]}
+              validate={[isRequired]}
               />
 
               <div>
