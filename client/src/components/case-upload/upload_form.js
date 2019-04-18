@@ -3,11 +3,10 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import DropZoneField from '../general/dropzone/dropzone_field';
 import InputField from '../general/input-field';
+import {isRequired} from '../../helpers/validate';
 import './upload.scss';
 
 const imageIsRequired = value => (!value ? "Required" : undefined);
-
-const isRequired = (value, allValues, props, name) => !value ? `Required` : undefined;
 
 let UploadForm = props => {
   const { handleSubmit, isUpdate, onSubmit, onReturn, id } = props;
@@ -57,7 +56,7 @@ let UploadForm = props => {
 
               <div>
                 <label htmlFor="street">Location Pet Last Seen*</label>
-                <Field name="street" component="input" type="text" placeholder="Street address or cross streets"/>
+                <Field name="street" component={InputField} validate={isRequired} type="text" placeholder="Street address or cross streets"/>
               </div>
 
               <div>
@@ -67,22 +66,22 @@ let UploadForm = props => {
 
               <div>
                 <label htmlFor="email">Your Email*</label>
-                <Field name="email" component="input" type="email" />
+                <Field name="email" component={InputField} validate={isRequired} type="email" />
               </div>
 
               <div>
                 <label htmlFor="name">Your Name*</label>
-                <Field name="name" component="input" type="text" />
+                <Field name="name" component={InputField} validate={isRequired} type="text" />
               </div>
 
               <div>
-                <label htmlFor="phone">Your Phone</label>
-                <Field name="phone" component="input" type="text" />
+                <label htmlFor="phone">Your Phone*</label>
+                <Field name="phone" component={InputField} validate={isRequired} type="text" />
               </div>
 
               <div>
-                <label htmlFor="caseDate">Date Pet Last Seen</label>
-                <Field name="caseDate" component="input" type="text" />
+                <label htmlFor="caseDate">Date Pet Last Seen*</label>
+                <Field name="caseDate" component={InputField} validate={isRequired} type="text" />
               </div>
 
               <div>
