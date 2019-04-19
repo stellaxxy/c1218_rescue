@@ -101,6 +101,15 @@ $color-background: #fff3e0 !default;
             //overflow-y: scroll;
 
             .container {
+                .modal {
+                    position: absolute;
+                    width: auto;
+                }
+
+                .modal-overlay {
+                    background-color: white;
+                }
+                
                 @media (min-width: 1024px) {
                     width: 60%;
                 }
