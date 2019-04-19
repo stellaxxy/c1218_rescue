@@ -1,3 +1,7 @@
+/**
+ * Purpose: Form Validation Methods
+ */
+
 import React from 'react';
 import {capitalize} from './index';
 
