@@ -277,7 +277,7 @@ class MyCase extends Component {
                                             <button className="waves-effect waves-light btn btn-action myCaseCloseBtn"  onClick={this.handleUpdateBtn}>UPDATE CASE</button>
                                         </Fragment>)
                                         :
-                                        null
+                                        <div className="caseIsClosedDiv">This Case Is Closed</div>
                                 }
                             </div>
 

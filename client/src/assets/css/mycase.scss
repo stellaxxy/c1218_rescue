@@ -35,7 +35,6 @@
   }
 
   .flyerDiv {
-    //overflow-y: scroll;
     padding-bottom: 20px;
   }
 
@@ -62,6 +61,16 @@
         margin-right: 45px;
       }
     }
+
+    .caseIsClosedDiv {
+      font-size: 160%;
+      color: #d84315;
+      font-family: 'Sniglet', cursive;
+      font-weight: bold;
+      border: 1px solid orangered;
+      border-radius: 5px;
+    }
+
   }
 
 
