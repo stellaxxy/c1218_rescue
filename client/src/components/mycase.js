@@ -6,7 +6,6 @@ import {Fragment} from 'react';
 import '../assets/css/mycase.scss';
 import FlyerCode from './case-upload/flyer';
 import UpdateForm from './case-upload/upload_form';
-//import Update from './update-modal/update_form'
 
 class MockFile {
     constructor(source) {

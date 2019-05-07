@@ -5,13 +5,15 @@ import DropZoneField from '../general/dropzone/dropzone_field';
 import InputField from '../general/input-field';
 import {isRequired} from '../../helpers/validate';
 import './upload.scss';
+import DatePicker from '../general/input-field/datepicker';
 
 class UploadForm extends Component {
+  /*
   componentDidMount() {
     var elems = document.querySelectorAll('input[name="caseDate"]');
     var instances = M.Datepicker.init(elems, {format: 'mm/dd/yyyy'});
   }
-
+*/
   render() {
     const { handleSubmit, isUpdate, onSubmit, onDrop, onReturn, imageFile, id } = this.props;
 
@@ -65,7 +67,7 @@ class UploadForm extends Component {
 
                 <div>
                   <label htmlFor="city">City Pet Last Seen*</label>
-                  <Field name="city" component="input" type="text" component={InputField} validate={isRequired} placeholder="Zipcode or City, State" />
+                  <Field name="city" type="text" component={InputField} validate={isRequired} placeholder="Zipcode or City, State" />
                 </div>
 
                 <div>

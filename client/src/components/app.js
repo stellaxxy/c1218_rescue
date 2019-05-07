@@ -9,10 +9,8 @@ import CaseDetails from './caseDetails';
 import CaseMap from './casemap';
 import Upload from './case-upload';
 import UploadConfirmation from './case-upload/upload_confirmation';
-//import Resource from './resourcepage';
 import Landing from './landing';
 import Contact from './contactpage';
-//import SearchModal from './searchmodal';
 import SearchVet from './resource/searchVet';
 import DogCare from './resource/dogcare';
 import CatCare from './resource/catcare';
@@ -50,6 +48,7 @@ const App = () => (
             <Route path="/flyer" component={Flyer}/>
             <Route path="/casedescription" component={DescribeForm}/>
 
+
             <Route component={Error404}/>
         </Switch>
     </div>
@@ -58,3 +57,4 @@ const App = () => (
 export default App;
 //<Route path="/searchmodal" component={SearchModal}/>
 //<Route path="/resource" component={Resource}/>
+//<Route path="/searchvet" component={SearchVet}/>
