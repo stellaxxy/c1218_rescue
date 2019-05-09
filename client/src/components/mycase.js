@@ -206,6 +206,7 @@ class MyCase extends Component {
     };
 
     render() {
+       // console.log('mycase data:', this.state.data);
         if (this.state.error === true) {
             return (
                 <Fragment>

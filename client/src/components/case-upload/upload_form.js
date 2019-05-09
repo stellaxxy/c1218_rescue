@@ -15,8 +15,8 @@ class UploadForm extends Component {
   }
 */
   render() {
-    const { handleSubmit, isUpdate, onSubmit, onDrop, onReturn, imageFile, id } = this.props;
-
+    const { handleSubmit, isUpdate, onSubmit, onDrop, onReturn, imageFile, id, initialValues} = this.props;
+    console.log('initialValues:', initialValues);
     return (
         <div className="page-body">
           <main>
@@ -87,7 +87,7 @@ class UploadForm extends Component {
 
                 <div>
                   <label htmlFor="caseDate">Date Pet Last Seen*</label>
-                  <Field name="caseDate" component={InputField} validate={isRequired} type="text" />
+                  <Field name="caseDate" component={DatePicker} validate={isRequired} type="text" initialDate={initialValues.caseDate}/>
                 </div>
 
                 <div>
