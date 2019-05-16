@@ -25,6 +25,7 @@ import Error404 from "./general/error_404";
 
 
 
+
 const App = () => (
     <div className="mainContainer">
         <MainNav/>
@@ -33,7 +34,6 @@ const App = () => (
             <Route exact path="/" component={Landing}/>
             <Route path="/search" component={SearchPage}/>
             <Route path="/searchform" component={SearchForm}/>
-            <Route path="/casemap" component={CaseMap}/>
             <Route path="/upload" component={Upload}/>
             <Route path="/upload-complete/:caseid/:casekey" component={UploadConfirmation}/>
             <Route path="/casedetails" component={CaseDetails}/>

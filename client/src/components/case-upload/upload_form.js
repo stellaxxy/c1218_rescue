@@ -8,15 +8,9 @@ import './upload.scss';
 import DatePicker from '../general/input-field/datepicker';
 
 class UploadForm extends Component {
-  /*
-  componentDidMount() {
-    var elems = document.querySelectorAll('input[name="caseDate"]');
-    var instances = M.Datepicker.init(elems, {format: 'mm/dd/yyyy'});
-  }
-*/
   render() {
     const { handleSubmit, isUpdate, onSubmit, onDrop, onReturn, imageFile, id, initialValues} = this.props;
-    console.log('initialValues:', initialValues);
+
     return (
         <div className="page-body">
           <main>
@@ -133,9 +127,3 @@ UploadForm = reduxForm({
 })(UploadForm);
 
 export default UploadForm;
-
-/*
-<footer className="page-footer">
-
-        </footer>
- */

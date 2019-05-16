@@ -1,67 +1,49 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import InputField from '../general/input-field';
 
-class Filter extends Component {
-    onSubmit = ()=>{
-        event.preventDefault();
-        const inputObj = {};
-        if(document.querySelector('input[name="caseType"]:checked')){
-            inputObj.caseType = document.querySelector('input[name="caseType"]:checked').value;
-        }
-
-        inputObj.city = document.getElementById('city').value;
-
-        inputObj.zipcode = document.getElementById('zipCode').value;
-
-        inputObj.animalType = document.getElementById('type').value;
-
-        inputObj.animalSize = document.getElementById('size').value;
-
-        const queryObj = {mode: 'list'};
-        for(let [key, value] of Object.entries(inputObj)){
-            if(value){
-                queryObj[key] = value;
-            }
-        }
-
-        this.props.onFilterChange(queryObj);
-    };
+class FilterForm extends Component {
 
     render(){
-
+        const {handleSubmit, initialValues} = this.props;
         return(
             <div className="formDiv">
-                <form className="listForm" onSubmit={this.onSubmit}>
+                <form className="listForm" onSubmit={handleSubmit} id="searchForm">
                     <h5>What are you searching for?</h5>
                     <div className="radioFound">
-                        <label htmlFor="found">Found Pets</label>
-                        <input className="radioBtn" type="radio" name="caseType" value="found" id="found" defaultChecked={this.props.filterValues.caseType==='found' ? 'checked':''}/>
+                        <label>
+                            <Field component="input" type="radio" name="caseType" value="found"/>
+                            <span>Found Pets</span>
+                        </label>
                     </div>
                     <div className="radioLost">
-                        <label htmlFor="lost">Missing Pets</label>
-                        <input className="radioBtn" type="radio" name="caseType" value="lost" id="lost" defaultChecked={this.props.filterValues.caseType==='lost' ? 'checked':''}/>
+                        <label>
+                            <Field component="input" type="radio" name="caseType" value="lost"/>
+                            <span>Missing Pets</span>
+                        </label>
                     </div>
                     <div className="locationDiv">
                         <h5>Location:</h5>
                         <h6>City or Zip Code</h6>
-                        <input id="city" type="text" placeholder="City to search" defaultValue={this.props.filterValues.city || ""}/>
-                        <input id="zipCode" type="text" placeholder="Zip code" defaultValue={this.props.filterValues.zipcode || ""}/>
+                        <Field name="city" component={InputField} type="text" placeholder="City to search"/>
+                        <Field name="zipcode" component={InputField} type="text" placeholder="Zip code"/>
                     </div>
                     <div className="animalDiv">
                         <h5>Animal:</h5>
                         <h6>Type</h6>
-                        <select id="type" className="selectOpt" name="animalType" defaultValue={this.props.filterValues.animalType || ""}>
+                        <Field id="type" className="selectOpt" name="animalType" component="select">
                             <option value="">All Species</option>
                             <option value="dog">Dog</option>
                             <option value="cat">Cat</option>
                             <option value="other">Other</option>
-                        </select>
+                        </Field>
                         <h6>Size</h6>
-                        <select id="size" className="selectOpt" name="animalSize" defaultValue={this.props.filterValues.animalSize || ""}>
+                        <Field id="size" className="selectOpt" name="animalSize" component="select">
                             <option value="">All Size</option>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
                             <option value="large">Large</option>
-                        </select>
+                        </Field>
                     </div>
                     <button className="searchBtn waves-effect waves-light btn-small">SEARCH</button>
                 </form>
@@ -70,4 +52,9 @@ class Filter extends Component {
     }
 }
 
-export default Filter;
+FilterForm = reduxForm({
+    form: 'filter',
+
+})(FilterForm);
+
+export default FilterForm;
