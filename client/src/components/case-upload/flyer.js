@@ -190,13 +190,13 @@ class FlyerCode extends Component {
                                                 <tbody>
                                                 <tr>
                                                     <td><i className="material-icons">phone</i></td>
-                                                    <td><a href={'tel:+1' + phone}>{phone.slice(0, 3)}-{phone.slice(3, 6)}-{phone.slice(6)}</a></td>
+                                                    <td className="centerCol"><a href={'tel:+1' + phone}>{phone.slice(0, 3)}-{phone.slice(3, 6)}-{phone.slice(6)}</a></td>
                                                     <td> </td>
                                                 </tr>
                                                 <tr>
                                                     <td><i className="material-icons">location_on</i></td>
-                                                    <td>{city} {state} {zipcode}</td>
-                                                    <td><a className="waves-effect waves-light modal-trigger" onClick={this.openModal}>See On Map</a></td>
+                                                    <td className="centerCol">{city} {state} {zipcode}</td>
+                                                    <td className="centerCol"><a className="waves-effect waves-light modal-trigger" onClick={this.openModal}>See On Map</a></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

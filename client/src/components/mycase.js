@@ -40,6 +40,7 @@ class MyCase extends Component {
                 const result = await axios.post('/api/casedetails', {caseid: this.props.match.params.caseid});
 
                 let data = result.data.data;
+                
                 data.coverImg = new MockFile(data.coverImg);
 
                 if(result.data.success){
