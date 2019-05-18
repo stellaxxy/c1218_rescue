@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import queryString from 'query-string';
 import './filterform.scss';
 
 class SearchPanel extends Component {

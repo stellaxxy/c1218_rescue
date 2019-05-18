@@ -1,5 +1,5 @@
 .myCaseContainer {
-  height: 80%;
+  //height: 80%;
 
   .page-body {
     position: relative;
@@ -35,18 +35,16 @@
   }
 
   .flyerDiv {
-    //overflow-y: scroll;
     padding-bottom: 20px;
   }
 
   .myCaseCloseBtnContainer {
     text-align: center;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
     position: relative;
-    top: 6%;
 
     @media (min-width: 635px) {
-      margin-top: 40px;
+      padding-top: 40px;
     }
 
     .myCaseCloseBtn {
@@ -62,6 +60,16 @@
         margin-right: 45px;
       }
     }
+
+    .caseIsClosedDiv {
+      font-size: 160%;
+      color: #d84315;
+      font-family: 'Sniglet', cursive;
+      font-weight: bold;
+      border: 1px solid orangered;
+      border-radius: 5px;
+    }
+
   }
 
 
@@ -80,4 +88,85 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.mapBody~.myCaseCloseBtnContainer {
+  -webkit-filter: blur(8px);
+  -ms-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  filter: blur(8px);
+  background-color: lightgrey;
+}
+
+.closeConfirmModal {
+  display: none;
+}
+
+.openConfirmModal {
+  display: block;
+}
+
+.confirmModal {
+  width: 35%;
+  height: 35%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: white;
+  z-index: 2;
+  border-radius: 10px;
+
+  @media (max-width: 768px){
+    width: 70%;
+    height: 50%;
+  }
+
+  .confirmModalContent {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    p {
+      font-size: 130%;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    button {
+      background-color: #d84315;
+      font-family: 'Sniglet', cursive;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-left: 15px;
+      margin-right: 15px;
+      padding: 5px;
+      font-size: 120%;
+      color: white;
+      width: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+.confirmModalBackground.myCaseContainer,
+.confirmModalBackground.myCaseContainer #flyerMainContainer #flyer{
+  -webkit-filter: blur(8px);
+  -ms-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  filter: blur(8px);
+  background-color: lightgrey;
+
 }

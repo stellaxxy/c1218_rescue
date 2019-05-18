@@ -18,9 +18,6 @@ class SideNav extends Component{
                     <Link className="sidenav-close" to="/search?mode=list"><i className="material-icons left">search</i>PET SEARCH</Link>
                 </li>
                 <li>
-                    <Link className="sidenav-close" to="/search?mode=map"><i className="material-icons left">map</i>MAP</Link>
-                </li>
-                <li>
                     <Link className="sidenav-close" to="/upload"><i className="material-icons left">add</i>CREATE NEW LISTING</Link>
                 </li>
                 <li>

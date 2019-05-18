@@ -86,6 +86,11 @@ class SearchPage extends Component {
         this.getAllData();
     }
 
+    handleFilterFormSubmit = formValues=>{
+        event.preventDefault();
+        this.handleFilterChange(formValues);
+    };
+
     render() {
         const filterValues = queryString.parse(this.props.location.search);
 
@@ -105,7 +110,7 @@ class SearchPage extends Component {
                         <img src={pawsPrint} className="pawsPrintLeft"/>
                     </div>
                     <div className="centerDiv">
-                        <Filter onFilterChange={this.handleFilterChange} filterValues={filterValues}/>
+                        <Filter onFilterChange={this.handleFilterChange} initialValues={filterValues} onSubmit={this.handleFilterFormSubmit}/>
                         <CaseList searchUrl={this.props.location.search} error={this.state.error} cases={this.state.cases} filterValues={filterValues}/>
                     </div>
                     <div className="rightDiv">

@@ -116,7 +116,7 @@ app.get('/api/caselist', async (request, response) => {
 //-------------------------------------------------------------------------------------------
 // CASE DETAILS
 //-------------------------------------------------------------------------------------------
-app.get('/api/casedetails', async (request, response) => {
+app.post('/api/casedetails', async (request, response) => {
     try {
         let query = "SELECT c.`id`, c.`caseType`, c.`city`, c.`location`,c.`status`, c.`state`, c.`zipcode`, \n" +
             "            c.`latitude`, c.`longitude`, c.`coverImg`, c.`date`, a.`id` AS animalID, a.`animalType`, a.`name`, a.`breed`,\n" +
@@ -128,15 +128,15 @@ app.get('/api/casedetails', async (request, response) => {
         let data = {};
 
         // LOOKUP BY CASE KEY
-        if (request.query.caseKey || request.query.email) {
-            if (request.query.caseKey === undefined) {
+        if (request.body.caseKey || request.body.email) {
+            if (request.body.caseKey === undefined) {
                 throw new Error(`Please provide valid case key`);
-            } else if (request.query.email === undefined) {
+            } else if (request.body.email === undefined) {
                 throw new Error(`Please provide valid email`);
             }
 
-            const caseKey = request.query.caseKey;
-            const email = request.query.email;
+            const caseKey = request.body.caseKey;
+            const email = request.body.email;
 
             query = query + "WHERE u.`email` = ? AND c.`caseKey` = ?" + "GROUP BY c.`id`";
 
@@ -144,7 +144,7 @@ app.get('/api/casedetails', async (request, response) => {
 
         // LOOKUP BY CASE ID
         } else {
-            const id = request.query.id;
+            const id = request.body.caseid;
             if (id === undefined) {
                 throw new Error(`Please provide a valid ID`);
             } else if (isNaN(id)) {

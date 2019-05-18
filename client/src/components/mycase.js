@@ -6,7 +6,6 @@ import {Fragment} from 'react';
 import '../assets/css/mycase.scss';
 import FlyerCode from './case-upload/flyer';
 import UpdateForm from './case-upload/upload_form';
-//import Update from './update-modal/update_form'
 
 class MockFile {
     constructor(source) {
@@ -24,7 +23,8 @@ class MyCase extends Component {
         update: false,
         imageFile: [],
         matchingData: true,
-        updating: false
+        updating: false,
+        toggle: false
     };
 
     closeModal = () => {
@@ -37,9 +37,10 @@ class MyCase extends Component {
         try{
             if(this.props.match.params.caseid){
 
-                const result = await axios.get('/api/casedetails?id=' + this.props.match.params.caseid);
+                const result = await axios.post('/api/casedetails', {caseid: this.props.match.params.caseid});
 
                 let data = result.data.data;
+                
                 data.coverImg = new MockFile(data.coverImg);
 
                 if(result.data.success){
@@ -101,7 +102,7 @@ class MyCase extends Component {
 
     handleSubmit = async formValues => {
         try {
-            const result = await axios.get('/api/casedetails?caseKey=' + formValues.caseKey + '&email=' + formValues.email);
+            const result = await axios.post('/api/casedetails', {caseKey: formValues.caseKey, email:formValues.email});
 
             if(result.data.success){
                 this.setState({
@@ -189,6 +190,8 @@ class MyCase extends Component {
 
             if(!response.data.success){
                 throw new Error('axios call error');
+            } else {
+                this.props.history.push('/closecase');
             }
         } catch(error) {
             this.setState({
@@ -196,6 +199,18 @@ class MyCase extends Component {
                 modal: false
             });
         }
+    };
+
+    handleConfirmation = ()=>{
+        this.setState({
+            toggle: true
+        })
+    };
+
+    handleCloseModal = ()=>{
+      this.setState({
+          toggle: false
+      });
     };
 
     handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
@@ -207,6 +222,8 @@ class MyCase extends Component {
     };
 
     render() {
+        console.log('mycase error:', this.state.error);
+       // console.log('mycase data:', this.state.data);
         if (this.state.error === true) {
             return (
                 <Fragment>
@@ -258,35 +275,45 @@ class MyCase extends Component {
         }
 
         return (
+            <Fragment>
+                <div className={this.state.toggle ? "myCaseContainer confirmModalBackground":"myCaseContainer"}>
+                    {
+                        this.state.update ?
+                            <Fragment>
+                                <UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>
+                                {this.renderSpinner()}
+                            </Fragment>
+                            :
+                            <Fragment>
+                                <FlyerCode id={this.state.data.id}/>
+                                <div className="myCaseCloseBtnContainer">
+                                    {
+                                        this.state.data.status === 'active' ?
 
-            <div className="myCaseContainer">
-                {
-                    this.state.update ?
-                        <Fragment>
-                            <UpdateForm id={initialValues.id} initialValues={initialValues} onReturn={this.handleReturn} onDrop={this.handleOnDrop} showUpdate={this.state.update} onSubmit={this.handleUpdate} isUpdate={true} imageFile={this.state.imageFile}/>
-                            {this.renderSpinner()}
-                        </Fragment>
-                        :
-                        <Fragment>
-                            <FlyerCode id={this.state.data.id}/>
-                            <div className="myCaseCloseBtnContainer">
-                                {
-                                    this.state.data.status === 'active' ?
+                                            (<Fragment>
+                                                <button className="waves-effect waves-light btn btn-action myCaseCloseBtn" onClick={this.handleConfirmation}>CLOSE CASE</button>
+                                                <button className="waves-effect waves-light btn btn-action myCaseCloseBtn"  onClick={this.handleUpdateBtn}>UPDATE CASE</button>
+                                            </Fragment>)
+                                            :
+                                            <div className="caseIsClosedDiv">This Case Is Closed</div>
+                                    }
+                                </div>
 
-                                        (<Fragment>
-                                            <Link to="/closecase" className="waves-effect waves-light btn btn-action myCaseCloseBtn" onClick={this.closeCase}>CLOSE CASE</Link>
-                                            <button className="waves-effect waves-light btn btn-action myCaseCloseBtn"  onClick={this.handleUpdateBtn}>UPDATE CASE</button>
-                                        </Fragment>)
-                                        :
-                                        null
-                                }
-                            </div>
+                                <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key"/>
+                            </Fragment>
+                    }
+                </div>
 
-                            <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key"/>
-                        </Fragment>
-                }
-            </div>
-
+                <div className={this.state.toggle? "confirmModal openConfirmModal":"confirmModal closeConfirmModal"}>
+                    <div className="confirmModalContent">
+                        <p>Are You Sure You Want To Close This Case?</p>
+                        <div>
+                            <button onClick={this.closeCase}>Yes</button>
+                            <button onClick={this.handleCloseModal}>No</button>
+                        </div>
+                    </div>
+                </div>
+            </Fragment>
         );
     }
 }
