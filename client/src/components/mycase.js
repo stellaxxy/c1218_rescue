@@ -33,6 +33,25 @@ class MyCase extends Component {
         })
     };
 
+    transformData(data) {
+        data.animalType = data.animalDetail.animalType;
+        data.animalSize = data.animalDetail.size;
+        data.street = data.location.location;
+        data.city = data.location.city;
+        data.name = data.userName;
+        data.caseDate = data.date;
+        data.description = data.animalDetail.description;
+
+        data.coverImg = new MockFile(data.coverImg);
+
+        delete data.animalDetail;
+        delete data.location;
+        delete data.userName;
+        delete data.date;
+
+        return data;
+    }
+
     async componentDidMount(){
         try{
             if(this.props.match.params.caseid){
@@ -40,12 +59,10 @@ class MyCase extends Component {
                 const result = await axios.post('/api/casedetails', {caseid: this.props.match.params.caseid});
 
                 let data = result.data.data;
-                
-                data.coverImg = new MockFile(data.coverImg);
 
                 if(result.data.success){
                     this.setState({
-                        data: data,
+                        data: this.transformData(data),
                         imageFile: [data.coverImg],
                         update: false,
                         modal: false
@@ -105,8 +122,10 @@ class MyCase extends Component {
             const result = await axios.post('/api/casedetails', {caseKey: formValues.caseKey, email:formValues.email});
 
             if(result.data.success){
-                this.setState({
-                    data: result.data.data
+                const data = this.transformData(result.data.data);
+                await this.setState({
+                    data: data,
+                    imageFile: [data.coverImg]
                 });
                 this.closeModal();
                 this.props.history.push(`/mycase/${this.state.data.id}`);
@@ -222,8 +241,6 @@ class MyCase extends Component {
     };
 
     render() {
-        console.log('mycase error:', this.state.error);
-       // console.log('mycase data:', this.state.data);
         if (this.state.error === true) {
             return (
                 <Fragment>
@@ -255,24 +272,7 @@ class MyCase extends Component {
             );
         }
 
-        let initialValues = {};
-        //console.log('mycase update data:', this.state.data);
-        if(this.state.data){
-            initialValues = {...this.state.data};
-
-            initialValues.animalType = initialValues.animalDetail.animalType;
-            initialValues.animalSize = initialValues.animalDetail.size;
-            initialValues.street = initialValues.location.location;
-            initialValues.city = initialValues.location.city;
-            initialValues.name = initialValues.userName;
-            initialValues.caseDate = initialValues.date;
-            initialValues.description = initialValues.animalDetail.description;
-
-            delete initialValues.animalDetail;
-            delete initialValues.location;
-            delete initialValues.userName;
-            delete initialValues.date;
-        }
+        let initialValues = this.state.data ? {...this.state.data} : {};
 
         return (
             <Fragment>
