@@ -10,18 +10,21 @@ class FilterForm extends Component {
             <div className="formDiv">
                 <form className="listForm" onSubmit={handleSubmit} id="searchForm">
                     <h5>What are you searching for?</h5>
-                    <div className="radioFound">
-                        <label>
-                            <Field component="input" type="radio" name="caseType" value="found"/>
-                            <span>Found Pets</span>
-                        </label>
+                    <div>
+                        <div className="radioFound">
+                            <label>
+                                <Field component="input" type="radio" name="caseType" value="found"/>
+                                <span>Found Pets</span>
+                            </label>
+                        </div>
+                        <div className="radioLost">
+                            <label>
+                                <Field component="input" type="radio" name="caseType" value="lost"/>
+                                <span>Missing Pets</span>
+                            </label>
+                        </div>
                     </div>
-                    <div className="radioLost">
-                        <label>
-                            <Field component="input" type="radio" name="caseType" value="lost"/>
-                            <span>Missing Pets</span>
-                        </label>
-                    </div>
+
                     <div className="locationDiv">
                         <h5>Location:</h5>
                         <h6>City or Zip Code</h6>
