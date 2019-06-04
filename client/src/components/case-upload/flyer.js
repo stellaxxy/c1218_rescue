@@ -15,22 +15,21 @@ class FlyerCode extends Component {
         error: false,
         toggle: false
     };
-
+    //-----------------------------------------------------------------------------------------
+    // OPEN MAP
+    //-----------------------------------------------------------------------------------------
     openModal = () => {
-        //debugger;
         let mapBody = document.getElementById('flyerMainContainer');
         mapBody.className = "mapBody";
-        //let body = document.body;
-        //body.classList.add('mapBody');
 
         this.setState({
             toggle: true
         })
     };
-
+    //-----------------------------------------------------------------------------------------
+    // CLOSE MAP
+    //-----------------------------------------------------------------------------------------
     closeModal = () => {
-       // const mapBody = document.getElementsByClassName('mainContainer');
-       // mapBody.classList.remove('mapBody');
         let mapBody = document.getElementById('flyerMainContainer');
         mapBody.className = "";
 
@@ -39,7 +38,7 @@ class FlyerCode extends Component {
         })
     };
 
-        //-----------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------
     // PRINT FLYER
     //-----------------------------------------------------------------------------------------   
     handlePrintClick = () => {
@@ -126,7 +125,7 @@ class FlyerCode extends Component {
 
         try {
             const {data, error} = this.state;
-            console.log('flyer error:', error);
+
             // HANDLE ERROR
             if (error) {
 
