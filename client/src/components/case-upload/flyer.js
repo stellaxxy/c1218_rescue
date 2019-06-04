@@ -262,6 +262,5 @@ class FlyerCode extends Component {
         }
     }
 }
-//className={this.state.toggle? "mapModalOpen mapModal" : "mapModalClose mapModal"}
-//<td><Link to={`/map/${this.props.location.search}`} gobackurl={this.props.location.search}>See On Map</Link></td>
+
 export default FlyerCode;
