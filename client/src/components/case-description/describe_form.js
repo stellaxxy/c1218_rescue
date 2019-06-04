@@ -15,7 +15,9 @@ class DescribeForm extends Component {
             page: 1         
         }
     }
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE SUBMIT FILTER VALUE AND GO TO SEARCH LIST
+    //-----------------------------------------------------------------------------------------
     handleSubmit = values => {
         // Get case type from query string
         const params = queryString.parse(this.props.location.search);

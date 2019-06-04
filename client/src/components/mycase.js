@@ -26,13 +26,17 @@ class MyCase extends Component {
         updating: false,
         toggle: false
     };
-
+    //-----------------------------------------------------------------------------------------
+    // CLOSE LOGIN MODAL
+    //-----------------------------------------------------------------------------------------
     closeModal = () => {
         this.setState({
             modal: false
         })
     };
-
+    //-----------------------------------------------------------------------------------------
+    // TRANSFORM DATA OBJECT
+    //-----------------------------------------------------------------------------------------
     transformData(data) {
         data.animalType = data.animalDetail.animalType;
         data.animalSize = data.animalDetail.size;
@@ -94,7 +98,9 @@ class MyCase extends Component {
             }
         }
     }
-
+    //-----------------------------------------------------------------------------------------
+    // RENDER SPINNER ON LOADING
+    //-----------------------------------------------------------------------------------------
     renderSpinner() {
         const {updating} = this.state;
 
@@ -116,7 +122,9 @@ class MyCase extends Component {
             </div>
         )
     }
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE LOGIN MODAL CONFIRM
+    //-----------------------------------------------------------------------------------------
     handleSubmit = async formValues => {
         try {
             const result = await axios.post('/api/casedetails', {caseKey: formValues.caseKey, email:formValues.email});
@@ -146,15 +154,18 @@ class MyCase extends Component {
         }
 
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE UPDATE BUTTON CLICK
+    //-----------------------------------------------------------------------------------------
     handleUpdateBtn = () => {
-        //this.handleOnDrop([{lastModified: '1551340347922',lastModifiedDate: new Date().toGMTString(), name: 'https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184', preview: "https://pet-rescue-images1.s3.us-west-2.amazonaws.com/1554494804184", size: '13552 bytes', type: "image/jpeg", webkitRelativePath: ""}]);
         this.setState({
             update: true,
         });
     };
 
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE UPDATE
+    //-----------------------------------------------------------------------------------------
     handleUpdate = async (formValues) => {
         try {
             event.preventDefault();
@@ -201,7 +212,9 @@ class MyCase extends Component {
             });
         }
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE CLOSE CASE
+    //-----------------------------------------------------------------------------------------
     closeCase = async () => {
         try {
             const {id} = this.state.data;
@@ -219,27 +232,37 @@ class MyCase extends Component {
             });
         }
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE CLOSE CONFIRMATION
+    //-----------------------------------------------------------------------------------------
     handleConfirmation = ()=>{
         this.setState({
             toggle: true
         })
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE CLOSE CONFIRMATION MODAL
+    //-----------------------------------------------------------------------------------------
     handleCloseModal = ()=>{
       this.setState({
           toggle: false
       });
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE DROP IMAGE
+    //-----------------------------------------------------------------------------------------
     handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE RETURN FROM UPDATE TO MY CASE
+    //-----------------------------------------------------------------------------------------
     handleReturn = () => {
       this.setState({
           update: false
       })
     };
-
+    //-----------------------------------------------------------------------------------------
+    // RENDER
+    //-----------------------------------------------------------------------------------------
     render() {
         if (this.state.error === true) {
             return (
@@ -299,6 +322,11 @@ class MyCase extends Component {
                                     }
                                 </div>
 
+                                <div className="row footer">
+                                    <div className="col s12 center">
+                                        Generated by PAWSFindHome.com
+                                    </div>
+                                </div>
                                 <Modal onSubmit={this.handleSubmit} showModal={this.state.modal} heading="Please provide your email and unique key"/>
                             </Fragment>
                     }

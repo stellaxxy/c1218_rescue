@@ -1,5 +1,4 @@
 .myCaseContainer {
-  //height: 80%;
 
   .page-body {
     position: relative;
@@ -73,6 +72,9 @@
   }
 
 
+}
+.footer {
+  display: none;
 }
 
 .mycaseError {
@@ -169,4 +171,17 @@
   filter: blur(8px);
   background-color: lightgrey;
 
+}
+
+@media print {
+  .myCaseCloseBtnContainer {
+    display: none;
+  }
+  .footer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 }

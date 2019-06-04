@@ -13,15 +13,10 @@ $font-size-normal: 1.4em;
 
 
 body {
-    //background-image: url(../images/landing-page-background.png);
-
-
     .mainContainer {
         height: 100vh;
         font-family: 'Kanit', sans-serif;
         overflow-y: scroll;
-
-
 
         .navBar {
             height: 9%;
@@ -50,12 +45,10 @@ body {
 
     .mainContainer::-webkit-scrollbar {
         width: 2px;
-        //background-color: white;
         opacity: 0;
     }
 
     .mainContainer::-webkit-scrollbar-thumb {
-        //background-color: white;
         opacity: 0;
     }
 }
@@ -69,7 +62,6 @@ body {
 
     .typecard {
         border-radius: 2px;
-        /*background-color: white;*/
         padding: 5px;
         color: $color-text;
         font-family: 'Kanit', sans-serif;

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 
 class SearchForm extends Component {
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE SUBMIT FILTER VALUE
+    //-----------------------------------------------------------------------------------------
     onSubmit = () => {
         event.preventDefault();
         let formData = new FormData(event.target);
@@ -14,12 +16,16 @@ class SearchForm extends Component {
 
         this.props.history.push('/search?' + queryString.stringify(filters));
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE FILTER FORM CANCEL CLICK
+    //-----------------------------------------------------------------------------------------
     onCancel = () => {
         this.props.history.push('/search' + this.props.history.location.search);
 
     };
-
+    //-----------------------------------------------------------------------------------------
+    // RENDER
+    //-----------------------------------------------------------------------------------------
     render() {
         const {caseType, zipcode, city, animalType, size, mode} = queryString.parse(this.props.location.search);
 

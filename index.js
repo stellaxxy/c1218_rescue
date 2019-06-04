@@ -425,7 +425,7 @@ app.post('/api/contactuser', async (request, response) => {
         // TODO: Get info from DB using caseId
 
         const userInfo = "select c.caseKey,c.city,c.caseType,a.animalType,u.email,u.phone,c.id from cases as c join animals as a ON c.animalID=a.id JOIN users as u ON c.userID= u.id WHERE c.id = ?"
-        const userCaseId = [caseId]
+        const userCaseId = [caseId];
         const userEmail = mysql.format(userInfo, userCaseId);
         const userSendEmail = await db.query(userEmail);
 

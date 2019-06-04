@@ -19,11 +19,15 @@ class SearchPage extends Component {
             error: false
         };
     }
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE CHANGE OF FILTER VALUE
+    //-----------------------------------------------------------------------------------------
     handleFilterChange = (filterValues) => {
         this.props.history.push('/search?' + queryString.stringify(filterValues));
     };
-
+    //-----------------------------------------------------------------------------------------
+    // GET DATA
+    //-----------------------------------------------------------------------------------------
     async getData() {
         try {
             let filterValues = queryString.parse(this.props.location.search);
@@ -53,7 +57,9 @@ class SearchPage extends Component {
             });
         }
     }
-
+    //-----------------------------------------------------------------------------------------
+    // GET ALL DATA
+    //-----------------------------------------------------------------------------------------
     async getAllData() {
         try {
             const result = await axios.get('/api/caselist');
@@ -85,12 +91,16 @@ class SearchPage extends Component {
         this.getData();
         this.getAllData();
     }
-
+    //-----------------------------------------------------------------------------------------
+    // CHANGE OF FILTER VALUE
+    //-----------------------------------------------------------------------------------------
     handleFilterFormSubmit = formValues=>{
         event.preventDefault();
         this.handleFilterChange(formValues);
     };
-
+    //-----------------------------------------------------------------------------------------
+    // RENDER
+    //-----------------------------------------------------------------------------------------
     render() {
         const filterValues = queryString.parse(this.props.location.search);
 

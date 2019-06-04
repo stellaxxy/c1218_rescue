@@ -15,7 +15,6 @@ $color-background: #fff3e0 !default;
 }
 
 #flyerMainContainer.mapBody {
-    //background-color: rgba(0,0,0,0.4);
     -webkit-filter: blur(8px);
     -ms-filter: blur(8px);
     -moz-filter: blur(8px);
@@ -287,7 +286,6 @@ $color-background: #fff3e0 !default;
 }
 
 #flyerMainContainer {
-    //height: 91%;
     overflow-y: scroll;
     width: 100vw;
 

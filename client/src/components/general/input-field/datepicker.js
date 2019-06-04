@@ -7,7 +7,9 @@ class RenderDatePicker extends Component{
     state = {
         startDate: new Date(this.props.initialDate)
     };
-
+    //-----------------------------------------------------------------------------------------
+    // HANDLE DATE CHANGE
+    //-----------------------------------------------------------------------------------------
     handleChange = date => {
         this.props.input.onChange(date);
         this.setState({
@@ -23,4 +25,3 @@ class RenderDatePicker extends Component{
 }
 
 export default RenderDatePicker;
-//selected={this.state.startDate} onChange={value=>this.props.input.onChange(value)}
