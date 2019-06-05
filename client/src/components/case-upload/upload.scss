@@ -1,0 +1,459 @@
+
+.upload-confirmation {
+    text-align: center;
+}
+$color-bars: #e79307;
+$color-action-buttons: #d84315;
+$color-background: #fff3e0 !default;
+
+.mapModalOpen {
+    display: block;
+}
+
+.mapModalClose {
+    display: none;
+}
+
+#flyerMainContainer.mapBody {
+    -webkit-filter: blur(8px);
+    -ms-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    filter: blur(8px);
+    background-color: lightgrey;
+
+    #flyer {
+        background-color: lightgrey;
+
+        #emailMessage {
+            background-color: lightgrey;
+        }
+    }
+}
+
+.mapModal {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    top: 13%;
+    left: 10%;
+    z-index: 1;
+    background-color: white;
+    border-radius: 5px;
+
+
+    .modal-content {
+        z-index: 1;
+        height: 90%;
+    }
+
+    .modal-footer {
+        z-index: 1;
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-top: 1.5px solid lightgray;
+        text-align: right;
+
+
+        .modalCloseBtn {
+            position: relative;
+            top: 50%;
+            right: 2%;
+            transform: translateY(-50%);
+            border-radius: 5px;
+            font-size: 110%;
+            background-color: #26a69a;
+            color: white;
+            font-family: 'Sniglet', cursive;
+        }
+
+        .modalCloseBtn:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+.leftUploadDiv {
+    display: none;
+
+    @media (min-width: 1024px){
+        display: inline-block;
+        text-align: center;
+    }
+
+    img {
+        width: 25vw;
+        position: fixed;
+        bottom: 0;
+    }
+
+}
+
+.rightUploadDiv {
+    display: none;
+
+    @media (min-width: 1024px){
+        display: inline-block;
+        text-align: center;
+        position: fixed;
+        top: 55%;
+        transform: translateY(-50%);
+        right: 5%;
+        height: 40vh;
+    }
+
+    .rightUploadContent {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    h5 {
+        @media (min-width: 1024px) {
+            font-size: 280%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #d84315;
+        }
+    }
+
+    p {
+        @media (min-width: 1024px) {
+            font-size: 210%;
+            font-weight: 900;
+            font-family: 'Kanit', sans-serif;
+            color: #e79307;
+        }
+    }
+
+    .orangeBone,
+    .brownBone {
+        width: 50px;
+    }
+
+    .leftTiltedOrangeBone {
+        position: relative;
+        left: 4%;
+    }
+
+    .tiltedOrangeBone {
+        position: relative;
+        right: 6%;
+        transform: rotate(30deg);
+    }
+
+    .tiltedBrownBone {
+        position: relative;
+        right: 5%;
+        transform: rotate(-15deg);
+    }
+
+}
+
+.uploadDiv {
+    @media (min-width: 1024px){
+        display: inline-block;
+        width: 75%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .page-body {
+
+        main {
+            position: relative;
+            height: 100%;
+            //overflow-y: scroll;
+
+            .container {
+                .modal {
+                    position: absolute;
+                    width: auto;
+                }
+
+                .modal-overlay {
+                    background-color: white;
+                }
+                
+                @media (min-width: 1024px) {
+                    width: 60%;
+                }
+            }
+
+            h5 {
+                font-weight: bold;
+            }
+
+            form {
+                top: 0;
+            }
+        }
+
+        .uploadSubmitBtnContainer {
+            margin-top: 20px;
+            text-align: center;
+
+            .uploadSubmitBtn {
+                background-color: #d84315;
+                font-family: 'Sniglet', cursive;
+                border-radius: 10px;
+                font-weight: bold;
+            }
+        }
+
+        .formCheckBox {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+
+            [type="checkbox"] {
+                opacity: 1;
+            }
+
+            label {
+                margin-left: 20px;
+            }
+        }
+
+        footer {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+
+            .btn {
+                background-color: $color-action-buttons;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+.image-preview-container {
+    margin: 20px 0px;
+
+    .placeholder-preview {
+        text-align: center;
+        border-radius: 5px;
+        border: 2px dashed black;
+    }
+}
+.preloader-wrapper.active {
+    position: absolute;
+    top :0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+.render-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .details {
+        text-align: center;
+    }
+}
+
+@media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
+    .navBar, .sidenav {
+        display: none;
+    }
+}
+
+#flyerMainContainer::-webkit-scrollbar-track {
+    background-color: lightgrey;
+}
+
+#flyerMainContainer::-webkit-scrollbar {
+    width: 3px;
+    background-color: lightgrey;
+}
+
+#flyerMainContainer::-webkit-scrollbar-thumb {
+    background-color: white;
+}
+
+#flyerMainContainer {
+    overflow-y: scroll;
+    width: 100vw;
+
+
+    #flyer {
+        position: relative;
+        height: 100%;
+        width: 100vw;
+        background-color: white;
+
+        @media (min-width: 635px){
+            width: 80%;
+            margin: auto;
+        }
+
+        @media (min-width: 1024px) {
+            width: 70%;
+        }
+
+        .emailDiv{
+            margin-bottom: 70px;
+        }
+
+        .flyerDiv {
+            .centerCol {
+                text-align: center;
+            }
+
+            .socialMediaBtn {
+                margin-top: 27px;
+            }
+
+            .image-container {
+                @media (min-width: 635px) {
+                    height: 300px;
+                    img {
+                        height: 100%;
+                    }
+                }
+
+                @media (min-width: 1024px) {
+                    height: 300px;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                justify-content: center;
+
+                .SocialMediaShareButton {
+                    display: inline;
+                    padding: 5px 5px 5px 5px;
+                    outline: none;
+                }
+
+                button {
+                    margin: 5px;
+                    box-shadow: none;
+                }
+            }
+
+            .bottom {
+                .qrcode {
+                    display: none;
+                }
+            }
+
+            .label {
+                font-weight: bold;
+            }
+
+            .description {
+                font-weight: normal;
+            }
+
+            a {
+                color: #26a69a;
+                cursor: pointer;
+            }
+
+            form {
+                top: 0;
+
+                button {
+                    background-color: $color-action-buttons;
+                }
+            }
+        }
+
+        .flyerBtnDiv{
+            .leftBtn {
+                margin-right: 50px;
+            }
+
+            .rightBtn {
+                margin-left: 50px;
+            }
+        }
+
+        .footer {
+            display: none;
+        }
+
+        @media print {
+
+            .title {
+                position: relative;
+                right: 6%;
+            }
+
+            .image-container{
+                width: 70%;
+                height: 35vh;
+                img {
+                    max-height: 100%;
+                    width: 90%;
+                }
+            }
+
+            .buttons {
+                display: none;
+            }
+
+            .row {
+                margin-bottom: 50px;
+            }
+
+            .flyerDiv {
+                .socialMediaBtn {
+                    display: none;
+                }
+
+                .bottom{
+                    display: flex;
+
+                    .details {
+                        width: 70%;
+
+                        a {
+                            color: black;
+                        }
+                    }
+
+                    .qrcode {
+                        height: 100%;
+                        width: 30%;
+                        display: inline-block;
+                    }
+                }
+            }
+
+
+            form {
+                display: none;
+            }
+
+            .footer {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+
+}
+
+#toast-container .toast{
+	background-color: $color-bars;
+}

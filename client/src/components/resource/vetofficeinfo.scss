@@ -1,0 +1,45 @@
+.vetInformation {
+  p {
+    margin: 3px 0;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  div {
+    text-align: center;
+  }
+
+  .vetHours {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .firstHalf {
+    vertical-align: top;
+  }
+}
+
+.imgContainer {
+  position: relative;
+  left: 10%;
+
+  .vetDetailImage {
+    width: 80%;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+}
+
+.callContainer {
+  margin: 15px;
+  display: flex;
+  justify-content: space-evenly;
+
+  .btn {
+    background-color: #d84315;
+  }
+}
+

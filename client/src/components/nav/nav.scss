@@ -1,0 +1,17 @@
+$color-bars: #e79307;
+
+.brand-logo {
+    //font-family: 'Kanit', sans-serif;
+    font-family: 'Sniglet', cursive;
+    font-weight: bold;
+    position: relative;
+    left: 10px;
+}
+
+nav, .sidenav {
+    background-color: $color-bars;
+
+    .sidenav-close {
+        color: white;
+    }
+}

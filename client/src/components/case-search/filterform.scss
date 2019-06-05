@@ -1,0 +1,31 @@
+.filter-panel {
+  padding: 5px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid silver;
+
+  .filterButtonDiv {
+    text-align: center;
+  }
+
+  .button-panel {
+    text-align: center;
+  }
+
+}
+
+form{
+  position: relative;
+  top: 40px;
+
+  .modal-footer{
+    display: flex;
+    justify-content: space-around;
+
+      button {
+        background-color: #d84315;
+        font-weight: bold;
+        font-family: 'Kanit', sans-serif;
+      }
+  }
+}

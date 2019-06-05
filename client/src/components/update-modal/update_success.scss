@@ -1,0 +1,21 @@
+.updateContainer {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 635px){
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10%;
+  }
+
+  div {
+    margin: 25px;
+  }
+
+  .updateSuccess {
+    text-align: center;
+  }
+}
+
+

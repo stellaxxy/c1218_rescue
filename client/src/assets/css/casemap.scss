@@ -1,0 +1,23 @@
+.mapContainer {
+  height: 82%;
+
+  .map {
+    height: 90% !important;
+    width: 100%;
+    margin: 0 auto 0 auto;
+
+
+    img {
+      width: 150px;
+    }
+  }
+}
+
+.errorOnMap {
+  h4 {
+    margin: 0;
+    text-align: center;
+    position: relative;
+    top: 30%;
+  }
+}

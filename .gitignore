@@ -1,0 +1,15 @@
+node_modules
+.idea
+.vscode
+.DS_Store
+.env
+
+public
+!public/images/image*.jpg
+!public/images/cover5.jpg
+
+config/*.js
+!config /index.js
+
+client/dist/images/*
+!client/dist/images/image*.jpg
