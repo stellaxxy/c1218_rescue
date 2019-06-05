@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../assets/css/casemap.scss';
-import axios from 'axios';
 import config from '../../../config/api';
 import foundIcon from '../assets/images/icons8-region-filled-48.png';
 import lostIcon from '../assets/images/icons8-region-48.png';
