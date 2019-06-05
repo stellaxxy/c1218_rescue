@@ -1,7 +1,5 @@
-import {Link} from 'react-router-dom';
 import Map from './map';
 import axios from 'axios';
-import {googleMapApi} from '../../../../config';
 import SearchVetItem from './searchvetitem';
 import React, {Component} from 'react';
 import './searchVet.scss';
